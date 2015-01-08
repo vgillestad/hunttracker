@@ -14,7 +14,7 @@
     <RootNamespace>HuntTracker.Web</RootNamespace>
     <AssemblyName>HuntTracker.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -82,6 +82,11 @@
     <Content Include="bower_components\bootstrap\js\tab.js" />
     <Content Include="bower_components\bootstrap\js\tooltip.js" />
     <Content Include="bower_components\bootstrap\js\transition.js" />
+    <Content Include="bower_components\hammerjs\.gitignore" />
+    <Content Include="bower_components\hammerjs\hammer.js" />
+    <Content Include="bower_components\hammerjs\hammer.min.js" />
+    <Content Include="bower_components\jquery.hammer.js\.gitignore" />
+    <Content Include="bower_components\jquery.hammer.js\jquery.hammer.js" />
     <Content Include="bower_components\jquery\dist\jquery.js" />
     <Content Include="bower_components\jquery\dist\jquery.min.js" />
     <Content Include="bower_components\jquery\MIT-LICENSE.txt" />
@@ -1101,6 +1106,26 @@
     <Content Include="bower_components\jquery\bower.json" />
     <Content Include="bower_components\jquery\dist\jquery.min.map" />
     <Content Include="bower_components\jquery\src\sizzle\dist\sizzle.min.map" />
+    <Content Include="bower_components\hammerjs\.bower.json" />
+    <Content Include="bower_components\hammerjs\.bowerrc" />
+    <Content Include="bower_components\hammerjs\.jscsrc" />
+    <Content Include="bower_components\hammerjs\.jshintrc" />
+    <Content Include="bower_components\hammerjs\.travis.yml" />
+    <Content Include="bower_components\hammerjs\bower.json" />
+    <Content Include="bower_components\hammerjs\CHANGELOG.md" />
+    <Content Include="bower_components\hammerjs\component.json" />
+    <Content Include="bower_components\hammerjs\CONTRIBUTING.md" />
+    <Content Include="bower_components\hammerjs\Gruntfile.coffee" />
+    <Content Include="bower_components\hammerjs\hammer.min.map" />
+    <Content Include="bower_components\hammerjs\LICENSE.md" />
+    <Content Include="bower_components\hammerjs\package.json" />
+    <Content Include="bower_components\hammerjs\README.md" />
+    <Content Include="bower_components\jquery.hammer.js\.bower.json" />
+    <Content Include="bower_components\jquery.hammer.js\.bowerrc" />
+    <Content Include="bower_components\jquery.hammer.js\bower.json" />
+    <Content Include="bower_components\jquery.hammer.js\LICENSE" />
+    <Content Include="bower_components\jquery.hammer.js\package.json" />
+    <Content Include="bower_components\jquery.hammer.js\README.md" />
     <None Include="Properties\PublishProfiles\hunttracker.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1109,9 +1134,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="app\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -1127,7 +1150,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61088/</IISUrl>
+          <IISUrl>http://localhost/ht</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

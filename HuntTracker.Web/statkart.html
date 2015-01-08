@@ -6,12 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OpenLayers 3 with Statkart tiles</title>
-    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/bower_components/openlayers3/css/ol.css">
-    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/bower_components/openlayers3/build/ol.js"></script>
-    <style type="text/css">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/openlayers3/css/ol.css">
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/hammerjs/hammer.min.js"></script>
+    <script type="text/javascript" src="bower_components/jquery.hammer.js/jquery.hammer.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/openlayers3/build/ol.js"></script>
+    <style type="text/css"> 
         html,
         body {
             height: 100%;
@@ -123,20 +125,19 @@
                 popup.getElement().popover('destroy');
             });
 
-            var addMarker = function (evt) {
-                evt.preventDefault();
+            var addMarker = function (eventPosition) {
                 var coordinate;
                 var element = popup.getElement();
                 element.popover('destroy');
                 console.log("click");
-                var feature = map.forEachFeatureAtPixel(map.getEventPixel(evt),
+                var feature = map.forEachFeatureAtPixel(eventPosition,
                     function (feature, layer) {
                         return feature;
                     });
                 if (feature) {
                     coordinate = feature.getGeometry().getCoordinates();
                 } else {
-                    coordinate = map.getEventCoordinate(evt);
+                    coordinate = map.getCoordinateFromPixel(eventPosition);
 
                     feature = new ol.Feature({
                         geometry: new ol.geom.Point(coordinate),
@@ -164,11 +165,21 @@
                 }
             };
 
-            //$(map.getViewport()).on('contextmenu', function (evt) { // or $(map.getViewport()).on('contextmenu', function(e) with jQuery
-            //    window.alert("clicked");
-            //    addMarker(evt);
-            //    return false;
-            //});
+            //Right click on PC
+            $(map.getViewport()).on('contextmenu', function (e) {
+                e.preventDefault();
+                var eventPosition = map.getEventPixel(e);
+                addMarker(eventPosition);
+                return false;
+            });
+
+            //Touch devices like iPad
+            $(map.getViewport()).hammer().bind('press', function (e) {
+                e.preventDefault();
+                var eventPosition = [e.gesture.center.x, e.gesture.center.y];
+                addMarker(eventPosition);
+                return false;
+            });
 
             //$(map.getViewport()).on('touchstart touchend', function (evt) { // or $(map.getViewport()).on('contextmenu', function(e) with jQuery
             //    //window.alert("hi");
