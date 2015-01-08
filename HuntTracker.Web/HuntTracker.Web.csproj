@@ -1126,6 +1126,7 @@
     <Content Include="bower_components\jquery.hammer.js\LICENSE" />
     <Content Include="bower_components\jquery.hammer.js\package.json" />
     <Content Include="bower_components\jquery.hammer.js\README.md" />
+    <Content Include="bower.json" />
     <None Include="Properties\PublishProfiles\hunttracker.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
