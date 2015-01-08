@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenLayers 3 with Statkart tiles</title>
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/openlayers3/css/ol.css">
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/openlayers3/build/ol.js"></script>
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .map_fullscreen {
+            width: 100%;
+            height: 100%;
+        }
+
+        .popover {
+            min-width: 250px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div style="position: absolute; top: 0; right: 0; z-index: 1">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Menu
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a href="#">Add event</a>
+                </li>
+                <li>
+                    <a href="#">Toggle events</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">Preferences</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div id="map" class="map_fullscreen"></div>
+
+    <div style="display: none;">
+        <div id="marker" title="Marker"></div>
+        <div id="popup" title="Welcome to ol3"></div>
+    </div>
+
+    <!-- ReSharper disable UseOfImplicitGlobalInFunctionScope -->
+    <script type="text/javascript">
+        (function () {
+            //Script origin - https://gist.github.com/atlefren/6697409
+            var center = [2629703.3656816175, 9797587.027268754];
+            var view = new ol.View({
+                center: center,
+                zoom: 5
+            });
+            var geolocation = new ol.Geolocation({
+                projection: view.getProjection(),
+                tracking: true
+            });
+            geolocation.once("change", function () {
+                view.setCenter(geolocation.getPosition());
+                view.setZoom(15);
+            });
+
+            var iconStyle = new ol.style.Style({
+                image: new ol.style.Icon( /** @type {olx.style.IconOptions} */({
+                    anchor: [0.45, 37],
+                    anchorXUnits: 'fraction',
+                    anchorYUnits: 'pixels',
+                    src: 'images/you.png'
+                }))
+            });
+
+            var positionFeature = new ol.Feature();
+            positionFeature.setStyle(iconStyle);
+            positionFeature.bindTo('geometry', geolocation, 'position')
+                .transform(function () { }, function (coordinates) {
+                    return coordinates ? new ol.geom.Point(coordinates) : null;
+                });
+            var vectorSource = new ol.source.Vector({ features: [positionFeature] });
+            var vectorLayer = new ol.layer.Vector({ source: vectorSource });
+
+            var mapLayer = new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                    attributions: [
+                        new ol.Attribution({
+                            html: "&copy; <a href='http://statkart.no'>Kartverket</a>"
+                        })
+                    ],
+                    url: 'http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={z}&x={x}&y={y}'
+                })
+            });
+
+
+            var map = new ol.Map({
+                target: 'map',
+                layers: [mapLayer, vectorLayer],
+                view: view
+            });
+
+            var popup = new ol.Overlay({
+                element: $("<div></div>").appendTo("body")
+            });
+            map.addOverlay(popup);
+
+            map.on('click', function () {
+                popup.getElement().popover('destroy');
+            });
+
+            var addMarker = function (evt) {
+                evt.preventDefault();
+                var coordinate;
+                var element = popup.getElement();
+                element.popover('destroy');
+                console.log("click");
+                var feature = map.forEachFeatureAtPixel(map.getEventPixel(evt),
+                    function (feature, layer) {
+                        return feature;
+                    });
+                if (feature) {
+                    coordinate = feature.getGeometry().getCoordinates();
+                } else {
+                    coordinate = map.getEventCoordinate(evt);
+
+                    feature = new ol.Feature({
+                        geometry: new ol.geom.Point(coordinate),
+                        name: 'Null Island',
+                        population: 4000,
+                        rainfall: 500
+                    });
+                    feature.setStyle(iconStyle);
+                    vectorSource.addFeature(feature);
+
+                    var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+                        coordinate, 'EPSG:3857', 'EPSG:4326'));
+
+                    $(element).popover('destroy');
+                    popup.setPosition(coordinate);
+                    popup.setOffset([12, -25]);
+                    // the keys are quoted to prevent renaming in ADVANCED_OPTIMIZATIONS mode.
+                    $(element).popover({
+                        'placement': 'right',
+                        'animation': false,
+                        'html': true,
+                        'content': '<p>The location you clicked was:</p><code>' + hdms + '</code>'
+                    });
+                    $(element).popover('show');
+                }
+            };
+
+            //$(map.getViewport()).on('contextmenu', function (evt) { // or $(map.getViewport()).on('contextmenu', function(e) with jQuery
+            //    window.alert("clicked");
+            //    addMarker(evt);
+            //    return false;
+            //});
+
+            //$(map.getViewport()).on('touchstart touchend', function (evt) { // or $(map.getViewport()).on('contextmenu', function(e) with jQuery
+            //    //window.alert("hi");
+            //    var tapTime, duration;
+            //    if (event.type === 'touchstart') {
+            //        tapTime = new Date().getTime();
+            //    } else {
+            //        duration = (new Date().getTime() - tapTime);
+            //        if (duration > 3000) {
+            //            addMarker(evt);
+            //        }
+            //    }
+            //});
+
+            //map.on("click", function(e) {
+            //    console.log(e.coordinate);
+            //    var feature = new ol.Feature({
+            //        geometry: new ol.geom.Point(e.coordinate),
+            //        name: 'Null Island',
+            //        population: 4000,
+            //        rainfall: 500
+            //    });
+            //    feature.setStyle(iconStyle);
+            //    vectorSource.addFeature(feature);
+            //});
+
+            //map.on('click', function (evt) {
+            //    var element = popup.getElement();
+            //    var coordinate = evt.coordinate;
+            //    var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+            //        coordinate, 'EPSG:3857', 'EPSG:4326'));
+
+            //    $(element).popover('destroy');
+            //    popup.setPosition(coordinate);
+            //    // the keys are quoted to prevent renaming in ADVANCED_OPTIMIZATIONS mode.
+            //    $(element).popover({
+            //        'placement': 'right',
+            //        'animation': false,
+            //        'html': true,
+            //        'content': '<p>The location you clicked was:</p><code>' + hdms + '</code>'
+            //    });
+            //    $(element).popover('show');
+            //});
+
+
+        }());
+    </script>
+    <!-- ReSharper restore UseOfImplicitGlobalInFunctionScope -->
+</body>
+
+</html>
