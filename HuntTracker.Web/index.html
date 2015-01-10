@@ -1,31 +1,56 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Hunters</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HuntTracker</title>
+
+    <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="bower_components/openlayers3/build/ol.css" />
+    <link type="text/css" rel="stylesheet" href="bower_components/tombatossals/css/markers.css"/>
+    <link type="text/css" rel="stylesheet" href="css/index.css"/>
+    
+
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/openlayers3/build/ol.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-    <script type="text/javascript" src="bower_components/openlayers3/build/ol.js"></script>
-    <script type="text/javascript" src="bower_components/tombatossals/dist/angular-openlayers-directive.min.js"></script>
+    <script type="text/javascript" src="bower_components/tombatossals/dist/angular-openlayers-directive.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </head>
-<body ng-app="hunters" ng-init="name = 'World'">
-    <a href="statkart.html">Startkart.html</a>
-
-    <h1> Hello {{name}}</h1>
-    <div ng-controller="HuntersCtrl">
-        <input type="text" ng-model="name" />
-        <p>Hello {{name}}!</p>
-
-        <ul>
-            <li ng-repeat="name in names">
-                {{name}}
-            </li>
-        </ul>
+<body ng-app="HuntTracker" ng-init="name = 'World'">
+    <a href="statkart.html">Statkart.html</a>
+    <div class="main-menu">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Menu
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a href="#">Add event</a>
+                </li>
+                <li>
+                    <a href="#">Toggle events</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">Preferences</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div ng-controller="MapCtrl">
-        <openlayers ol-center="center" height="480px" width="640px">
+
+    <div style="display: none;">
+        <div id="marker" title="Marker"></div>
+        <div id="popup" title="Welcome to ol3"></div>
+    </div>
+
+    <div ng-controller="MapCtrl" class="map-fullscreen">
+        <openlayers ol-center="ol.center" ol-layers="ol.layers" class="map-fullscreen">
         </openlayers>
     </div>
 </body>
