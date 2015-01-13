@@ -6,19 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HuntTracker</title>
 
-    <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="bower_components/openlayers3/build/ol.css" />
-    <link type="text/css" rel="stylesheet" href="bower_components/tombatossals/css/markers.css"/>
-    <link type="text/css" rel="stylesheet" href="css/index.css"/>
-    
+    <link type="text/css" rel="stylesheet" href="bower_components/tombatossals/css/markers.css" />
+    <link type="text/css" rel="stylesheet" href="css/index.css" />
+
 
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bower_components/openlayers3/build/ol.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-    <script type="text/javascript" src="bower_components/tombatossals/dist/angular-openlayers-directive.js"></script>
+    <script type="text/javascript" src="bower_components/hammerjs/hammer.min.js"></script>
+    <script type="text/javascript" src="bower_components/jquery.hammer.js/jquery.hammer.js"></script>
+    <script type="text/javascript" src="js/directive.ol-map.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body ng-app="HuntTracker" ng-init="name = 'World'">
@@ -50,8 +51,14 @@
     </div>
 
     <div ng-controller="MapCtrl" class="map-fullscreen">
-        <openlayers ol-center="ol.center" ol-layers="ol.layers" class="map-fullscreen">
-        </openlayers>
+        <div ol-map
+             ol-markers="markers"
+             ol-track-position="tracking"
+             ol-on-position-changed="positionChanged(coordinates)"
+             ol-on-marker-selected="showMarkerDetails(id)"
+             ol-on-show-context-menu="addMarker(eventPosition, coordinates)"
+             class="map-fullscreen">
+        </div>
     </div>
 </body>
 </html>

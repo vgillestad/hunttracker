@@ -173,6 +173,7 @@
     <Content Include="bower_components\jquery\src\var\support.js" />
     <Content Include="bower_components\jquery\src\var\toString.js" />
     <Content Include="bower_components\jquery\src\wrap.js" />
+    <Content Include="css\index.css" />
     <Content Include="images\icon.png" />
     <Content Include="images\observe.png" />
     <Content Include="images\you.png" />
@@ -862,6 +863,9 @@
     <Content Include="index.html" />
     <Content Include="js\controllers.js" />
     <Content Include="js\directives.js" />
+    <Content Include="js\directive.ol-map.js" />
+    <Content Include="js\directives\ol3.map.js" />
+    <Content Include="js\main.old.js" />
     <Content Include="js\main.js" />
     <Content Include="js\services.js" />
     <Content Include="statkart.html" />

@@ -62,7 +62,6 @@
         <div id="popup" title="Welcome to ol3"></div>
     </div>
 
-    <!-- ReSharper disable UseOfImplicitGlobalInFunctionScope -->
     <script type="text/javascript">
         (function () {
             //Script origin - https://gist.github.com/atlefren/6697409
@@ -111,7 +110,7 @@
 
 
             var map = new ol.Map({
-                target: 'map',
+                target: "map",
                 layers: [mapLayer, vectorLayer],
                 view: view
             });
@@ -122,43 +121,31 @@
             map.addOverlay(popup);
 
             var addMarker = function (eventPosition) {
-                var coordinate;
-                var element = popup.getElement();
-                element.popover('destroy');
-                console.log("click");
-                var feature = map.forEachFeatureAtPixel(eventPosition,
-                    function (feature, layer) {
-                        return feature;
-                    });
-                if (feature) {
-                    coordinate = feature.getGeometry().getCoordinates();
-                } else {
-                    coordinate = map.getCoordinateFromPixel(eventPosition);
+                var coordinate = map.getCoordinateFromPixel(eventPosition);
+                var feature = new ol.Feature({
+                    geometry: new ol.geom.Point(coordinate),
+                    name: 'Null Island',
+                    population: 4000,
+                    rainfall: 500
+                });
+                feature.setStyle(iconStyle);
+                vectorSource.addFeature(feature);
 
-                    feature = new ol.Feature({
-                        geometry: new ol.geom.Point(coordinate),
-                        name: 'Null Island',
-                        population: 4000,
-                        rainfall: 500
-                    });
-                    feature.setStyle(iconStyle);
-                    vectorSource.addFeature(feature);
+                var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+                    coordinate, 'EPSG:3857', 'EPSG:4326'));
 
-                    var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
-                        coordinate, 'EPSG:3857', 'EPSG:4326'));
-
-                    $(element).popover('destroy');
-                    popup.setPosition(coordinate);
-                    popup.setOffset([12, -25]);
-                    // the keys are quoted to prevent renaming in ADVANCED_OPTIMIZATIONS mode.
-                    $(element).popover({
-                        'placement': 'right',
-                        'animation': false,
-                        'html': true,
-                        'content': '<p>The location you clicked was:</p><code>' + hdms + '</code>'
-                    });
-                    $(element).popover('show');
-                }
+                var $element = $(popup.getElement());
+                $element.popover('destroy');
+                popup.setPosition(coordinate);
+                popup.setOffset([12, -25]);
+                // the keys are quoted to prevent renaming in ADVANCED_OPTIMIZATIONS mode.
+                $element.popover({
+                    'placement': 'right',
+                    'animation': false,
+                    'html': true,
+                    'content': '<p>The location you clicked was:</p><code>' + hdms + '</code>'
+                });
+                $element.popover('show');
             };
 
             //Right click on PC
@@ -177,57 +164,19 @@
                 return false;
             });
 
-            //map.on('click', function () {
-            //    popup.getElement().popover('destroy');
-            //});
-
-            //$(map.getViewport()).on('touchstart touchend', function (evt) { // or $(map.getViewport()).on('contextmenu', function(e) with jQuery
-            //    //window.alert("hi");
-            //    var tapTime, duration;
-            //    if (event.type === 'touchstart') {
-            //        tapTime = new Date().getTime();
-            //    } else {
-            //        duration = (new Date().getTime() - tapTime);
-            //        if (duration > 3000) {
-            //            addMarker(evt);
-            //        }
-            //    }
-            //});
-
-            //map.on("click", function(e) {
-            //    console.log(e.coordinate);
-            //    var feature = new ol.Feature({
-            //        geometry: new ol.geom.Point(e.coordinate),
-            //        name: 'Null Island',
-            //        population: 4000,
-            //        rainfall: 500
-            //    });
-            //    feature.setStyle(iconStyle);
-            //    vectorSource.addFeature(feature);
-            //});
-
-            //map.on('click', function (evt) {
-            //    var element = popup.getElement();
-            //    var coordinate = evt.coordinate;
-            //    var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
-            //        coordinate, 'EPSG:3857', 'EPSG:4326'));
-
-            //    $(element).popover('destroy');
-            //    popup.setPosition(coordinate);
-            //    // the keys are quoted to prevent renaming in ADVANCED_OPTIMIZATIONS mode.
-            //    $(element).popover({
-            //        'placement': 'right',
-            //        'animation': false,
-            //        'html': true,
-            //        'content': '<p>The location you clicked was:</p><code>' + hdms + '</code>'
-            //    });
-            //    $(element).popover('show');
-            //});
-
-            window.map = map;
+            //When user clicks a marker display information about it.
+            $(map.getViewport()).on('click', function (e) {
+                var eventPosition = map.getEventPixel(e);
+                var feature = map.forEachFeatureAtPixel(eventPosition,
+                    function (feature, layer) {
+                        return feature;
+                    });
+                if (feature) {
+                    console.log("I will show popup for this feature");
+                }
+            });
         }());
     </script>
-    <!-- ReSharper restore UseOfImplicitGlobalInFunctionScope -->
 </body>
 
 </html>
