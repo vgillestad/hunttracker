@@ -53,12 +53,12 @@
              ol-on-position-changed="positionChanged(coordinates)"
              ol-on-marker-selected="showMarkerDetails(marker)"
              ol-on-show-context-menu="addMarker(coordinates)"
-             class="map-fullscreen">
+             class="map_fullscreen">
         </div>
 
         <pop-it-over target="#marker-element" show="showPopIt">
             Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#)
-            <div>
+            <div id="asdf">
                 <textarea cols="32"></textarea>
             </div>
 
@@ -69,7 +69,7 @@
             </div>
 
             <p>
-                <input type="text" />
+                <input type="text"/>
             </p>
 
             <div>
@@ -77,6 +77,8 @@
                 <button type="button" class="btn btn-default" ng-click="closeMarker()">Cancel</button>
             </div>
         </pop-it-over>
+        <div id="test"></div>
+        <div>hei {{event.animal}}</div>
     </div>
 </body>
 </html>
