@@ -11,7 +11,6 @@
     <link type="text/css" rel="stylesheet" href="bower_components/tombatossals/css/markers.css" />
     <link type="text/css" rel="stylesheet" href="css/index.css" />
 
-
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bower_components/openlayers3/build/ol.js"></script>
@@ -19,11 +18,13 @@
     <script type="text/javascript" src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
     <script type="text/javascript" src="bower_components/hammerjs/hammer.min.js"></script>
     <script type="text/javascript" src="bower_components/jquery.hammer.js/jquery.hammer.js"></script>
+
+    <script type="text/javascript" src="js/directives.js"></script>
+    <script type="text/javascript" src="js/directive.popover.js"></script>
     <script type="text/javascript" src="js/directive.ol-map.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body ng-app="HuntTracker" ng-init="name = 'World'">
-    <a href="statkart.html">Statkart.html</a>
     <div class="main-menu">
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -45,20 +46,37 @@
         </div>
     </div>
 
-    <div style="display: none;">
-        <div id="marker" title="Marker"></div>
-        <div id="popup" title="Welcome to ol3"></div>
-    </div>
-
     <div ng-controller="MapCtrl" class="map-fullscreen">
         <div ol-map
              ol-markers="markers"
              ol-track-position="tracking"
              ol-on-position-changed="positionChanged(coordinates)"
-             ol-on-marker-selected="showMarkerDetails(id)"
-             ol-on-show-context-menu="addMarker(eventPosition, coordinates)"
+             ol-on-marker-selected="showMarkerDetails(marker)"
+             ol-on-show-context-menu="addMarker(coordinates)"
              class="map-fullscreen">
         </div>
+
+        <pop-it-over target="#marker-element" show="showPopIt">
+            Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#)
+            <div>
+                <textarea cols="32"></textarea>
+            </div>
+
+            Vi anbefaler at du gjør et valg på desse forhandsdefinerte tags:
+            <div>
+                <select ng-model="event.action" ng-options="action.id as action.name for action in actions"></select>
+                <select ng-model="event.animal" ng-options="animal.id as animal.name for animal in animals"></select>
+            </div>
+
+            <p>
+                <input type="text" />
+            </p>
+
+            <div>
+                <button type="button" class="btn btn-primary" ng-click="addMarkerConfirm()">Add</button>
+                <button type="button" class="btn btn-default" ng-click="closeMarker()">Cancel</button>
+            </div>
+        </pop-it-over>
     </div>
 </body>
 </html>

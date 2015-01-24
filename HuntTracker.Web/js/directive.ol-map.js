@@ -1,6 +1,6 @@
-﻿angular.module("HuntersDirectives", [])
+﻿angular.module("HuntersDirectives")
 
-    .directive("olMap", function () {
+    .directive("olMap", function ($compile) {
         return {
             restrict: "A",
             scope: {
@@ -18,6 +18,7 @@
 
                 var map = new ol.Map({
                     layers: [
+                        new ol.layer.Tile({ source: new ol.source.OSM() }),
                         new ol.layer.Tile({
                             source: new ol.source.XYZ({
                                 attributions: [
@@ -34,13 +35,19 @@
 
                 map.setTarget(element[0]);
 
+                //Createing a POPOVER element
+                var popup = new ol.Overlay({ element: $("<div id='marker-element'></div>").appendTo("body") });
+                map.addOverlay(popup);
+
                 //Right click on PC
                 $(map.getViewport()).on('contextmenu', function (e) {
                     e.preventDefault();
                     var eventPosition = map.getEventPixel(e);
                     var coordinates = map.getCoordinateFromPixel(eventPosition);
+                    popup.setPosition(coordinates);
+                    popup.setOffset([12, -25]);
                     scope.$apply(function () {
-                        scope.onShowContextMenu({ eventPosition: eventPosition, coordinates: coordinates });
+                        scope.onShowContextMenu({ coordinates: coordinates });
                     });
                     return false;
                 });
@@ -50,13 +57,14 @@
                     e.preventDefault();
                     var eventPosition = [e.gesture.center.x, e.gesture.center.y];
                     var coordinates = map.getCoordinateFromPixel(eventPosition);
-                    scope.$apply(function() {
-                        scope.onShowContextMenu({ eventPosition: eventPosition, coordinates: coordinates });
+                    popup.setPosition(coordinates);
+                    popup.setOffset([12, -25]);
+                    scope.$apply(function () {
+                        scope.onShowContextMenu({ coordinates: coordinates });
                     });
                     return false;
                 });
 
-                //When user clicks a marker display information about it.
                 $(map.getViewport()).on('click', function (e) {
                     var eventPosition = map.getEventPixel(e);
                     var feature = map.forEachFeatureAtPixel(eventPosition,
@@ -64,8 +72,14 @@
                             return feature;
                         });
                     if (feature) {
-                        var markerId = 1;
-                        scope.onMarkerSelected({ id: markerId });
+                        var geometry = feature.getGeometry();
+                        var coordinates = geometry.getCoordinates();
+                        popup.setPosition(coordinates);
+                        popup.setOffset([12, -25]);
+
+                        scope.$apply(function () {
+                            scope.onMarkerSelected({ marker: feature.marker });
+                        });
                     }
                 });
 
@@ -77,11 +91,11 @@
                 scope.$watch("tracking", function (t) {
                     geolocation.setTracking(t);
                     if (t) {
-                        geolocation.on("change", function () {
+                        geolocation.once("change", function () {
                             var coordinates = geolocation.getPosition();
                             view.setCenter(coordinates);
                             view.setZoom(15);
-                            scope.$apply(function() { //But why
+                            scope.$apply(function () {
                                 scope.onPositionChanged({ coordinates: coordinates });
                             });
                         });
@@ -110,10 +124,12 @@
                     //Re-add features.
                     if (newMarkers) {
                         for (var i = 0; i < newMarkers.length; i++) {
+                            var marker = newMarkers[i];
                             var feature = new ol.Feature({
-                                geometry: new ol.geom.Point(newMarkers[i].coordinates)
+                                geometry: new ol.geom.Point(marker.coordinates)
                             });
-                            feature.setStyle(iconStyle);  
+                            feature.marker = marker;
+                            feature.setStyle(iconStyle);
                             vectorSource.addFeature(feature);
                         }
                     }
