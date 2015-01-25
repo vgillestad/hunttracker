@@ -1,4 +1,4 @@
-﻿angular.module("HuntersDirectives")
+﻿angular.module("HTDirectives")
 
     .directive("popItOver", function ($compile) {
         return {

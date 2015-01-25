@@ -862,10 +862,12 @@
     <Content Include="bower_components\tombatossals\grunt\watch.js" />
     <Content Include="index.html" />
     <Content Include="js\controllers.js" />
+    <Content Include="js\controller.menu.js" />
     <Content Include="js\directive.popover.js" />
     <Content Include="js\directives.js" />
-    <Content Include="js\directives.modal.js" />
     <Content Include="js\directive.ol-map.js" />
+    <Content Include="js\lib\Math.uuid.js" />
+    <Content Include="js\controller.map.js" />
     <Content Include="js\main.js" />
     <Content Include="js\services.js" />
     <Content Include="statkart.html" />

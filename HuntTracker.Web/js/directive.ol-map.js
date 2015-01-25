@@ -1,6 +1,6 @@
-﻿angular.module("HuntersDirectives")
+﻿angular.module("HTDirectives")
 
-    .directive("olMap", function ($compile) {
+    .directive("olMap", function () {
         return {
             restrict: "A",
             scope: {

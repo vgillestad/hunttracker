@@ -1,1 +1,1 @@
-﻿angular.module("HuntersDirectives", [])
+﻿angular.module("HTDirectives", [])

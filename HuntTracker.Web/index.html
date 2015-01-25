@@ -18,13 +18,17 @@
     <script type="text/javascript" src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
     <script type="text/javascript" src="bower_components/hammerjs/hammer.min.js"></script>
     <script type="text/javascript" src="bower_components/jquery.hammer.js/jquery.hammer.js"></script>
+    <script type="text/javascript" src="js/lib/Math.uuid.js"></script>
 
     <script type="text/javascript" src="js/directives.js"></script>
     <script type="text/javascript" src="js/directive.popover.js"></script>
     <script type="text/javascript" src="js/directive.ol-map.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <script type="text/javascript" src="js/controller.menu.js"></script>
+    <script type="text/javascript" src="js/controller.map.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </head>
-<body ng-app="HuntTracker" ng-init="name = 'World'">
+<body ng-app="HuntTracker">
     <div class="main-menu">
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -47,16 +51,22 @@
     </div>
 
     <div ng-controller="MapCtrl" class="map-fullscreen">
+
+        <!--MAP-->
         <div ol-map
              ol-markers="markers"
              ol-track-position="tracking"
              ol-on-position-changed="positionChanged(coordinates)"
              ol-on-marker-selected="showMarkerDetails(marker)"
              ol-on-show-context-menu="addMarker(coordinates)"
-             class="map_fullscreen">
+             class="map-fullscreen">
         </div>
 
+        <!--MARKER POPOVER-->
         <pop-it-over target="#marker-element" show="showPopIt">
+            <div ng-show="marker.id === 'you'">
+                This is where <strong>you</strong> are now.
+            </div>
             Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#)
             <div id="asdf">
                 <textarea cols="32"></textarea>
@@ -69,7 +79,7 @@
             </div>
 
             <p>
-                <input type="text"/>
+                <input type="text" />
             </p>
 
             <div>
@@ -77,8 +87,6 @@
                 <button type="button" class="btn btn-default" ng-click="closeMarker()">Cancel</button>
             </div>
         </pop-it-over>
-        <div id="test"></div>
-        <div>hei {{event.animal}}</div>
     </div>
 </body>
 </html>
