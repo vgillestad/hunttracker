@@ -6,11 +6,6 @@
         $scope.tracking = true;
         $scope.markers = [];
 
-        $scope.markers.push({
-            id: Math.uuid(),
-            coordinates: [2629703.3656816175, 9797587.027268754]
-        });
-
         var cleanMarkers = function () {
             if ($scope.marker && !$scope.marker.id) {
                 $scope.markers = $scope.markers.filter(function (m) {
@@ -29,22 +24,40 @@
         };
 
         $scope.addMarkerConfirm = function () {
-            $scope.marker.id = Math.uuid();
+            $scope.marker.id = $scope.marker.id || Math.uuid();
             $scope.showPopIt = false;
-            console.log("addMarkerConfirm");
+        };
+
+        $scope.addTag = function () {
+            $scope.marker.description = $scope.marker.description || "";
+
+            $scope.actions.forEach(function (action) {
+                $scope.marker.description = $scope.marker.description.replace(action.id, "");
+            });
+
+            $scope.animals.forEach(function (animal) {
+                $scope.marker.description = $scope.marker.description.replace(animal.id, "");
+            });
+
+            if ($scope.marker.action) {
+                $scope.marker.description += " " + $scope.marker.action;
+            }
+            if ($scope.marker.animal) {
+                $scope.marker.description += " " + $scope.marker.animal;
+            }
+
+            $scope.marker.description = $scope.marker.description.trim();
         };
 
         $scope.closeMarker = function () {
             cleanMarkers();
             $scope.showPopIt = false;
-            console.log("closeMarkerConfirm");
         };
 
         $scope.showMarkerDetails = function (marker) {
             cleanMarkers();
             $scope.marker = marker;
             $scope.showPopIt = true;
-            console.log("showMarkerDetails");
         }
 
         $scope.positionChanged = function (coordinates) {

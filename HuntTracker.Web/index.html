@@ -29,6 +29,7 @@
     <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body ng-app="HuntTracker">
+
     <div class="main-menu">
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -68,14 +69,14 @@
                 This is where <strong>you</strong> are now.
             </div>
             Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#)
-            <div id="asdf">
-                <textarea cols="32"></textarea>
+            <div>
+                <textarea cols="32" ng-model="marker.description"></textarea>
             </div>
 
             Vi anbefaler at du gjør et valg på desse forhandsdefinerte tags:
             <div>
-                <select ng-model="event.action" ng-options="action.id as action.name for action in actions"></select>
-                <select ng-model="event.animal" ng-options="animal.id as animal.name for animal in animals"></select>
+                <select ng-options="action.id as action.name for action in actions" ng-model="marker.action" ng-change="addTag()"></select>
+                <select ng-options="animal.id as animal.name for animal in animals" ng-model="marker.animal" ng-change="addTag()"></select>
             </div>
 
             <p>
