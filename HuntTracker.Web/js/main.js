@@ -1,1 +1,1 @@
-﻿angular.module("HuntTracker", ["gettext","HTControllers", "HTDirectives"])
+﻿angular.module("HuntTracker", ["gettext","HTControllers", "HTDirectives", "HTServices"])

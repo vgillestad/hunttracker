@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuntTracker.Web", "HuntTracker.Web\HuntTracker.Web.csproj", "{8A1870DC-C7C6-492B-A566-398A21E9AB5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuntTracker.Api", "HuntTracker.Api\HuntTracker.Api.csproj", "{F6953768-237F-4BD5-8638-4EF9E512F23F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{361619D9-C31F-45CD-A581-D95160637B7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,10 @@ Global
 		{8A1870DC-C7C6-492B-A566-398A21E9AB5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A1870DC-C7C6-492B-A566-398A21E9AB5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A1870DC-C7C6-492B-A566-398A21E9AB5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6953768-237F-4BD5-8638-4EF9E512F23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6953768-237F-4BD5-8638-4EF9E512F23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6953768-237F-4BD5-8638-4EF9E512F23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6953768-237F-4BD5-8638-4EF9E512F23F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

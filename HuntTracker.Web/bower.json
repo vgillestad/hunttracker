@@ -18,6 +18,7 @@
     "angular": "~1.3.8",
     "bootstrap": "~3.3.1",
     "tombatossals": "~0.0.2",
-    "jquery.hammer.js": "~2.0.0"
+    "jquery.hammer.js": "~2.0.0",
+    "angular-resource": "~1.3.11"
   }
 }

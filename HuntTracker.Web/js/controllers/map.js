@@ -1,10 +1,17 @@
 ﻿angular.module("HTControllers")
 
-    .controller("MapCtrl", function ($scope) {
+    .controller("MapCtrl", function ($scope, MarkerSource) {
+        var userId = "e9c177ee-9c36-43b4-9813-1b2adc710732";
         $scope.actions = [{ id: "#shot", name: "Shot animal" }, { id: "#observed", name: "Observation" }];
         $scope.animals = [{ id: "#deer", name: "Deer" }, { id: "#pig", name: "Pig" }];
         $scope.tracking = true;
         $scope.markers = [];
+
+        MarkerSource.getByUserId({ userId: userId }, function (markers) {
+            markers.forEach(function (marker) {
+                $scope.markers.push(marker);
+            });
+        });
 
         var cleanMarkers = function () {
             if ($scope.marker && !$scope.marker.id) {
@@ -25,6 +32,10 @@
 
         $scope.addMarkerConfirm = function () {
             $scope.marker.id = $scope.marker.id || Math.uuid();
+            $scope.marker.userId = userId;
+            MarkerSource.add($scope.marker, function () {
+                console.log("added");
+            });
             $scope.showPopIt = false;
         };
 
