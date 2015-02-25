@@ -1,63 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
-using AutoMapper;
+using HuntTracker.Api.Interfaces.DataAccess;
 using HuntTracker.Api.Interfaces.DataEntities;
 
 namespace HuntTracker.Api.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/markers")]
     public class MarkerController : ApiController
     {
-        public static List<Marker> Markers = new List<Marker>();
+        private readonly IMarkerRepository _markerRepository;
 
-        //[HttpGet]
-        //[Route("")]
-        //public List<Marker> GetAll()
-        //{
-        //    return Markers.ToList();
-        //}
-
-        [HttpGet]
-        [Route("")]
-        public List<Marker> GetByOwner([FromUri] Guid userId)
+        public MarkerController(IMarkerRepository markerRepository)
         {
-            return Markers.Where(x=>x.UserId == userId).ToList();
+            _markerRepository = markerRepository;
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public Marker GetById([FromUri] Guid id)
+        [Route("")]
+        public async Task<IEnumerable<Marker>> GetByUser([FromUri] string userId)
         {
-            return Markers.First(x => x.Id == id);
+            return await _markerRepository.GetByUser(userId);
         }
 
         [HttpPost]
         [Route("")]
-        public Marker Post([FromBody] Marker marker)
+        public async Task<Marker> Post([FromBody] Marker marker)
         {
-            Markers.Add(marker);
+            await _markerRepository.InsertAsync(marker);
             return marker;
         }
 
         [HttpPut]
-        public Marker Put([FromBody] Marker marker)
+        [Route("")]
+        public async Task Put([FromBody] Marker marker)
         {
-            var current = Markers.First(x => x.Id == marker.Id);
-            Mapper.DynamicMap(marker, current);
-
-            return current;
+            await _markerRepository.UpdateAsync(marker);
         }
 
         [HttpDelete]
-        public HttpResponseMessage Delete([FromUri] Guid id)
+        [Route("")]
+        public async Task Delete([FromUri] string id)
         {
-            var current = Markers.First(x => x.Id == id);
-            Markers.Remove(current);
-            return new HttpResponseMessage(HttpStatusCode.Accepted);
+            await _markerRepository.DeleteAsync(id);
         }
     }
 }

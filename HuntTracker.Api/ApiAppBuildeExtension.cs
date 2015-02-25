@@ -1,5 +1,10 @@
 ﻿using System.Net.Http.Formatting;
+using System.Reflection;
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
+using Autofac;
+using Autofac.Integration.WebApi;
+using HuntTracker.Api.Interfaces.DataAccess;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -27,6 +32,7 @@ namespace HuntTracker.Api
             jsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
             webApiConfig.Formatters.Add(jsonFormatter);
 
+            appBuilder.UseAutofacWebApi(webApiConfig);
             appBuilder.UseWebApi(webApiConfig);
 
             return appBuilder;

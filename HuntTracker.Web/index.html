@@ -24,6 +24,8 @@
 
     <script type="text/javascript" src="js/services/services.js"></script>
     <script type="text/javascript" src="js/services/markers.js"></script>
+    <script type="text/javascript" src="js/services/auth.js"></script>
+    <script type="text/javascript" src="js/services/users.js"></script>
     <script type="text/javascript" src="js/directives/directives.js"></script>
     <script type="text/javascript" src="js/directives/popover.js"></script>
     <script type="text/javascript" src="js/directives/ol-map.js"></script>
@@ -34,7 +36,7 @@
 </head>
 <body ng-app="HuntTracker">
 
-    <div class="main-menu">
+    <div class="main-menu" ng-controller="MenuCtrl">
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 Menu
@@ -46,6 +48,9 @@
                 </li>
                 <li>
                     <a href="#">Toggle events</a>
+                </li>
+                <li>
+                    <a href="#" ng-click="logout()">Log out</a>
                 </li>
                 <li class="divider"></li>
                 <li>

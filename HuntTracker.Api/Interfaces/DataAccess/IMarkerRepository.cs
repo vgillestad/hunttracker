@@ -7,9 +7,9 @@ namespace HuntTracker.Api.Interfaces.DataAccess
 {
     public interface IMarkerRepository
     {
-        Task<List<Marker>> GetByUser(Guid userId);
+        Task<IEnumerable<Marker>> GetByUser(string userId);
         Task InsertAsync(Marker marker);
         Task UpdateAsync(Marker marker);
-        Task DeleteAsync(Guid markerId);
+        Task DeleteAsync(string markerId);
     }
 }

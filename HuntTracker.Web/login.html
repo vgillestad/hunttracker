@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>HuntTracker - Login</title>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="container">
+
+    <form>
+        <label for="username">Email:</label>
+        <input id="username" type="text" />
+
+        <label for="password">Password:</label>
+        <input id="password" type="text" />
+
+        <label id="loginLbl"></label>
+
+        <button type="button" id="loginBtn" class="btn btn-primary">Login</button>
+    </form>
+    <script type="text/javascript">
+        $("#loginBtn").on("click", function () {
+            var $loginLbl = $("#loginLbl");
+            var $email = $("#username");
+            var $password = $("#password");
+            
+
+            $loginLbl.text("");
+            $.ajax({
+                method: "POST",
+                url: "/api/auth",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    username: $email.val(),
+                    password: $password.val()
+                }),
+                success: function () {
+                    location.href = "/";
+                },
+                error: function () {
+                    $password.val("");
+                    $loginLbl.text("Invalid email/password");
+                }
+            });
+        })
+    </script>
+</body>
+</html>

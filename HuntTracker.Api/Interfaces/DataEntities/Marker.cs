@@ -5,8 +5,9 @@ namespace HuntTracker.Api.Interfaces.DataEntities
 {
     public class Marker
     {
-        public Guid Id { get; set; }
-        public Guid UserId { get; set; }
+        public string Id { get; set; }
+        public string UserId { get; set; }
         public List<string> Coordinates { get; set; }
+        public string Description { get; set; }
     }
 }

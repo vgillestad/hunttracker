@@ -1,17 +1,18 @@
 ﻿angular.module("HTControllers")
 
-    .controller("MapCtrl", function ($scope, MarkerSource) {
-        var userId = "e9c177ee-9c36-43b4-9813-1b2adc710732";
+    .controller("MapCtrl", function ($scope, UserSource, MarkerSource) {
         $scope.actions = [{ id: "#shot", name: "Shot animal" }, { id: "#observed", name: "Observation" }];
         $scope.animals = [{ id: "#deer", name: "Deer" }, { id: "#pig", name: "Pig" }];
         $scope.tracking = true;
         $scope.markers = [];
 
-        MarkerSource.getByUserId({ userId: userId }, function (markers) {
-            markers.forEach(function (marker) {
-                $scope.markers.push(marker);
+        UserSource.current(function (user) {
+            $scope.user = user;
+            MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
+                $scope.markers = markers;
             });
         });
+
 
         var cleanMarkers = function () {
             if ($scope.marker && !$scope.marker.id) {
@@ -31,11 +32,18 @@
         };
 
         $scope.addMarkerConfirm = function () {
-            $scope.marker.id = $scope.marker.id || Math.uuid();
-            $scope.marker.userId = userId;
-            MarkerSource.add($scope.marker, function () {
-                console.log("added");
-            });
+            if ($scope.marker.id) {
+                MarkerSource.update($scope.marker, function() {
+                    console.log("added");
+                });
+            } else {
+                $scope.marker.id = $scope.marker.id || Math.uuid();
+                $scope.marker.userId = $scope.user.id;
+                MarkerSource.add($scope.marker, function () {
+                    console.log("added");
+                });
+            }
+
             $scope.showPopIt = false;
         };
 
