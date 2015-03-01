@@ -9,13 +9,15 @@
     <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="bower_components/openlayers3/build/ol.css" />
     <link type="text/css" rel="stylesheet" href="bower_components/tombatossals/css/markers.css" />
-    <link type="text/css" rel="stylesheet" href="css/index.css" />
+    <link type="text/css" rel="stylesheet" href="css/index.css"/>
+    <link type="text/css" rel="stylesheet" href="css/icomoon.css" />
 
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bower_components/openlayers3/build/ol.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
     <script type="text/javascript" src="bower_components/hammerjs/hammer.min.js"></script>
     <script type="text/javascript" src="bower_components/jquery.hammer.js/jquery.hammer.js"></script>
@@ -44,13 +46,10 @@
             </button>
             <ul class="dropdown-menu" role="menu">
                 <li>
-                    <a href="#">Add event</a>
-                </li>
-                <li>
-                    <a href="#">Toggle events</a>
-                </li>
-                <li>
-                    <a href="#" ng-click="logout()">Log out</a>
+                    <a href="#" ng-click="logout()">
+                        <i class="icon-user-minus"></i>
+                        Log out
+                    </a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -63,14 +62,13 @@
     <div ng-controller="MapCtrl" class="map-fullscreen">
 
         <!--MAP-->
-        <div ol-map
-             ol-markers="markers"
-             ol-track-position="tracking"
-             ol-on-position-changed="positionChanged(coordinates)"
-             ol-on-marker-selected="showMarkerDetails(marker)"
-             ol-on-show-context-menu="addMarker(coordinates)"
-             class="map-fullscreen">
-        </div>
+        <ol-map ol-markers="markers"
+                ol-track-position="tracking"
+                ol-on-position-changed="positionChanged(coordinates)"
+                ol-on-marker-selected="showMarkerDetails(marker)"
+                ol-on-show-context-menu="addMarker(coordinates)"
+                class="map-fullscreen">
+        </ol-map>
 
         <!--MARKER POPOVER-->
         <pop-it-over target="#marker-element" show="showPopIt">

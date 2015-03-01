@@ -4,28 +4,47 @@
     <title>HuntTracker - Login</title>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="css/icomoon.css" />
+    <link type="text/css" rel="stylesheet" href="css/login.css" />
 </head>
-<body class="container">
-
-    <form>
-        <label for="username">Email:</label>
-        <input id="username" type="text" />
-
-        <label for="password">Password:</label>
-        <input id="password" type="text" />
-
-        <label id="loginLbl"></label>
-
-        <button type="button" id="loginBtn" class="btn btn-primary">Login</button>
-    </form>
+<body>
+    <div class="container" style="margin-top:10%">
+        <div class="col-md-5 col-md-offset-3">
+            <div class="panel">
+                <div class="panel-body">
+                    <p id="loginLbl" class="login-error">Invalid username password</p>
+                    <form role="form" class="loginform">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <i class="input-group-addon icon-user"></i>
+                                <input type="email" class="form-control" id="email" 
+                                       placeholder="username or email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="sr-only">Password</label>
+                            <div class="input-group">
+                                <i class="input-group-addon icon-lock"></i>
+                                <input type="password" class="form-control" id="password"
+                                       placeholder="password">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success login">Log in</button>
+                    </form>
+                    <!--<hr/>
+                    <button class="btn btn-default btn-sm">Register</button>
+                    <p class="forgotpass pull-right"><a href="#" class="small">Forgot Password?</a></p>-->
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
-        $("#loginBtn").on("click", function () {
+        $("button.login").on("click", function () {
             var $loginLbl = $("#loginLbl");
-            var $email = $("#username");
+            var $email = $("#email");
             var $password = $("#password");
-            
 
-            $loginLbl.text("");
+            $loginLbl.hide();
             $.ajax({
                 method: "POST",
                 url: "/api/auth",
@@ -40,6 +59,7 @@
                 error: function () {
                     $password.val("");
                     $loginLbl.text("Invalid email/password");
+                    $loginLbl.show();
                 }
             });
         })

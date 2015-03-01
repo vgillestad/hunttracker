@@ -1,6 +1,6 @@
 ﻿angular.module("HuntTracker", ["gettext", "HTControllers", "HTDirectives", "HTServices"])
 
-.config(function ($httpProvider) {
+.config(["$httpProvider", function ($httpProvider) {
     //interceptor that adds random argument to GET-requests to prevent caching in IE.
     $httpProvider.interceptors.push(function ($q) {
         return {
@@ -29,4 +29,4 @@
             }
         };
     });
-})
+}])

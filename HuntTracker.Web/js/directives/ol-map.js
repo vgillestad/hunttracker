@@ -2,7 +2,9 @@
 
     .directive("olMap", function () {
         return {
-            restrict: "A",
+            restrict: "EA",
+            template: "<div></div>",
+            replace: true,
             scope: {
                 markers: "=olMarkers",
                 tracking: "=olTrackPosition",
@@ -108,9 +110,25 @@
                         anchor: [0.45, 37],
                         anchorXUnits: 'fraction',
                         anchorYUnits: 'pixels',
-                        src: 'images/you.png'
+                        src: 'images/hooves.png'
                     }))
                 });
+
+                var iconStyles = {};
+                var getIconStyle = function (imgSrc) {
+                    if (!iconStyles[imgSrc]) {
+                        iconStyles[imgSrc] = new ol.style.Style({
+                            image: new ol.style.Icon( /** @type {olx.style.IconOptions} */({
+                                anchor: [0.45, 37],
+                                anchorXUnits: 'fraction',
+                                anchorYUnits: 'pixels',
+                                src: imgSrc
+                            }))
+                        });
+                    }
+                    return iconStyles[imgSrc];
+                }
+
                 var vectorSource = new ol.source.Vector();
                 var vectorLayer = new ol.layer.Vector({ source: vectorSource });
                 map.addLayer(vectorLayer);
@@ -129,7 +147,7 @@
                                 geometry: new ol.geom.Point(marker.coordinates)
                             });
                             feature.marker = marker;
-                            feature.setStyle(iconStyle);
+                            feature.setStyle(getIconStyle(marker.imgSrc));
                             vectorSource.addFeature(feature);
                         }
                     }

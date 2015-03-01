@@ -9,6 +9,9 @@
         UserSource.current(function (user) {
             $scope.user = user;
             MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
+                markers.forEach(function(marker) {
+                    marker.imgSrc = "/images/hooves.png";
+                });
                 $scope.markers = markers;
             });
         });
@@ -84,7 +87,8 @@
             $scope.markers.push({
                 id: "you",
                 coordinates: coordinates,
-                popover: "This is you"
+                popover: "This is you",
+                imgSrc: "/images/you.png"
             });
         }
     });
