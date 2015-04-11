@@ -17,7 +17,10 @@
 
                     scope.$watch("show", function () {
                         if (scope.show) {
-                            popover.popover("show");
+                            setTimeout(function () {
+                                popover.popover("show");
+                            }, 1);
+
                         } else {
                             popover.popover("hide");
                         }

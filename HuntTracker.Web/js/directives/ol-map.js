@@ -105,15 +105,6 @@
                 });
 
                 //Markers
-                var iconStyle = new ol.style.Style({
-                    image: new ol.style.Icon( /** @type {olx.style.IconOptions} */({
-                        anchor: [0.45, 37],
-                        anchorXUnits: 'fraction',
-                        anchorYUnits: 'pixels',
-                        src: 'images/hooves.png'
-                    }))
-                });
-
                 var iconStyles = {};
                 var getIconStyle = function (imgSrc) {
                     if (!iconStyles[imgSrc]) {
@@ -132,7 +123,7 @@
                 var vectorSource = new ol.source.Vector();
                 var vectorLayer = new ol.layer.Vector({ source: vectorSource });
                 map.addLayer(vectorLayer);
-                scope.$watchCollection("markers", function (newMarkers, oldMarkers) {
+                scope.$watch("markers", function (newMarkers, oldMarkers) {
                     //Remove all first
                     var features = vectorSource.getFeatures();
                     for (var i = 0; i < features.length; i++) {
@@ -147,11 +138,11 @@
                                 geometry: new ol.geom.Point(marker.coordinates)
                             });
                             feature.marker = marker;
-                            feature.setStyle(getIconStyle(marker.imgSrc));
+                            feature.setStyle(getIconStyle(marker.iconSrc));
                             vectorSource.addFeature(feature);
                         }
                     }
-                });
+                }, true);
             }
         };
     });

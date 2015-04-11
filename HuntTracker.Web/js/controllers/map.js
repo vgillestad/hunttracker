@@ -1,18 +1,16 @@
 ﻿angular.module("HTControllers")
 
-    .controller("MapCtrl", function ($scope, UserSource, MarkerSource) {
-        $scope.actions = [{ id: "#shot", name: "Shot animal" }, { id: "#observed", name: "Observation" }];
-        $scope.animals = [{ id: "#deer", name: "Deer" }, { id: "#pig", name: "Pig" }];
+    .controller("MapCtrl", ["$scope", "$modal", "$timeout", "UserSource", "MarkerSource", "IconSource", "Helpers", function ($scope, $modal, $timeout, UserSource, MarkerSource, IconSource, Helpers) {
+        $scope.actions = [{ name: "-Event-" }, { id: "#shot", name: "Shot animal" }, { id: "#observed", name: "Observation" }];
+        $scope.animals = [{ name: "-Animal-" }, { id: "#deer", name: "Deer" }, { id: "#pig", name: "Pig" }];
         $scope.tracking = true;
         $scope.markers = [];
+        $scope.icons = IconSource.getAll();
 
         UserSource.current(function (user) {
             $scope.user = user;
             MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
-                markers.forEach(function(marker) {
-                    marker.imgSrc = "/images/hooves.png";
-                });
-                $scope.markers = markers;
+                $scope.markers = MarkerSource.filterAndMap(markers);
             });
         });
 
@@ -25,29 +23,56 @@
             }
         }
 
+        var togglePopover = function (show) {
+            $scope.showPopIt = show ? Math.random() : null;
+        }
+
         $scope.addMarker = function (coordinates) {
             cleanMarkers();
             $scope.marker = {
-                coordinates: coordinates
+                coordinates: coordinates,
+                icon: "default",
+                iconSrc: $scope.icons["default"],
+                dateTime: new Date()
             };
             $scope.markers.push($scope.marker);
-            $scope.showPopIt = true;
+            togglePopover(true);
+
+            //$timeout(function () {
+            //    var modal = $modal.open({
+            //        templateUrl: "widget.modal.html",
+            //        controller: "MapModalCtrl",
+            //        size: "sm",
+            //        resolve: {
+            //            marker: function () {
+            //                return $scope.marker;
+            //            },
+            //            icons: function () {
+            //                return $scope.icons;
+            //            }
+            //        }
+            //    });
+
+            //    modal.result.then(function (marker) {
+            //        $scope.marker = marker;
+            //        $scope.addMarkerSubmit();
+            //    }, function () {
+            //        cleanMarkers();
+            //    });
+
+            //}, 100);
         };
 
-        $scope.addMarkerConfirm = function () {
+        $scope.addMarkerSubmit = function () {
             if ($scope.marker.id) {
-                MarkerSource.update($scope.marker, function() {
-                    console.log("added");
-                });
+                MarkerSource.update($scope.marker);
             } else {
                 $scope.marker.id = $scope.marker.id || Math.uuid();
                 $scope.marker.userId = $scope.user.id;
-                MarkerSource.add($scope.marker, function () {
-                    console.log("added");
-                });
+                MarkerSource.add($scope.marker);
             }
 
-            $scope.showPopIt = false;
+            togglePopover(false);
         };
 
         $scope.addTag = function () {
@@ -71,15 +96,20 @@
             $scope.marker.description = $scope.marker.description.trim();
         };
 
+        $scope.setIcon = function (icon) {
+            $scope.marker.icon = icon;
+            $scope.marker.iconSrc = $scope.icons[icon];
+        }
+
         $scope.closeMarker = function () {
             cleanMarkers();
-            $scope.showPopIt = false;
+            togglePopover(false);
         };
 
         $scope.showMarkerDetails = function (marker) {
             cleanMarkers();
             $scope.marker = marker;
-            $scope.showPopIt = true;
+            togglePopover(true);
         }
 
         $scope.positionChanged = function (coordinates) {
@@ -88,7 +118,25 @@
                 id: "you",
                 coordinates: coordinates,
                 popover: "This is you",
-                imgSrc: "/images/you.png"
+                iconSrc: $scope.icons["person"]
             });
         }
-    });
+    }])
+
+    .controller("MapModalCtrl", ["$scope", "$modalInstance", "marker", "icons", function ($scope, $modalInstance, marker, icons) {
+        $scope.marker = marker;
+        $scope.icons = icons;
+
+        $scope.setIcon = function (icon) {
+            $scope.marker.icon = icon;
+            $scope.marker.iconSrc = $scope.icons[icon];
+        }
+
+        $scope.add = function () {
+            $modalInstance.close($scope.marker);
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss("cancel");
+        };
+    }]);

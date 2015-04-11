@@ -15,3 +15,11 @@ body {
     right: 0; 
     z-index: 1
 }
+
+.popover {
+    -moz-min-width: 300px;
+    -ms-min-width: 300px;
+    -o-min-width: 300px;
+    -webkit-min-width: 300px;
+    min-width: 300px;
+}

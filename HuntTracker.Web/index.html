@@ -7,30 +7,38 @@
     <title>HuntTracker</title>
 
     <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <link type="text/css" rel="stylesheet" href="bower_components/openlayers3/build/ol.css" />
     <link type="text/css" rel="stylesheet" href="bower_components/tombatossals/css/markers.css" />
-    <link type="text/css" rel="stylesheet" href="css/index.css"/>
+    <link type="text/css" rel="stylesheet" href="css/index.css" />
     <link type="text/css" rel="stylesheet" href="css/icomoon.css" />
 
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/moment/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="bower_components/openlayers3/build/ol.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript" src="bower_components/hammerjs/hammer.min.js"></script>
     <script type="text/javascript" src="bower_components/jquery.hammer.js/jquery.hammer.js"></script>
     <script type="text/javascript" src="js/lib/Math.uuid.js"></script>
 
 
     <script type="text/javascript" src="js/services/services.js"></script>
+    <script type="text/javascript" src="js/services/icons.js"></script>
     <script type="text/javascript" src="js/services/markers.js"></script>
     <script type="text/javascript" src="js/services/auth.js"></script>
     <script type="text/javascript" src="js/services/users.js"></script>
+    <script type="text/javascript" src="js/services/helpers.js"></script>
     <script type="text/javascript" src="js/directives/directives.js"></script>
     <script type="text/javascript" src="js/directives/popover.js"></script>
     <script type="text/javascript" src="js/directives/ol-map.js"></script>
+    <script type="text/javascript" src="js/directives/datetime-picker.js"></script>
     <script type="text/javascript" src="js/controllers/controllers.js"></script>
     <script type="text/javascript" src="js/controllers/menu.js"></script>
     <script type="text/javascript" src="js/controllers/map.js"></script>
@@ -63,6 +71,7 @@
 
         <!--MAP-->
         <ol-map ol-markers="markers"
+                ol-marker-icons="markerIcons"
                 ol-track-position="tracking"
                 ol-on-position-changed="positionChanged(coordinates)"
                 ol-on-marker-selected="showMarkerDetails(marker)"
@@ -72,29 +81,87 @@
 
         <!--MARKER POPOVER-->
         <pop-it-over target="#marker-element" show="showPopIt">
-            <div ng-show="marker.id === 'you'">
-                This is where <strong>you</strong> are now.
-            </div>
-            Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#)
-            <div>
-                <textarea cols="32" ng-model="marker.description"></textarea>
-            </div>
+            <form ng-submit="addMarkerSubmit()">
+                <div class="form-group" ng-show="marker.id === 'you'">
+                    This is where <strong>you</strong> are now.
+                </div>
 
-            Vi anbefaler at du gjør et valg på desse forhandsdefinerte tags:
-            <div>
-                <select ng-options="action.id as action.name for action in actions" ng-model="marker.action" ng-change="addTag()"></select>
-                <select ng-options="animal.id as animal.name for animal in animals" ng-model="marker.animal" ng-change="addTag()"></select>
-            </div>
+                <small class="text-justify">Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#)</small>
+                <div class="form-group">
+                    <textarea class="form-control" ng-model="marker.description"></textarea>
+                </div>
 
-            <p>
-                <input type="text" />
-            </p>
+                <div class="form-group">
+                    <img ng-repeat="(key, value) in icons"
+                         ng-class="key === marker.icon ? 'btn btn-primary' : 'btn btn-default'"
+                         ng-click="setIcon(key)"
+                         src="{{value}}" alt="{{key}}" />
+                </div>
+                <!--<small class="text-justify">Vi anbefaler at du gjør et valg på desse forhandsdefinerte tags:</small>-->
+                <!--<div class="form-group row">
+                    <div class="col-lg-6">
+                        <select class="form-control" ng-options="action.id as action.name for action in actions" ng-model="marker.action" ng-change="addTag()"></select>
+                    </div>
+                    <div class="col-lg-6">
+                        <select class="form-control" ng-options="animal.id as animal.name for animal in animals" ng-model="marker.animal" ng-change="addTag()"></select>
+                    </div>
+                </div>-->
 
-            <div>
-                <button type="button" class="btn btn-primary" ng-click="addMarkerConfirm()">Add</button>
-                <button type="button" class="btn btn-default" ng-click="closeMarker()">Cancel</button>
-            </div>
+                <div class="form-group">
+                    <div class="input-group date" datetime-picker ng-model="marker.dateTime">
+                        <input type="text" class="form-control" />
+                        <span class="input-group-addon">
+                            <i class="icon-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div>
+                    <button type="submit" class="btn btn-success">Add</button>
+                    <button type="button" class="btn btn-default pull-right" ng-click="closeMarker()">Cancel</button>
+                </div>
+            </form>
         </pop-it-over>
+
+        <script type="text/ng-template" id="widget.modal.html">
+            <div class="modal-header">
+                <h3 class="modal-title">{{dataset.name}}</h3>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="addMarkerSubmit()">
+                    <div class="form-group" ng-show="marker.id === 'you'">
+                        This is where <strong>you</strong> are now.
+                    </div>
+
+                    <small class="text-justify">Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#)</small>
+                    <div class="form-group">
+                        <textarea class="form-control" ng-model="marker.description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <img ng-repeat="(key, value) in icons"
+                             ng-class="key === marker.icon ? 'btn btn-primary' : 'btn btn-default'"
+                             ng-click="setIcon(key)"
+                             src="{{value}}" alt="{{key}}" />
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group date" datetime-picker ng-model="marker.dateTime">
+                            <input type="text" class="form-control" />
+                            <span class="input-group-addon">
+                                <i class="icon-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-default" ng-click="cancel()">Close</button>
+                <button type="submit" class="btn btn-success" ng-click="add()">Add</button>
+            </div>
+        </script>
     </div>
 </body>
 </html>

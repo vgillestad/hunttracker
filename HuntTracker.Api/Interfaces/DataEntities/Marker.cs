@@ -9,5 +9,7 @@ namespace HuntTracker.Api.Interfaces.DataEntities
         public string UserId { get; set; }
         public List<string> Coordinates { get; set; }
         public string Description { get; set; }
+        public DateTime DateTime { get; set; }
+        public string Icon { get; set; }
     }
 }
