@@ -80,59 +80,13 @@
         </ol-map>
 
         <!--MARKER POPOVER-->
-        <pop-it-over target="#marker-element" show="showPopIt">
-            <form ng-submit="addMarkerSubmit()">
-                <div class="form-group" ng-show="marker.id === 'you'">
-                    This is where <strong>you</strong> are now.
-                </div>
-
-                <small class="text-justify">Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#)</small>
-                <div class="form-group">
-                    <textarea class="form-control" ng-model="marker.description"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <img ng-repeat="(key, value) in icons"
-                         ng-class="key === marker.icon ? 'btn btn-primary' : 'btn btn-default'"
-                         ng-click="setIcon(key)"
-                         src="{{value}}" alt="{{key}}" />
-                </div>
-                <!--<small class="text-justify">Vi anbefaler at du gjør et valg på desse forhandsdefinerte tags:</small>-->
-                <!--<div class="form-group row">
-                    <div class="col-lg-6">
-                        <select class="form-control" ng-options="action.id as action.name for action in actions" ng-model="marker.action" ng-change="addTag()"></select>
-                    </div>
-                    <div class="col-lg-6">
-                        <select class="form-control" ng-options="animal.id as animal.name for animal in animals" ng-model="marker.animal" ng-change="addTag()"></select>
-                    </div>
-                </div>-->
-
-                <div class="form-group">
-                    <div class="input-group date" datetime-picker ng-model="marker.dateTime">
-                        <input type="text" class="form-control" />
-                        <span class="input-group-addon">
-                            <i class="icon-calendar"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <hr />
-
-                <div>
-                    <button type="submit" class="btn btn-success">Add</button>
-                    <button type="button" class="btn btn-default pull-right" ng-click="closeMarker()">Cancel</button>
-                </div>
-            </form>
-        </pop-it-over>
-
         <script type="text/ng-template" id="widget.modal.html">
-            <div class="modal-header">
-                <h3 class="modal-title">{{dataset.name}}</h3>
-            </div>
             <div class="modal-body">
                 <form ng-submit="addMarkerSubmit()">
                     <div class="form-group" ng-show="marker.id === 'you'">
+                        <img src="/images/person.png" alt="you" />
                         This is where <strong>you</strong> are now.
+                        <hr />
                     </div>
 
                     <small class="text-justify">Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#)</small>
@@ -158,8 +112,10 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-sm btn-default" ng-click="cancel()">Close</button>
-                <button type="submit" class="btn btn-success" ng-click="add()">Add</button>
+                <button type="button" class="btn btn-sm btn-danger pull-left" ng-if="showDelBtn" ng-click="delete()">Delete</button>
+                <button type="button" class="btn btn-sm btn-danger pull-left" ng-if="showDelConfirmBtn" ng-click="deleteConfirm()">Are you sure?</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="cancel()">Close</button>
+                <button type="submit" class="btn btn-success" ng-click="submit()">{{submitText}}</button>
             </div>
         </script>
     </div>

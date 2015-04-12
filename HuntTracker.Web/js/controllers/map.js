@@ -5,12 +5,16 @@
         $scope.animals = [{ name: "-Animal-" }, { id: "#deer", name: "Deer" }, { id: "#pig", name: "Pig" }];
         $scope.tracking = true;
         $scope.markers = [];
+        $scope.you = null;
         $scope.icons = IconSource.getAll();
 
         UserSource.current(function (user) {
             $scope.user = user;
             MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
                 $scope.markers = MarkerSource.filterAndMap(markers);
+                if ($scope.you) {
+                    $scope.markers.push($scope.you);
+                }
             });
         });
 
@@ -23,8 +27,34 @@
             }
         }
 
-        var togglePopover = function (show) {
-            $scope.showPopIt = show ? Math.random() : null;
+
+        var showMarkerModal = function () {
+            var modal = $modal.open({
+                templateUrl: "widget.modal.html",
+                controller: "MapModalCtrl",
+                size: "sm",
+                resolve: {
+                    marker: function () {
+                        return $scope.marker;
+                    },
+                    icons: function () {
+                        return $scope.icons;
+                    }
+                }
+            });
+
+            modal.result.then(function (result) {
+                $scope.marker = result.marker;
+                if (result.action === "delete") {
+                    MarkerSource.remove({ markerId: $scope.marker.id }, function () {
+                        $scope.markers = MarkerSource.getAll({ userId: $scope.user.id });
+                    });
+                } else if (result.action === "submit") {
+                    $scope.addMarkerSubmit();
+                }
+            }, function () {
+                cleanMarkers();
+            });
         }
 
         $scope.addMarker = function (coordinates) {
@@ -36,34 +66,14 @@
                 dateTime: new Date()
             };
             $scope.markers.push($scope.marker);
-            togglePopover(true);
-
-            //$timeout(function () {
-            //    var modal = $modal.open({
-            //        templateUrl: "widget.modal.html",
-            //        controller: "MapModalCtrl",
-            //        size: "sm",
-            //        resolve: {
-            //            marker: function () {
-            //                return $scope.marker;
-            //            },
-            //            icons: function () {
-            //                return $scope.icons;
-            //            }
-            //        }
-            //    });
-
-            //    modal.result.then(function (marker) {
-            //        $scope.marker = marker;
-            //        $scope.addMarkerSubmit();
-            //    }, function () {
-            //        cleanMarkers();
-            //    });
-
-            //}, 100);
+            $timeout(showMarkerModal, 100);
         };
 
         $scope.addMarkerSubmit = function () {
+            if ($scope.marker.id === "you") {
+                $scope.marker = angular.extend({}, $scope.marker);
+                $scope.marker.id = undefined;
+            }
             if ($scope.marker.id) {
                 MarkerSource.update($scope.marker);
             } else {
@@ -71,55 +81,26 @@
                 $scope.marker.userId = $scope.user.id;
                 MarkerSource.add($scope.marker);
             }
-
-            togglePopover(false);
-        };
-
-        $scope.addTag = function () {
-            $scope.marker.description = $scope.marker.description || "";
-
-            $scope.actions.forEach(function (action) {
-                $scope.marker.description = $scope.marker.description.replace(action.id, "");
-            });
-
-            $scope.animals.forEach(function (animal) {
-                $scope.marker.description = $scope.marker.description.replace(animal.id, "");
-            });
-
-            if ($scope.marker.action) {
-                $scope.marker.description += " " + $scope.marker.action;
-            }
-            if ($scope.marker.animal) {
-                $scope.marker.description += " " + $scope.marker.animal;
-            }
-
-            $scope.marker.description = $scope.marker.description.trim();
-        };
-
-        $scope.setIcon = function (icon) {
-            $scope.marker.icon = icon;
-            $scope.marker.iconSrc = $scope.icons[icon];
-        }
-
-        $scope.closeMarker = function () {
-            cleanMarkers();
-            togglePopover(false);
         };
 
         $scope.showMarkerDetails = function (marker) {
             cleanMarkers();
             $scope.marker = marker;
-            togglePopover(true);
+            showMarkerModal();
         }
 
         $scope.positionChanged = function (coordinates) {
-            console.log("Position changed");
-            $scope.markers.push({
-                id: "you",
-                coordinates: coordinates,
-                popover: "This is you",
-                iconSrc: $scope.icons["person"]
-            });
+            if ($scope.you) {
+                $scope.you.coordinates = coordinates;
+            } else {
+                $scope.you = {
+                    id: "you",
+                    coordinates: coordinates,
+                    popover: "This is you",
+                    iconSrc: $scope.icons["person"]
+                };
+                $scope.markers.push($scope.you);
+            }
         }
     }])
 
@@ -127,16 +108,29 @@
         $scope.marker = marker;
         $scope.icons = icons;
 
+        var editMarker = $scope.marker.id && $scope.marker.id !== "you";
+        $scope.submitText = editMarker ? "Edit" : "Add";
+        $scope.showDelBtn = editMarker;
+
         $scope.setIcon = function (icon) {
             $scope.marker.icon = icon;
             $scope.marker.iconSrc = $scope.icons[icon];
         }
 
-        $scope.add = function () {
-            $modalInstance.close($scope.marker);
+        $scope.submit = function () {
+            $modalInstance.close({ action: "submit", marker: $scope.marker });
         };
 
         $scope.cancel = function () {
             $modalInstance.dismiss("cancel");
         };
+
+        $scope.delete = function () {
+            $scope.showDelBtn = false;
+            $scope.showDelConfirmBtn = true;
+        }
+
+        $scope.deleteConfirm = function () {
+            $modalInstance.close({ action: "delete", marker: $scope.marker });
+        }
     }]);

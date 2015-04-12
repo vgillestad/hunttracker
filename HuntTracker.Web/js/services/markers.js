@@ -1,6 +1,6 @@
 ﻿angular.module('HTServices')
 
-    .factory('MarkerSource', ["$resource", "IconSource", function ($resource, IconSource) {
+    .factory('MarkerSource', ["$resource", "IconSource", "$q", "$http", function ($resource, IconSource, $q, $http) {
         var sources = $resource("/api/markers/:markerId", null, {
             getAll: { method: "GET", isArray: true },
             getByUserId: { method: "GET", isArray: true, params: { userId: "@userId" } },

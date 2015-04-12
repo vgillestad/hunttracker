@@ -40,7 +40,7 @@ namespace HuntTracker.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("")]
+        [Route("{id}")]
         public async Task Delete([FromUri] string id)
         {
             await _markerRepository.DeleteAsync(id);
