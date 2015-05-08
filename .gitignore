@@ -111,3 +111,6 @@ UpgradeLog*.XML
 
 #Bower components
 bower_components
+
+#Visual Studio 2015 suff
+.vs
