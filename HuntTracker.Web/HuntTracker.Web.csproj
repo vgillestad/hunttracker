@@ -1015,6 +1015,7 @@
     <Content Include="images\you.png" />
     <Content Include="index.html" />
     <Content Include="js\controllers\controllers.js" />
+    <Content Include="js\controllers\login.js" />
     <Content Include="js\controllers\menu.js" />
     <Content Include="js\directives\datetime-picker.js" />
     <Content Include="js\directives\popover.js" />

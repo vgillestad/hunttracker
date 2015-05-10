@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="ApiAppBuildeExtension.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Interfaces\DataAccess\IMarkerRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IUserRepository.cs" />

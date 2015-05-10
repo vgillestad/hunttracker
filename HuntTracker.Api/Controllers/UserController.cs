@@ -1,9 +1,12 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
+using AutoMapper;
 using HuntTracker.Api.Interfaces.DataAccess;
 using HuntTracker.Api.Interfaces.DataEntities;
+using HuntTracker.Api.Models;
 
 namespace HuntTracker.Api.Controllers
 {
@@ -22,9 +25,19 @@ namespace HuntTracker.Api.Controllers
         [Route("current")]
         public async Task<User> Current()
         {
-            var currentPrincipal = (ClaimsPrincipal) Thread.CurrentPrincipal;
+            var currentPrincipal = (ClaimsPrincipal)Thread.CurrentPrincipal;
             var userId = currentPrincipal.FindFirst(ClaimTypes.NameIdentifier).Value;
             return await _userRepository.GetById(userId);
+        }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<User> Register(RegisterUserModel registerUser)
+        {
+            var newUser = Mapper.DynamicMap<RegisterUserModel, User>(registerUser);
+            newUser.Id = Guid.NewGuid().ToString();
+            var created = await _userRepository.Register(newUser, registerUser.Password);
+            return created;
         }
     }
 }
