@@ -2,9 +2,8 @@
 
     .factory('AuthSource', function ($resource) {
         var sources = $resource("/api/auth", null, {
-            current: { method: "GET"},
-            login: { method: "POST" },
-            logout: { method: "DELETE"}
+            login: { method: "POST", params: { email: "@email", password: "@password" } },
+            logout: { method: "DELETE" }
         });
 
         return sources;

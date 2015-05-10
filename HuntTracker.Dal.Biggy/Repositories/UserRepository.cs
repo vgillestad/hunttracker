@@ -6,6 +6,7 @@ using Biggy.Core;
 using Biggy.Data.Postgres;
 using HuntTracker.Api.Interfaces.DataAccess;
 using HuntTracker.Api.Interfaces.DataEntities;
+using HuntTracker.Dal.Biggy.Crypto;
 
 namespace HuntTracker.Dal.Biggy.Repositories
 {
@@ -27,28 +28,39 @@ namespace HuntTracker.Dal.Biggy.Repositories
 
         public Task<bool> TryGetByCredentials(string email, string password, out User user)
         {
-            var all = _users;
-            var userWithCredentials = _users.FirstOrDefault(x => x.Email.Equals(email, StringComparison.InvariantCultureIgnoreCase) && x.Password.Equals(password));
+            var userWithCredentials = _users.FirstOrDefault(x => x.Email.Equals(email, StringComparison.InvariantCultureIgnoreCase));
             if (userWithCredentials != null)
             {
-                user = userWithCredentials;
-                return Task.FromResult(true);
+                var correctPassword = PasswordHash.ValidatePassword(password, userWithCredentials.Hash);
+                if (correctPassword)
+                {
+                    user = userWithCredentials;
+                    return Task.FromResult(true);
+                }
             }
 
             user = null;
             return Task.FromResult(false);
         }
 
-        public Task Register(User user, string password)
+        public Task<User> Register(User user, string password)
         {
+            var existingUser = _users.FirstOrDefault(x => x.Email.Equals(user.Email, StringComparison.InvariantCultureIgnoreCase));
+            if (existingUser != null)
+            {
+                throw new Exception("Email not unique");
+            }
+
             var userWithCredentials = Mapper.DynamicMap<User, UserWithCredentials>(user);
+            userWithCredentials.Hash = PasswordHash.CreateHash(password);
             _users.Add(userWithCredentials);
-            return Task.FromResult(0);
+
+            return Task.FromResult((User) userWithCredentials);
         }
     }
 
     public class UserWithCredentials : User
     {
-        public string Password { get; set; }
+        public string Hash { get; set; }
     }
 }
