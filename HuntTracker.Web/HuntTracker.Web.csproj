@@ -21,6 +21,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +52,10 @@
     </Reference>
     <Reference Include="Autofac.Integration.WebApi.Owin">
       <HintPath>..\packages\Autofac.WebApi2.Owin.3.2.0\lib\net45\Autofac.Integration.WebApi.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Documents.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Documents.Client.0.9.3-preview\lib\net40\Microsoft.Azure.Documents.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
@@ -1352,6 +1357,10 @@
     <ProjectReference Include="..\HuntTracker.Dal.Biggy\HuntTracker.Dal.Biggy.csproj">
       <Project>{b09560f9-4480-48c9-8daa-c7b7c5702499}</Project>
       <Name>HuntTracker.Dal.Biggy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HuntTracker.Dal.DocumentDB\HuntTracker.Dal.DocumentDB.csproj">
+      <Project>{4dd1a6ee-38a2-4963-868a-574fb8d000fc}</Project>
+      <Name>HuntTracker.Dal.DocumentDB</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
