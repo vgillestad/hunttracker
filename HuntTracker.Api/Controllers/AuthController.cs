@@ -25,7 +25,7 @@ namespace HuntTracker.Api.Controllers
         public async Task<HttpResponseMessage> LogIn([FromBody] Login login)
         {
             User user;
-            if (login == null || !await _usersRepository.TryGetByCredentials(login.Username, login.Password, out user))
+            if (login == null || !await _usersRepository.TryGetByCredentials(login.Email, login.Password, out user))
             {
                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
             }

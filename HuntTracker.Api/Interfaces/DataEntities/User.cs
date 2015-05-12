@@ -1,7 +1,10 @@
-﻿namespace HuntTracker.Api.Interfaces.DataEntities
+﻿using Newtonsoft.Json;
+
+namespace HuntTracker.Api.Interfaces.DataEntities
 {
     public class User
     {
+        [JsonProperty("id")]
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

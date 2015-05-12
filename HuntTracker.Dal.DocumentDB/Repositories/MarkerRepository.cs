@@ -35,8 +35,9 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
 
         public async Task UpdateAsync(Marker marker)
         {
-            dynamic currentDocument = _client.CreateDocumentQuery<Marker>(_collection.SelfLink)
+            var currentDocument = _client.CreateDocumentQuery(_collection.SelfLink)
                 .Where(x => x.Id == marker.Id)
+                .AsEnumerable()
                 .FirstOrDefault();
 
             await _client.ReplaceDocumentAsync(currentDocument.SelfLink, marker);
@@ -44,8 +45,9 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
 
         public async Task DeleteAsync(string markerId)
         {
-            dynamic currentDocument = _client.CreateDocumentQuery<Marker>(_collection.SelfLink)
+            var currentDocument = _client.CreateDocumentQuery(_collection.SelfLink)
                 .Where(x => x.Id == markerId)
+                .AsEnumerable()
                 .FirstOrDefault();
 
             await _client.DeleteDocumentAsync(currentDocument.SelfLink);

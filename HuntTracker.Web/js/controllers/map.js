@@ -34,20 +34,19 @@
                 controller: "MapModalCtrl",
                 size: "sm",
                 resolve: {
-                    marker: function () {
-                        return $scope.marker;
-                    },
-                    icons: function () {
-                        return $scope.icons;
-                    }
+                    marker: function () { return $scope.marker; },
+                    icons: function () { return $scope.icons; }
                 }
             });
 
             modal.result.then(function (result) {
                 $scope.marker = result.marker;
                 if (result.action === "delete") {
-                    MarkerSource.remove({ markerId: $scope.marker.id }, function () {
-                        $scope.markers = MarkerSource.getAll({ userId: $scope.user.id });
+                    var markerId = $scope.marker.id;
+                    MarkerSource.remove({ markerId: markerId }, function () {
+                        $scope.markers = $scope.markers.filter(function (marker) {
+                            return marker.id !== markerId;
+                        })
                     });
                 } else if (result.action === "submit") {
                     $scope.addMarkerSubmit();

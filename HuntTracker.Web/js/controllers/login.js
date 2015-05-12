@@ -9,9 +9,10 @@
         };
 
         $scope.loginSubmit = function () {
-            AuthSource.login({ email: $scope.email, password: $scope.password })
+            $scope.errorMessage = "";
+            AuthSource.login({ email: $scope.email, password: $scope.password }).$promise
                 .then(function () {
-                    document.location.href = "";
+                    document.location.href = "/";
                 }, function () {
                     $scope.password = "";
                     $scope.errorMessage = "Invalid username/password";
@@ -19,10 +20,12 @@
         }
 
         $scope.register = function () {
+            $scope.errorMessage = "";
             $scope.view = "register";
         }
 
         $scope.registerSubmit = function () {
+            $scope.errorMessage = "";
             var newUser = {
                 firstName: $scope.firstName,
                 lastName: $scope.lastName,
@@ -30,7 +33,7 @@
                 password: $scope.password
             }
 
-            UserSource.register({ user: newUser })
+            UserSource.register(newUser).$promise
                 .then(function () {
                     document.location.href = "";
                 }, function () {
@@ -39,6 +42,7 @@
         }
 
         $scope.forgot = function () {
+            $scope.errorMessage = "";
             $scope.view = "forgot";
         }
     })

@@ -21,7 +21,8 @@ namespace HuntTracker.Api.Controllers
         [Route("")]
         public async Task<IEnumerable<Marker>> GetByUser([FromUri] string userId)
         {
-            return await _markerRepository.GetByUser(userId);
+            var markers = await _markerRepository.GetByUser(userId);
+            return markers;
         }
 
         [HttpPost]

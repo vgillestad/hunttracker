@@ -24,7 +24,9 @@
             <!--LOGIN-->
             <div ng-show="view === 'login'" class="panel">
                 <div class="panel-body">
-                    <p class="login-error" ng-model="errorMessage" ng-show="errorMessage"></p>
+
+                    
+                    <p class="text-danger" ng-show="errorMessage">{{errorMessage}}</p>
                     <form role="form" class="loginform">
                         <div class="form-group">
                             <div class="input-group">
@@ -38,7 +40,7 @@
                             <div class="input-group">
                                 <i class="input-group-addon icon-lock"></i>
                                 <input type="password" class="form-control" 
-                                       placeholder="password">
+                                       placeholder="password" ng-model="password">
                             </div>
                         </div>
                         <button type="button" class="btn btn-success login" ng-click="loginSubmit()">Login</button>
@@ -81,7 +83,7 @@
                             <div class="input-group">
                                 <i class="input-group-addon icon-lock"></i>
                                 <input type="password" class="form-control"
-                                       placeholder="password">
+                                       placeholder="password" ng-model="password">
                             </div>
                         </div>
                         <div class="form-group">

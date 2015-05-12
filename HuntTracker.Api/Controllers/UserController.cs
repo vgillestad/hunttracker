@@ -10,7 +10,6 @@ using HuntTracker.Api.Models;
 
 namespace HuntTracker.Api.Controllers
 {
-    [Authorize]
     [RoutePrefix("api/users")]
     public class UserController : ApiController
     {
@@ -21,6 +20,7 @@ namespace HuntTracker.Api.Controllers
             _userRepository = userRepository;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("current")]
         public async Task<User> Current()
