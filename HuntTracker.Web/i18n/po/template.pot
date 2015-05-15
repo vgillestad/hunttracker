@@ -1,0 +1,49 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: login.html:106
+#: login.html:35
+#: login.html:78
+msgid "email"
+msgstr ""
+
+#: login.html:64
+msgid "first name"
+msgstr ""
+
+#: login.html:49
+msgid "Forgot password?"
+msgstr ""
+
+#: i18n\translations.html:1
+msgid "Invalid username/password"
+msgstr ""
+
+#: login.html:71
+msgid "last name"
+msgstr ""
+
+#: login.html:46
+msgid "Login"
+msgstr ""
+
+#: login.html:43
+#: login.html:86
+msgid "password"
+msgstr ""
+
+#: login.html:82
+msgid "Password"
+msgstr ""
+
+#: login.html:48
+#: login.html:91
+msgid "Register"
+msgstr ""
+
+#: login.html:111
+msgid "Send"
+msgstr ""

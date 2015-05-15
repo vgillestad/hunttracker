@@ -112,5 +112,8 @@ UpgradeLog*.XML
 #Bower components
 bower_components
 
+#Node modules
+node_modules
+
 #Visual Studio 2015 suff
 .vs

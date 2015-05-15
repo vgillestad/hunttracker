@@ -325,6 +325,11 @@
     <Content Include="css\index.css" />
     <Content Include="css\login.css" />
     <Content Include="fonts\icomoon\icomoon.svg" />
+    <Content Include="gulpfile.js" />
+    <Content Include="i18n\nb_NO.js" />
+    <Content Include="i18n\nn_NO.js" />
+    <Content Include="i18n\translations-autodetect.js" />
+    <Content Include="i18n\translations.html" />
     <Content Include="images\bing.png" />
     <Content Include="images\circle.png" />
     <Content Include="images\hoove.png" />
@@ -1036,7 +1041,6 @@
     <Content Include="js\services\services.js" />
     <Content Include="js\services\users.js" />
     <Content Include="login.html" />
-    <Content Include="statkart.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1342,6 +1346,11 @@
     <Content Include="bower_components\moment\scripts\npm_prepublish.sh" />
     <Content Include="bower_components\angular-bootstrap\.bower.json" />
     <Content Include="bower_components\angular-bootstrap\bower.json" />
+    <Content Include="i18n\po\template.pot" />
+    <Content Include="i18n\po\nb_NO.mo" />
+    <Content Include="i18n\po\nb_NO.po" />
+    <Content Include="i18n\po\nn_NO.mo" />
+    <Content Include="i18n\po\nn_NO.po" />
     <None Include="Properties\PublishProfiles\hunttracker.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
