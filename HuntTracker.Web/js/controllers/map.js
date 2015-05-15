@@ -40,7 +40,6 @@
             });
 
             modal.result.then(function (result) {
-                $scope.marker = result.marker;
                 if (result.action === "delete") {
                     var markerId = $scope.marker.id;
                     MarkerSource.remove({ markerId: markerId }, function () {
@@ -117,10 +116,12 @@
         }
 
         $scope.submit = function () {
-            $modalInstance.close({ action: "submit", marker: $scope.marker });
+            $modalInstance.close({ action: "submit" });
         };
 
+        var originalMarker = angular.copy($scope.marker, {});
         $scope.cancel = function () {
+            $scope.marker = angular.copy(originalMarker, $scope.marker);
             $modalInstance.dismiss("cancel");
         };
 
@@ -130,6 +131,6 @@
         }
 
         $scope.deleteConfirm = function () {
-            $modalInstance.close({ action: "delete", marker: $scope.marker });
+            $modalInstance.close({ action: "delete" });
         }
     }]);

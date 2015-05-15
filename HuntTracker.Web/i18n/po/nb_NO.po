@@ -25,8 +25,8 @@ msgid "Are you sure?"
 msgstr "Sikker?"
 
 #: index.html:120
-msgid "Close"
-msgstr "Lukk"
+msgid "Cancel"
+msgstr "Avbryt"
 
 #: index.html:118
 msgid "Delete"
@@ -91,3 +91,6 @@ msgstr "Send"
 #: index.html:91
 msgid "This is where <strong>you</strong> are now."
 msgstr "Dette er der <strong>du</strong> er no."
+
+#~ msgid "Close"
+#~ msgstr "Lukk"

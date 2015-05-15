@@ -17,7 +17,7 @@ msgid "Are you sure?"
 msgstr ""
 
 #: index.html:120
-msgid "Close"
+msgid "Cancel"
 msgstr ""
 
 #: index.html:118
