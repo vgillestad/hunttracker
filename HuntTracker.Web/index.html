@@ -27,6 +27,9 @@
     <script type="text/javascript" src="bower_components/hammerjs/hammer.min.js"></script>
     <script type="text/javascript" src="bower_components/jquery.hammer.js/jquery.hammer.js"></script>
     <script type="text/javascript" src="js/lib/Math.uuid.js"></script>
+    <script type="text/javascript" src="i18n/nb_NO.js"></script>
+    <script type="text/javascript" src="i18n/nn_NO.js"></script>
+    <script type="text/javascript" src="i18n/translations-autodetect.js"></script>
 
 
     <script type="text/javascript" src="js/services/services.js"></script>
@@ -49,19 +52,19 @@
     <div class="main-menu" ng-controller="MenuCtrl">
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                Menu
+                <span translate="yes">Menu</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
                 <li>
                     <a href="#" ng-click="logout()">
                         <i class="icon-user-minus"></i>
-                        Log out
+                        {{'Log out' | translate}}
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="#">Preferences</a>
+                    <a href="#" translate="yes">Preferences</a>
                 </li>
             </ul>
         </div>
@@ -85,11 +88,11 @@
                 <form ng-submit="addMarkerSubmit()">
                     <div class="form-group" ng-show="marker.id === 'you'">
                         <img src="/images/person.png" alt="you" />
-                        This is where <strong>you</strong> are now.
+                        <span translate="yes">This is where <strong>you</strong> are now.</span>
                         <hr />
                     </div>
 
-                    <small class="text-justify">Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#)</small>
+                    <small class="text-justify" translate="yes">Add a pin. Enter a description and tag (#) the pin:</small>
                     <div class="form-group">
                         <textarea class="form-control" ng-model="marker.description"></textarea>
                     </div>
@@ -112,10 +115,10 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-danger pull-left" ng-if="showDelBtn" ng-click="delete()">Delete</button>
-                <button type="button" class="btn btn-sm btn-danger pull-left" ng-if="showDelConfirmBtn" ng-click="deleteConfirm()">Are you sure?</button>
-                <button type="button" class="btn btn-sm btn-default" ng-click="cancel()">Close</button>
-                <button type="submit" class="btn btn-success" ng-click="submit()">{{submitText}}</button>
+                <button type="button" class="btn btn-sm btn-danger pull-left" ng-if="showDelBtn" ng-click="delete()" translate="yes">Delete</button>
+                <button type="button" class="btn btn-sm btn-danger pull-left" ng-if="showDelConfirmBtn" ng-click="deleteConfirm()" translate="yes">Are you sure?</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="cancel()" translate="yes">Close</button>
+                <button type="submit" class="btn btn-success" ng-click="submit()">{{submitText | translate}}</button>
             </div>
         </script>
     </div>

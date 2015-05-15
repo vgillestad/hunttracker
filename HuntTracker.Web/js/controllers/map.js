@@ -108,7 +108,7 @@
         $scope.icons = icons;
 
         var editMarker = $scope.marker.id && $scope.marker.id !== "you";
-        $scope.submitText = editMarker ? "Edit" : "Add";
+        $scope.submitText = editMarker ? "Save" : "Add";
         $scope.showDelBtn = editMarker;
 
         $scope.setIcon = function (icon) {

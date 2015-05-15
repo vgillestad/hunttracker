@@ -4,17 +4,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: login.html:106
-#: login.html:35
-#: login.html:78
+#: i18n\translations.html:2
+msgid "Add"
+msgstr ""
+
+#: index.html:95
+msgid "Add a pin. Enter a description and tag (#) the pin:"
+msgstr ""
+
+#: index.html:119
+msgid "Are you sure?"
+msgstr ""
+
+#: index.html:120
+msgid "Close"
+msgstr ""
+
+#: index.html:118
+msgid "Delete"
+msgstr ""
+
+#: login.html:107
+#: login.html:36
+#: login.html:79
 msgid "email"
 msgstr ""
 
-#: login.html:64
+#: login.html:65
 msgid "first name"
 msgstr ""
 
-#: login.html:49
+#: login.html:50
 msgid "Forgot password?"
 msgstr ""
 
@@ -22,28 +42,48 @@ msgstr ""
 msgid "Invalid username/password"
 msgstr ""
 
-#: login.html:71
+#: login.html:72
 msgid "last name"
 msgstr ""
 
-#: login.html:46
+#: index.html:62
+msgid "Log out"
+msgstr ""
+
+#: login.html:47
 msgid "Login"
 msgstr ""
 
-#: login.html:43
-#: login.html:86
+#: index.html:55
+msgid "Menu"
+msgstr ""
+
+#: login.html:44
+#: login.html:87
 msgid "password"
 msgstr ""
 
-#: login.html:82
+#: login.html:83
 msgid "Password"
 msgstr ""
 
-#: login.html:48
-#: login.html:91
+#: index.html:67
+msgid "Preferences"
+msgstr ""
+
+#: login.html:49
+#: login.html:92
 msgid "Register"
 msgstr ""
 
-#: login.html:111
+#: i18n\translations.html:3
+msgid "Save"
+msgstr ""
+
+#: login.html:112
 msgid "Send"
+msgstr ""
+
+#: index.html:91
+msgid "This is where <strong>you</strong> are now."
 msgstr ""

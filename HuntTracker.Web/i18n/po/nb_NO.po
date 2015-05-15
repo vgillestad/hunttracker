@@ -12,15 +12,35 @@ msgstr ""
 "X-Generator: Poedit 1.7.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: login.html:106 login.html:35 login.html:78
+#: i18n\translations.html:2
+msgid "Add"
+msgstr "Legg til"
+
+#: index.html:95
+msgid "Add a pin. Enter a description and tag (#) the pin:"
+msgstr "Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#):"
+
+#: index.html:119
+msgid "Are you sure?"
+msgstr "Sikker?"
+
+#: index.html:120
+msgid "Close"
+msgstr "Lukk"
+
+#: index.html:118
+msgid "Delete"
+msgstr "Slett"
+
+#: login.html:107 login.html:36 login.html:79
 msgid "email"
 msgstr "epost"
 
-#: login.html:64
+#: login.html:65
 msgid "first name"
 msgstr "fornavn"
 
-#: login.html:49
+#: login.html:50
 msgid "Forgot password?"
 msgstr "Glemt password?"
 
@@ -28,26 +48,46 @@ msgstr "Glemt password?"
 msgid "Invalid username/password"
 msgstr "Feir brukernavn/epost"
 
-#: login.html:71
+#: login.html:72
 msgid "last name"
 msgstr "etternavn"
 
-#: login.html:46
+#: index.html:62
+msgid "Log out"
+msgstr "Logg ut"
+
+#: login.html:47
 msgid "Login"
 msgstr "Logg inn"
 
-#: login.html:43 login.html:86
+#: index.html:55
+msgid "Menu"
+msgstr "Meny"
+
+#: login.html:44 login.html:87
 msgid "password"
 msgstr "passord"
 
-#: login.html:82
+#: login.html:83
 msgid "Password"
 msgstr "Passord"
 
-#: login.html:48 login.html:91
+#: index.html:67
+msgid "Preferences"
+msgstr "Innstillinger"
+
+#: login.html:49 login.html:92
 msgid "Register"
 msgstr "Registrer"
 
-#: login.html:111
+#: i18n\translations.html:3
+msgid "Save"
+msgstr "Lagre"
+
+#: login.html:112
 msgid "Send"
 msgstr "Send"
+
+#: index.html:91
+msgid "This is where <strong>you</strong> are now."
+msgstr "Dette er der <strong>du</strong> er no."
