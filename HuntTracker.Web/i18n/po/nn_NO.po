@@ -12,13 +12,17 @@ msgstr ""
 "X-Generator: Poedit 1.7.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: i18n\translations.html:2
+#: i18n\translations.html:1
 msgid "Add"
 msgstr "Legg til"
 
 #: index.html:95
 msgid "Add a pin. Enter a description and tag (#) the pin:"
 msgstr "Legg til punkt i kartet. Skriv inn beskrivelse og merk punktet med tags (#)"
+
+#: i18n\translations.html:4
+msgid "Already an existing user with that email address."
+msgstr "Det finns allereie ein brukar med denne epostadressa."
 
 #: index.html:119
 msgid "Are you sure?"
@@ -32,23 +36,23 @@ msgstr "Avbryt"
 msgid "Delete"
 msgstr "Slett"
 
-#: login.html:107 login.html:36 login.html:79
+#: login.html:108 login.html:36 login.html:80
 msgid "email"
 msgstr "epost"
 
-#: login.html:65
+#: login.html:66
 msgid "first name"
 msgstr "fornamn"
 
-#: login.html:50
+#: login.html:51
 msgid "Forgot password?"
 msgstr "Glømt passord?"
 
-#: i18n\translations.html:1
-msgid "Invalid username/password"
-msgstr "Feil brukarnamn/passord"
+#: i18n\translations.html:3
+msgid "Invalid username/password."
+msgstr "Feil brukarnamn/password."
 
-#: login.html:72
+#: login.html:73
 msgid "last name"
 msgstr "etternamn"
 
@@ -56,7 +60,7 @@ msgstr "etternamn"
 msgid "Log out"
 msgstr "Logg ut"
 
-#: login.html:47
+#: login.html:48
 msgid "Login"
 msgstr "Logg inn"
 
@@ -64,11 +68,11 @@ msgstr "Logg inn"
 msgid "Menu"
 msgstr "Meny"
 
-#: login.html:44 login.html:87
+#: login.html:44 login.html:88
 msgid "password"
 msgstr "passord"
 
-#: login.html:83
+#: login.html:84
 msgid "Password"
 msgstr "Passord"
 
@@ -76,21 +80,28 @@ msgstr "Passord"
 msgid "Preferences"
 msgstr "Innstillingar"
 
-#: login.html:49 login.html:92
+#: login.html:50 login.html:93
 msgid "Register"
 msgstr "Registrer"
 
-#: i18n\translations.html:3
+#: i18n\translations.html:2
 msgid "Save"
 msgstr "Lagre"
 
-#: login.html:112
+#: login.html:113
 msgid "Send"
 msgstr "Send"
 
 #: index.html:91
 msgid "This is where <strong>you</strong> are now."
 msgstr "Dette er der <strong>du</strong> er no."
+
+#: i18n\translations.html:5
+msgid "We are sorry, but an unexpected error occured."
+msgstr "Vi beklagar, men ein uventa feil oppstod."
+
+#~ msgid "Invalid username/password"
+#~ msgstr "Feil brukarnamn/passord"
 
 #~ msgid "Close"
 #~ msgstr "Lukk"

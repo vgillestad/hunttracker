@@ -22,6 +22,15 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
             _collection = collection;
         }
 
+        public Task<User> GetByEmail(string email)
+        {
+            var user = _client.CreateDocumentQuery<User>(_collection.SelfLink)
+                .Where(x => x.Email == email)
+                .AsEnumerable()
+                .FirstOrDefault();
+            return Task.FromResult(user);
+        }
+
         public Task<User> GetById(string id)
         {
             var user = _client.CreateDocumentQuery<User>(_collection.SelfLink)

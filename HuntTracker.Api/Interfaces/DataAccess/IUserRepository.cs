@@ -6,7 +6,8 @@ namespace HuntTracker.Api.Interfaces.DataAccess
     public interface IUserRepository
     {
         Task<User> GetById(string id);
-        Task<bool> TryGetByCredentials(string username, string password, out User user);
+        Task<User> GetByEmail(string email);
+        Task<bool> TryGetByCredentials(string email, string password, out User user);
         Task<User> Register(User user, string password);
     }
 }

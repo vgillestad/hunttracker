@@ -5,6 +5,7 @@
         $scope.submitBtnLbl = "Login";
 
         $scope.login = function () {
+            $scope.errorMessage = "";
             $scope.view = "login";
         };
 
@@ -15,7 +16,7 @@
                     document.location.href = "/";
                 }, function () {
                     $scope.password = "";
-                    $scope.errorMessage = "Invalid username/password";
+                    $scope.errorMessage = "Invalid username/password.";
                 });
         }
 
@@ -36,9 +37,14 @@
             UserSource.register(newUser).$promise
                 .then(function () {
                     document.location.href = "";
-                }, function () {
-                console.log("An exception occured");
-            });
+                }, function (reason) {
+                    if (reason.status === 409) {
+                        $scope.errorMessage = "Already an existing user with that email address."
+                    }
+                    else {
+                        $scope.errorMessage = "We are sorry, but an unexpected error occured."
+                    }
+                });
         }
 
         $scope.forgot = function () {

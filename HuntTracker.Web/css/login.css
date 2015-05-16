@@ -1,6 +1,8 @@
-﻿
+﻿body {
+    background: url('../images/deer_hunting.jpg')
+}
 .panel {
-    border: 1px solid lightgray
+    border: 1px solid lightgray;
 }
 
 button.login {
@@ -22,4 +24,8 @@ p.forgotpass {
 .login-error {
     display: none;
     color: #F5683D;
+}
+
+input.ng-invalid.ng-touched {
+    background-color: #f2dede;
 }

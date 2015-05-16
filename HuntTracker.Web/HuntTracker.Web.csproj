@@ -332,6 +332,7 @@
     <Content Include="i18n\translations.html" />
     <Content Include="images\bing.png" />
     <Content Include="images\circle.png" />
+    <Content Include="images\deer_hunting.jpg" />
     <Content Include="images\hoove.png" />
     <Content Include="images\hooves.png" />
     <Content Include="images\icon.png" />

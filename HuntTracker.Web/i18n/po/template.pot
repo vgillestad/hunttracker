@@ -4,12 +4,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: i18n\translations.html:2
+#: i18n\translations.html:1
 msgid "Add"
 msgstr ""
 
 #: index.html:95
 msgid "Add a pin. Enter a description and tag (#) the pin:"
+msgstr ""
+
+#: i18n\translations.html:4
+msgid "Already an existing user with that email address."
 msgstr ""
 
 #: index.html:119
@@ -24,25 +28,25 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: login.html:107
+#: login.html:108
 #: login.html:36
-#: login.html:79
+#: login.html:80
 msgid "email"
 msgstr ""
 
-#: login.html:65
+#: login.html:66
 msgid "first name"
 msgstr ""
 
-#: login.html:50
+#: login.html:51
 msgid "Forgot password?"
 msgstr ""
 
-#: i18n\translations.html:1
-msgid "Invalid username/password"
+#: i18n\translations.html:3
+msgid "Invalid username/password."
 msgstr ""
 
-#: login.html:72
+#: login.html:73
 msgid "last name"
 msgstr ""
 
@@ -50,7 +54,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: login.html:47
+#: login.html:48
 msgid "Login"
 msgstr ""
 
@@ -59,11 +63,11 @@ msgid "Menu"
 msgstr ""
 
 #: login.html:44
-#: login.html:87
+#: login.html:88
 msgid "password"
 msgstr ""
 
-#: login.html:83
+#: login.html:84
 msgid "Password"
 msgstr ""
 
@@ -71,19 +75,23 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: login.html:49
-#: login.html:92
+#: login.html:50
+#: login.html:93
 msgid "Register"
 msgstr ""
 
-#: i18n\translations.html:3
+#: i18n\translations.html:2
 msgid "Save"
 msgstr ""
 
-#: login.html:112
+#: login.html:113
 msgid "Send"
 msgstr ""
 
 #: index.html:91
 msgid "This is where <strong>you</strong> are now."
+msgstr ""
+
+#: i18n\translations.html:5
+msgid "We are sorry, but an unexpected error occured."
 msgstr ""

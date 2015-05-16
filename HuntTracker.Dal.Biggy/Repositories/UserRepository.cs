@@ -57,6 +57,11 @@ namespace HuntTracker.Dal.Biggy.Repositories
 
             return Task.FromResult((User) userWithCredentials);
         }
+
+        public Task<User> GetByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class UserWithCredentials : User

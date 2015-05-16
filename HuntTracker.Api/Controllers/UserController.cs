@@ -7,6 +7,8 @@ using AutoMapper;
 using HuntTracker.Api.Interfaces.DataAccess;
 using HuntTracker.Api.Interfaces.DataEntities;
 using HuntTracker.Api.Models;
+using System.Net;
+using System.Net.Mail;
 
 namespace HuntTracker.Api.Controllers
 {
@@ -35,6 +37,28 @@ namespace HuntTracker.Api.Controllers
         public async Task<User> Register(RegisterUserModel registerUser)
         {
             var newUser = Mapper.DynamicMap<RegisterUserModel, User>(registerUser);
+            if (string.IsNullOrEmpty(registerUser.Email) ||
+                string.IsNullOrEmpty(registerUser.FirstName) ||
+                string.IsNullOrEmpty(registerUser.LastName) ||
+                string.IsNullOrEmpty(registerUser.Password))
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest); ;
+            }
+
+            var user = await _userRepository.GetByEmail(registerUser.Email);
+            if (user != null)
+            {
+                throw new HttpResponseException(HttpStatusCode.Conflict);
+            }
+            try
+            {
+                new MailAddress(registerUser.Email);
+            }
+            catch (Exception)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
             newUser.Id = Guid.NewGuid().ToString();
             var created = await _userRepository.Register(newUser, registerUser.Password);
             return created;
