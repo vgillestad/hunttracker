@@ -29,6 +29,7 @@
 
 
         var showMarkerModal = function () {
+            var originalMarker = angular.copy($scope.marker, {});
             var modal = $modal.open({
                 templateUrl: "widget.modal.html",
                 controller: "MapModalCtrl",
@@ -51,6 +52,7 @@
                     $scope.addMarkerSubmit();
                 }
             }, function () {
+                $scope.marker = angular.copy(originalMarker, $scope.marker);
                 cleanMarkers();
             });
         }
@@ -119,9 +121,7 @@
             $modalInstance.close({ action: "submit" });
         };
 
-        var originalMarker = angular.copy($scope.marker, {});
         $scope.cancel = function () {
-            $scope.marker = angular.copy(originalMarker, $scope.marker);
             $modalInstance.dismiss("cancel");
         };
 
