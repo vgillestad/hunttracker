@@ -36,7 +36,7 @@
 
             UserSource.register(newUser).$promise
                 .then(function () {
-                    document.location.href = "";
+                    $scope.loginSubmit();
                 }, function (reason) {
                     if (reason.status === 409) {
                         $scope.errorMessage = "Already an existing user with that email address."
@@ -48,7 +48,7 @@
         }
 
         $scope.forgot = function () {
-            $scope.errorMessage = "";
+            $scope.errorMessage = "Sorry, but this functionality is not ready yet.";
             $scope.view = "forgot";
         }
     })
