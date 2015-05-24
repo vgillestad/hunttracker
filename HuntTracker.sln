@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuntTracker.Dal.Biggy", "Hu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuntTracker.Dal.DocumentDB", "HuntTracker.Dal.DocumentDB\HuntTracker.Dal.DocumentDB.csproj", "{4DD1A6EE-38A2-4963-868A-574FB8D000FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuntTracker.Dal.File", "HuntTracker.Dal.File\HuntTracker.Dal.File.csproj", "{61DDBA0E-A97D-4AF3-84E8-3AC1D9875FE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{4DD1A6EE-38A2-4963-868A-574FB8D000FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DD1A6EE-38A2-4963-868A-574FB8D000FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DD1A6EE-38A2-4963-868A-574FB8D000FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61DDBA0E-A97D-4AF3-84E8-3AC1D9875FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61DDBA0E-A97D-4AF3-84E8-3AC1D9875FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61DDBA0E-A97D-4AF3-84E8-3AC1D9875FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61DDBA0E-A97D-4AF3-84E8-3AC1D9875FE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

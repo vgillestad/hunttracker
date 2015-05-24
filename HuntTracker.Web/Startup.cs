@@ -23,19 +23,35 @@ namespace HuntTracker.Web
 
         public void Configuration(IAppBuilder app)
         {
-            string serviceEndpoint = ConfigurationManager.AppSettings["serviceEndpoint"];
-            string authKey = ConfigurationManager.AppSettings["authKey"];
-            client = new DocumentClient(new Uri(serviceEndpoint), authKey);
-            var database = ReadOrCreateDatabase("HuntTrackerDB");
-            var collection = ReadOrCreateCollection(database.SelfLink, "HuntTrackerCollection");
-
-
-            //Autofac
             var builder = new ContainerBuilder();
-            builder.Register(x => client).AsSelf().SingleInstance();
-            builder.Register(x => collection).AsSelf().SingleInstance();
-            builder.RegisterType<MarkerRepository>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<UserRepository>().AsImplementedInterfaces().SingleInstance();
+            var storage = Storage.File;
+
+            if (storage == Storage.DocumentDB)
+            {
+                string serviceEndpoint = ConfigurationManager.AppSettings["serviceEndpoint"];
+                string authKey = ConfigurationManager.AppSettings["authKey"];
+                client = new DocumentClient(new Uri(serviceEndpoint), authKey);
+                var database = ReadOrCreateDatabase("HuntTrackerDB");
+                var collection = ReadOrCreateCollection(database.SelfLink, "HuntTrackerCollection");
+
+                builder.Register(x => client).AsSelf().SingleInstance();
+                builder.Register(x => collection).AsSelf().SingleInstance();
+                builder.RegisterType<MarkerRepository>().AsImplementedInterfaces().SingleInstance();
+                builder.RegisterType<UserRepository>().AsImplementedInterfaces().SingleInstance();
+            }
+            else if (storage == Storage.File)
+            {
+                var path = "C:\\Users\\Vegard\\Dev\\Git\\HuntTracker\\HuntTracker.Web\\Data";
+                builder.Register(x => new Dal.File.Repositories.MarkerRepository(path)).AsImplementedInterfaces().SingleInstance();
+                builder.Register(x => new Dal.File.Repositories.UserRepository(path)).AsImplementedInterfaces().SingleInstance();
+
+                //builder.RegisterType<Dal.File.Repositories.MarkerRepository>().AsImplementedInterfaces().SingleInstance();
+                //builder.RegisterType<Dal.File.Repositories.UserRepository>().AsImplementedInterfaces().SingleInstance();
+            }
+            else
+            {
+                throw new ArgumentException("No storage provided");
+            }
 
             builder.RegisterApiControllers(typeof(MarkerController).Assembly);
             var container = builder.Build();
@@ -69,6 +85,11 @@ namespace HuntTracker.Web
                               .AsEnumerable()
                               .FirstOrDefault();
             return col ?? client.CreateDocumentCollectionAsync(databaseLink, new DocumentCollection { Id = collectionId }).Result;
+        }
+
+        private enum Storage
+        {
+            DocumentDB, File, Postgres
         }
     }
 }

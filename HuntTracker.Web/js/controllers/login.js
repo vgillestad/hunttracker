@@ -14,9 +14,14 @@
             AuthSource.login({ email: $scope.email, password: $scope.password }).$promise
                 .then(function () {
                     document.location.href = "/";
-                }, function () {
+                }, function (reason) {
                     $scope.password = "";
-                    $scope.errorMessage = "Invalid username/password.";
+                    if (reason.status === 401) {
+                        $scope.errorMessage = "Invalid username/password.";
+                    }
+                    else {
+                        $scope.errorMessage = "We are sorry, but an unexpected error occured.";
+                    }
                 });
         }
 

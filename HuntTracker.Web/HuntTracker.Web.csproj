@@ -1373,6 +1373,10 @@
       <Project>{4dd1a6ee-38a2-4963-868a-574fb8d000fc}</Project>
       <Name>HuntTracker.Dal.DocumentDB</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HuntTracker.Dal.File\HuntTracker.Dal.File.csproj">
+      <Project>{61ddba0e-a97d-4af3-84e8-3ac1d9875fe6}</Project>
+      <Name>HuntTracker.Dal.File</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
