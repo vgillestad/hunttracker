@@ -6,6 +6,7 @@ var uglify = require('gulp-uglify');
 var minifyHtml = require('gulp-minify-html');
 var minifyCss = require('gulp-minify-css');
 var rev = require('gulp-rev');
+var runSequence = require('run-sequence');
 
 gulp.task('pot', function () {
     return gulp.src(['./**/*.html'])
@@ -19,8 +20,8 @@ gulp.task('translations', function () {
         .pipe(gulp.dest('./i18n'));
 });
 
-gulp.task('build', function () {
-    return gulp.src('./src/*.html')
+var useMin = function (src) {
+    return gulp.src(src)
         .pipe(usemin({
             css: [minifyCss(), 'concat'],
             html: [minifyHtml({ empty: true })],
@@ -29,4 +30,18 @@ gulp.task('build', function () {
             inlinecss: [minifyCss(), 'concat']
         }))
         .pipe(gulp.dest('./'));
+}
+
+gulp.task('useMinIndex', function () {
+    return useMin("./src/index.html");
+});
+
+gulp.task('useMinLogin', function () {
+    return useMin("./src/login.html");
+});
+
+gulp.task('build', function (cb) {
+    runSequence(
+        ['useMinIndex', 'useMinLogin'],
+        cb);
 });

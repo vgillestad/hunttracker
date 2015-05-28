@@ -3,14 +3,17 @@
 <head>
     <title>HuntTracker - Login</title>
 
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- build:css login.css -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link type="text/css" rel="stylesheet" href="css/icomoon.css" />
     <link type="text/css" rel="stylesheet" href="css/login.css" />
+    <!-- endbuild -->
 
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
+    <!-- build:js login.js -->
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-gettext/dist/angular-gettext.js"></script>
     <script type="text/javascript" src="i18n/nb_NO.js"></script>
     <script type="text/javascript" src="i18n/nn_NO.js"></script>
     <script type="text/javascript" src="i18n/translations-autodetect.js"></script>
@@ -19,6 +22,7 @@
     <script type="text/javascript" src="js/services/services.js"></script>
     <script type="text/javascript" src="js/services/auth.js"></script>
     <script type="text/javascript" src="js/services/users.js"></script>
+    <!-- endbuild -->
 </head>
 <body ng-app="HTLogin" ng-controller="LoginCtrl">
     <div class="container" style="margin-top:10%">

@@ -100,9 +100,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.css" />
     <Content Include="index.html" />
-    <Content Include="index.js" />
+    <Content Include="login.html" />
     <Content Include="src\css\icomoon.css" />
     <Content Include="src\css\index.css" />
     <Content Include="src\css\login.css" />

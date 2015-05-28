@@ -1,5 +1,5 @@
 ﻿angular.module("HTLogin", ["gettext", "HTServices"])
-    .controller("LoginCtrl", function ($scope, AuthSource, UserSource) {
+    .controller("LoginCtrl", ["$scope", "AuthSource", "UserSource", function ($scope, AuthSource, UserSource) {
         $scope.view = "login";
 
         $scope.submitBtnLbl = "Login";
@@ -56,4 +56,4 @@
             $scope.errorMessage = "Sorry, but this functionality is not ready yet.";
             $scope.view = "forgot";
         }
-    })
+    }])

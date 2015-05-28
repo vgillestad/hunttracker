@@ -28,7 +28,7 @@
             },
             'responseError': function (rejection) {
                 if (rejection && rejection.status === 401) {
-                    document.location.href = "src/login.html";
+                    document.location.href = "/login.html";
                 }
 
                 return $q.reject(rejection);
