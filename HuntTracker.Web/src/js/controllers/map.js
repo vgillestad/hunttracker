@@ -1,8 +1,6 @@
 ﻿angular.module("HTControllers")
 
     .controller("MapCtrl", ["$scope", "$modal", "$timeout", "UserSource", "MarkerSource", "IconSource", "Helpers", function ($scope, $modal, $timeout, UserSource, MarkerSource, IconSource, Helpers) {
-        $scope.actions = [{ name: "-Event-" }, { id: "#shot", name: "Shot animal" }, { id: "#observed", name: "Observation" }];
-        $scope.animals = [{ name: "-Animal-" }, { id: "#deer", name: "Deer" }, { id: "#pig", name: "Pig" }];
         $scope.tracking = true;
         $scope.markers = [];
         $scope.you = null;

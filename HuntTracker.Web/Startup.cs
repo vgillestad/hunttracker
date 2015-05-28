@@ -44,9 +44,6 @@ namespace HuntTracker.Web
                 var path = "C:\\Users\\Vegard\\Dev\\Git\\HuntTracker\\HuntTracker.Web\\Data";
                 builder.Register(x => new Dal.File.Repositories.MarkerRepository(path)).AsImplementedInterfaces().SingleInstance();
                 builder.Register(x => new Dal.File.Repositories.UserRepository(path)).AsImplementedInterfaces().SingleInstance();
-
-                //builder.RegisterType<Dal.File.Repositories.MarkerRepository>().AsImplementedInterfaces().SingleInstance();
-                //builder.RegisterType<Dal.File.Repositories.UserRepository>().AsImplementedInterfaces().SingleInstance();
             }
             else
             {
@@ -69,6 +66,7 @@ namespace HuntTracker.Web
             app.UseHuntTrackerApi();
         }
 
+        #region DocumentDB helpers
         private Database ReadOrCreateDatabase(string databaseId)
         {
             var db = client.CreateDatabaseQuery()
@@ -91,5 +89,7 @@ namespace HuntTracker.Web
         {
             DocumentDB, File, Postgres
         }
+
+        #endregion
     }
 }

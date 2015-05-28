@@ -1,6 +1,6 @@
 ﻿angular.module('HTServices')
 
-    .factory('UserSource', function ($resource) {
+    .factory('UserSource', ["$resource", function ($resource) {
         var sources = $resource("/api/users/:id", null, {
             current: { method: "GET", params: { id: "current" } },
             register: {
@@ -14,4 +14,4 @@
         });
 
         return sources;
-    });
+    }]);

@@ -1,6 +1,6 @@
 ﻿angular.module("HTDirectives")
 
-    .directive("datetimePicker", function ($compile) {
+    .directive("datetimePicker", ["$compile", function ($compile) {
         return {
             require: '?ngModel',
             restrict: 'AE',
@@ -10,7 +10,7 @@
                     useCurrent: true
                 });
 
-                ngModelCtrl.$render = function() {
+                ngModelCtrl.$render = function () {
                     var date = ngModelCtrl.$viewValue;
                     var newDate = moment(date);
                     element.data("DateTimePicker").date(newDate);
@@ -22,4 +22,4 @@
                 });
             }
         };
-    });
+    }]);

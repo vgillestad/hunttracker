@@ -2,7 +2,7 @@
 
 .config(["$httpProvider", function ($httpProvider) {
     //interceptor that adds random argument to GET-requests to prevent caching in IE.
-    $httpProvider.interceptors.push(function ($q) {
+    $httpProvider.interceptors.push(["$q", function ($q) {
         var whitelist = [
             "widget.modal.html",
             "template/modal/backdrop.html",
@@ -28,11 +28,11 @@
             },
             'responseError': function (rejection) {
                 if (rejection && rejection.status === 401) {
-                    document.location.href = "/login.html";
+                    document.location.href = "src/login.html";
                 }
 
                 return $q.reject(rejection);
             }
         };
-    });
+    }]);
 }])
