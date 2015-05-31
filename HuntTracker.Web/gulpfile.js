@@ -26,8 +26,6 @@ var useMin = function (src) {
             css: [minifyCss(), 'concat'],
             html: [minifyHtml({ empty: true })],
             js: [uglify()],
-            inlinejs: [uglify()],
-            inlinecss: [minifyCss(), 'concat']
         }))
         .pipe(gulp.dest('./'));
 }

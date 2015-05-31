@@ -94,7 +94,6 @@
                 $scope.you = {
                     id: "you",
                     coordinates: coordinates,
-                    popover: "This is you",
                     iconSrc: $scope.icons["person"]
                 };
                 $scope.markers.push($scope.you);
