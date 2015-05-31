@@ -134,6 +134,7 @@
     <Content Include="src\js\directives\popover.js" />
     <Content Include="src\js\directives\directives.js" />
     <Content Include="src\js\directives\ol-map.js" />
+    <Content Include="src\js\lib\extensions.js" />
     <Content Include="src\js\lib\Math.uuid.js" />
     <Content Include="src\js\controllers\map.js" />
     <Content Include="src\js\main.js" />

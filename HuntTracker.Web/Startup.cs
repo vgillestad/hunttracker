@@ -24,7 +24,7 @@ namespace HuntTracker.Web
         public void Configuration(IAppBuilder app)
         {
             var builder = new ContainerBuilder();
-            var storage = Storage.DocumentDB;
+            var storage = Storage.File;
 
             if (storage == Storage.DocumentDB)
             {

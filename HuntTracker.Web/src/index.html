@@ -12,10 +12,9 @@
     <link type="text/css" rel="stylesheet" href="../bower_components/openlayers3/build/ol.css" />
     <link type="text/css" rel="stylesheet" href="../bower_components/tombatossals/css/markers.css" />
     <link type="text/css" rel="stylesheet" href="css/icomoon.css" />
-    
+
     <link type="text/css" rel="stylesheet" href="css/index.css" />
     <!-- endbuild -->
-
     <!-- build:js index.js -->
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -30,6 +29,7 @@
     <script type="text/javascript" src="../bower_components/hammerjs/hammer.js"></script>
     <script type="text/javascript" src="../bower_components/jquery.hammer.js/jquery.hammer.js"></script>
     <script type="text/javascript" src="js/lib/Math.uuid.js"></script>
+    <script type="text/javascript" src="js/lib/extensions.js"></script>
     <script type="text/javascript" src="i18n/nb_NO.js"></script>
     <script type="text/javascript" src="i18n/nn_NO.js"></script>
     <script type="text/javascript" src="i18n/translations-autodetect.js"></script>
@@ -95,7 +95,9 @@
                         <hr />
                     </div>
 
-                    <small class="text-justify" translate="yes">Add a pin. Enter a description and tag (#) the pin:</small>
+                    <small ng-if="marker.id === 'you' || !marker.id" class="text-justify" translate="yes">
+                        Add a pin. Enter a description and tag (#) the pin:
+                    </small>
                     <div class="form-group">
                         <textarea class="form-control" ng-model="marker.description"></textarea>
                     </div>
