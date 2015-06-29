@@ -25,20 +25,24 @@
             }
         }
 
-
+        var modalIsOpen = false;
         var showMarkerModal = function () {
             var originalMarker = angular.copy($scope.marker, {});
-            var modal = $modal.open({
-                templateUrl: "widget.modal.html",
-                controller: "MapModalCtrl",
-                size: "sm",
-                resolve: {
-                    marker: function () { return $scope.marker; },
-                    icons: function () { return $scope.icons; }
-                }
-            });
+            if (!modalIsOpen) {
+                modalIsOpen = true;
+                var modal = $modal.open({
+                    templateUrl: "widget.modal.html",
+                    controller: "MapModalCtrl",
+                    size: "sm",
+                    resolve: {
+                        marker: function () { return $scope.marker; },
+                        icons: function () { return $scope.icons; }
+                    }
+                });
+            }
 
             modal.result.then(function (result) {
+                modalIsOpen = false;
                 if (result.action === "delete") {
                     var markerId = $scope.marker.id;
                     MarkerSource.remove({ markerId: markerId }, function () {
@@ -50,6 +54,7 @@
                     $scope.addMarkerSubmit();
                 }
             }, function () {
+                modalIsOpen = false;
                 $scope.marker = angular.copy(originalMarker, $scope.marker);
                 cleanMarkers();
             });
