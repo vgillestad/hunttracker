@@ -106,10 +106,12 @@
     <Content Include="login.css" />
     <Content Include="login.html" />
     <Content Include="login.js" />
+    <Content Include="modernizr.js" />
+    <Content Include="moment.js" />
     <Content Include="src\css\icomoon.css" />
     <Content Include="src\css\index.css" />
     <Content Include="src\css\login.css" />
-    <Content Include="src\date.html" />
+    <Content Include="date.html" />
     <Content Include="src\fonts\icomoon\icomoon.svg" />
     <Content Include="gulpfile.js" />
     <Content Include="src\i18n\nb_NO.js" />
@@ -190,6 +192,9 @@
       <Project>{61ddba0e-a97d-4af3-84e8-3ac1d9875fe6}</Project>
       <Name>HuntTracker.Dal.File</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="play\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
