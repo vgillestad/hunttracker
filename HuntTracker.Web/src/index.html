@@ -18,7 +18,8 @@
     <!-- build:js index.js -->
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../bower_components/moment/min/moment-with-locales.js"></script>
+    <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="../bower_components/moment/locale/nb.js"></script>
     <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="../bower_components/openlayers3/build/ol.js"></script>
     <script type="text/javascript" src="../bower_components/angular/angular.min.js"></script>
@@ -28,8 +29,10 @@
     <script type="text/javascript" src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript" src="../bower_components/hammerjs/hammer.js"></script>
     <script type="text/javascript" src="../bower_components/jquery.hammer.js/jquery.hammer.js"></script>
+    
     <script type="text/javascript" src="js/lib/Math.uuid.js"></script>
     <script type="text/javascript" src="js/lib/extensions.js"></script>
+    <script type="text/javascript" src="js/lib/modernizr-date.js"></script>
     <script type="text/javascript" src="i18n/nb_NO.js"></script>
     <script type="text/javascript" src="i18n/nn_NO.js"></script>
     <script type="text/javascript" src="i18n/translations-autodetect.js"></script>
@@ -109,25 +112,9 @@
                              src="{{value}}" alt="{{key}}" />
                     </div>
 
-                    
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="date" ng-model="marker.dateTime" class="form-control" />
-                            <span class="input-group-addon">
-                                <i class="icon-calendar"></i>
-                            </span>
-                        </div>
-                    </div>
+                    <datetime-picker model="marker.dateTime">
 
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="time" ng-model="marker.dateTime" class="form-control" />
-                            <span class="input-group-addon">
-                                <i class="icon-clock"></i>
-                            </span>
-                        </div>
-                    </div>
-
+                    </datetime-picker>
                 </form>
             </div>
             <div class="modal-footer">

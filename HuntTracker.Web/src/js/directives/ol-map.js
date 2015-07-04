@@ -42,19 +42,17 @@
                 map.addOverlay(popup);
 
                 //Right click on PC
-                if (!window.isAndroid()) {
-                    $(map.getViewport()).on('contextmenu', function (e) {
-                        e.preventDefault();
-                        var eventPosition = map.getEventPixel(e);
-                        var coordinates = map.getCoordinateFromPixel(eventPosition);
-                        popup.setPosition(coordinates);
-                        popup.setOffset([12, -25]);
-                        scope.$apply(function () {
-                            scope.onShowContextMenu({ coordinates: coordinates });
-                        });
-                        return false;
+                $(map.getViewport()).on('contextmenu', function (e) {
+                    e.preventDefault();
+                    var eventPosition = map.getEventPixel(e);
+                    var coordinates = map.getCoordinateFromPixel(eventPosition);
+                    popup.setPosition(coordinates);
+                    popup.setOffset([12, -25]);
+                    scope.$apply(function () {
+                        scope.onShowContextMenu({ coordinates: coordinates });
                     });
-                }
+                    return false;
+                });
 
                 //Touch devices like iPad
                 $(map.getViewport()).hammer().bind('press', function (e) {

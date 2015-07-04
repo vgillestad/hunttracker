@@ -106,12 +106,9 @@
     <Content Include="login.css" />
     <Content Include="login.html" />
     <Content Include="login.js" />
-    <Content Include="modernizr.js" />
-    <Content Include="moment.js" />
     <Content Include="src\css\icomoon.css" />
     <Content Include="src\css\index.css" />
     <Content Include="src\css\login.css" />
-    <Content Include="date.html" />
     <Content Include="src\fonts\icomoon\icomoon.svg" />
     <Content Include="gulpfile.js" />
     <Content Include="src\i18n\nb_NO.js" />
@@ -140,6 +137,7 @@
     <Content Include="src\js\lib\extensions.js" />
     <Content Include="src\js\lib\Math.uuid.js" />
     <Content Include="src\js\controllers\map.js" />
+    <Content Include="src\js\lib\modernizr-date.js" />
     <Content Include="src\js\main.js" />
     <Content Include="src\js\services\auth.js" />
     <Content Include="src\js\services\helpers.js" />
