@@ -109,7 +109,7 @@
                         <img ng-repeat="(key, value) in icons"
                              ng-class="key === marker.icon ? 'btn btn-primary' : 'btn btn-default'"
                              ng-click="setIcon(key)"
-                             src="{{value}}" alt="{{key}}" />
+                             ng-src="{{value}}" alt="{{key}}" />
                     </div>
 
                     <datetime-picker model="marker.dateTime">
