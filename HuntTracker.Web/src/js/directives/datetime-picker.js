@@ -6,14 +6,14 @@
             template:
                 '<div class="form-group">' +
                     '<div class="input-group" style="max-width:170px;float:left;padding-right:5px">' +
-                        '<input type="date" class="form-control" />' +
+                        '<input type="date" class="form-control" style="-webkit-appearance: none;" />' +
                         '<span class="input-group-addon">' +
                             '<i class="icon-calendar"></i>' +
                         '</span>' +
                     '</div>' +
 
                     '<div class="input-group">' +
-                        '<input type="time" class="form-control" />' +
+                        '<input type="time" class="form-control" style="-webkit-appearance: none;" />' +
                         '<span class="input-group-addon">' +
                             '<i class="icon-clock"></i>' +
                         '</span>' +

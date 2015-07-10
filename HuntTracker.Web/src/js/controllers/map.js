@@ -34,6 +34,7 @@
                     templateUrl: "widget.modal.html",
                     controller: "MapModalCtrl",
                     size: "sm",
+                    //backdrop: "static",
                     resolve: {
                         marker: function () { return $scope.marker; },
                         icons: function () { return $scope.icons; }
@@ -135,4 +136,14 @@
         $scope.deleteConfirm = function () {
             $modalInstance.close({ action: "delete" });
         }
+
+        var first = true;
+        var startTime = new Date();
+        $scope.$on('modal.closing', function (event, reason, closing) {
+            var duration = (new Date()) - startTime;
+            if (reason == "backdrop click" && first && duration < 2000 && Modernizr.touch) {
+                first = false;
+                event.preventDefault();
+            }
+        });
     }]);
