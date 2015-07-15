@@ -10,10 +10,10 @@ body {
 }
 
 .main-menu {
-    position: absolute; 
-    top: 0; 
-    right: 0; 
-    z-index: 1
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
 }
 
 .popover {
@@ -24,15 +24,17 @@ body {
     min-width: 300px;
 }
 
-/*Hide date picker in Chrome. Originates from http://stackoverflow.com/questions/11320615/disable-native-datepicker-in-google-chrome*/
-/*input::-webkit-calendar-picker-indicator{
-    display: none;
+.animal-btn {
+    height:63px;
+    width: 63px;
+}
+.animal-btn div {
+    background-repeat: no-repeat;
+    -moz-transform-origin: 0 0;
+    margin: auto;
 }
 
-input[type="date"]::-webkit-input-placeholder{ 
-    visibility: hidden !important;
+.btn-selected {
+    background-color: #D7D7D7;
+    border:2px solid;
 }
-
-input[type=date]::-webkit-inner-spin-button, input[type=date]::-webkit-calendar-picker-indicator {
-   display: none;
-}*/

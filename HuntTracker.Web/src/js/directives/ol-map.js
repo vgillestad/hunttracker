@@ -105,20 +105,17 @@
                 });
 
                 //Markers
-                var iconStyles = {};
-                var getIconStyle = function (imgSrc) {
-                    if (!iconStyles[imgSrc]) {
-                        iconStyles[imgSrc] = new ol.style.Style({
-                            image: new ol.style.Icon( /** @type {olx.style.IconOptions} */({
-                                anchor: [0.45, 37],
-                                anchorXUnits: 'fraction',
-                                anchorYUnits: 'pixels',
-                                src: imgSrc
-                            }))
-                        });
-                    }
-                    return iconStyles[imgSrc];
-                }
+                var getIconStyle = function (iconSrc) {
+                    return new ol.style.Style({
+                        image: new ol.style.Icon( /** @type {olx.style.IconOptions} */({
+                            src: iconSrc.src,
+                            offset: iconSrc.offset,
+                            size: iconSrc.size,
+                            scale: iconSrc.scale || 1,
+                            snapToPixel: true,
+                        }))
+                    });
+                };
 
                 var vectorSource = new ol.source.Vector();
                 var vectorLayer = new ol.layer.Vector({ source: vectorSource });

@@ -34,7 +34,6 @@
                     templateUrl: "widget.modal.html",
                     controller: "MapModalCtrl",
                     size: "sm",
-                    //backdrop: "static",
                     resolve: {
                         marker: function () { return $scope.marker; },
                         icons: function () { return $scope.icons; }
@@ -90,6 +89,9 @@
         $scope.showMarkerDetails = function (marker) {
             cleanMarkers();
             $scope.marker = marker;
+            if ($scope.marker.id === "you") {
+                $scope.marker.dateTime = new Date();
+            }
             showMarkerModal();
         }
 

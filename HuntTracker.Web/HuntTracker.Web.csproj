@@ -115,8 +115,14 @@
     <Content Include="src\i18n\nn_NO.js" />
     <Content Include="src\i18n\translations-autodetect.js" />
     <Content Include="src\i18n\translations.html" />
+    <Content Include="src\images\animals1.png" />
+    <Content Include="src\images\animals4.png" />
     <Content Include="src\images\bing.png" />
     <Content Include="src\images\circle.png" />
+    <Content Include="src\images\deer-shot-silhouette-20x32.png" />
+    <Content Include="src\images\deer-shot-silhouette.png" />
+    <Content Include="src\images\deer-silhouette.png" />
+    <Content Include="src\images\deer.gif" />
     <Content Include="src\images\deer_hunting.jpg" />
     <Content Include="src\images\hoove.png" />
     <Content Include="src\images\hooves.png" />
@@ -191,9 +197,7 @@
       <Name>HuntTracker.Dal.File</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="play\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
