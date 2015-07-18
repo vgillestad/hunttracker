@@ -1,10 +1,21 @@
 ﻿angular.module("HTControllers")
 
-    .controller("MapCtrl", ["$scope", "$modal", "$timeout", "UserSource", "MarkerSource", "IconSource", "Helpers", function ($scope, $modal, $timeout, UserSource, MarkerSource, IconSource, Helpers) {
+    .controller("MapCtrl", ["$scope", "$modal", "$timeout", "UserSource", "AuthSource", "MarkerSource", "IconSource", "Helpers", function ($scope, $modal, $timeout, UserSource, AuthSource, MarkerSource, IconSource, Helpers) {
         $scope.tracking = true;
         $scope.markers = [];
         $scope.you = null;
         $scope.icons = IconSource.getAll();
+        $scope.layers = [{ id: "norgeskart", name: "Norwegian Map" }, { id: "satellite", name: "Satellite" }, { id: "osm", name: "Open Street Map" }];
+        $scope.settings = {
+            layer: $scope.layers[0].id,
+            filter: null,
+        }
+
+        $scope.logout = function () {
+            AuthSource.logout(function () {
+                location.href = "/login.html";
+            });
+        }
 
         UserSource.current(function (user) {
             $scope.user = user;
@@ -106,6 +117,10 @@
                 };
                 $scope.markers.push($scope.you);
             }
+        }
+
+        $scope.setLayer = function () {
+            console.log("set layer called");
         }
     }])
 

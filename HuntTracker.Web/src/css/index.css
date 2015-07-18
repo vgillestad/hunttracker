@@ -38,3 +38,21 @@ body {
     background-color: #D7D7D7;
     border:2px solid;
 }
+
+.btn-group>.btn-group>.btn {
+    border-radius: 0;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: 0 !important;
+}
+ 
+.navbar-nav.navbar-right {
+  margin-right: 0;
+  float: right!important;
+}
+
+.navbar-nav {
+    float: right!important;
+    margin: 0;
+}

@@ -51,30 +51,74 @@
         <!-- endbuild -->
     </head>
     
-    <body ng-app="HuntTracker">
-        <div class="main-menu" ng-controller="MenuCtrl">
-            <div class="btn-group pull-right">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span translate="yes">Menu</span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li>
-                        <a href="#" ng-click="logout()">
-                        <i class="icon-user-minus"></i>
-                        {{'Log out' | translate}}
-                    </a>
+    <body ng-app="HuntTracker" ng-controller="MapCtrl">
+        <div class="main-menu">
+            <nav class="navbar navbar-default">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="border-right: 1px solid #e7e7e7">
+                            <i class="icon-filter"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">All</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">Satellite</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#" translate="yes">Preferences</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="border-right: 1px solid #e7e7e7">
+                            <i class="icon-stack2"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" ng-click="settings.layer = 'norgeskart'">
+                                Norgeskart
+                            </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#" ng-click="settings.layer = 'satellite'">
+                                Satellite
+                            </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#" ng-click="settings.layer = 'osm'">
+                                Open Street Map
+                            </a>
+                            </li>
+                        </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+                            <i class="icon-menu"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" ng-click="logout()">
+                                <i class="icon-user-minus"></i>
+                                    {{'Log out' | translate}}
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#" translate="yes">Preferences</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--<li class="dropdown" style="width:15px">
+                        <a href="#"></a>
+                    </li>-->
                 </ul>
-            </div>
+            </nav>
         </div>
-        <div ng-controller="MapCtrl" class="map-fullscreen">
+        <div class="map-fullscreen">
             <!--MAP-->
-            <ol-map ol-markers="markers" ol-marker-icons="markerIcons" ol-track-position="tracking" ol-on-position-changed="positionChanged(coordinates)"
+            <ol-map ol-markers="markers" ol-layer="settings.layer" ol-track-position="tracking" ol-on-position-changed="positionChanged(coordinates)"
             ol-on-marker-selected="showMarkerDetails(marker)" ol-on-show-context-menu="addMarker(coordinates)" class="map-fullscreen"></ol-map>
             <!--MARKER POPOVER-->
             <script type="text/ng-template" id="widget.modal.html">
@@ -95,7 +139,8 @@
     
                         <div class="form-group">
                             <button ng-repeat="(key, value) in icons" class="btn btn-default animal-btn" ng-class="key === marker.icon ? 'btn-selected' : ''" ng-click="setIcon(key)">
-                                <div ng-style="{'background-image': 'url(' + value.src + ')', 'height': value.size[1] + 'px', 'width': value.size[0] + 'px', 'background-position': '-' + value.offset[0] + 'px -' + value.offset[1] + 'px', 'zoom': value.scale, '-moz-transform': 'scale(' + value.scale + ')'}"></div>
+                                <div ng-show="value.type === 'image'" ng-style="{'background-image': 'url(' + value.src + ')', 'height': value.size[1] + 'px', 'width': value.size[0] + 'px', 'background-position': '-' + value.offset[0] + 'px -' + value.offset[1] + 'px', 'zoom': value.scale, '-moz-transform': 'scale(' + value.scale + ')'}"></div>
+                                <i ng-show="value.type === 'font'" ng-class="value.class" style="font-size:25px"></i>
                             </button>
                         </div>
     

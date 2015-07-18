@@ -1,4 +1,5 @@
-﻿angular.module("HTControllers")
+﻿/* global angular */
+angular.module("HTControllers")
 
     .controller("MenuCtrl", ["$scope", "AuthSource", function ($scope, AuthSource) {
 

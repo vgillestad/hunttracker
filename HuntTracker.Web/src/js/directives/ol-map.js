@@ -1,4 +1,6 @@
-﻿angular.module("HTDirectives")
+﻿/* global $ */
+/* global ol */
+angular.module("HTDirectives")
 
     .directive("olMap", function () {
         return {
@@ -7,6 +9,7 @@
             replace: true,
             scope: {
                 markers: "=olMarkers",
+                layer: "=olLayer",
                 tracking: "=olTrackPosition",
                 onPositionChanged: "&olOnPositionChanged",
                 onMarkerSelected: "&olOnMarkerSelected",
@@ -17,21 +20,31 @@
                     center: [2629703.3656816175, 9797587.027268754],
                     zoom: 5
                 });
+                
+                var layers = [
+                    new ol.layer.Tile({
+                        source: new ol.source.OSM()
+                    }),
+                    new ol.layer.Tile({
+                        preload: Infinity,
+                        source: new ol.source.BingMaps({
+                            key: "AiRYpbYAESC89e7hUCnmi0L1lQBQWVRoF_MaVTeLQ4G8rTTpnabfM6Eg2VgQUtge",
+                            imagerySet: "AerialWithLabels"
+                        })
+                    }),
+                    new ol.layer.Tile({
+                        source: new ol.source.XYZ({
+                            attributions: [
+                                new ol.Attribution({
+                                    html: "&copy; <a href='http://statkart.no'>Kartverket</a>"
+                                })
+                            ],
+                            url: "http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={z}&x={x}&y={y}"
+                        })
+                    })
+                ];
 
                 var map = new ol.Map({
-                    layers: [
-                        new ol.layer.Tile({ source: new ol.source.OSM() }),
-                        new ol.layer.Tile({
-                            source: new ol.source.XYZ({
-                                attributions: [
-                                    new ol.Attribution({
-                                        html: "&copy; <a href='http://statkart.no'>Kartverket</a>"
-                                    })
-                                ],
-                                url: "http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={z}&x={x}&y={y}"
-                            })
-                        })
-                    ],
                     view: view
                 });
 
@@ -106,8 +119,21 @@
 
                 //Markers
                 var getIconStyle = function (iconSrc) {
+                    if (iconSrc.type === 'font') {
+                        return new ol.style.Style({
+                            text: new ol.style.Text({
+                                text: iconSrc.text,
+                                font: iconSrc.font,
+                                scale: 1,
+                                fill: new ol.style.Fill({
+                                    color: 'black',
+                                })
+                            })
+                        });
+                    }
+
                     return new ol.style.Style({
-                        image: new ol.style.Icon( /** @type {olx.style.IconOptions} */({
+                        image: new ol.style.Icon(({
                             src: iconSrc.src,
                             offset: iconSrc.offset,
                             size: iconSrc.size,
@@ -140,6 +166,25 @@
                         }
                     }
                 }, true);
+                
+                scope.$watch("layer", function () {
+                    for (var index = 0; index < layers.length; index++) {
+                        map.removeLayer(layers[index]);
+                    }
+                    
+                    if (scope.layer === "osm") {
+                        map.addLayer(layers[0]);
+                    }
+                    else if (scope.layer === "satellite") {
+                        map.addLayer(layers[1]);
+                    }
+                    else {
+                        map.addLayer(layers[2]);
+                    }
+                    //Readd to ensure on top
+                    map.removeLayer(vectorLayer);
+                    map.addLayer(vectorLayer);
+                });
             }
         };
     });
