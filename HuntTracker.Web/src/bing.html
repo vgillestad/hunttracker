@@ -1,76 +1,116 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Bing Maps example</title>
-<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.7.0/ol.css" type="text/css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.7.0/ol.js"></script>
+  
+  <head>
+    <title>Bing Maps example</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <title>HuntTracker</title>
+    <!-- build:css index.css -->
+    <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+    />
+    <link type="text/css" rel="stylesheet" href="../node_modules/openlayers/dist/ol-debug.css" />
+    <link type="text/css" rel="stylesheet" href="css/icomoon.css" />
+    <link type="text/css" rel="stylesheet" href="css/index.css" />
+    <!-- endbuild -->
+    <!-- build:js index.js -->
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="../bower_components/moment/locale/nb.js"></script>
+    <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../node_modules/openlayers/dist/ol-debug.js"></script>
+    <script type="text/javascript" src="../bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-gettext/dist/angular-gettext.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="../bower_components/hammerjs/hammer.js"></script>
+    <script type="text/javascript" src="../bower_components/jquery.hammer.js/jquery.hammer.js"></script>
+    <script type="text/javascript" src="js/lib/Math.uuid.js"></script>
+    <script type="text/javascript" src="js/lib/extensions.js"></script>
+    <script type="text/javascript" src="js/lib/modernizr-custom.js"></script>
+    <script type="text/javascript" src="i18n/nb_NO.js"></script>
+    <script type="text/javascript" src="i18n/nn_NO.js"></script>
+    <script type="text/javascript" src="i18n/translations-autodetect.js"></script>
+    <script type="text/javascript" src="js/services/services.js"></script>
+    <script type="text/javascript" src="js/services/icons.js"></script>
+    <script type="text/javascript" src="js/services/markers.js"></script>
+    <script type="text/javascript" src="js/services/auth.js"></script>
+    <script type="text/javascript" src="js/services/users.js"></script>
+    <script type="text/javascript" src="js/services/helpers.js"></script>
+    <script type="text/javascript" src="js/directives/directives.js"></script>
+    <script type="text/javascript" src="js/directives/popover.js"></script>
+    <script type="text/javascript" src="js/directives/ol-map.js"></script>
+    <script type="text/javascript" src="js/directives/datetime-picker.js"></script>
+    <script type="text/javascript" src="js/controllers/controllers.js"></script>
+    <script type="text/javascript" src="js/controllers/menu.js"></script>
+    <script type="text/javascript" src="js/controllers/map.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </head>
+  
+  <body>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <div id="map" class="map-fullscreen" ></div>
+          <select id="layer-select">
+            <option value="Aerial">Aerial</option>
+            <option value="AerialWithLabels" selected>Aerial with labels</option>
+            <option value="Road">Road</option>
+            <option value="collinsBart">Collins Bart</option>
+            <option value="ordnanceSurvey">Ordnance Survey</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <script>
+      var styles = [
+        'Road',
+        'Aerial',
+        'AerialWithLabels',
+        'collinsBart',
+        'ordnanceSurvey'
+      ];
+      var layers = [];
+      var i, ii;
+      for (i = 0, ii = styles.length; i < ii; ++i) {
+        layers.push(new ol.layer.Tile({
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.BingMaps({
+            key: 'Ak-dzM4wZjSqTlzveKz5u0d4IQ4bRzVI309GxmkgSVr1ewS6iPSrOvOKhA-CJlm3',
+            imagerySet: styles[i]
+            // use maxZoom 19 to see stretched tiles instead of the BingMaps
+            // "no photos at this zoom level" tiles
+            // maxZoom: 19
+          })
+        }));
+      }
+      var map = new ol.Map({
+        layers: layers,
+        // Improve user experience by loading tiles while dragging/zooming. Will make
+        // zooming choppy on mobile or slow devices.
+        loadTilesWhileInteracting: true,
+        target: 'map',
+        view: new ol.View({
+          center: [-6655.5402445057125, 6709968.258934638],
+          zoom: 13
+        })
+      });
+      
+      var select = document.getElementById('layer-select');
+      function onChange() {
+        var style = select.value;
+        for (var i = 0, ii = layers.length; i < ii; ++i) {
+          layers[i].setVisible(styles[i] === style);
+        }
+      }
+      select.addEventListener('change', onChange);
+      onChange();
+    </script>
+  </body>
 
-</head>
-<body>
-<div class="container-fluid">
-
- <div class="row-fluid">
-   <div class="span12">
-     <div id="map" class="map"></div>
-     <select id="layer-select">
-       <option value="Aerial">Aerial</option>
-       <option value="AerialWithLabels" selected>Aerial with labels</option>
-       <option value="Road">Road</option>
-       <option value="collinsBart">Collins Bart</option>
-       <option value="ordnanceSurvey">Ordnance Survey</option>
-     </select>
-   </div>
- </div>
-
-</div>
-<script>
-var styles = [
-  'Road',
-  'Aerial',
-  'AerialWithLabels',
-  'collinsBart',
-  'ordnanceSurvey'
-];
-var layers = [];
-var i, ii;
-for (i = 0, ii = styles.length; i < ii; ++i) {
-  layers.push(new ol.layer.Tile({
-    visible: false,
-    preload: Infinity,
-    source: new ol.source.BingMaps({
-      key: 'Ak-dzM4wZjSqTlzveKz5u0d4IQ4bRzVI309GxmkgSVr1ewS6iPSrOvOKhA-CJlm3',
-      imagerySet: styles[i]
-      // use maxZoom 19 to see stretched tiles instead of the BingMaps
-      // "no photos at this zoom level" tiles
-      // maxZoom: 19
-    })
-  }));
-}
-var map = new ol.Map({
-  layers: layers,
-  // Improve user experience by loading tiles while dragging/zooming. Will make
-  // zooming choppy on mobile or slow devices.
-  loadTilesWhileInteracting: true,
-  target: 'map',
-  view: new ol.View({
-    center: [-6655.5402445057125, 6709968.258934638],
-    zoom: 13
-  })
-});
-
-var select = document.getElementById('layer-select');
-function onChange() {
-  var style = select.value;
-  for (var i = 0, ii = layers.length; i < ii; ++i) {
-    layers[i].setVisible(styles[i] === style);
-  }
-}
-select.addEventListener('change', onChange);
-onChange();
-
-</script>
-</body>
 </html>
