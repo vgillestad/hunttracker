@@ -46,7 +46,8 @@ angular.module("HTDirectives")
 
                 var map = new ol.Map({
                     view: view,
-                    layers: [layers[1]]
+                    layers: [layers[1]],
+                    interactions: ol.interaction.defaults({pinchRotate: false, altShiftDragRotate: false})
                 });
 
                 map.setTarget(element[0]);
