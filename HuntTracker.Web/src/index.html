@@ -52,6 +52,7 @@
     </head>
     
     <body ng-app="HuntTracker" ng-controller="MapCtrl">
+        <!--MENU-->
         <div class="main-menu">
             <nav class="navbar navbar-default">
                 <ul class="nav navbar-nav navbar-right">
@@ -60,9 +61,13 @@
                             <i class="icon-filter"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">All</a></li>
+                            <li>
+                                <a href="#">All</a>
+                            </li>
                             <li class="divider"></li>
-                            <li><a href="#">Satellite</a></li>
+                            <li>
+                                <a href="#">Satellite</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -70,11 +75,17 @@
                             <i class="icon-stack2"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" ng-click="settings.layer = 'norgeskart'">Norgeskart</a></li>
+                            <li>
+                                <a href="#" ng-click="settings.layer = 'norgeskart'">Norgeskart</a>
+                            </li>
                             <li class="divider"></li>
-                            <li><a href="#" ng-click="settings.layer = 'satellite'">Satellite</a></li>
+                            <li>
+                                <a href="#" ng-click="settings.layer = 'satellite'">Satellite</a>
+                            </li>
                             <li class="divider"></li>
-                            <li><a href="#" ng-click="settings.layer = 'osm'">Open Street Map</a></li>
+                            <li>
+                                <a href="#" ng-click="settings.layer = 'osm'">Open Street Map</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -82,21 +93,26 @@
                             <i class="icon-menu"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" ng-click="logout()"><i class="icon-user-minus"></i> {{'Log out' | translate}}</a></li>
+                            <li>
+                                <a href="#" ng-click="logout()"><i class="icon-user-minus"></i> {{'Log out' | translate}}</a>
+                            </li>
                             <li class="divider"></li>
-                            <li><a href="#" translate="yes">Preferences</a></li>
+                            <li>
+                                <a href="#" translate="yes">Preferences</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
             </nav>
         </div>
+        <!--MAP-->
         <div class="map-fullscreen">
-            <!--MAP-->
             <ol-map ol-markers="markers" ol-layer="settings.layer" ol-track-position="tracking" ol-on-position-changed="positionChanged(coordinates)"
             ol-on-marker-selected="showMarkerDetails(marker)" ol-on-show-context-menu="addMarker(coordinates)" class="map-fullscreen"></ol-map>
-            <!--MARKER POPOVER-->
-            <script type="text/ng-template" id="widget.modal.html">
-                <div class="modal-body">
+        </div>
+        <!--POINT MODAL-->
+        <script type="text/ng-template" id="widget.modal.html">
+            <div class="modal-body">
                     <form ng-submit="addMarkerSubmit()">
                         <div class="form-group" ng-show="marker.id === 'you'">
                             <img src="/src/images/you.png" alt="you" />
@@ -127,8 +143,7 @@
                     <button type="button" class="btn btn-sm btn-default" ng-click="cancel()" translate="yes">Cancel</button>
                     <button type="submit" class="btn btn-success" ng-click="submit()">{{submitText | translate}}</button>
                 </div>
-            </script>
-        </div>
+        </script>
     </body>
 
 </html>

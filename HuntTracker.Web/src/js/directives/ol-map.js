@@ -1,5 +1,5 @@
-﻿/* global $ */
-/* global ol */
+﻿/* global angular, $, ol */
+
 angular.module("HTDirectives")
 
     .directive("olMap", function () {
@@ -16,11 +16,7 @@ angular.module("HTDirectives")
                 onShowContextMenu: "&olOnShowContextMenu"
             },
             link: function (scope, element, attrs) {
-                var view = new ol.View({
-                    center: [2629703.3656816175, 9797587.027268754],
-                    zoom: 5
-                });
-                
+
                 var layers = [
                     new ol.layer.Tile({
                         source: new ol.source.OSM()
@@ -44,25 +40,24 @@ angular.module("HTDirectives")
                     })
                 ];
 
+                var view = new ol.View({
+                    center: [2629703.3656816175, 9797587.027268754],
+                    zoom: 5
+                });
+
                 var map = new ol.Map({
                     view: view,
-                    layers: [layers[1]],
-                    interactions: ol.interaction.defaults({pinchRotate: false, altShiftDragRotate: false})
+                    interactions: ol.interaction.defaults({ pinchRotate: false, altShiftDragRotate: false }),
+                    controls: ol.control.defaults({ attribution: false })
                 });
 
                 map.setTarget(element[0]);
-
-                //Createing a POPOVER element
-                var popup = new ol.Overlay({ element: $("<div id='marker-element'></div>").appendTo("body") });
-                map.addOverlay(popup);
 
                 //Right click on PC
                 $(map.getViewport()).on('contextmenu', function (e) {
                     e.preventDefault();
                     var eventPosition = map.getEventPixel(e);
                     var coordinates = map.getCoordinateFromPixel(eventPosition);
-                    popup.setPosition(coordinates);
-                    popup.setOffset([12, -25]);
                     scope.$apply(function () {
                         scope.onShowContextMenu({ coordinates: coordinates });
                     });
@@ -74,8 +69,6 @@ angular.module("HTDirectives")
                     e.preventDefault();
                     var eventPosition = [e.gesture.center.x, e.gesture.center.y];
                     var coordinates = map.getCoordinateFromPixel(eventPosition);
-                    popup.setPosition(coordinates);
-                    popup.setOffset([12, -25]);
                     scope.$apply(function () {
                         scope.onShowContextMenu({ coordinates: coordinates });
                     });
@@ -89,11 +82,6 @@ angular.module("HTDirectives")
                             return feature;
                         });
                     if (feature) {
-                        var geometry = feature.getGeometry();
-                        var coordinates = geometry.getCoordinates();
-                        popup.setPosition(coordinates);
-                        popup.setOffset([12, -25]);
-
                         scope.$apply(function () {
                             scope.onMarkerSelected({ marker: feature.marker });
                         });
@@ -148,6 +136,7 @@ angular.module("HTDirectives")
                 var pointsSource = new ol.source.Vector();
                 var pointsLayer = new ol.layer.Vector({ source: pointsSource });
                 map.addLayer(pointsLayer);
+
                 scope.$watch("markers", function (newMarkers, oldMarkers) {
                     //Remove all first
                     var features = pointsSource.getFeatures();
@@ -168,12 +157,12 @@ angular.module("HTDirectives")
                         }
                     }
                 }, true);
-                
+
                 scope.$watch("layer", function () {
                     for (var index = 0; index < layers.length; index++) {
                         map.removeLayer(layers[index]);
                     }
-                    
+
                     if (scope.layer === "osm") {
                         map.addLayer(layers[0]);
                     }
