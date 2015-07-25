@@ -1,4 +1,4 @@
-﻿/* global angular, $, ol */
+﻿/* global angular, $, ol, Hammer */
 
 angular.module("HTDirectives")
 
@@ -64,16 +64,21 @@ angular.module("HTDirectives")
                     return false;
                 });
 
-                //Touch devices like iPad
-                $(map.getViewport()).hammer().bind('press', function (e) {
+                //Touch devices like iPad - using element[0] instead of map.getViewport() to make it work on Windows Phone
+                new Hammer.Manager(element[0], {
+                    recognizers: [
+                        [Hammer.Press]
+                    ]
+                }).on('press', function (e) {
                     e.preventDefault();
-                    var eventPosition = [e.gesture.center.x, e.gesture.center.y];
+                    var eventPosition = [e.center.x, e.center.y];
                     var coordinates = map.getCoordinateFromPixel(eventPosition);
                     scope.$apply(function () {
                         scope.onShowContextMenu({ coordinates: coordinates });
                     });
                     return false;
                 });
+                
 
                 $(map.getViewport()).on('click', function (e) {
                     var eventPosition = map.getEventPixel(e);
