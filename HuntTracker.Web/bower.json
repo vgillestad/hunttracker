@@ -17,7 +17,7 @@
     "angular-gettext": "~1.1.4",
     "angular": "~1.3.8",
     "bootstrap": "~3.3.1",
-    "jquery.hammer.js": "~2.0.0",
+    "hammerjs": "~2.0.0",
     "angular-resource": "~1.3.11",
     "eonasdan-bootstrap-datetimepicker": "~4.0.0",
     "angular-bootstrap": "~0.13.0"

@@ -65,7 +65,8 @@ angular.module("HTDirectives")
                 });
 
                 //Touch devices like iPad - using element[0] instead of map.getViewport() to make it work on Windows Phone
-                new Hammer.Manager(element[0], {
+                var elm = window.isWindowsPhone ? element[0] : map.getViewport();
+                new Hammer.Manager(elm, {
                     recognizers: [
                         [Hammer.Press]
                     ]

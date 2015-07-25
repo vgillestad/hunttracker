@@ -1,4 +1,5 @@
-﻿angular.module("HTDirectives")
+﻿/* global Modernizr, moment */
+angular.module("HTDirectives")
 
     .directive("datetimePicker", ["$compile", "$window", function ($compile, $window) {
         return {
@@ -63,8 +64,8 @@
                     scope.$apply();
                 };
 
-                var useDateInput = Modernizr.inputtypes.date && $window.isMobileOrTablet();
-                var useTimeInput = Modernizr.inputtypes.time && $window.isMobileOrTablet();
+                var useDateInput = Modernizr.inputtypes.date && $window.isMobileOrTablet;
+                var useTimeInput = Modernizr.inputtypes.time && $window.isMobileOrTablet;
 
                 if (useDateInput) {
                     $date.val(moment(scope.model).format('YYYY-MM-DD'));
