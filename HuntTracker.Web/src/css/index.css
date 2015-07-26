@@ -56,3 +56,7 @@ body {
     float: right!important;
     margin: 0;
 }
+
+.navbar-nav>li, .navbar-nav {
+    float: left !important;
+}

@@ -1,6 +1,8 @@
-﻿angular.module("HTLogin", ["gettext", "HTServices"])
+﻿/* global angular */
+angular.module("HTLogin", ["gettext", "HTServices"])
     .controller("LoginCtrl", ["$scope", "AuthSource", "UserSource", function ($scope, AuthSource, UserSource) {
         $scope.view = "login";
+        $scope.loading = false;
 
         $scope.submitBtnLbl = "Login";
 
@@ -11,11 +13,13 @@
 
         $scope.loginSubmit = function () {
             $scope.errorMessage = "";
+            $scope.loading = true;
             AuthSource.login({ email: $scope.email, password: $scope.password }).$promise
                 .then(function () {
                     document.location.href = "/";
                 }, function (reason) {
                     $scope.password = "";
+                    $scope.loading = false;
                     if (reason.status === 401) {
                         $scope.errorMessage = "Invalid username/password.";
                     }
@@ -32,6 +36,7 @@
 
         $scope.registerSubmit = function () {
             $scope.errorMessage = "";
+            $scope.loading = true;
             var newUser = {
                 firstName: $scope.firstName,
                 lastName: $scope.lastName,
@@ -45,9 +50,11 @@
                 }, function (reason) {
                     if (reason.status === 409) {
                         $scope.errorMessage = "Already an existing user with that email address."
+                        $scope.loading = false;
                     }
                     else {
                         $scope.errorMessage = "We are sorry, but an unexpected error occured."
+                        $scope.loading = false;
                     }
                 });
         }

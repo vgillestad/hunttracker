@@ -63,7 +63,7 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
                             .AsEnumerable()
                             .FirstOrDefault();
 
-            if (PasswordHash.ValidatePassword(password, userWithCredentials.Hash))
+            if (userWithCredentials != null && PasswordHash.ValidatePassword(password, userWithCredentials.Hash))
             {
                 user = new User()
                 {
