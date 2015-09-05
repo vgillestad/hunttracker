@@ -135,6 +135,7 @@
     <Content Include="src\index.html" />
     <Content Include="src\js\controllers\controllers.js" />
     <Content Include="src\js\controllers\login.js" />
+    <Content Include="src\js\controllers\mapModal.js" />
     <Content Include="src\js\controllers\menu.js" />
     <Content Include="src\js\directives\datetime-picker.js" />
     <Content Include="src\js\directives\popover.js" />

@@ -1,0 +1,138 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: src\i18n\translations.html:1
+msgid "Add"
+msgstr ""
+
+#: index.html:1
+#: src\index.html:130
+msgid "Add a pin. Enter a description and tag (#) the pin:"
+msgstr ""
+
+#: src\index.html:66
+msgid "All"
+msgstr ""
+
+#: src\i18n\translations.html:4
+msgid "Already an existing user with that email address."
+msgstr ""
+
+#: index.html:1
+#: src\index.html:200
+msgid "Are you sure?"
+msgstr ""
+
+#: index.html:1
+#: src\index.html:204
+msgid "Cancel"
+msgstr ""
+
+#: index.html:1
+#: src\index.html:199
+msgid "Delete"
+msgstr ""
+
+#: login.html:1
+#: src\login.html:113
+#: src\login.html:38
+#: src\login.html:82
+msgid "email"
+msgstr ""
+
+#: login.html:1
+#: src\login.html:68
+msgid "first name"
+msgstr ""
+
+#: login.html:1
+#: src\login.html:55
+msgid "Forgot password?"
+msgstr ""
+
+#: src\i18n\translations.html:3
+msgid "Invalid username/password."
+msgstr ""
+
+#: login.html:1
+#: src\login.html:75
+msgid "last name"
+msgstr ""
+
+#: src\index.html:74
+msgid "Latest 31 days"
+msgstr ""
+
+#: index.html:1
+#: src\index.html:102
+msgid "Log out"
+msgstr ""
+
+#: login.html:1
+#: src\login.html:51
+msgid "Login"
+msgstr ""
+
+#: src\index.html:70
+msgid "None"
+msgstr ""
+
+#: src\index.html:84
+msgid "Norgeskart"
+msgstr ""
+
+#: src\index.html:92
+msgid "Open Street Map"
+msgstr ""
+
+#: login.html:1
+#: src\login.html:45
+#: src\login.html:89
+msgid "password"
+msgstr ""
+
+#: login.html:1
+#: src\login.html:86
+msgid "Password"
+msgstr ""
+
+#: index.html:1
+#: src\index.html:106
+msgid "Preferences"
+msgstr ""
+
+#: login.html:1
+#: src\login.html:54
+#: src\login.html:99
+msgid "Register"
+msgstr ""
+
+#: src\index.html:88
+msgid "Satellite Imagery"
+msgstr ""
+
+#: src\i18n\translations.html:2
+msgid "Save"
+msgstr ""
+
+#: login.html:1
+#: src\login.html:120
+msgid "Send"
+msgstr ""
+
+#: src\index.html:124
+msgid ""
+"This is where\r\n"
+"                        <strong>you</strong> are now."
+msgstr ""
+
+#: index.html:1
+msgid "This is where <strong>you</strong> are now."
+msgstr ""
+
+#: src\i18n\translations.html:5
+msgid "We are sorry, but an unexpected error occured."
+msgstr ""

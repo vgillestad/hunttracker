@@ -8,7 +8,9 @@
         var whitelist = [
             "widget.modal.html",
             "template/modal/backdrop.html",
-            "template/modal/window.html"
+            "template/modal/window.html",
+            "template/tooltip/tooltip-popup.html",
+            "template/popover/popover.html"
         ];
 
         return {

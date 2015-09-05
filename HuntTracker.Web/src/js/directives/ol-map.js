@@ -154,12 +154,14 @@ angular.module("HTDirectives")
                     if (newMarkers) {
                         for (var i = 0; i < newMarkers.length; i++) {
                             var marker = newMarkers[i];
-                            var feature = new ol.Feature({
-                                geometry: new ol.geom.Point(marker.coordinates)
-                            });
-                            feature.marker = marker;
-                            feature.setStyle(getIconStyle(marker.iconSrc));
-                            pointsSource.addFeature(feature);
+                            if (!marker.hidden) {
+                                var feature = new ol.Feature({
+                                    geometry: new ol.geom.Point(marker.coordinates)
+                                });
+                                feature.marker = marker;
+                                feature.setStyle(getIconStyle(marker.iconSrc));
+                                pointsSource.addFeature(feature);
+                            }
                         }
                     }
                 }, true);

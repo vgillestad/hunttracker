@@ -43,6 +43,7 @@ body {
     border-radius: 0;
 }
 
+/*Main menu*/
 .navbar-nav.navbar-right:last-child {
   margin-right: 0 !important;
 }
@@ -59,4 +60,34 @@ body {
 
 .navbar-nav>li, .navbar-nav {
     float: left !important;
+}
+
+/*Tabs in the marker modal*/
+.nav-tabs>li>a {
+    padding: 10px 4px;
+}
+
+/*.tab-pane {
+    padding-top: 5px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}*/
+
+/*Tooltip input modal*/
+.tooltip > p {
+   text-align:left;
+ }
+
+.tooltip-inner {
+    text-align:justify;
+}
+
+/*Tags in modal*/
+.badge-lighter {
+    background-color: #989898;;
+}
+
+.icon-red {
+    color: red;
 }

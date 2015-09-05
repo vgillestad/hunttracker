@@ -1,14 +1,15 @@
-﻿angular.module("HTControllers")
+﻿/* global angular, Modernizr */
+angular.module("HTControllers")
 
-    .controller("MapCtrl", ["$scope", "$modal", "$timeout", "UserSource", "AuthSource", "MarkerSource", "IconSource", "Helpers", function ($scope, $modal, $timeout, UserSource, AuthSource, MarkerSource, IconSource, Helpers) {
+    .controller("MapCtrl", ["$scope", "$modal", "$timeout", "UserSource", "AuthSource", "MarkerSource", "IconSource", "FilterSource", "Helpers", function ($scope, $modal, $timeout, UserSource, AuthSource, MarkerSource, IconSource, FilterSource, Helpers) {
         $scope.tracking = true;
         $scope.markers = [];
         $scope.you = null;
         $scope.icons = IconSource.getAll();
-        $scope.layers = [{ id: "norgeskart", name: "Norwegian Map" }, { id: "satellite", name: "Satellite" }, { id: "osm", name: "Open Street Map" }];
+        $scope.layers = [{ id: "norgeskart", name: "Norwegian Map" }, { id: "satellite", name: "Satellite Imagery" }, { id: "osm", name: "Open Street Map" }];
         $scope.settings = {
             layer: $scope.layers[0].id,
-            filter: null,
+            filter: 'all',
         }
 
         $scope.logout = function () {
@@ -20,13 +21,12 @@
         UserSource.current(function (user) {
             $scope.user = user;
             MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
-                $scope.markers = MarkerSource.filterAndMap(markers);
+                $scope.markers = Helpers.mapIcons(markers, $scope.icons);
                 if ($scope.you) {
                     $scope.markers.push($scope.you);
                 }
             });
         });
-
 
         var cleanMarkers = function () {
             if ($scope.marker && !$scope.marker.id) {
@@ -112,55 +112,21 @@
             } else {
                 $scope.you = {
                     id: "you",
+                    icon: "person",
                     coordinates: coordinates,
                     iconSrc: $scope.icons["person"]
                 };
                 $scope.markers.push($scope.you);
             }
         }
+       
+        var filters = FilterSource.getAll(); 
+        $scope.applyFilter = function (filter, options) {
+            $scope.settings.filter = filter;
+            $scope.markers = filters[filter]($scope.markers, options);
+        }
 
         $scope.setLayer = function () {
             console.log("set layer called");
         }
-    }])
-
-    .controller("MapModalCtrl", ["$scope", "$modalInstance", "marker", "icons", function ($scope, $modalInstance, marker, icons) {
-        $scope.marker = marker;
-        $scope.icons = icons;
-
-        var editMarker = $scope.marker.id && $scope.marker.id !== "you";
-        $scope.submitText = editMarker ? "Save" : "Add";
-        $scope.showDelBtn = editMarker;
-
-        $scope.setIcon = function (icon) {
-            $scope.marker.icon = icon;
-            $scope.marker.iconSrc = $scope.icons[icon];
-        }
-
-        $scope.submit = function () {
-            $modalInstance.close({ action: "submit" });
-        };
-
-        $scope.cancel = function () {
-            $modalInstance.dismiss("cancel");
-        };
-
-        $scope.delete = function () {
-            $scope.showDelBtn = false;
-            $scope.showDelConfirmBtn = true;
-        }
-
-        $scope.deleteConfirm = function () {
-            $modalInstance.close({ action: "delete" });
-        }
-
-        var first = true;
-        var startTime = new Date();
-        $scope.$on('modal.closing', function (event, reason, closing) {
-            var duration = (new Date()) - startTime;
-            if (!editMarker && reason == "backdrop click" && first && duration < 2000 && Modernizr.touch) {
-                first = false;
-                event.preventDefault();
-            }
-        });
     }]);

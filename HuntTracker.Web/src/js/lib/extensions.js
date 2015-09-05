@@ -16,4 +16,4 @@
         return window.isMobile || window.isTablet;
     })();
 
-} (navigator.userAgent || navigator.vendor || window.opera || ""));
+}(navigator.userAgent || navigator.vendor || window.opera || ""));

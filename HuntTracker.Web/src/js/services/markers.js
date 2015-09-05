@@ -9,14 +9,5 @@
             remove: { method: "DELETE", params: { markerId: "@markerId" } }
         });
 
-        sources.filterAndMap = function (markers) {
-            if (!markers || markers.length < 1) return markers;
-            var icons = IconSource.getAll();
-            return markers.map(function (marker) {
-                marker.iconSrc = icons[marker.icon] || icons["default"];
-                return marker;
-            });
-        }
-
         return sources;
     }]);

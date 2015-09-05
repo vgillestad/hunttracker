@@ -11,13 +11,13 @@ var runSequence = require('run-sequence');
 gulp.task('pot', function () {
     return gulp.src(['./**/*.html'])
         .pipe(gettext.extract('template.pot'))
-        .pipe(gulp.dest('./i18n/po/'));
+        .pipe(gulp.dest('./src/i18n/po/'));
 });
 
 gulp.task('translations', function () {
-    return gulp.src('./i18n/po/**/*.po')
+    return gulp.src('./src/i18n/po/**/*.po')
         .pipe(gettext.compile())
-        .pipe(gulp.dest('./i18n'));
+        .pipe(gulp.dest('./src/i18n'));
 });
 
 var useMin = function (src) {
