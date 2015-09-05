@@ -117,6 +117,7 @@
     <Content Include="src\i18n\translations.html" />
     <Content Include="src\images\animals1.png" />
     <Content Include="src\images\animals4.png" />
+    <Content Include="src\images\animals8.png" />
     <Content Include="src\images\bing.png" />
     <Content Include="src\images\circle.png" />
     <Content Include="src\images\deer-shot-silhouette-20x32.png" />
