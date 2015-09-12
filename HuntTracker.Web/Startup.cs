@@ -24,8 +24,11 @@ namespace HuntTracker.Web
         public void Configuration(IAppBuilder app)
         {
             var builder = new ContainerBuilder();
+#if DEBUG
             var storage = Storage.DocumentDB;
-
+#else
+            var storage = Storage.DocumentDB;
+#endif
             if (storage == Storage.DocumentDB)
             {
                 string serviceEndpoint = ConfigurationManager.AppSettings["serviceEndpoint"];

@@ -2,7 +2,7 @@
 angular.module("HTControllers")
 
     .controller("MapCtrl", ["$scope", "$modal", "$timeout", "UserSource", "AuthSource", "MarkerSource", "IconSource", "FilterSource", "Helpers", function ($scope, $modal, $timeout, UserSource, AuthSource, MarkerSource, IconSource, FilterSource, Helpers) {
-        $scope.tracking = true;
+        $scope.tracking = false;
         $scope.markers = [];
         $scope.you = null;
         $scope.icons = IconSource.getAll();
@@ -11,6 +11,9 @@ angular.module("HTControllers")
             layer: $scope.layers[0].id,
             filter: 'all',
         }
+        $scope.show = {
+            location: true
+        };
 
         $scope.logout = function () {
             AuthSource.logout(function () {
@@ -22,9 +25,6 @@ angular.module("HTControllers")
             $scope.user = user;
             MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
                 $scope.markers = Helpers.mapIcons(markers, $scope.icons);
-                if ($scope.you) {
-                    $scope.markers.push($scope.you);
-                }
             });
         });
 
@@ -33,6 +33,13 @@ angular.module("HTControllers")
                 $scope.markers = $scope.markers.filter(function (m) {
                     return m.id;
                 });
+            }
+        }
+        
+        $scope.setTracking = function () {
+            $scope.tracking = !$scope.tracking;
+            if(!$scope.tracking) {
+                $scope.you.hidden = true;
             }
         }
 
@@ -47,7 +54,8 @@ angular.module("HTControllers")
                     size: "sm",
                     resolve: {
                         marker: function () { return $scope.marker; },
-                        icons: function () { return $scope.icons; }
+                        icons: function () { return $scope.icons; },
+                        youAreHere: function () { return $scope.you && !$scope.you.hidden && $scope.marker.coordinates[0] === $scope.you.coordinates[0] && $scope.marker.coordinates[1] === $scope.you.coordinates[1]}
                     }
                 });
             }
@@ -80,14 +88,10 @@ angular.module("HTControllers")
                 dateTime: new Date()
             };
             $scope.markers.push($scope.marker);
-            $timeout(showMarkerModal, 100);
+            showMarkerModal();
         };
 
         $scope.addMarkerSubmit = function () {
-            if ($scope.marker.id === "you") {
-                $scope.marker = angular.extend({}, $scope.marker);
-                $scope.marker.id = undefined;
-            }
             if ($scope.marker.id) {
                 MarkerSource.update($scope.marker);
             } else {
@@ -98,26 +102,33 @@ angular.module("HTControllers")
         };
 
         $scope.showMarkerDetails = function (marker) {
-            cleanMarkers();
             $scope.marker = marker;
             if ($scope.marker.id === "you") {
-                $scope.marker.dateTime = new Date();
+                $scope.youAreHere = true;
+                $scope.addMarker($scope.marker.coordinates);
             }
-            showMarkerModal();
+            else {
+                $scope.youAreHere = false;
+                showMarkerModal();   
+            }
         }
 
         $scope.positionChanged = function (coordinates) {
             if ($scope.you) {
                 $scope.you.coordinates = coordinates;
+                $scope.you.hidden = false;
             } else {
                 $scope.you = {
                     id: "you",
-                    icon: "person",
+                    icon: "pin",
                     coordinates: coordinates,
-                    iconSrc: $scope.icons["person"]
+                    iconSrc: $scope.icons["pin"]
                 };
+                $scope.you.iconSrc.color = "green";
                 $scope.markers.push($scope.you);
             }
+            
+            console.log("position changed");
         }
        
         var filters = FilterSource.getAll(); 

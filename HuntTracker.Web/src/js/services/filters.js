@@ -16,11 +16,13 @@ angular.module('HTServices')
             });
             return all;
         }
-        filters["date"] = function (markers, date, operator) {
-            var d = new Date();
-            d.setDate(d.getDate() - date);
+        filters["date"] = function (markers, days, operator) {
+            var oneDayInMS = 86400000;
+            var now = new Date();
+            var filterDateInMS = now.getTime() - (days * oneDayInMS); 
             return markers.map(function (marker) {
-                marker.hidden = new Date(marker.dateTime) > d;
+                var markerDate = new Date(marker.dateTime); 
+                marker.hidden = markerDate.getTime() < filterDateInMS;
                 return marker;
             });
         }

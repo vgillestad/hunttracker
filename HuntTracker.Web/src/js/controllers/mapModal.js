@@ -1,9 +1,10 @@
 ﻿/* global angular, Modernizr */
 angular.module("HTControllers")
 
-    .controller("MapModalCtrl", ["$scope", "$modalInstance", "Helpers", "marker", "icons", function ($scope, $modalInstance, helpers, marker, icons) {
+    .controller("MapModalCtrl", ["$scope", "$modalInstance", "Helpers", "marker", "icons", "youAreHere", function ($scope, $modalInstance, helpers, marker, icons, youAreHere) {
         $scope.marker = marker;
         $scope.icons = icons;
+        $scope.youAreHere = youAreHere;
 
         var editMarker = $scope.marker.id && $scope.marker.id !== "you";
         $scope.submitText = editMarker ? "Save" : "Add";

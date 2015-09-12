@@ -57,6 +57,11 @@
     <div class="main-menu">
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" ng-click="setTracking()" style="border-right: 1px solid #e7e7e7">
+                        <i class="icon-location5" ng-class="{'text-success': tracking  === true}"></i>
+                    </a>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="border-right: 1px solid #e7e7e7">
                         <i class="icon-filter" ng-class="{'text-danger': settings.filter  !== 'all'}" ></i>
@@ -119,12 +124,12 @@
     <script type="text/ng-template" id="widget.modal.html">
         <div class="modal-body">
             <form ng-submit="addMarkerSubmit()">
-                <div class="form-group" ng-show="marker.id === 'you'">
-                    <img src="/src/images/you.png" alt="you" />
+                <div class="form-group" ng-show="youAreHere">
+                    <i class="icon-location5" style="color:green"></i>
                     <span translate>This is where <strong>you</strong> are now.</span>
                     <hr />
                 </div>
-                <small ng-if="marker.id === 'you' || !marker.id" class="text-justify" translate>Add a pin. Enter a description and tag (#) the pin:</small>
+                <small ng-if="!marker.id" class="text-justify" translate>Add a pin. Enter a description and tag (#) the pin:</small>
                 <div class="form-group">
                     <textarea class="form-control" ng-model="marker.description" ng-change="extractDescriptionTags()"></textarea>
                 </div>

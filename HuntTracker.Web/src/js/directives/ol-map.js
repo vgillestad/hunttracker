@@ -79,7 +79,7 @@ angular.module("HTDirectives")
                     });
                     return false;
                 });
-                
+
 
                 $(map.getViewport()).on('click', function (e) {
                     var eventPosition = map.getEventPixel(e);
@@ -99,18 +99,17 @@ angular.module("HTDirectives")
                     projection: view.getProjection()
                 });
 
+                geolocation.on("change:position", function () {
+                    var coordinates = geolocation.getPosition();
+                    view.setCenter(coordinates);
+                    view.setZoom(15);
+                    scope.$apply(function () {
+                        scope.onPositionChanged({ coordinates: coordinates });
+                    });
+                })
+
                 scope.$watch("tracking", function (t) {
                     geolocation.setTracking(t);
-                    if (t) {
-                        geolocation.once("change", function () {
-                            var coordinates = geolocation.getPosition();
-                            view.setCenter(coordinates);
-                            view.setZoom(15);
-                            scope.$apply(function () {
-                                scope.onPositionChanged({ coordinates: coordinates });
-                            });
-                        });
-                    }
                 });
 
                 //Points
@@ -122,7 +121,7 @@ angular.module("HTDirectives")
                                 font: iconSrc.font,
                                 scale: 1,
                                 fill: new ol.style.Fill({
-                                    color: 'black',
+                                    color: iconSrc.color || 'black',
                                 })
                             })
                         });

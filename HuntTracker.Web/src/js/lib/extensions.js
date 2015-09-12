@@ -17,3 +17,11 @@
     })();
 
 }(navigator.userAgent || navigator.vendor || window.opera || ""));
+
+(function () {
+    Array.prototype.findByFieldValue = function (field, value) {
+        this.filter(function (object) {
+            return object[field] === value;
+        })
+    }
+}());

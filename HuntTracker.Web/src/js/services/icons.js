@@ -24,7 +24,7 @@
         icons["grouse"] = { type:"image", scale:0.4, src:defaultSrc, tags: ["seen", "grouse"], offset: [0, 239], size: [60,72] }; 
         icons["hare"] = { type:"image", scale:0.4, src:defaultSrc, tags: ["seen", "hare"], offset: [0, 321], size: [59,73] }; 
         icons["moose"] = { type:"image", scale:0.4, src:defaultSrc, tags: ["seen", "moose"], offset: [0, 457], size: [90,85] }; 
-        icons["raindeer"] = { type:"image", scale:0.4, src:defaultSrc, tags: ["seen", "raindeer"], offset: [0, 552], size: [73,81] };
+        icons["raindeer"] = { type:"image", scale:0.5, src:defaultSrc, tags: ["seen", "raindeer"], offset: [0, 552], size: [73,81] };
         icons["wolf"] = { type:"image", scale:0.4, src:defaultSrc, tags: ["seen", "wolf"], offset: [0, 1299], size: [105,56] }; 
          
         // Shot icons 
@@ -34,7 +34,7 @@
         icons["shot_grouse"] = { type:"image", scale:0.4, src:defaultSrc, tags: ["shot", "grouse"], offset: [0, 882], size: [60,72] }; 
         icons["shot_hare"] = { type:"image", scale:0.4, src:defaultSrc, tags: ["shot", "hare"], offset: [0, 964], size: [59,73] }; 
         icons["shot_moose"] = { type:"image", scale:0.4, src:defaultSrc, tags: ["shot", "moose"], offset: [0, 1047], size: [90,85] }; 
-        icons["shot_raindeer"] = { type:"image", scale:0.4, src:defaultSrc, tags: ["shot", "raindeer"], offset: [0, 1142], size: [73,81] }; 
+        icons["shot_raindeer"] = { type:"image", scale:0.5, src:defaultSrc, tags: ["shot", "raindeer"], offset: [0, 1142], size: [73,81] }; 
         icons["shot_wolf"] = { type:"image", scale:0.4, src:defaultSrc, tags: ["shot", "wolf"], offset: [0, 1233], size: [105,56] }; 
         
         return {
