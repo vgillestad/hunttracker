@@ -25,6 +25,9 @@ angular.module("HTControllers")
             $scope.user = user;
             MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
                 $scope.markers = Helpers.mapIcons(markers, $scope.icons);
+                if($scope.markers.length < 1) {
+                    $scope.showHelp();
+                }
             });
         });
 
@@ -35,10 +38,10 @@ angular.module("HTControllers")
                 });
             }
         }
-        
+
         $scope.setTracking = function () {
             $scope.tracking = !$scope.tracking;
-            if(!$scope.tracking) {
+            if (!$scope.tracking) {
                 $scope.you.hidden = true;
             }
         }
@@ -49,13 +52,13 @@ angular.module("HTControllers")
             if (!modalIsOpen) {
                 modalIsOpen = true;
                 var modal = $modal.open({
-                    templateUrl: "widget.modal.html",
+                    templateUrl: "marker.modal.html",
                     controller: "MapModalCtrl",
                     size: "sm",
                     resolve: {
                         marker: function () { return $scope.marker; },
                         icons: function () { return $scope.icons; },
-                        youAreHere: function () { return $scope.you && !$scope.you.hidden && $scope.marker.coordinates[0] === $scope.you.coordinates[0] && $scope.marker.coordinates[1] === $scope.you.coordinates[1]}
+                        youAreHere: function () { return $scope.you && !$scope.you.hidden && $scope.marker.coordinates[0] === $scope.you.coordinates[0] && $scope.marker.coordinates[1] === $scope.you.coordinates[1] }
                     }
                 });
             }
@@ -109,7 +112,7 @@ angular.module("HTControllers")
             }
             else {
                 $scope.youAreHere = false;
-                showMarkerModal();   
+                showMarkerModal();
             }
         }
 
@@ -127,11 +130,11 @@ angular.module("HTControllers")
                 $scope.you.iconSrc.color = "green";
                 $scope.markers.push($scope.you);
             }
-            
+
             console.log("position changed");
         }
-       
-        var filters = FilterSource.getAll(); 
+
+        var filters = FilterSource.getAll();
         $scope.applyFilter = function (filter, options) {
             $scope.settings.filter = filter;
             $scope.markers = filters[filter]($scope.markers, options);
@@ -139,5 +142,13 @@ angular.module("HTControllers")
 
         $scope.setLayer = function () {
             console.log("set layer called");
+        }
+
+        $scope.showHelp = function () {
+            $modal.open({
+                templateUrl: "help.modal.html",
+                controller: "HelpModalCtrl",
+                size: "sm"
+            });
         }
     }]);

@@ -4,17 +4,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: src\index.html:205
+msgid "4 tips for you"
+msgstr ""
+
 #: src\i18n\translations.html:1
 msgid "Add"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:127
+#: src\index.html:133
 msgid "Add a pin. Enter a description and tag (#) the pin:"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:66
+#: src\index.html:72
 msgid "All"
 msgstr ""
 
@@ -23,7 +27,7 @@ msgid "Already an existing user with that email address."
 msgstr ""
 
 #: index.html:1
-#: src\index.html:188
+#: src\index.html:194
 msgid "Are you sure?"
 msgstr ""
 
@@ -36,7 +40,7 @@ msgid "camera"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:192
+#: src\index.html:198
 msgid "Cancel"
 msgstr ""
 
@@ -53,7 +57,7 @@ msgid "deer"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:187
+#: src\index.html:193
 msgid "Delete"
 msgstr ""
 
@@ -86,6 +90,10 @@ msgstr ""
 msgid "hare"
 msgstr ""
 
+#: src\index.html:108
+msgid "Help"
+msgstr ""
+
 #: src\i18n\translations.html:24
 msgid "hoove"
 msgstr ""
@@ -104,12 +112,12 @@ msgid "last name"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:74
+#: src\index.html:80
 msgid "Latest 31 days"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:102
+#: src\index.html:112
 msgid "Log out"
 msgstr ""
 
@@ -123,17 +131,21 @@ msgid "moose"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:70
+#: src\index.html:76
 msgid "None"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:84
+#: src\index.html:90
 msgid "Norgeskart"
 msgstr ""
 
+#: src\index.html:216
+msgid "Ok"
+msgstr ""
+
 #: index.html:1
-#: src\index.html:92
+#: src\index.html:98
 msgid "Open Street Map"
 msgstr ""
 
@@ -142,7 +154,7 @@ msgid "other"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:140
+#: src\index.html:146
 msgid "Other"
 msgstr ""
 
@@ -162,8 +174,11 @@ msgid "paw"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:106
 msgid "Preferences"
+msgstr ""
+
+#: src\index.html:209
+msgid "Press <i class=\"icon-location5\"></i> to find your location."
 msgstr ""
 
 #: src\i18n\translations.html:16
@@ -177,7 +192,7 @@ msgid "Register"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:88
+#: src\index.html:94
 msgid "Satellite Imagery"
 msgstr ""
 
@@ -190,7 +205,7 @@ msgid "seen"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:137
+#: src\index.html:143
 msgid "Seen"
 msgstr ""
 
@@ -204,22 +219,34 @@ msgid "shot"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:134
+#: src\index.html:140
 msgid "Shot"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:172
+#: src\index.html:178
 msgid "Tags are categories that can be used when searching an filtering points. Most icons have assosiated tags. You can add your own tags by using hashtag in the description text box, i.e. #team1 joined me, will add a team1 tag."
 msgstr ""
 
+#: src\index.html:210
+msgid "Tap-and-hold to add point in the map"
+msgstr ""
+
 #: index.html:1
-#: src\index.html:124
+#: src\index.html:130
 msgid "This is where <strong>you</strong> are now."
 msgstr ""
 
 #: src\i18n\translations.html:11
 msgid "tracks"
+msgstr ""
+
+#: src\index.html:211
+msgid "Use <i class=\"icon-filter\"></i> to filter points."
+msgstr ""
+
+#: src\index.html:212
+msgid "Use <i class=\"icon-stack2\"></i> to change what map to use."
 msgstr ""
 
 #: src\i18n\translations.html:5

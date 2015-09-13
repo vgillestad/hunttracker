@@ -99,16 +99,21 @@ angular.module("HTDirectives")
                     projection: view.getProjection()
                 });
 
+                var setViewOnPositionChange = true;
                 geolocation.on("change:position", function () {
                     var coordinates = geolocation.getPosition();
-                    view.setCenter(coordinates);
-                    view.setZoom(15);
+                    if(setViewOnPositionChange) {
+                        view.setCenter(coordinates);
+                        view.setZoom(15);
+                        setViewOnPositionChange = false;   
+                    }
                     scope.$apply(function () {
                         scope.onPositionChanged({ coordinates: coordinates });
                     });
                 })
 
                 scope.$watch("tracking", function (t) {
+                    setViewOnPositionChange = true;
                     geolocation.setTracking(t);
                 });
 

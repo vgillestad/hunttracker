@@ -12,16 +12,20 @@ msgstr ""
 "X-Generator: Poedit 1.7.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: src\index.html:205
+msgid "4 tips for you"
+msgstr "4 tips til deg"
+
 #: src\i18n\translations.html:1
 msgid "Add"
 msgstr "Legg til"
 
-#: index.html:1 src\index.html:127
+#: index.html:1 src\index.html:133
 msgid "Add a pin. Enter a description and tag (#) the pin:"
 msgstr ""
 "Legg til punkt i kartet. Skriv inn beskrivelse og merk punktene med tags (#):"
 
-#: index.html:1 src\index.html:66
+#: index.html:1 src\index.html:72
 msgid "All"
 msgstr "Alle"
 
@@ -29,7 +33,7 @@ msgstr "Alle"
 msgid "Already an existing user with that email address."
 msgstr "Det finnes allerede en broker med denne epostadressen."
 
-#: index.html:1 src\index.html:188
+#: index.html:1 src\index.html:194
 msgid "Are you sure?"
 msgstr "Sikker?"
 
@@ -41,13 +45,13 @@ msgstr "fugl"
 msgid "camera"
 msgstr "kamera"
 
-#: index.html:1 src\index.html:192
+#: index.html:1 src\index.html:198
 msgid "Cancel"
 msgstr "Avbryt"
 
 #: src\i18n\translations.html:29
 msgid "car"
-msgstr ""
+msgstr "bil"
 
 #: src\i18n\translations.html:28
 msgid "danger"
@@ -57,7 +61,7 @@ msgstr "fare"
 msgid "deer"
 msgstr "hjort"
 
-#: index.html:1 src\index.html:187
+#: index.html:1 src\index.html:193
 msgid "Delete"
 msgstr "Slett"
 
@@ -85,6 +89,10 @@ msgstr "rype"
 msgid "hare"
 msgstr "hare"
 
+#: src\index.html:108
+msgid "Help"
+msgstr "Hjelp"
+
 #: src\i18n\translations.html:24
 msgid "hoove"
 msgstr "hov"
@@ -101,11 +109,11 @@ msgstr "Feil brukernavn/password."
 msgid "last name"
 msgstr "etternavn"
 
-#: index.html:1 src\index.html:74
+#: index.html:1 src\index.html:80
 msgid "Latest 31 days"
 msgstr "Siste 31 dagar"
 
-#: index.html:1 src\index.html:102
+#: index.html:1 src\index.html:112
 msgid "Log out"
 msgstr "Logg ut"
 
@@ -117,15 +125,19 @@ msgstr "Logg inn"
 msgid "moose"
 msgstr "elg"
 
-#: index.html:1 src\index.html:70
+#: index.html:1 src\index.html:76
 msgid "None"
 msgstr "Ingen"
 
-#: index.html:1 src\index.html:84
+#: index.html:1 src\index.html:90
 msgid "Norgeskart"
 msgstr ""
 
-#: index.html:1 src\index.html:92
+#: src\index.html:216
+msgid "Ok"
+msgstr "Ok"
+
+#: index.html:1 src\index.html:98
 msgid "Open Street Map"
 msgstr ""
 
@@ -133,7 +145,7 @@ msgstr ""
 msgid "other"
 msgstr "anna"
 
-#: index.html:1 src\index.html:140
+#: index.html:1 src\index.html:146
 msgid "Other"
 msgstr "Anna"
 
@@ -149,9 +161,13 @@ msgstr "Passord"
 msgid "paw"
 msgstr "pote"
 
-#: index.html:1 src\index.html:106
+#: index.html:1
 msgid "Preferences"
 msgstr "Innstillinger"
+
+#: src\index.html:209
+msgid "Press <i class=\"icon-location5\"></i> to find your location."
+msgstr "Trykk <i class=\"icon-location5\"></i> for å finne din posisjon."
 
 #: src\i18n\translations.html:16
 msgid "raindeer"
@@ -161,7 +177,7 @@ msgstr "reinsdyr"
 msgid "Register"
 msgstr "Registrer"
 
-#: index.html:1 src\index.html:88
+#: index.html:1 src\index.html:94
 msgid "Satellite Imagery"
 msgstr "Satelittbilder"
 
@@ -173,7 +189,7 @@ msgstr "Lagre"
 msgid "seen"
 msgstr "sett"
 
-#: index.html:1 src\index.html:137
+#: index.html:1 src\index.html:143
 msgid "Seen"
 msgstr "Sett"
 
@@ -185,11 +201,11 @@ msgstr "Send"
 msgid "shot"
 msgstr "skutt"
 
-#: index.html:1 src\index.html:134
+#: index.html:1 src\index.html:140
 msgid "Shot"
 msgstr "Skutt"
 
-#: index.html:1 src\index.html:172
+#: index.html:1 src\index.html:178
 msgid ""
 "Tags are categories that can be used when searching an filtering points. "
 "Most icons have assosiated tags. You can add your own tags by using hashtag "
@@ -200,13 +216,25 @@ msgstr ""
 "tags på et punkt ved å bruke hashtags i beskrivelsetekstboksen, f.eks. "
 "#jaktlag1 var med, vil legge på en jaktlag1 tag."
 
-#: index.html:1 src\index.html:124
+#: src\index.html:210
+msgid "Tap-and-hold to add point in the map"
+msgstr "Trykk-og-hold for å legge til eit punkt i kartet."
+
+#: index.html:1 src\index.html:130
 msgid "This is where <strong>you</strong> are now."
 msgstr "Dette er der <strong>du</strong> er no."
 
 #: src\i18n\translations.html:11
 msgid "tracks"
 msgstr "spor"
+
+#: src\index.html:211
+msgid "Use <i class=\"icon-filter\"></i> to filter points."
+msgstr "Bruk <i class=\"icon-filter\"></i> for å filtrere punkt."
+
+#: src\index.html:212
+msgid "Use <i class=\"icon-stack2\"></i> to change what map to use."
+msgstr "Bruk <i class=\"icon-stack2\"></i> for å velge kart."
 
 #: src\i18n\translations.html:5
 msgid "We are sorry, but an unexpected error occured."
