@@ -80,6 +80,15 @@ angular.module("HTDirectives")
                     return false;
                 });
 
+                var adjacentPixels = function (pixel, r) {
+                    var x = pixel[0], y = pixel[1], pixels = [];
+                    for (var i = x - r; i <= x + r; i++) {
+                        for (var j = y - r; j <= y + r; j++) {
+                            pixels.push([i, j]);
+                        }
+                    }
+                    return pixels;
+                }
 
                 $(map.getViewport()).on('click', function (e) {
                     var eventPosition = map.getEventPixel(e);
@@ -87,6 +96,20 @@ angular.module("HTDirectives")
                         function (feature, layer) {
                             return feature;
                         });
+                    
+                    //If touch and no feature found at pixel, expand pixels to check.
+                    //This extra checking can potensially take extra time.
+                    if(!feature && Modernizr.touch) {
+                        var pixelsToCheck =  adjacentPixels(eventPosition, 5);
+                        for (var i = 0; i < pixelsToCheck.length; i++) {
+                            var pixel = pixelsToCheck[i];
+                            feature = map.forEachFeatureAtPixel(pixel, function (feature, layer) {
+                                return feature;
+                            });
+                            if(feature) {break;}
+                        }
+                    }   
+
                     if (feature) {
                         scope.$apply(function () {
                             scope.onMarkerSelected({ marker: feature.marker });
@@ -102,10 +125,10 @@ angular.module("HTDirectives")
                 var setViewOnPositionChange = true;
                 geolocation.on("change:position", function () {
                     var coordinates = geolocation.getPosition();
-                    if(setViewOnPositionChange) {
+                    if (setViewOnPositionChange) {
                         view.setCenter(coordinates);
                         view.setZoom(15);
-                        setViewOnPositionChange = false;   
+                        setViewOnPositionChange = false;
                     }
                     scope.$apply(function () {
                         scope.onPositionChanged({ coordinates: coordinates });
