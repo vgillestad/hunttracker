@@ -93,12 +93,12 @@ body {
 }
 
 /*Loading and Success icon*/
-.icon-saveing {
+.icon-saving {
     position: absolute;
     top:5px;
     left:-20px;
     font-size:20px;
 }
-.icon-saveing-success {
+.icon-saving-success {
     color:rgb(60, 118, 61);
 }
