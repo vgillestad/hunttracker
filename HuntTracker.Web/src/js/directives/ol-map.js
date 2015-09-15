@@ -140,7 +140,7 @@ angular.module("HTDirectives")
                     geolocation.setTracking(t);
                 });
 
-                //Points
+                //Markers
                 var getIconStyle = function (iconSrc) {
                     if (iconSrc.type === 'font') {
                         return new ol.style.Style({
@@ -166,15 +166,15 @@ angular.module("HTDirectives")
                     });
                 };
 
-                var pointsSource = new ol.source.Vector();
-                var pointsLayer = new ol.layer.Vector({ source: pointsSource });
-                map.addLayer(pointsLayer);
+                var markerSource = new ol.source.Vector();
+                var markerLayer = new ol.layer.Vector({ source: markerSource });
+                map.addLayer(markerLayer);
 
                 scope.$watch("markers", function (newMarkers, oldMarkers) {
                     //Remove all first
-                    var features = pointsSource.getFeatures();
+                    var features = markerSource.getFeatures();
                     for (var i = 0; i < features.length; i++) {
-                        pointsSource.removeFeature(features[i]);
+                        markerSource.removeFeature(features[i]);
                     }
 
                     //Re-add features.
@@ -187,7 +187,7 @@ angular.module("HTDirectives")
                                 });
                                 feature.marker = marker;
                                 feature.setStyle(getIconStyle(marker.iconSrc));
-                                pointsSource.addFeature(feature);
+                                markerSource.addFeature(feature);
                             }
                         }
                     }
@@ -208,8 +208,8 @@ angular.module("HTDirectives")
                         map.addLayer(layers[2]);
                     }
                     //Re-add to ensure on top
-                    map.removeLayer(pointsLayer);
-                    map.addLayer(pointsLayer);
+                    map.removeLayer(markerLayer);
+                    map.addLayer(markerLayer);
                 });
             }
         };

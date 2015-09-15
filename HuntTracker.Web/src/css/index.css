@@ -91,3 +91,14 @@ body {
 .icon-red {
     color: red;
 }
+
+/*Loading and Success icon*/
+.icon-saveing {
+    position: absolute;
+    top:5px;
+    left:-20px;
+    font-size:20px;
+}
+.icon-saveing-success {
+    color:rgb(60, 118, 61);
+}

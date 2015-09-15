@@ -56,13 +56,17 @@
 <body ng-app="HuntTracker" ng-controller="MapCtrl">
     <!--MENU-->
     <div class="main-menu">
+        <i ng-if="saveing" class="icon-spinner3 spinner icon-saveing"></i>
+        <i ng-if="savedWithSuccess" class="icon-checkmark3 icon-saveing icon-saveing-success"></i>
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav navbar-right">
+                <!--Tracking-->
                 <li>
                     <a href="#" ng-click="setTracking()" style="border-right: 1px solid #e7e7e7">
                         <i class="icon-location5" ng-class="{'text-success': tracking  === true}"></i>
                     </a>
                 </li>
+                <!--Filters-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="border-right: 1px solid #e7e7e7">
                         <i class="icon-filter" ng-class="{'text-danger': settings.filter  !== 'all'}" ></i>
@@ -81,6 +85,7 @@
                         </li>
                     </ul>
                 </li>
+                <!--Layers-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="border-right: 1px solid #e7e7e7">
                         <i class="icon-stack2"></i>
@@ -95,10 +100,11 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#" ng-click="settings.layer = 'osm'"><i ng-class="settings.layer === 'all' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Open Street Map</span></a>
+                            <a href="#" ng-click="settings.layer = 'osm'"><i ng-class="settings.layer === 'osm' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Open Street Map</span></a>
                         </li>
                     </ul>
                 </li>
+                <!--General Menu-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="icon-menu"></i>
@@ -200,6 +206,7 @@
         </div>
     </script>
     
+    <!--Help Modal-->
     <script type="text/ng-template" id="help.modal.html">
         <div class="modal-header">
             <h1 translate>4 tips for you</h1>

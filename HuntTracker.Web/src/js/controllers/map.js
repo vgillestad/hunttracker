@@ -6,19 +6,9 @@ angular.module("HTControllers")
         $scope.markers = [];
         $scope.you = null;
         $scope.icons = IconSource.getAll();
-        $scope.layers = [{ id: "norgeskart", name: "Norwegian Map" }, { id: "satellite", name: "Satellite Imagery" }, { id: "osm", name: "Open Street Map" }];
         $scope.settings = {
-            layer: $scope.layers[0].id,
+            layer: 'norgeskart',
             filter: 'all',
-        }
-        $scope.show = {
-            location: true
-        };
-
-        $scope.logout = function () {
-            AuthSource.logout(function () {
-                location.href = "/login.html";
-            });
         }
 
         UserSource.current(function (user) {
@@ -37,6 +27,14 @@ angular.module("HTControllers")
                     return m.id;
                 });
             }
+        }
+        
+        var savedWithSuccess = function () {
+            $scope.saveing = false;
+            $scope.savedWithSuccess = true;
+            $timeout(function () {
+                $scope.savedWithSuccess = false;
+            },1000);
         }
 
         $scope.setTracking = function () {
@@ -67,7 +65,9 @@ angular.module("HTControllers")
                 modalIsOpen = false;
                 if (result.action === "delete") {
                     var markerId = $scope.marker.id;
+                    $scope.saveing = true;
                     MarkerSource.remove({ markerId: markerId }, function () {
+                        savedWithSuccess();
                         $scope.markers = $scope.markers.filter(function (marker) {
                             return marker.id !== markerId;
                         })
@@ -83,7 +83,6 @@ angular.module("HTControllers")
         }
 
         $scope.addMarker = function (coordinates) {
-            cleanMarkers();
             $scope.marker = {
                 coordinates: coordinates,
                 icon: "default",
@@ -95,12 +94,13 @@ angular.module("HTControllers")
         };
 
         $scope.addMarkerSubmit = function () {
+            $scope.saveing = true;
             if ($scope.marker.id) {
-                MarkerSource.update($scope.marker);
+                MarkerSource.update($scope.marker, savedWithSuccess);
             } else {
                 $scope.marker.id = $scope.marker.id || Math.uuid();
                 $scope.marker.userId = $scope.user.id;
-                MarkerSource.add($scope.marker);
+                MarkerSource.add($scope.marker, savedWithSuccess);
             }
         };
 
@@ -130,8 +130,6 @@ angular.module("HTControllers")
                 $scope.you.iconSrc.color = "green";
                 $scope.markers.push($scope.you);
             }
-
-            console.log("position changed");
         }
 
         var filters = FilterSource.getAll();
@@ -140,15 +138,17 @@ angular.module("HTControllers")
             $scope.markers = filters[filter]($scope.markers, options);
         }
 
-        $scope.setLayer = function () {
-            console.log("set layer called");
-        }
-
         $scope.showHelp = function () {
             $modal.open({
                 templateUrl: "help.modal.html",
                 controller: "HelpModalCtrl",
                 size: "sm"
+            });
+        }
+        
+        $scope.logout = function () {
+            AuthSource.logout(function () {
+                location.href = "/login.html";
             });
         }
     }]);
