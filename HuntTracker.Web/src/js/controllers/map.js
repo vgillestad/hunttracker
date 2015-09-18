@@ -6,6 +6,7 @@ angular.module("HTControllers")
         $scope.markers = [];
         $scope.you = null;
         $scope.icons = IconSource.getAll();
+        $scope.youIcon = "default";
         $scope.settings = {
             layer: 'norgeskart',
             filter: 'all',
@@ -27,14 +28,6 @@ angular.module("HTControllers")
                     return m.id;
                 });
             }
-        }
-        
-        var savedWithSuccess = function () {
-            $scope.saveing = false;
-            $scope.savedWithSuccess = true;
-            $timeout(function () {
-                $scope.savedWithSuccess = false;
-            },1000);
         }
 
         $scope.setTracking = function () {
@@ -67,7 +60,7 @@ angular.module("HTControllers")
                     var markerId = $scope.marker.id;
                     $scope.saveing = true;
                     MarkerSource.remove({ markerId: markerId }, function () {
-                        savedWithSuccess();
+                        $scope.saveing = false;
                         $scope.markers = $scope.markers.filter(function (marker) {
                             return marker.id !== markerId;
                         })
@@ -96,11 +89,11 @@ angular.module("HTControllers")
         $scope.addMarkerSubmit = function () {
             $scope.saveing = true;
             if ($scope.marker.id) {
-                MarkerSource.update($scope.marker, savedWithSuccess);
+                MarkerSource.update($scope.marker, function () { $scope.saveing = false; });
             } else {
                 $scope.marker.id = $scope.marker.id || Math.uuid();
                 $scope.marker.userId = $scope.user.id;
-                MarkerSource.add($scope.marker, savedWithSuccess);
+                MarkerSource.add($scope.marker, function () { $scope.saveing = false; });
             }
         };
 
@@ -123,11 +116,11 @@ angular.module("HTControllers")
             } else {
                 $scope.you = {
                     id: "you",
-                    icon: "pin",
+                    icon: "default",
                     coordinates: coordinates,
-                    iconSrc: $scope.icons["pin"]
+                    iconSrc: $scope.icons["default"]
                 };
-                $scope.you.iconSrc.color = "green";
+                $scope.you.iconSrc.color = "rgb(51, 122, 183)";
                 $scope.markers.push($scope.you);
             }
         }

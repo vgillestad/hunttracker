@@ -169,7 +169,8 @@ angular.module("HTDirectives")
                 var markerSource = new ol.source.Vector();
                 var markerLayer = new ol.layer.Vector({ source: markerSource });
                 map.addLayer(markerLayer);
-
+                
+                var fitViewToMarkers = true;
                 scope.$watch("markers", function (newMarkers, oldMarkers) {
                     //Remove all first
                     var features = markerSource.getFeatures();
@@ -189,6 +190,11 @@ angular.module("HTDirectives")
                                 feature.setStyle(getIconStyle(marker.iconSrc));
                                 markerSource.addFeature(feature);
                             }
+                        }
+                        if(fitViewToMarkers && newMarkers.length > 0) { //Happens first time
+                            fitViewToMarkers = false;
+                            map.updateSize();
+                            view.fit(markerSource.getExtent(), map.getSize(), { maxZoom: 15 });
                         }
                     }
                 }, true);

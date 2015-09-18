@@ -57,13 +57,12 @@
     <!--MENU-->
     <div class="main-menu">
         <i ng-if="saveing" class="icon-spinner3 spinner icon-saving"></i>
-        <i ng-if="savedWithSuccess" class="icon-checkmark3 icon-saving icon-saving-success"></i>
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav navbar-right">
                 <!--Tracking-->
                 <li>
                     <a href="#" ng-click="setTracking()" style="border-right: 1px solid #e7e7e7">
-                        <i class="icon-location5" ng-class="{'text-success': tracking  === true}"></i>
+                        <i class="icon-circles" ng-class="{'text-primary': tracking  === true}"></i>
                     </a>
                 </li>
                 <!--Filters-->
