@@ -113,12 +113,12 @@ angular.module("HTControllers")
             if ($scope.you) {
                 $scope.you.coordinates = coordinates;
                 $scope.you.hidden = false;
-            } else {
+            } else { 
                 $scope.you = {
                     id: "you",
                     icon: "default",
                     coordinates: coordinates,
-                    iconSrc: $scope.icons["default"]
+                    iconSrc: angular.copy($scope.icons["default"],{})
                 };
                 $scope.you.iconSrc.color = "rgb(51, 122, 183)";
                 $scope.markers.push($scope.you);
