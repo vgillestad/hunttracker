@@ -13,5 +13,6 @@ namespace HuntTracker.Api.Interfaces.DataEntities
         public string Description { get; set; }
         public DateTime DateTime { get; set; }
         public string Icon { get; set; }
+        public IEnumerable<string> SharedWithTeamIds { get; set; }
     }
 }

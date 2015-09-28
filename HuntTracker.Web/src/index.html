@@ -49,6 +49,7 @@
     <script type="text/javascript" src="js/controllers/map.js"></script>
     <script type="text/javascript" src="js/controllers/mapModal.js"></script>
     <script type="text/javascript" src="js/controllers/helpModal.js"></script>
+    <script type="text/javascript" src="js/controllers/teamModal.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <!-- endbuild -->
 </head>
@@ -109,6 +110,9 @@
                         <i class="icon-menu"></i>
                     </a>
                     <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" ng-click="showTeam()" translate>Hunting Team</a>
+                        </li>
                         <li>
                             <a href="#" ng-click="showHelp()" translate>Help</a>
                         </li>
@@ -217,6 +221,22 @@
               <li translate>Use <i class="icon-filter"></i> to filter points.</li>
               <li translate>Use <i class="icon-stack2"></i> to change what map to use.</li>
             </ul>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-default" ng-click="cancel()" translate>Ok</button>
+        </div>
+    </script>
+    
+    <!--Team Modal-->
+    <script type="text/ng-template" id="team.modal.html">
+        <div class="modal-header">
+            <h1 translate>Hunting Team</h1>
+        </div>
+        <div class="modal-body">
+          <p translate>By creating a hunting team, you will be able to share points and your position with the other members of the team. You will also see points that the other team members have shared, and their posision if they have choosen to share it.</p>
+          <p translate>When you create a hunting team you can invite others to join. The invites have to be accepted before they become active memebers of the hunting team.</p>
+          <input type="text" ng-modal="newTeam.name" placeholder="{{'Name of the new team ...' | translate}}" />
+          <button type="button" ng-click="createTeam()" class="btn btn-default" translate>Create</button>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-default" ng-click="cancel()" translate>Ok</button>

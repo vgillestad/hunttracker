@@ -8,6 +8,7 @@
         var whitelist = [
             "marker.modal.html",
             "help.modal.html",
+            "team.modal.html",
             "template/modal/backdrop.html",
             "template/modal/window.html",
             "template/tooltip/tooltip-popup.html",

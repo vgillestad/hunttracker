@@ -139,6 +139,14 @@ angular.module("HTControllers")
             });
         }
         
+        $scope.showTeam = function () {
+            $modal.open({
+                templateUrl: "team.modal.html",
+                controller: "TeamModalCtrl",
+                size: "sm"
+            });
+        }
+        
         $scope.logout = function () {
             AuthSource.logout(function () {
                 location.href = "/login.html";

@@ -19,7 +19,7 @@ namespace HuntTracker.Api.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IEnumerable<Marker>> GetByUser([FromUri] string userId)
+        public async Task<IEnumerable<Marker>> GetByUser([FromUri] string userId, bool includeTeamMarkers = true)
         {
             var markers = await _markerRepository.GetByUser(userId);
             return markers;
@@ -31,13 +31,13 @@ namespace HuntTracker.Api.Controllers
         {
             await _markerRepository.InsertAsync(marker);
             return marker;
-        }
+        }        
 
         [HttpPut]
         [Route("")]
-        public async Task Put([FromBody] Marker marker)
+        public async Task Put([FromBody] Marker update)
         {
-            await _markerRepository.UpdateAsync(marker);
+            await _markerRepository.UpdateAsync(update);
         }
 
         [HttpDelete]
@@ -46,5 +46,29 @@ namespace HuntTracker.Api.Controllers
         {
             await _markerRepository.DeleteAsync(id);
         }
+
+        [HttpPut]
+        [Route("{id}/sharewithteam/{teamId}")]
+        public async Task ShareWithTeam(
+            [FromUri] string id,
+            [FromUri] string teamId)
+        {   
+        }
+
+        [HttpPut]
+        [Route("{id}/unsharewithteam/{teamId}")]
+        public async Task UnShareWithTeam(
+            [FromUri] string id,
+            [FromUri] string teamId)
+        {
+        }
     }
 }
+
+//if (update.SharedWithTeamIds.Any() && current.SharedWithTeamIds.Any())
+//{
+//    var addedTeams = update.SharedWithTeamIds.Except(current.SharedWithTeamIds).ToList();
+//    var removedTeams = current.SharedWithTeamIds.Except(update.SharedWithTeamIds).ToList();
+
+//    //Update teams.
+//}
