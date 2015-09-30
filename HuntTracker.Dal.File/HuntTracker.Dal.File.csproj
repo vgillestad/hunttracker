@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Crypto\PasswordHash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\TeamRepository.cs" />
     <Compile Include="Repositories\MarkerRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>

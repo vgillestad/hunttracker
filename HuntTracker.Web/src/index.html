@@ -39,6 +39,7 @@
     <script type="text/javascript" src="js/services/markers.js"></script>
     <script type="text/javascript" src="js/services/auth.js"></script>
     <script type="text/javascript" src="js/services/users.js"></script>
+    <script type="text/javascript" src="js/services/teams.js"></script>
     <script type="text/javascript" src="js/services/helpers.js"></script>
     <script type="text/javascript" src="js/directives/directives.js"></script>
     <script type="text/javascript" src="js/directives/popover.js"></script>
@@ -233,9 +234,15 @@
             <h1 translate>Hunting Team</h1>
         </div>
         <div class="modal-body">
-          <p translate>By creating a hunting team, you will be able to share points and your position with the other members of the team. You will also see points that the other team members have shared, and their posision if they have choosen to share it.</p>
+          <p translate>By creating a hunting team, you will be able to share points and your position with the other team members.</p>
           <p translate>When you create a hunting team you can invite others to join. The invites have to be accepted before they become active memebers of the hunting team.</p>
-          <input type="text" ng-modal="newTeam.name" placeholder="{{'Name of the new team ...' | translate}}" />
+          <ul>
+            <li ng-repeat="team in teams">
+              {{team.name}}
+              <a href="javascript:void(0)" class="icon-cross3 btn btn-default btn-sm" ng-click="removeTeam(team.id)"></a>
+            </li>
+          <ul>
+          <input type="text" ng-model="newTeam.name" placeholder="{{'Name of the new team ...' | translate}}" />
           <button type="button" ng-click="createTeam()" class="btn btn-default" translate>Create</button>
         </div>
         <div class="modal-footer">

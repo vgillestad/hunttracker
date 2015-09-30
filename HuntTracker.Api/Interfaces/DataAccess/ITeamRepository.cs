@@ -8,8 +8,8 @@ namespace HuntTracker.Api.Interfaces.DataAccess
     {
         Task<Team> GetByIdAsync(string id);
         Task<IEnumerable<Team>> GetByUserAsync(string userId);
-        Task InsertAsync(Team marker);
-        Task UpdateAsync(Team marker);
+        Task InsertAsync(Team team);
+        Task UpdateAsync(Team team);
         Task DeleteAsync(string teamId);
     }
 }

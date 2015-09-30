@@ -8,6 +8,7 @@ using HuntTracker.Api.Interfaces.DataEntities;
 using Microsoft.Azure.Documents.Linq;
 using System.Linq;
 using HuntTracker.Dal.DocumentDB.Crypto;
+using System.Collections.Generic;
 
 namespace HuntTracker.Dal.DataDocumentDB.Repositories
 {
@@ -37,6 +38,14 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
                 .Where(x => x.Id == id)
                 .AsEnumerable()
                 .FirstOrDefault();
+            return Task.FromResult(user);
+        }
+
+        public Task<IEnumerable<User>> GetByIds(IEnumerable<string> ids)
+        {
+            var user = _client.CreateDocumentQuery<User>(_collection.SelfLink)
+                .Where(x => ids.Any(y => x.Id.Equals(y, StringComparison.InvariantCultureIgnoreCase)))
+                .AsEnumerable();
             return Task.FromResult(user);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -60,7 +61,16 @@ namespace HuntTracker.Dal.Biggy.Repositories
 
         public Task<User> GetByEmail(string email)
         {
-            throw new NotImplementedException();
+            var userWithCredentials = _users.FirstOrDefault(x => x.Email.Equals(email, StringComparison.InvariantCultureIgnoreCase));
+            var user = (User)userWithCredentials;
+            return Task.FromResult(user);
+        }
+
+        public Task<IEnumerable<User>> GetByIds(IEnumerable<string> ids)
+        {
+            var users = _users.Where(x => ids.Any(y => x.Id.Equals(y, StringComparison.InvariantCultureIgnoreCase)))
+                .Select(x =>(User) x);
+            return Task.FromResult(users);
         }
     }
 

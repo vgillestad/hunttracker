@@ -25,7 +25,7 @@ namespace HuntTracker.Web
         {
             var builder = new ContainerBuilder();
 #if DEBUG
-            var storage = Storage.DocumentDB;
+            var storage = Storage.File;
 #else
             var storage = Storage.DocumentDB;
 #endif
@@ -41,12 +41,14 @@ namespace HuntTracker.Web
                 builder.Register(x => collection).AsSelf().SingleInstance();
                 builder.RegisterType<MarkerRepository>().AsImplementedInterfaces().SingleInstance();
                 builder.RegisterType<UserRepository>().AsImplementedInterfaces().SingleInstance();
+                
             }
             else if (storage == Storage.File)
             {
                 var path = "C:\\Users\\Vegard\\Dev\\Git\\HuntTracker\\HuntTracker.Web\\Data";
                 builder.Register(x => new Dal.File.Repositories.MarkerRepository(path)).AsImplementedInterfaces().SingleInstance();
                 builder.Register(x => new Dal.File.Repositories.UserRepository(path)).AsImplementedInterfaces().SingleInstance();
+                builder.Register(x => new Dal.File.Repositories.TeamRepository(path)).AsImplementedInterfaces().SingleInstance();
             }
             else
             {

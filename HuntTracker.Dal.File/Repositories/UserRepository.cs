@@ -7,6 +7,7 @@ using HuntTracker.Api.Interfaces.DataAccess;
 using HuntTracker.Api.Interfaces.DataEntities;
 using HuntTracker.Dal.Biggy.Crypto;
 using Biggy.Data.Json;
+using System.Collections.Generic;
 
 namespace HuntTracker.Dal.File.Repositories
 {
@@ -63,6 +64,13 @@ namespace HuntTracker.Dal.File.Repositories
         {
             var userWithCredentials = _users.FirstOrDefault(x => x.Email.Equals(email, StringComparison.InvariantCultureIgnoreCase));
             return Task.FromResult((User) userWithCredentials);
+        }
+
+        public Task<IEnumerable<User>> GetByIds(IEnumerable<string> ids)
+        {
+            var users = _users.Where(x => ids.Any(y => x.Id.Equals(y, StringComparison.InvariantCultureIgnoreCase)))
+                .Select(x => (User)x);
+            return Task.FromResult(users);
         }
     }
 

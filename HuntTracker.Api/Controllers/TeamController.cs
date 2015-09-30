@@ -2,6 +2,10 @@
 using System.Web.Http;
 using HuntTracker.Api.Interfaces.DataAccess;
 using HuntTracker.Api.Interfaces.DataEntities;
+using System.Collections;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading;
 
 namespace HuntTracker.Api.Controllers
 {
@@ -16,12 +20,18 @@ namespace HuntTracker.Api.Controllers
             _teamRepository = markerRepository;
         }
 
+        [HttpGet]
+        [Route("")]
+        public async Task<IEnumerable<Team>> GetTeamsByUser([FromUri] string userId)
+        {
+            return await _teamRepository.GetByUserAsync(userId);
+        }
+
         [HttpPost]
         [Route("")]
-        public async Task<Team> Post([FromBody] Team team)
+        public async Task Post([FromBody] Team team)
         {
             await _teamRepository.InsertAsync(team);
-            return team;
         }
 
         [HttpPut] //Expecting whole team - including member ids
