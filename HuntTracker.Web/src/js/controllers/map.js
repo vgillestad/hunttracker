@@ -143,7 +143,7 @@ angular.module("HTControllers")
             $modal.open({
                 templateUrl: "team.modal.html",
                 controller: "TeamModalCtrl",
-                size: "sm"
+                size: "md"
             });
         }
         

@@ -2,10 +2,7 @@
 using System.Web.Http;
 using HuntTracker.Api.Interfaces.DataAccess;
 using HuntTracker.Api.Interfaces.DataEntities;
-using System.Collections;
 using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading;
 
 namespace HuntTracker.Api.Controllers
 {
@@ -14,10 +11,12 @@ namespace HuntTracker.Api.Controllers
     public class TeamController : ApiController
     {
         private readonly ITeamRepository _teamRepository;
+        private readonly IUserRepository _userRepository;
 
-        public TeamController(ITeamRepository markerRepository)
+        public TeamController(ITeamRepository markerRepository, IUserRepository userRepository)
         {
             _teamRepository = markerRepository;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
@@ -32,23 +31,14 @@ namespace HuntTracker.Api.Controllers
         public async Task Post([FromBody] Team team)
         {
             await _teamRepository.InsertAsync(team);
+            await _teamRepository.AddUserAsMember(team.Id, team.AdminId, TeamMemberStatus.Admin);
         }
 
-        [HttpPut] //Expecting whole team - including member ids
+        [HttpPut]
         [Route("")]
         public async Task Put([FromBody] Team update)
         {
             await _teamRepository.UpdateAsync(update);
-        }
-
-        [HttpPatch] //Just name and description - not including member ids
-        [Route("")]
-        public async Task Patch([FromBody] Team update)
-        {
-            var current = await _teamRepository.GetByIdAsync(update.Id);
-            current.Name = update.Name;
-            current.Description = update.Description;
-            await _teamRepository.UpdateAsync(current);
         }
 
         [HttpDelete]

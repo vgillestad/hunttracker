@@ -13,6 +13,7 @@ using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Linq;
 using System.Linq;
 using HuntTracker.Dal.DataDocumentDB.Repositories;
+using HuntTracker.Api.Interfaces.DataAccess;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace HuntTracker.Web
@@ -48,7 +49,7 @@ namespace HuntTracker.Web
                 var path = "C:\\Users\\Vegard\\Dev\\Git\\HuntTracker\\HuntTracker.Web\\Data";
                 builder.Register(x => new Dal.File.Repositories.MarkerRepository(path)).AsImplementedInterfaces().SingleInstance();
                 builder.Register(x => new Dal.File.Repositories.UserRepository(path)).AsImplementedInterfaces().SingleInstance();
-                builder.Register(x => new Dal.File.Repositories.TeamRepository(path)).AsImplementedInterfaces().SingleInstance();
+                builder.Register(x => new Dal.File.Repositories.TeamRepository(path, x.Resolve<IUserRepository>())).AsImplementedInterfaces().SingleInstance();
             }
             else
             {

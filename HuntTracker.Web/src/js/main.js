@@ -12,7 +12,9 @@
             "template/modal/backdrop.html",
             "template/modal/window.html",
             "template/tooltip/tooltip-popup.html",
-            "template/popover/popover.html"
+            "template/popover/popover.html",
+            "template/accordion/accordion.html",
+            "template/accordion/accordion-group.html"
         ];
 
         return {

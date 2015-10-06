@@ -10,23 +10,23 @@ namespace HuntTracker.Api.Interfaces.DataEntities
         public string AdminId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public IEnumerable<Member> Members { get; set; }
     }
 
     public class Member
     {
-        public string Id { get; set; }
-        public TeamMemberStatus Status { get; set; }
-    }
-
-    public class MemberFull : User
-    {
+        public string UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public TeamMemberStatus Status { get; set; }
     }
 
     public enum TeamMemberStatus
     {
-        Active, Deactivated, Invited, RequestingMembership
+        Admin = 0,
+        Active = 1,
+        Deactivated = 2,
+        Invited = 3,
+        RequestingMembership = 4 
     }
     
 }

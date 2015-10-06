@@ -9,7 +9,8 @@
     <title>HuntTracker</title>
     <!-- build:css index.css -->
     <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+    <link type="text/css" rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+    />
     <link type="text/css" rel="stylesheet" href="../node_modules/openlayers/dist/ol-debug.css" />
     <link type="text/css" rel="stylesheet" href="css/icomoon.css" />
     <link type="text/css" rel="stylesheet" href="css/index.css" />
@@ -40,6 +41,7 @@
     <script type="text/javascript" src="js/services/auth.js"></script>
     <script type="text/javascript" src="js/services/users.js"></script>
     <script type="text/javascript" src="js/services/teams.js"></script>
+    <script type="text/javascript" src="js/services/members.js"></script>
     <script type="text/javascript" src="js/services/helpers.js"></script>
     <script type="text/javascript" src="js/directives/directives.js"></script>
     <script type="text/javascript" src="js/directives/popover.js"></script>
@@ -70,7 +72,7 @@
                 <!--Filters-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="border-right: 1px solid #e7e7e7">
-                        <i class="icon-filter" ng-class="{'text-danger': settings.filter  !== 'all'}" ></i>
+                        <i class="icon-filter" ng-class="{'text-danger': settings.filter  !== 'all'}"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -129,7 +131,7 @@
     <!--MAP-->
     <div class="map-fullscreen">
         <ol-map class="map-fullscreen" ol-markers="markers" ol-layer="settings.layer" ol-track-position="tracking" ol-on-position-changed="positionChanged(coordinates)"
-                ol-on-marker-selected="showMarkerDetails(marker)" ol-on-show-context-menu="addMarker(coordinates)"></ol-map>
+        ol-on-marker-selected="showMarkerDetails(marker)" ol-on-show-context-menu="addMarker(coordinates)"></ol-map>
     </div>
     <!--MARKER MODAL-->
     <script type="text/ng-template" id="marker.modal.html">
@@ -160,14 +162,14 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane" ng-class="{active: shotIcons[marker.icon] != null }" id="shot">
                             <button ng-repeat="(key, value) in shotIcons" class="btn btn-default animal-btn" ng-class="key === marker.icon ? 'btn-selected' : ''"
-                                    ng-click="setIcon(key)">
+                            ng-click="setIcon(key)">
                                 <div ng-show="value.type === 'image'" ng-style="{'background-image': 'url(' + value.src + ')', 'height': value.size[1] + 'px', 'width': value.size[0] + 'px', 'background-position': '-' + value.offset[0] + 'px -' + value.offset[1] + 'px', 'zoom': value.scale, '-moz-transform': 'scale(' + value.scale + ')'}"></div>
                                 <i ng-show="value.type === 'font'" ng-class="value.class" style="font-size:25px"></i>
                             </button>
                         </div>
                         <div role="tabpanel" class="tab-pane" ng-class="{active: seenIcons[marker.icon] != null }" id="seen">
                             <button ng-repeat="(key, value) in seenIcons" class="btn btn-default animal-btn" ng-class="key === marker.icon ? 'btn-selected' : ''"
-                                    ng-click="setIcon(key)">
+                            ng-click="setIcon(key)">
                                 <div ng-show="value.type === 'image'" ng-style="{'background-image': 'url(' + value.src + ')', 'height': value.size[1] + 'px', 'width': value.size[0] + 'px', 'background-position': '-' + value.offset[0] + 'px -' + value.offset[1] + 'px', 'zoom': value.scale, '-moz-transform': 'scale(' + value.scale + ')'}"></div>
                                 <i ng-show="value.type === 'font'" ng-class="value.class" style="font-size:25px"></i>
                             </button>
@@ -175,7 +177,7 @@
 
                         <div role="tabpanel" class="tab-pane" ng-class="{active: otherIcons[marker.icon] != null }" id="other">
                             <button ng-repeat="(key, value) in otherIcons" class="btn btn-default animal-btn" ng-class="key === marker.icon ? 'btn-selected' : ''"
-                                    ng-click="setIcon(key)">
+                            ng-click="setIcon(key)">
                                 <div ng-show="value.type === 'image'" ng-style="{'background-image': 'url(' + value.src + ')', 'height': value.size[1] + 'px', 'width': value.size[0] + 'px', 'background-position': '-' + value.offset[0] + 'px -' + value.offset[1] + 'px', 'zoom': value.scale, '-moz-transform': 'scale(' + value.scale + ')'}"></div>
                                 <i ng-show="value.type === 'font'" ng-class="value.class" style="font-size:25px"></i>
                             </button>
@@ -183,11 +185,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    Tags 
-                    <i class="icon-question" 
-                       tooltip="{{'Tags are categories that can be used when searching an filtering points. Most icons have assosiated tags. You can add your own tags by using hashtag in the description text box, i.e. #team1 joined me, will add a team1 tag.' | translate}}" 
-                       tooltip-placement="right"
-                       tooltip-trigger="click"></i>: 
+                    Tags
+                    <i class="icon-question" tooltip="{{'Tags are categories that can be used when searching an filtering points. Most icons have assosiated tags. You can add your own tags by using hashtag in the description text box, i.e. #team1 joined me, will add a team1 tag.' | translate}}"
+                    tooltip-placement="right" tooltip-trigger="click"></i>:
                     <span class="badge" ng-repeat="tag in icons[marker.icon].tags" style="margin-right:2px">
                         #{{tag | translate}}
                     </span>
@@ -201,15 +201,14 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-danger pull-left" ng-if="showDelBtn" ng-click="delete()" translate>Delete</button>
-            <button type="button" class="btn btn-sm btn-danger pull-left" ng-if="showDelConfirmBtn" ng-click="deleteConfirm()"
-                    translate>
+            <button type="button" class="btn btn-sm btn-danger pull-left" ng-if="showDelConfirmBtn" ng-click="deleteConfirm()" translate>
                 Are you sure?
             </button>
             <button type="button" class="btn btn-sm btn-default" ng-click="cancel()" translate>Cancel</button>
             <button type="submit" class="btn btn-success" ng-click="submit()">{{submitText | translate}}</button>
         </div>
     </script>
-    
+
     <!--Help Modal-->
     <script type="text/ng-template" id="help.modal.html">
         <div class="modal-header">
@@ -217,36 +216,70 @@
         </div>
         <div class="modal-body">
             <ul style="padding-left:10px">
-              <li translate>Press <i class="icon-circles"></i> to find your location.</li>
-              <li translate>Tap-and-hold to add point in the map</li>
-              <li translate>Use <i class="icon-filter"></i> to filter points.</li>
-              <li translate>Use <i class="icon-stack2"></i> to change what map to use.</li>
+                <li translate>Press <i class="icon-circles"></i> to find your location.</li>
+                <li translate>Tap-and-hold to add point in the map</li>
+                <li translate>Use <i class="icon-filter"></i> to filter points.</li>
+                <li translate>Use <i class="icon-stack2"></i> to change what map to use.</li>
             </ul>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-default" ng-click="cancel()" translate>Ok</button>
         </div>
     </script>
-    
+
     <!--Team Modal-->
     <script type="text/ng-template" id="team.modal.html">
         <div class="modal-header">
             <h1 translate>Hunting Team</h1>
         </div>
         <div class="modal-body">
-          <p translate>By creating a hunting team, you will be able to share points and your position with the other team members.</p>
-          <p translate>When you create a hunting team you can invite others to join. The invites have to be accepted before they become active memebers of the hunting team.</p>
-          <ul>
-            <li ng-repeat="team in teams">
-              {{team.name}}
-              <a href="javascript:void(0)" class="icon-cross3 btn btn-default btn-sm" ng-click="removeTeam(team.id)"></a>
-            </li>
-          <ul>
-          <input type="text" ng-model="newTeam.name" placeholder="{{'Name of the new team ...' | translate}}" />
-          <button type="button" ng-click="createTeam()" class="btn btn-default" translate>Create</button>
+            <p translate>By creating a hunting team, you will be able to share points and your position with the other team members.</p>
+            <p translate>When you create a hunting team you can invite others to join. The invites have to be accepted before they become
+                active memebers of the hunting team.</p>
+
+
+            <accordion close-others="true">
+                <accordion-group ng-repeat="t in teams">
+                    <accordion-heading>
+                        {{t.name}}
+                    </accordion-heading>
+                    <span ng-if="member.status === 'invited' && member.userId === user.id" translate>
+                        <span>You have been invited to this hunting team. Do you accept or decline membership?</span>
+                        <button type="button" ng-click="activateMember(t.id, member.userId)" class="btn btn-default btn-sm" translate>Accept</button>
+                        <button type="button" ng-click="activateMember(t.id, member.userId)" class="btn btn-default btn-sm" translate>Decline</button>
+                    </span>
+                    <span class="pull-right btn btn-default btn-sm" ng-click="removeTeam(t.id)" ng-if="t.userIsTeamAdmin">X</span>
+                    <ul>
+                        <li ng-repeat="member in t.members">
+                            {{member.firstName}} {{member.lastName}}
+                            <span class="label" ng-class="{'label-success': member.status === 'active', 'label-info': member.status === 'invited', 'label-warning': member.status === 'deactivated', 'label-primary': member.status === 'admin'}">
+                                {{member.status}}
+                            </span>
+                            <span ng-if="t.userIsTeamAdmin">
+                            <span class="btn btn-danger btn-sm" ng-click="removeMember(t.id, member.userId)" ng-if="t.adminId !== member.userId"><i class="icon-cancel-circle2"></i></span>
+                            <span class="btn btn-default btn-sm" ng-click="deactivateMember(t.id, member.userId)" ng-if="member.status === 'active'"
+                            translate><i class="icon-pause"></i></span>
+                            <span class="btn btn-default btn-sm" ng-click="activateMember(t.id, member.userId)" ng-if="member.status === 'deactivated'"
+                            translate><i class="icon-play3"></i></span>
+                            </span>
+                        </li>
+                    </ul>
+
+                    <span ng-if="t.userIsTeamAdmin">
+                    Invite member:
+                    <input type="text" ng-model="inviteEmail" placeholder="{{'email' | translate}}" />
+                    <button type="button" ng-click="inviteMember(t.id, inviteEmail)" class="btn btn-default" translate>Invite</button>
+                    <p class="text-danger">{{errorMessage}}</p>
+                    </span>
+                </accordion-group>
+            </accordion>
+
+
+            <input type="text" ng-model="newTeam.name" placeholder="{{'Name of the new team ...' | translate}}" />
+            <button type="button" ng-click="createTeam()" class="btn btn-default" translate>Create</button>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-default" ng-click="cancel()" translate>Ok</button>
+            <button type="button" class="btn btn-sm btn-default" ng-click="cancel()" translate>Done</button>
         </div>
     </script>
 </body>

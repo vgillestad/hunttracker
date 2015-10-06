@@ -42,7 +42,7 @@ namespace HuntTracker.Api.Controllers
                 string.IsNullOrEmpty(registerUser.LastName) ||
                 string.IsNullOrEmpty(registerUser.Password))
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest); ;
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
             var user = await _userRepository.GetByEmail(registerUser.Email);
