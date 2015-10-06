@@ -239,16 +239,17 @@
 
 
             <accordion close-others="true">
-                <accordion-group ng-repeat="t in teams">
+                <accordion-group ng-repeat="t in teams" is-open="t.isOpen">
                     <accordion-heading>
                         {{t.name}}
+                        <i class="icon-cancel-circle2 text-danger pull-right" ng-click="removeTeam(t.id)" ng-show="t.userIsTeamAdmin && t.members.length < 2"></i>
                     </accordion-heading>
+                    <i ng-if="t.userIsTeamAdmin" translate>You are admin for this team and can invite and remove members.</i>
                     <span ng-if="t.userIsInvitedToTeam" translate>
                         <span>You have been invited to this hunting team. Do you accept or decline membership?</span>
                         <button type="button" ng-click="acceptInvitation(t.id)" class="btn btn-default btn-sm" translate>Accept</button>
                         <button type="button" ng-click="declineInvitation(t.id)" class="btn btn-default btn-sm" translate>Decline</button>
                     </span>
-                    <span class="pull-right btn btn-default btn-sm" ng-click="removeTeam(t.id)" ng-if="t.userIsTeamAdmin">X</span>
                     <ul>
                         <li ng-repeat="member in t.members">
                             {{member.firstName}} {{member.lastName}}

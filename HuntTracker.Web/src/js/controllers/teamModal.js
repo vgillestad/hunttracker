@@ -28,6 +28,9 @@ angular.module("HTControllers")
                         }).length > 0;
                     });
                 });
+                if($scope.teams && $scope.teams.length > 0) {
+                    $scope.teams[0].isOpen = true;
+                }
             });
         });
 
@@ -37,6 +40,8 @@ angular.module("HTControllers")
             TeamSource.add($scope.newTeam, function () {
                 MemberSource.getByTeamId({ teamId: $scope.newTeam.id }, function (members) {
                     $scope.newTeam.members = members;
+                    $scope.newTeam.isOpen = true;
+                    $scope.newTeam.userIsTeamAdmin = true;
                     $scope.teams.push($scope.newTeam);
                     $scope.newTeam = {};
                 });
