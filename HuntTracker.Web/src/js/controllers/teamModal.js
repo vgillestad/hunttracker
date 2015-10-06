@@ -22,7 +22,11 @@ angular.module("HTControllers")
                 $scope.teams = teams;
                 $scope.teams.forEach(function (team) {
                     team.userIsTeamAdmin = team.adminId === $scope.user.id;
-                    team.members = MemberSource.getByTeamId({ teamId: team.id });
+                    team.members = MemberSource.getByTeamId({ teamId: team.id }, function (members) {
+                        team.userIsInvitedToTeam = members.filter(function (member) {
+                            return member.userId === $scope.user.id && member.status === 'invited';
+                        }).length > 0;
+                    });
                 });
             });
         });
@@ -30,7 +34,6 @@ angular.module("HTControllers")
         $scope.createTeam = function () {
             $scope.newTeam.id = Math.uuid();
             $scope.newTeam.adminId = $scope.user.id;
-
             TeamSource.add($scope.newTeam, function () {
                 MemberSource.getByTeamId({ teamId: $scope.newTeam.id }, function (members) {
                     $scope.newTeam.members = members;
@@ -69,6 +72,21 @@ angular.module("HTControllers")
                     }
                 });
         }
+        
+        $scope.acceptInvitation = function (teamId) {
+            var team = getTeam(teamId);
+            team.userIsInvitedToTeam = false;
+            $scope.activateMember(teamId, $scope.user.id);
+        };
+        
+        $scope.declineInvitation = function (teamId) {
+            var team = getTeam(teamId);
+            team.userIsInvitedToTeam = false;
+            $scope.removeMember(teamId, $scope.user.id);
+            $scope.teams = $scope.teams.filter(function (team) {
+                return team.id !== teamId;
+            });
+        };
 
         $scope.activateMember = function (teamId, userId) {
             MemberSource.activate({ teamId: teamId, userId: userId }, function () {
@@ -88,7 +106,7 @@ angular.module("HTControllers")
             var team = getTeam(teamId);
             MemberSource.remove({ teamId: teamId, userId: userId }, function () {
                 team.members = team.members.filter(function (member) {
-                    return member.id !== userId;
+                    return member.userId !== userId;
                 });
             });
         }

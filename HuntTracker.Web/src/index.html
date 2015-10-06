@@ -243,10 +243,10 @@
                     <accordion-heading>
                         {{t.name}}
                     </accordion-heading>
-                    <span ng-if="member.status === 'invited' && member.userId === user.id" translate>
+                    <span ng-if="t.userIsInvitedToTeam" translate>
                         <span>You have been invited to this hunting team. Do you accept or decline membership?</span>
-                        <button type="button" ng-click="activateMember(t.id, member.userId)" class="btn btn-default btn-sm" translate>Accept</button>
-                        <button type="button" ng-click="activateMember(t.id, member.userId)" class="btn btn-default btn-sm" translate>Decline</button>
+                        <button type="button" ng-click="acceptInvitation(t.id)" class="btn btn-default btn-sm" translate>Accept</button>
+                        <button type="button" ng-click="declineInvitation(t.id)" class="btn btn-default btn-sm" translate>Decline</button>
                     </span>
                     <span class="pull-right btn btn-default btn-sm" ng-click="removeTeam(t.id)" ng-if="t.userIsTeamAdmin">X</span>
                     <ul>
