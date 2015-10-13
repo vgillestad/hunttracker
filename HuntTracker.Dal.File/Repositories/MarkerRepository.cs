@@ -13,9 +13,11 @@ namespace HuntTracker.Dal.File.Repositories
     public class MarkerRepository : IMarkerRepository
     {
         private BiggyList<Marker> _markers;
+        private ITeamRepository _teamRepository;
 
-        public MarkerRepository(string path)
+        public MarkerRepository(string path, ITeamRepository teamRepostiory)
         {
+            _teamRepository = teamRepostiory;
             var db = new JsonDbCore(path, "HT");
             _markers = new BiggyList<Marker>(new JsonStore<Marker>(db));
         }
@@ -27,10 +29,13 @@ namespace HuntTracker.Dal.File.Repositories
             return Task.FromResult(0);
         }
 
-        public Task<IEnumerable<Marker>> GetByUser(string userId)
+        public async Task<IEnumerable<Marker>> GetByUser(string userId)
         {
-            var markers = _markers.Where(x => x.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase));
-            return Task.FromResult(markers);
+            var teams = await _teamRepository.GetByUserAsync(userId);
+            var markers = _markers.Where(x => 
+                x.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase)
+                || (x.SharedWithTeamIds != null && x.SharedWithTeamIds.Any(y => teams.Any(k => k.Id == y))));
+            return markers;
         }
 
         public Task InsertAsync(Marker marker)

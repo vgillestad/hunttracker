@@ -6,7 +6,8 @@
     //interceptor that adds random argument to GET-requests to prevent caching in IE.
     $httpProvider.interceptors.push(["$q", function ($q) {
         var whitelist = [
-            "marker.modal.html",
+            "marker.mine.modal.html",
+            "marker.other.modal.html",
             "help.modal.html",
             "team.modal.html",
             "template/modal/backdrop.html",

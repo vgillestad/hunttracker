@@ -47,7 +47,7 @@ namespace HuntTracker.Web
             else if (storage == Storage.File)
             {
                 var path = "C:\\Users\\Vegard\\Dev\\Git\\HuntTracker\\HuntTracker.Web\\Data";
-                builder.Register(x => new Dal.File.Repositories.MarkerRepository(path)).AsImplementedInterfaces().SingleInstance();
+                builder.Register(x => new Dal.File.Repositories.MarkerRepository(path, x.Resolve<ITeamRepository>())).AsImplementedInterfaces().SingleInstance();
                 builder.Register(x => new Dal.File.Repositories.UserRepository(path)).AsImplementedInterfaces().SingleInstance();
                 builder.Register(x => new Dal.File.Repositories.TeamRepository(path, x.Resolve<IUserRepository>())).AsImplementedInterfaces().SingleInstance();
             }

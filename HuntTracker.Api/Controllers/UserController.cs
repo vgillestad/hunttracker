@@ -12,7 +12,7 @@ using System.Net.Mail;
 
 namespace HuntTracker.Api.Controllers
 {
-    [RoutePrefix("api/users")]
+    [RoutePrefix("api")]
     public class UserController : ApiController
     {
         private readonly IUserRepository _userRepository;
@@ -24,7 +24,7 @@ namespace HuntTracker.Api.Controllers
 
         [Authorize]
         [HttpGet]
-        [Route("current")]
+        [Route("me")]
         public async Task<User> Current()
         {
             var currentPrincipal = (ClaimsPrincipal)Thread.CurrentPrincipal;
@@ -32,8 +32,16 @@ namespace HuntTracker.Api.Controllers
             return await _userRepository.GetById(userId);
         }
 
+        [Authorize]
+        [HttpGet]
+        [Route("users/{id}")]
+        public async Task<User> Get([FromUri] string id)
+        {
+            return await _userRepository.GetById(id);
+        }
+
         [HttpPost]
-        [Route("")]
+        [Route("users")]
         public async Task<User> Register(RegisterUserModel registerUser)
         {
             var newUser = Mapper.DynamicMap<RegisterUserModel, User>(registerUser);

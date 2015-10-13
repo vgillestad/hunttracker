@@ -23,9 +23,10 @@ angular.module("HTControllers")
                 $scope.teams.forEach(function (team) {
                     team.userIsTeamAdmin = team.adminId === $scope.user.id;
                     team.members = MemberSource.getByTeamId({ teamId: team.id }, function (members) {
-                        team.userIsInvitedToTeam = members.filter(function (member) {
-                            return member.userId === $scope.user.id && member.status === 'invited';
-                        }).length > 0;
+                        var meAsMember = members.filter(function (member) {
+                            return member.userId === $scope.user.id;
+                        })[0];
+                        team.userMemberStatus = meAsMember.status;
                     });
                 });
                 if($scope.teams && $scope.teams.length > 0) {

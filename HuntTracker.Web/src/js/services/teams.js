@@ -2,7 +2,7 @@
 
     .factory('TeamSource', ["$resource", function ($resource) {
         var sources = $resource("/api/teams/:id", null, {
-            getByUserId: { method: "GET", isArray: true, params: { userId: "@userId" } },
+            getByUserId: { method: "GET", isArray: true, params: { userId: "@userId", activeOnly:"@activeOnly" } },
             add: { method: "POST" },
             update: { method: "PUT" },
             remove: { method: "DELETE", params: { id: "@id" } }

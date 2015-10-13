@@ -1,10 +1,12 @@
 ﻿/* global angular, Modernizr */
 angular.module("HTControllers")
 
-    .controller("MapModalCtrl", ["$scope", "$modalInstance", "Helpers", "marker", "icons", "youAreHere", function ($scope, $modalInstance, helpers, marker, icons, youAreHere) {
+    .controller("MapModalCtrl", ["$scope", "$modalInstance", "Helpers", "marker", "icons", "youAreHere", "teams", function ($scope, $modalInstance, helpers, marker, icons, youAreHere, teams) {
         $scope.marker = marker;
+        $scope.marker.sharedWithTeamIds = $scope.marker.sharedWithTeamIds || []; 
         $scope.icons = icons;
         $scope.youAreHere = youAreHere;
+        $scope.teams = teams;
 
         var editMarker = $scope.marker.id && $scope.marker.id !== "you";
         $scope.submitText = editMarker ? "Save" : "Add";
@@ -39,6 +41,18 @@ angular.module("HTControllers")
 
         $scope.deleteConfirm = function () {
             $modalInstance.close({ action: "delete" });
+        }
+        
+        $scope.shareWithTeam = function (teamId) {
+            var shareWithTeam = $scope.marker.sharedWithTeamIds.indexOf(teamId) < 0;
+            if(shareWithTeam) {
+                $scope.marker.sharedWithTeamIds.push(teamId);    
+            }
+            else {
+                $scope.marker.sharedWithTeamIds = $scope.marker.sharedWithTeamIds.filter(function (tId) {
+                    return tId !== teamId;
+                });
+            }
         }
 
         var first = true;
