@@ -16,9 +16,9 @@ angular.module("HTControllers")
             })[0];
         }
 
-        UserSource.current(function (user) {
+        UserSource.me(function (user) {
             $scope.user = user;
-            TeamSource.getByUserId({ userId: $scope.user.id }, function (teams) {
+            TeamSource.getMyTeams(function (teams) {
                 $scope.teams = teams;
                 $scope.teams.forEach(function (team) {
                     team.userIsTeamAdmin = team.adminId === $scope.user.id;

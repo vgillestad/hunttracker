@@ -16,11 +16,11 @@ angular.module("HTControllers")
             $scope.user = user;
             MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
                 $scope.markers = Helpers.mapIcons(markers, $scope.icons);
-                if($scope.markers.length < 1) {
+                if ($scope.markers.length < 1) {
                     $scope.showHelp();
                 }
             });
-            $scope.teams = TeamSource.getByUserId({ userId: $scope.user.id, activeOnly:true });
+            $scope.teams = TeamSource.getMyTeams({ activeOnly: true });
         });
 
         var cleanMarkers = function () {
@@ -51,7 +51,12 @@ angular.module("HTControllers")
                         marker: function () { return $scope.marker; },
                         icons: function () { return $scope.icons; },
                         teams: function () { return $scope.teams; },
-                        youAreHere: function () { return $scope.you && !$scope.you.hidden && $scope.marker.coordinates[0] === $scope.you.coordinates[0] && $scope.marker.coordinates[1] === $scope.you.coordinates[1] }
+                        position: function () {
+                            return {
+                                youAreHere: $scope.you && !$scope.you.hidden && $scope.marker.coordinates[0] === $scope.you.coordinates[0] && $scope.marker.coordinates[1] === $scope.you.coordinates[1],
+                                accuracy: $scope.you ? $scope.you.accuracy : ""
+                            }
+                        }
                     }
                 });
             }
@@ -76,19 +81,19 @@ angular.module("HTControllers")
                 cleanMarkers();
             });
         }
-        
+
         var showMarkerOtherModal = function () {
             $modal.open({
                 templateUrl: "marker.other.modal.html",
                 controller: "MarkerOtherModalCtrl",
                 size: "sm",
                 resolve: {
-                        marker: function () { return $scope.marker; },
-                        icons: function () { return $scope.icons; },
-                        teams: function () { return $scope.teams; },
-                    }
+                    marker: function () { return $scope.marker; },
+                    icons: function () { return $scope.icons; },
+                    teams: function () { return $scope.teams; },
+                }
             });
-        } 
+        }
 
         $scope.addMarker = function (coordinates) {
             $scope.marker = {
@@ -118,7 +123,7 @@ angular.module("HTControllers")
                 $scope.youAreHere = true;
                 $scope.addMarker($scope.marker.coordinates);
             }
-            else if($scope.marker.userId === $scope.user.id) {
+            else if ($scope.marker.userId === $scope.user.id) {
                 $scope.youAreHere = false;
                 showMarkerModal();
             }
@@ -128,16 +133,18 @@ angular.module("HTControllers")
             }
         }
 
-        $scope.positionChanged = function (coordinates) {
+        $scope.positionChanged = function (coordinates, accuracy) {
             if ($scope.you) {
                 $scope.you.coordinates = coordinates;
                 $scope.you.hidden = false;
-            } else { 
+                $scope.you.accuracy = accuracy;
+            } else {
                 $scope.you = {
                     id: "you",
                     icon: "default",
                     coordinates: coordinates,
-                    iconSrc: angular.copy($scope.icons["default"],{})
+                    accuracy: accuracy,
+                    iconSrc: angular.copy($scope.icons["default"], {})
                 };
                 $scope.you.iconSrc.color = "rgb(51, 122, 183)";
                 $scope.markers.push($scope.you);
@@ -157,18 +164,18 @@ angular.module("HTControllers")
                 size: "sm"
             });
         }
-        
+
         $scope.showTeam = function () {
             var teamModal = $modal.open({
                 templateUrl: "team.modal.html",
                 controller: "TeamModalCtrl",
                 size: "md"
             });
-            teamModal.result.then(function () {}, function () {
-                $scope.teams = TeamSource.getByUserId({ userId: $scope.user.id, activeOnly: true });
+            teamModal.result.then(function () { }, function () {
+                $scope.teams = TeamSource.getMyTeams({ activeOnly: true });
             });
         }
-        
+
         $scope.logout = function () {
             AuthSource.logout(function () {
                 location.href = "/login.html";

@@ -31,7 +31,7 @@ namespace HuntTracker.Dal.File.Repositories
 
         public async Task<IEnumerable<Marker>> GetByUser(string userId)
         {
-            var teams = await _teamRepository.GetByUserAsync(userId);
+            var teams = await _teamRepository.GetByUserAsync(userId, true);
             var markers = _markers.Where(x => 
                 x.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase)
                 || (x.SharedWithTeamIds != null && x.SharedWithTeamIds.Any(y => teams.Any(k => k.Id == y))));

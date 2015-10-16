@@ -35,15 +35,15 @@ namespace HuntTracker.Dal.File.Repositories
             return Task.FromResult(team);
         }
 
-        public Task<IEnumerable<Team>> GetByUserAsync(string userId)
+        public Task<IEnumerable<Team>> GetByUserAsync(string userId, bool activeOnly)
         {
-            var teams = (IEnumerable<Team>) _teams.Where(x =>x.AdminId.Equals(userId) || x.Members.Any(y => y.UserId.Equals(userId)));
+            var teams = (IEnumerable<Team>)_teams.Where(x => x.AdminId.Equals(userId) || x.Members.Any(y => y.UserId.Equals(userId) && (activeOnly == false || y.Status == TeamMemberStatus.Active)));
             return Task.FromResult(teams);
         }
 
         public Task InsertAsync(Team team)
         {
-            var toAdd = Mapper.DynamicMap<Team,TeamStored>(team);
+            var toAdd = Mapper.DynamicMap<Team, TeamStored>(team);
             _teams.Add(toAdd);
             return Task.FromResult(0);
         }
@@ -58,7 +58,7 @@ namespace HuntTracker.Dal.File.Repositories
         public async Task<IEnumerable<Member>> GetMemebersByTeam(string teamId)
         {
             var members = _teams.First(x => x.Id == teamId).Members;
-            var users =  await _userRepository.GetByIds(members.Select(x => x.UserId));
+            var users = await _userRepository.GetByIds(members.Select(x => x.UserId));
             return users.Select(x =>
             {
                 var member = new Member()

@@ -3,11 +3,12 @@ using System.Web.Http;
 using HuntTracker.Api.Interfaces.DataAccess;
 using HuntTracker.Api.Interfaces.DataEntities;
 using System.Collections.Generic;
+using HuntTracker.Api.Context;
 
 namespace HuntTracker.Api.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/teams")]
+    [RoutePrefix("api")]
     public class TeamController : ApiController
     {
         private readonly ITeamRepository _teamRepository;
@@ -20,14 +21,14 @@ namespace HuntTracker.Api.Controllers
         }
 
         [HttpGet]
-        [Route("")]
-        public async Task<IEnumerable<Team>> GetTeamsByUser([FromUri] string userId)
+        [Route("me/teams")]
+        public async Task<IEnumerable<Team>> GetMyTeams([FromUri] bool activeOnly = false)
         {
-            return await _teamRepository.GetByUserAsync(userId);
+            return await _teamRepository.GetByUserAsync(Me.Id(), activeOnly);
         }
 
         [HttpPost]
-        [Route("")]
+        [Route("teams")]
         public async Task Post([FromBody] Team team)
         {
             await _teamRepository.InsertAsync(team);
@@ -35,14 +36,14 @@ namespace HuntTracker.Api.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("teams")]
         public async Task Put([FromBody] Team update)
         {
             await _teamRepository.UpdateAsync(update);
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("teams/{id}")]
         public async Task Delete([FromUri] string id)
         {
             await _teamRepository.DeleteAsync(id);

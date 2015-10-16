@@ -99,16 +99,16 @@ angular.module("HTDirectives")
                     
                     //If touch and no feature found at pixel, expand pixels to check.
                     //This extra checking can potensially take extra time.
-                    if(!feature && Modernizr.touch) {
-                        var pixelsToCheck =  adjacentPixels(eventPosition, 5);
+                    if (!feature && Modernizr.touch) {
+                        var pixelsToCheck = adjacentPixels(eventPosition, 5);
                         for (var i = 0; i < pixelsToCheck.length; i++) {
                             var pixel = pixelsToCheck[i];
                             feature = map.forEachFeatureAtPixel(pixel, function (feature, layer) {
                                 return feature;
                             });
-                            if(feature) {break;}
+                            if (feature) { break; }
                         }
-                    }   
+                    }
 
                     if (feature) {
                         scope.$apply(function () {
@@ -119,19 +119,24 @@ angular.module("HTDirectives")
 
                 //Geolocation - Tracking
                 var geolocation = new ol.Geolocation({
-                    projection: view.getProjection()
+                    projection: view.getProjection(),
+                    trackingOptions: {
+                        enableHighAccuracy: true,
+                        maximumAge: 60000 //One minute
+                    }
                 });
 
                 var setViewOnPositionChange = true;
                 geolocation.on("change:position", function () {
                     var coordinates = geolocation.getPosition();
+                    var accuracy = geolocation.getAccuracy();
                     if (setViewOnPositionChange) {
                         view.setCenter(coordinates);
                         view.setZoom(15);
                         setViewOnPositionChange = false;
                     }
                     scope.$apply(function () {
-                        scope.onPositionChanged({ coordinates: coordinates });
+                        scope.onPositionChanged({ coordinates: coordinates, accuracy: accuracy });
                     });
                 })
 
@@ -169,7 +174,7 @@ angular.module("HTDirectives")
                 var markerSource = new ol.source.Vector();
                 var markerLayer = new ol.layer.Vector({ source: markerSource });
                 map.addLayer(markerLayer);
-                
+
                 var fitViewToMarkers = true;
                 scope.$watch("markers", function (newMarkers, oldMarkers) {
                     //Remove all first
@@ -191,7 +196,7 @@ angular.module("HTDirectives")
                                 markerSource.addFeature(feature);
                             }
                         }
-                        if(fitViewToMarkers && newMarkers.length > 0) { //Happens first time
+                        if (fitViewToMarkers && newMarkers.length > 0) { //Happens first time
                             fitViewToMarkers = false;
                             map.updateSize();
                             view.fit(markerSource.getExtent(), map.getSize(), { maxZoom: 15 });

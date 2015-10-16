@@ -1,11 +1,11 @@
 ﻿/* global angular, Modernizr */
 angular.module("HTControllers")
 
-    .controller("MapModalCtrl", ["$scope", "$modalInstance", "Helpers", "marker", "icons", "youAreHere", "teams", function ($scope, $modalInstance, helpers, marker, icons, youAreHere, teams) {
+    .controller("MapModalCtrl", ["$scope", "$modalInstance", "Helpers", "marker", "icons", "position", "teams", function ($scope, $modalInstance, helpers, marker, icons, position, teams) {
         $scope.marker = marker;
         $scope.marker.sharedWithTeamIds = $scope.marker.sharedWithTeamIds || []; 
         $scope.icons = icons;
-        $scope.youAreHere = youAreHere;
+        $scope.position = position;
         $scope.teams = teams;
 
         var editMarker = $scope.marker.id && $scope.marker.id !== "you";

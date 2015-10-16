@@ -3,7 +3,6 @@ angular.module("HTControllers")
 
     .controller("MarkerOtherModalCtrl", ["$scope", "$modalInstance", "marker", "icons", "teams", "UserSource", "Helpers", "UserSource", function ($scope, $modalInstance, marker, icons, teams, UserSource, helpers, UserSource) {
         $scope.marker = marker;
-        $scope.icons = icons;
         $scope.marker.sharedWithTeamIds = $scope.marker.sharedWithTeamIds || [];
 
         $scope.addedBy = UserSource.getById({ id: $scope.marker.userId });
@@ -15,6 +14,7 @@ angular.module("HTControllers")
         });
         $scope.descriptionTags = helpers.extractTags($scope.marker.description);
         $scope.formattedDateTime = moment($scope.marker.dateTime).format("LLLL");
+        $scope.icon = icons[$scope.marker.icon];
 
         $scope.cancel = function () {
             $modalInstance.dismiss();

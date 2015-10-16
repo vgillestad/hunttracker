@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiAppBuildeExtension.cs" />
+    <Compile Include="Context\Me.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\TeamMemberController.cs" />
     <Compile Include="Controllers\TeamController.cs" />

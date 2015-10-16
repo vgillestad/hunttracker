@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Security.Claims;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
@@ -9,6 +7,7 @@ using HuntTracker.Api.Interfaces.DataEntities;
 using HuntTracker.Api.Models;
 using System.Net;
 using System.Net.Mail;
+using HuntTracker.Api.Context;
 
 namespace HuntTracker.Api.Controllers
 {
@@ -27,9 +26,7 @@ namespace HuntTracker.Api.Controllers
         [Route("me")]
         public async Task<User> Current()
         {
-            var currentPrincipal = (ClaimsPrincipal)Thread.CurrentPrincipal;
-            var userId = currentPrincipal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return await _userRepository.GetById(userId);
+            return await _userRepository.GetById(Me.Id());
         }
 
         [Authorize]
@@ -37,6 +34,9 @@ namespace HuntTracker.Api.Controllers
         [Route("users/{id}")]
         public async Task<User> Get([FromUri] string id)
         {
+            if (id == "current")
+                return await Current();
+
             return await _userRepository.GetById(id);
         }
 
