@@ -2,6 +2,7 @@
 angular.module("HTControllers")
 
     .controller("MapCtrl", ["$scope", "$modal", "$timeout", "UserSource", "AuthSource", "MarkerSource", "IconSource", "FilterSource", "TeamSource", "Helpers", function ($scope, $modal, $timeout, UserSource, AuthSource, MarkerSource, IconSource, FilterSource, TeamSource, Helpers) {
+        $scope.loading = true;
         $scope.tracking = false;
         $scope.markers = [];
         $scope.you = null;
@@ -18,6 +19,7 @@ angular.module("HTControllers")
                 if ($scope.markers.length < 1) {
                     $scope.showHelp();
                 }
+                $scope.loading = false;
             });
             $scope.teams = TeamSource.getMyTeams({ activeOnly: true });
         }
@@ -69,9 +71,9 @@ angular.module("HTControllers")
                 modalIsOpen = false;
                 if (result.action === "delete") {
                     var markerId = $scope.marker.id;
-                    $scope.saveing = true;
+                    $scope.loading = true;
                     MarkerSource.remove({ markerId: markerId }, function () {
-                        $scope.saveing = false;
+                        $scope.loading = false;
                         $scope.markers = $scope.markers.filter(function (marker) {
                             return marker.id !== markerId;
                         })
@@ -111,13 +113,13 @@ angular.module("HTControllers")
         };
 
         $scope.addMarkerSubmit = function () {
-            $scope.saveing = true;
+            $scope.loading = true;
             if ($scope.marker.id) {
-                MarkerSource.update($scope.marker, function () { $scope.saveing = false; });
+                MarkerSource.update($scope.marker, function () { $scope.loading = false; });
             } else {
                 $scope.marker.id = $scope.marker.id || Math.uuid();
                 $scope.marker.userId = $scope.user.id;
-                MarkerSource.add($scope.marker, function () { $scope.saveing = false; });
+                MarkerSource.add($scope.marker, function () { $scope.loading = false; });
             }
         };
 
@@ -176,6 +178,7 @@ angular.module("HTControllers")
                 size: "md"
             });
             teamModal.result.then(function () { }, function () {
+                $scope.loading = true;
                 getTeamAndMarkers();
             });
         }

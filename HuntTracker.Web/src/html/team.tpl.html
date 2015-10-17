@@ -5,6 +5,7 @@
 	<p translate>By creating a hunting team, you will be able to share points and your position with the other team members.</p>
 	<p translate>When you create a hunting team you can invite others to join. The invites have to be accepted before they become active
 		memebers of the hunting team.</p>
+	<i ng-if="loading" class="icon-spinner3 spinner" style="font-size:25px"></i>
 	<accordion close-others="true">
 		<accordion-group ng-repeat="t in teams" is-open="t.isOpen">
 			<accordion-heading>

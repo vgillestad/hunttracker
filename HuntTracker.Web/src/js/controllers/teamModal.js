@@ -2,6 +2,7 @@
 angular.module("HTControllers")
 
     .controller("TeamModalCtrl", ["$scope", "$modalInstance", "TeamSource", "UserSource", "MemberSource", function ($scope, $modalInstance, TeamSource, UserSource, MemberSource) {
+        $scope.loading = true;
         $scope.newTeam = {};
 
         var getTeam = function (teamId) {
@@ -32,12 +33,14 @@ angular.module("HTControllers")
                 if($scope.teams && $scope.teams.length > 0) {
                     $scope.teams[0].isOpen = true;
                 }
+                $scope.loading = false;
             });
         });
 
         $scope.createTeam = function () {
             $scope.newTeam.id = Math.uuid();
             $scope.newTeam.adminId = $scope.user.id;
+            $scope.loading = true;
             TeamSource.add($scope.newTeam, function () {
                 MemberSource.getByTeamId({ teamId: $scope.newTeam.id }, function (members) {
                     $scope.newTeam.members = members;
@@ -45,6 +48,7 @@ angular.module("HTControllers")
                     $scope.newTeam.userIsTeamAdmin = true;
                     $scope.teams.push($scope.newTeam);
                     $scope.newTeam = {};
+                    $scope.loading = false;
                 });
             });
         }
