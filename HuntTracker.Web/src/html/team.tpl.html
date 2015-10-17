@@ -2,9 +2,8 @@
 	<h1 translate>Hunting Team</h1>
 </div>
 <div class="modal-body">
-	<p translate>By creating a hunting team, you will be able to share points and your position with the other team members.</p>
-	<p translate>When you create a hunting team you can invite others to join. The invites have to be accepted before they become active
-		memebers of the hunting team.</p>
+	<p translate>By creating a hunting team, you will be able to share points you add in the map with the other team members.</p>
+	<p translate>When you create a hunting team you can invite others to join. The invites have to be accepted before they become active memebers of the hunting team.</p>
 	<i ng-if="loading" class="icon-spinner3 spinner" style="font-size:25px"></i>
 	<accordion close-others="true">
 		<accordion-group ng-repeat="t in teams" is-open="t.isOpen">
@@ -15,8 +14,8 @@
 			<i ng-if="t.userIsTeamAdmin" class="text-muted" translate>
                         You are admin for this team and can invite and remove members.
                     </i>
-			<span ng-if="t.userMemberStatus === 'invited'" translate>
-                        <span>You have been invited to this hunting team. Do you accept or decline membership?</span>
+			<span ng-if="t.userMemberStatus === 'invited'">
+                        <span translate>You have been invited to this hunting team. Do you accept or decline membership?</span>
 			<button type="button" ng-click="acceptInvitation(t.id)" class="btn btn-default btn-sm" translate>Accept</button>
 			<button type="button" ng-click="declineInvitation(t.id)" class="btn btn-default btn-sm" translate>Decline</button>
 			</span>
@@ -28,7 +27,7 @@
 				<li ng-repeat="member in t.members">
 					{{member.firstName}} {{member.lastName}}
 					<span class="label" ng-class="{'label-success': member.status === 'active', 'label-info': member.status === 'invited', 'label-warning': member.status === 'paused', 'label-primary': member.status === 'admin'}">
-                                {{member.status}}
+                                {{member.status | translate}}
                             </span>
 					<span ng-if="t.userIsTeamAdmin" class="member-actions">
                               <span class="btn btn-danger btn-sm btn-circle-sm" ng-click="removeMember(t.id, member.userId)" ng-if="t.adminId !== member.userId">
@@ -52,7 +51,7 @@
                                 <button type="button" ng-click="inviteMember(t.id, inviteEmail)" class="btn btn-default" translate>Invite</button>
                             </span>
 </div>
-<p class="text-danger">{{errorMessage}}</p>
+<p class="text-danger">{{errorMessage | translate}}</p>
 </span>
 </accordion-group>
 </accordion>

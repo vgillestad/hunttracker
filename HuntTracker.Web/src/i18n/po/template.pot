@@ -5,8 +5,20 @@ msgstr ""
 "Project-Id-Version: \n"
 
 #: index.html:1
-#: src\index.html:211
+#: src\html\help.tpl.html:2
 msgid "4 tips for you"
+msgstr ""
+
+#: src\html\team.tpl.html:19
+msgid "Accept"
+msgstr ""
+
+#: src\html\marker.mine.tpl.html:7
+msgid "Accuracy:"
+msgstr ""
+
+#: src\i18n\translations.html:33
+msgid "active"
 msgstr ""
 
 #: src\i18n\translations.html:1
@@ -14,12 +26,16 @@ msgid "Add"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:138
+#: src\html\marker.mine.tpl.html:11
 msgid "Add a pin. Enter a description and tag (#) the pin:"
 msgstr ""
 
+#: src\i18n\translations.html:32
+msgid "admin"
+msgstr ""
+
 #: index.html:1
-#: src\index.html:75
+#: src\index.html:80
 msgid "All"
 msgstr ""
 
@@ -28,7 +44,7 @@ msgid "Already an existing user with that email address."
 msgstr ""
 
 #: index.html:1
-#: src\index.html:199
+#: src\html\marker.mine.tpl.html:84
 msgid "Are you sure?"
 msgstr ""
 
@@ -36,12 +52,16 @@ msgstr ""
 msgid "bird"
 msgstr ""
 
+#: src\html\team.tpl.html:5
+msgid "By creating a hunting team, you will be able to share points you add in the map with the other team members."
+msgstr ""
+
 #: src\i18n\translations.html:26
 msgid "camera"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:203
+#: src\html\marker.mine.tpl.html:87
 msgid "Cancel"
 msgstr ""
 
@@ -49,8 +69,24 @@ msgstr ""
 msgid "car"
 msgstr ""
 
+#: src\html\marker.other.tpl.html:33
+msgid "Close"
+msgstr ""
+
+#: src\html\team.tpl.html:64
+msgid "Create"
+msgstr ""
+
+#: src\html\team.tpl.html:59
+msgid "Create team:"
+msgstr ""
+
 #: src\i18n\translations.html:28
 msgid "danger"
+msgstr ""
+
+#: src\html\team.tpl.html:20
+msgid "Decline"
 msgstr ""
 
 #: src\i18n\translations.html:14
@@ -58,24 +94,33 @@ msgid "deer"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:198
+#: src\html\marker.mine.tpl.html:83
 msgid "Delete"
 msgstr ""
 
+#: src\html\marker.other.tpl.html:11
+msgid "Description:"
+msgstr ""
+
+#: src\html\team.tpl.html:70
+msgid "Done"
+msgstr ""
+
 #: login.html:1
-#: src\login.html:113
-#: src\login.html:38
-#: src\login.html:82
+#: src\html\team.tpl.html:49
+#: src\login.html:116
+#: src\login.html:41
+#: src\login.html:85
 msgid "email"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:68
+#: src\login.html:71
 msgid "first name"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:55
+#: src\login.html:58
 msgid "Forgot password?"
 msgstr ""
 
@@ -92,7 +137,7 @@ msgid "hare"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:113
+#: src\index.html:121
 msgid "Help"
 msgstr ""
 
@@ -104,27 +149,40 @@ msgstr ""
 msgid "house"
 msgstr ""
 
+#: src\html\team.tpl.html:2
+#: src\index.html:118
+msgid "Hunting Team"
+msgstr ""
+
 #: src\i18n\translations.html:3
 msgid "Invalid username/password."
 msgstr ""
 
+#: src\html\team.tpl.html:51
+msgid "Invite"
+msgstr ""
+
+#: src\i18n\translations.html:35
+msgid "invited"
+msgstr ""
+
 #: login.html:1
-#: src\login.html:75
+#: src\login.html:78
 msgid "last name"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:83
+#: src\index.html:88
 msgid "Latest 31 days"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:117
+#: src\index.html:125
 msgid "Log out"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:51
+#: src\login.html:54
 msgid "Login"
 msgstr ""
 
@@ -132,23 +190,27 @@ msgstr ""
 msgid "moose"
 msgstr ""
 
+#: src\html\team.tpl.html:61
+msgid "Name of the new team ..."
+msgstr ""
+
 #: index.html:1
-#: src\index.html:79
+#: src\index.html:84
 msgid "None"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:94
+#: src\index.html:99
 msgid "Norgeskart"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:222
+#: src\html\help.tpl.html:13
 msgid "Ok"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:102
+#: src\index.html:107
 msgid "Open Street Map"
 msgstr ""
 
@@ -157,19 +219,23 @@ msgid "other"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:151
+#: src\html\marker.mine.tpl.html:24
 msgid "Other"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:45
-#: src\login.html:89
+#: src\login.html:48
+#: src\login.html:92
 msgid "password"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:86
+#: src\login.html:89
 msgid "Password"
+msgstr ""
+
+#: src\i18n\translations.html:34
+msgid "paused"
 msgstr ""
 
 #: src\i18n\translations.html:25
@@ -177,7 +243,7 @@ msgid "paw"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:215
+#: src\html\help.tpl.html:6
 msgid "Press <i class=\"icon-circles\"></i> to find your location."
 msgstr ""
 
@@ -186,13 +252,13 @@ msgid "raindeer"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:54
-#: src\login.html:99
+#: src\login.html:102
+#: src\login.html:57
 msgid "Register"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:98
+#: src\index.html:103
 msgid "Satellite Imagery"
 msgstr ""
 
@@ -205,13 +271,21 @@ msgid "seen"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:148
+#: src\html\marker.mine.tpl.html:21
 msgid "Seen"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:120
+#: src\login.html:123
 msgid "Send"
+msgstr ""
+
+#: src\html\marker.mine.tpl.html:70
+msgid "Share with:"
+msgstr ""
+
+#: src\html\marker.other.tpl.html:28
+msgid "Shared with:"
 msgstr ""
 
 #: src\i18n\translations.html:8
@@ -219,22 +293,27 @@ msgid "shot"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:145
+#: src\html\marker.mine.tpl.html:18
 msgid "Shot"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:183
+#: src\html\marker.mine.tpl.html:55
+#: src\html\marker.other.tpl.html:16
 msgid "Tags are categories that can be used when searching an filtering points. Most icons have assosiated tags. You can add your own tags by using hashtag in the description text box, i.e. #team1 joined me, will add a team1 tag."
 msgstr ""
 
 #: index.html:1
-#: src\index.html:216
+#: src\html\help.tpl.html:7
 msgid "Tap-and-hold to add point in the map"
 msgstr ""
 
+#: src\i18n\translations.html:38
+msgid "This hunter is already a member in this team."
+msgstr ""
+
 #: index.html:1
-#: src\index.html:135
+#: src\html\marker.mine.tpl.html:5
 msgid "This is where <strong>you</strong> are now."
 msgstr ""
 
@@ -243,19 +322,40 @@ msgid "tracks"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:217
+#: src\html\help.tpl.html:8
 msgid "Use <i class=\"icon-filter\"></i> to filter points."
 msgstr ""
 
 #: index.html:1
-#: src\index.html:218
+#: src\html\help.tpl.html:9
 msgid "Use <i class=\"icon-stack2\"></i> to change what map to use."
 msgstr ""
 
+#: src\i18n\translations.html:39
 #: src\i18n\translations.html:5
 msgid "We are sorry, but an unexpected error occured."
 msgstr ""
 
+#: src\i18n\translations.html:37
+msgid "We did not find any hunters with that email address."
+msgstr ""
+
+#: src\html\team.tpl.html:6
+msgid "When you create a hunting team you can invite others to join. The invites have to be accepted before they become active memebers of the hunting team."
+msgstr ""
+
 #: src\i18n\translations.html:18
 msgid "wolf"
+msgstr ""
+
+#: src\html\team.tpl.html:14
+msgid "You are admin for this team and can invite and remove members."
+msgstr ""
+
+#: src\html\team.tpl.html:18
+msgid "You have been invited to this hunting team. Do you accept or decline membership?"
+msgstr ""
+
+#: src\html\team.tpl.html:22
+msgid "Your membership with this team has been paused by the the team admin."
 msgstr ""

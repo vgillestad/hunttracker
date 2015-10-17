@@ -3,7 +3,9 @@
 		<div class="form-group" ng-show="position.youAreHere">
 			<i class="icon-circles text-primary"></i>
 			<span translate>This is where <strong>you</strong> are now.</span>
-			<small ng-if="position.accuracy" translate>(Accuracy {{position.accuracy}}m)</small>
+			<small ng-if="position.accuracy">
+				(<span translate>Accuracy:</span>{{position.accuracy}}m)
+			</small>
 			<hr />
 		</div>
 		<small ng-if="!marker.id" class="text-justify" translate>Add a pin. Enter a description and tag (#) the pin:</small>
