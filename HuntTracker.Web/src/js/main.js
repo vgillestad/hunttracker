@@ -1,4 +1,4 @@
-﻿angular.module("HuntTracker", ["gettext", "ui.bootstrap", "HTControllers", "HTDirectives", "HTServices"])
+﻿angular.module("HuntTracker", ["gettext","templates", "ui.bootstrap", "HTControllers", "HTDirectives", "HTServices"])
 
     .constant(Modernizr,'')
 
@@ -6,10 +6,10 @@
     //interceptor that adds random argument to GET-requests to prevent caching in IE.
     $httpProvider.interceptors.push(["$q", function ($q) {
         var whitelist = [
-            "html/marker.mine.tpl.html",
-            "html/marker.other.tpl.html",
-            "html/help.tpl.html",
-            "html/team.tpl.html",
+            "marker.mine.tpl.html",
+            "marker.other.tpl.html",
+            "help.tpl.html",
+            "team.tpl.html",
             "template/modal/backdrop.html",
             "template/modal/window.html",
             "template/tooltip/tooltip-popup.html",

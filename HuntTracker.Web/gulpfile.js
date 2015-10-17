@@ -1,12 +1,20 @@
 ﻿var gulp = require('gulp');
 var gettext = require('gulp-angular-gettext');
 
+
 var usemin = require('gulp-usemin');
 var uglify = require('gulp-uglify');
 var minifyHtml = require('gulp-minify-html');
 var minifyCss = require('gulp-minify-css');
 var rev = require('gulp-rev');
 var runSequence = require('run-sequence');
+var templateCache = require('gulp-angular-templatecache');
+
+gulp.task('templates', function () {
+    return gulp.src('./src/html/*.tpl.html')
+      .pipe(templateCache({ standalone: true }))
+      .pipe(gulp.dest('./src/html'));
+});
 
 gulp.task('pot', function () {
     return gulp.src(['./**/*.html'])

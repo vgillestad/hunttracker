@@ -50,7 +50,7 @@ angular.module("HTControllers")
             if (!modalIsOpen) {
                 modalIsOpen = true;
                 var modal = $modal.open({
-                    templateUrl: "html/marker.mine.tpl.html",
+                    templateUrl: "marker.mine.tpl.html",
                     controller: "MarkerMineModalCtrl",
                     size: "sm",
                     resolve: {
@@ -90,7 +90,7 @@ angular.module("HTControllers")
 
         var showMarkerOtherModal = function () {
             $modal.open({
-                templateUrl: "html/marker.other.tpl.html",
+                templateUrl: "marker.other.tpl.html",
                 controller: "MarkerOtherModalCtrl",
                 size: "sm",
                 resolve: {
@@ -143,7 +143,7 @@ angular.module("HTControllers")
             if ($scope.you) {
                 $scope.you.coordinates = coordinates;
                 $scope.you.hidden = false;
-                $scope.you.accuracy = accuracy;
+                $scope.you.accuracy = Math.round(accuracy);
             } else {
                 $scope.you = {
                     id: "you",
@@ -165,7 +165,7 @@ angular.module("HTControllers")
 
         $scope.showHelp = function () {
             $modal.open({
-                templateUrl: "html/help.tpl.html",
+                templateUrl: "help.tpl.html",
                 controller: "HelpModalCtrl",
                 size: "sm"
             });
@@ -173,7 +173,7 @@ angular.module("HTControllers")
 
         $scope.showTeam = function () {
             var teamModal = $modal.open({
-                templateUrl: "html/team.tpl.html",
+                templateUrl: "team.tpl.html",
                 controller: "TeamModalCtrl",
                 size: "md"
             });
