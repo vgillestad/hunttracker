@@ -109,9 +109,13 @@
     <Content Include="src\css\icomoon.css" />
     <Content Include="src\css\index.css" />
     <Content Include="src\css\login.css" />
-    <Content Include="env.html" />
     <Content Include="src\fonts\icomoon\icomoon.svg" />
     <Content Include="gulpfile.js" />
+    <Content Include="src\html\help.tpl.html" />
+    <Content Include="src\html\marker.mine.tpl.html" />
+    <Content Include="src\html\marker.other.tpl.html" />
+    <Content Include="src\html\team.tpl.html" />
+    <Content Include="src\html\templates.js" />
     <Content Include="src\i18n\nb_NO.js" />
     <Content Include="src\i18n\nn_NO.js" />
     <Content Include="src\i18n\translations-autodetect.js" />
