@@ -1,0 +1,34 @@
+<div class="modal-body">
+	<div 
+	  ng-if="icon.type === 'image'" 
+	  ng-style="{'background-image': 'url(' + icon.src + ')', 'height': icon.size[1] + 'px', 'width': icon.size[0] + 'px', 'background-position': '-' + icon.offset[0] + 'px -' + icon.offset[1] + 'px', 'zoom': icon.scale, '-moz-transform': 'scale(' + icon.scale + ')'}">
+	</div>
+	<i ng-if="icon.type === 'font'" ng-class="icon.class" style="font-size:25px"></i>
+	<p><i class="icon-user"> </i><strong>{{addedBy.firstName}} {{addedBy.lastName}}</strong></p>
+	<p><i class="icon-calendar"> </i> {{formattedDateTime}}</p>
+	<p ng-if="marker.description">
+		<i class="icon-file-text"> </i>
+		<span translate>Description: </span> {{marker.description}}
+	</p>
+
+	<div>
+		<i class="icon-price-tag3"> </i> Tags
+		<i class="icon-question" tooltip="{{'Tags are categories that can be used when searching an filtering points. Most icons have assosiated tags. You can add your own tags by using hashtag in the description text box, i.e. #team1 joined me, will add a team1 tag.' | translate}}"
+		tooltip-placement="right" tooltip-trigger="click"></i>:
+		<span class="badge" ng-repeat="tag in icon.tags" style="margin-right:2px">
+                  #{{tag | translate}}
+              </span>
+		<span class="badge badge-lighter" ng-repeat="tag in descriptionTags" style="margin-right:2px">
+                  #{{tag | translate}}
+              </span>
+	</div>
+	<br/>
+	<p>
+		<i class="icon-share3"> </i>
+		<span translate>Shared with: </span>
+		<span ng-repeat="team in sharedWithTeams">{{team.name}}</span>
+	</p>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-sm btn-default" ng-click="cancel()" translate>Close</button>
+</div>

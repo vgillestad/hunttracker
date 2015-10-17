@@ -81,13 +81,11 @@ angular.module("HTControllers")
         
         $scope.acceptInvitation = function (teamId) {
             var team = getTeam(teamId);
-            team.userIsInvitedToTeam = false;
+            team.userMemberStatus = 'active';
             $scope.activateMember(teamId, $scope.user.id);
         };
         
         $scope.declineInvitation = function (teamId) {
-            var team = getTeam(teamId);
-            team.userIsInvitedToTeam = false;
             $scope.removeMember(teamId, $scope.user.id);
             $scope.teams = $scope.teams.filter(function (team) {
                 return team.id !== teamId;
@@ -101,10 +99,10 @@ angular.module("HTControllers")
             });
         }
 
-        $scope.deactivateMember = function (teamId, userId) {
-            MemberSource.deactivate({ teamId: teamId, userId: userId }, function () {
+        $scope.pauseMember = function (teamId, userId) {
+            MemberSource.pause({ teamId: teamId, userId: userId }, function () {
                 var member = getMember(teamId, userId);
-                member.status = "deactivated";
+                member.status = "paused";
             });
         }
 

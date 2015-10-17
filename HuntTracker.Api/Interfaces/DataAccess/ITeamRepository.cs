@@ -16,7 +16,7 @@ namespace HuntTracker.Api.Interfaces.DataAccess
         Task AddUserAsMember(string teamId, string userId, TeamMemberStatus status);
         Task InviteUserToTeam(string teamId, string userId);
         Task RequestMembership(string teamId, string userId);
-        Task DeactivateMember(string teamId, string userId);
+        Task PauseMembership(string teamId, string userId);
         Task ActivateMember(string teamId, string userId);
         Task RemoveMember(string teamId, string userId);
     }

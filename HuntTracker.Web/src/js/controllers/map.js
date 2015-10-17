@@ -11,9 +11,8 @@ angular.module("HTControllers")
             layer: 'norgeskart',
             filter: 'all',
         }
-
-        UserSource.me(function (user) {
-            $scope.user = user;
+        
+        var getTeamAndMarkers = function () {
             MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
                 $scope.markers = Helpers.mapIcons(markers, $scope.icons);
                 if ($scope.markers.length < 1) {
@@ -21,6 +20,11 @@ angular.module("HTControllers")
                 }
             });
             $scope.teams = TeamSource.getMyTeams({ activeOnly: true });
+        }
+
+        UserSource.me(function (user) {
+            $scope.user = user;
+            getTeamAndMarkers();
         });
 
         var cleanMarkers = function () {
@@ -44,8 +48,8 @@ angular.module("HTControllers")
             if (!modalIsOpen) {
                 modalIsOpen = true;
                 var modal = $modal.open({
-                    templateUrl: "marker.mine.modal.html",
-                    controller: "MapModalCtrl",
+                    templateUrl: "html/marker.mine.tpl.html",
+                    controller: "MarkerMineModalCtrl",
                     size: "sm",
                     resolve: {
                         marker: function () { return $scope.marker; },
@@ -84,7 +88,7 @@ angular.module("HTControllers")
 
         var showMarkerOtherModal = function () {
             $modal.open({
-                templateUrl: "marker.other.modal.html",
+                templateUrl: "html/marker.other.tpl.html",
                 controller: "MarkerOtherModalCtrl",
                 size: "sm",
                 resolve: {
@@ -159,7 +163,7 @@ angular.module("HTControllers")
 
         $scope.showHelp = function () {
             $modal.open({
-                templateUrl: "help.modal.html",
+                templateUrl: "html/help.tpl.html",
                 controller: "HelpModalCtrl",
                 size: "sm"
             });
@@ -167,12 +171,12 @@ angular.module("HTControllers")
 
         $scope.showTeam = function () {
             var teamModal = $modal.open({
-                templateUrl: "team.modal.html",
+                templateUrl: "html/team.tpl.html",
                 controller: "TeamModalCtrl",
                 size: "md"
             });
             teamModal.result.then(function () { }, function () {
-                $scope.teams = TeamSource.getMyTeams({ activeOnly: true });
+                getTeamAndMarkers();
             });
         }
 

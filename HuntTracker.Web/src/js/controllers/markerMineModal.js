@@ -1,7 +1,7 @@
 ﻿/* global angular, Modernizr */
 angular.module("HTControllers")
 
-    .controller("MapModalCtrl", ["$scope", "$modalInstance", "Helpers", "marker", "icons", "position", "teams", function ($scope, $modalInstance, helpers, marker, icons, position, teams) {
+    .controller("MarkerMineModalCtrl", ["$scope", "$modalInstance", "Helpers", "marker", "icons", "position", "teams", function ($scope, $modalInstance, helpers, marker, icons, position, teams) {
         $scope.marker = marker;
         $scope.marker.sharedWithTeamIds = $scope.marker.sharedWithTeamIds || []; 
         $scope.icons = icons;

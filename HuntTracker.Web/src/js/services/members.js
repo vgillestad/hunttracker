@@ -6,7 +6,7 @@
             invite: { method: "POST", url: "/api/teams/:teamId/invite", params: { teamId: "@teamId", userEmail: "@userEmail" } },
             requestMembership: { method: "POST", params: { teamId: "@teamId", userId: "@userId" } },
             activate: { method: "POST", url: "/api/teams/:teamId/members/:userId/activate", params: { teamId: "@teamId", userId: "@userId" } },
-            deactivate: { method: "POST", url: "/api/teams/:teamId/members/:userId/deactivate", params: { teamId: "@teamId", userId: "@userId" } },
+            pause: { method: "POST", url: "/api/teams/:teamId/members/:userId/pause", params: { teamId: "@teamId", userId: "@userId" } },
             remove: { method: "DELETE", params: { teamId: "@teamId", userId: "@userId" } }
         });
 

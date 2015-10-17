@@ -34,7 +34,7 @@ namespace HuntTracker.Api.Controllers
         [Route("users/{id}")]
         public async Task<User> Get([FromUri] string id)
         {
-            if (id == "current")
+            if (id == "current") //Backward compability
                 return await Current();
 
             return await _userRepository.GetById(id);

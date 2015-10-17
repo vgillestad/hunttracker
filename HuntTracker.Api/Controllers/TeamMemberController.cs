@@ -87,12 +87,12 @@ namespace HuntTracker.Api.Controllers
         }
 
         [HttpPost]
-        [Route("members/{userId}/deactivate")]
-        public async Task DeactiveMember(
+        [Route("members/{userId}/pause")]
+        public async Task PauseMember(
             [FromUri] string teamId,
             [FromUri] string userId)
         {
-            await _teamRepository.DeactivateMember(teamId, userId);
+            await _teamRepository.PauseMembership(teamId, userId);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace HuntTracker.Api.Interfaces.DataEntities
     {
         Admin = 0,
         Active = 1,
-        Deactivated = 2,
+        Paused = 2,
         Invited = 3,
         RequestingMembership = 4 
     }

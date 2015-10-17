@@ -91,9 +91,9 @@ namespace HuntTracker.Dal.File.Repositories
             return Task.FromResult(0);
         }
 
-        public Task DeactivateMember(string teamId, string userId)
+        public Task PauseMembership(string teamId, string userId)
         {
-            _teams.First(x => x.Id == teamId).Members.First(x => x.UserId.Equals(userId)).Status = TeamMemberStatus.Deactivated;
+            _teams.First(x => x.Id == teamId).Members.First(x => x.UserId.Equals(userId)).Status = TeamMemberStatus.Paused;
             return Task.FromResult(0);
         }
 
