@@ -6,6 +6,7 @@ using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
 using System.Linq;
 using Microsoft.Azure.Documents;
+using System;
 
 namespace HuntTracker.Dal.DataDocumentDB.Repositories
 {
@@ -13,19 +14,30 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
     {
         private DocumentClient _client;
         private DocumentCollection _collection;
+        private ITeamRepository _teamRepository;
 
-        public MarkerRepository(DocumentClient client, DocumentCollection collection)
+        public MarkerRepository(DocumentClient client, DocumentCollection collection, ITeamRepository teamRepostiory)
         {
             _client = client;
             _collection = collection;
+            _teamRepository = teamRepostiory;
         }
 
-        public Task<IEnumerable<Marker>> GetByUser(string userId)
+        //TODO : Must be re-written!
+        public async Task<IEnumerable<Marker>> GetByUser(string userId)
         {
-            var query = _client.CreateDocumentQuery<Marker>(_collection.SelfLink)
-                .Where(x => x.UserId == userId)
+            var teams = await _teamRepository.GetByUserAsync(userId, true);
+            var allMarkers = _client.CreateDocumentQuery<Marker>(_collection.SelfLink)
+                .Where(x => x.Coordinates != null)
                 .AsEnumerable();
-            return Task.FromResult(query);
+
+            var markers = allMarkers.Where(x =>
+                x.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase)
+                || (!x.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase)
+                    && x.SharedWithTeamIds != null
+                    && x.SharedWithTeamIds.Any(y => teams.Any(k => k.Id == y))));
+
+            return markers;
         }
 
         public async Task InsertAsync(Marker marker)

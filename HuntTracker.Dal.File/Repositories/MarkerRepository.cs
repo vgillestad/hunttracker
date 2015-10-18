@@ -14,6 +14,7 @@ namespace HuntTracker.Dal.File.Repositories
     {
         private BiggyList<Marker> _markers;
         private ITeamRepository _teamRepository;
+        private List<TeamMemberStatus> _activeMemberStatuses = new List<TeamMemberStatus>() { TeamMemberStatus.Active, TeamMemberStatus.Admin };
 
         public MarkerRepository(string path, ITeamRepository teamRepostiory)
         {
@@ -32,9 +33,11 @@ namespace HuntTracker.Dal.File.Repositories
         public async Task<IEnumerable<Marker>> GetByUser(string userId)
         {
             var teams = await _teamRepository.GetByUserAsync(userId, true);
-            var markers = _markers.Where(x => 
+            var markers = _markers.Where(x =>
                 x.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase)
-                || (x.SharedWithTeamIds != null && x.SharedWithTeamIds.Any(y => teams.Any(k => k.Id == y))));
+                || (!x.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase)
+                    && x.SharedWithTeamIds != null
+                    && x.SharedWithTeamIds.Any(y => teams.Any(k => k.Id == y))));
             return markers;
         }
 

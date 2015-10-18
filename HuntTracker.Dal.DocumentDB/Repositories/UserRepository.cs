@@ -41,11 +41,16 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
             return Task.FromResult(user);
         }
 
+        //TODO : Needs to be re-written!
         public Task<IEnumerable<User>> GetByIds(IEnumerable<string> ids)
         {
+            //var user = _client.CreateDocumentQuery<User>(_collection.SelfLink)
+            //    .Where(x => ids.Any(y => x.Id.Equals(y, StringComparison.InvariantCultureIgnoreCase)))
+            //    .AsEnumerable();
+
             var user = _client.CreateDocumentQuery<User>(_collection.SelfLink)
-                .Where(x => ids.Any(y => x.Id.Equals(y, StringComparison.InvariantCultureIgnoreCase)))
-                .AsEnumerable();
+                .AsEnumerable()
+                .Where(x => ids.Any(y => x.Id != null && x.Id.Equals(y, StringComparison.InvariantCultureIgnoreCase)));
             return Task.FromResult(user);
         }
 

@@ -13,7 +13,8 @@ angular.module("HTDirectives")
                 tracking: "=olTrackPosition",
                 onPositionChanged: "&olOnPositionChanged",
                 onMarkerSelected: "&olOnMarkerSelected",
-                onShowContextMenu: "&olOnShowContextMenu"
+                onShowContextMenu: "&olOnShowContextMenu",
+                fitViewToMarkersTrigger: "=olFitViewToMarkersTrigger"
             },
             link: function (scope, element, attrs) {
 
@@ -203,6 +204,13 @@ angular.module("HTDirectives")
                         }
                     }
                 }, true);
+                
+                scope.$watch("fitViewToMarkersTrigger", function () {
+                    if(scope.markers && scope.markers.length > 0) {
+                        view.fit(markerSource.getExtent(), map.getSize(), { maxZoom: 15 });
+                        console.log("triggered");   
+                    }
+                });
 
                 scope.$watch("layer", function () {
                     for (var index = 0; index < layers.length; index++) {

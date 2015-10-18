@@ -7,6 +7,7 @@ using HuntTracker.Api.Interfaces.DataEntities;
 using Biggy.Core;
 using Biggy.Data.Json;
 using AutoMapper;
+using HuntTracker.Dal.Common;
 
 namespace HuntTracker.Dal.File.Repositories
 {
@@ -121,22 +122,6 @@ namespace HuntTracker.Dal.File.Repositories
             team.Members = members;
             _teams.Update(team);
             return Task.FromResult(0);
-        }
-
-        private class TeamStored : Team
-        {
-            public IEnumerable<MemberStored> Members { get; set; }
-
-            public TeamStored()
-            {
-                Members = new List<MemberStored>();
-            }
-        }
-
-        private class MemberStored
-        {
-            public string UserId { get; set; }
-            public TeamMemberStatus Status { get; set; }
         }
     }
 }

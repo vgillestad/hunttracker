@@ -14,6 +14,7 @@ using Microsoft.Azure.Documents.Linq;
 using System.Linq;
 using HuntTracker.Dal.DataDocumentDB.Repositories;
 using HuntTracker.Api.Interfaces.DataAccess;
+using DataDocumentDB.Repositories;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace HuntTracker.Web
@@ -26,9 +27,13 @@ namespace HuntTracker.Web
         {
             var builder = new ContainerBuilder();
 #if DEBUG
-            var storage = Storage.File;
+            //var storage = Storage.File;
+            var storage = Storage.DocumentDB;
+
+            var collectionName = "HuntTrackerTestCollection";
 #else
             var storage = Storage.DocumentDB;
+            var collectionName = "HuntTrackerCollection";
 #endif
             if (storage == Storage.DocumentDB)
             {
@@ -36,13 +41,14 @@ namespace HuntTracker.Web
                 string authKey = ConfigurationManager.AppSettings["authKey"];
                 client = new DocumentClient(new Uri(serviceEndpoint), authKey);
                 var database = ReadOrCreateDatabase("HuntTrackerDB");
-                var collection = ReadOrCreateCollection(database.SelfLink, "HuntTrackerCollection");
+                var collection = ReadOrCreateCollection(database.SelfLink, collectionName);
 
                 builder.Register(x => client).AsSelf().SingleInstance();
                 builder.Register(x => collection).AsSelf().SingleInstance();
                 builder.RegisterType<MarkerRepository>().AsImplementedInterfaces().SingleInstance();
                 builder.RegisterType<UserRepository>().AsImplementedInterfaces().SingleInstance();
-                
+                builder.RegisterType<TeamRepository>().AsImplementedInterfaces().SingleInstance();
+
             }
             else if (storage == Storage.File)
             {

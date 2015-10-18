@@ -63,12 +63,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Backup\dump-2015.10.18.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HuntTracker.Api\HuntTracker.Api.csproj">
       <Project>{f6953768-237f-4bd5-8638-4ef9e512f23f}</Project>
       <Name>HuntTracker.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HuntTracker.Dal.Common\HuntTracker.Dal.Common.csproj">
+      <Project>{5f72d101-4675-4989-a76c-dd36e05e3028}</Project>
+      <Name>HuntTracker.Dal.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
