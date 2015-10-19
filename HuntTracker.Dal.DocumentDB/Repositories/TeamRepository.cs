@@ -67,22 +67,31 @@ namespace DataDocumentDB.Repositories
             return Task.FromResult(query);
         }
 
-        //TODO : This query has to re-written!
-        public Task<IEnumerable<Team>> GetByUserAsync(string userId, bool activeOnly)
+        public async Task<IEnumerable<Team>> GetByUserAsync(string userId, bool activeOnly)
         {
-            //var query = _client.CreateDocumentQuery<TeamStored>(_collection.SelfLink)
-            //    .Where(x => x.AdminId.Equals(userId) || x.Members.Any(y => y.UserId.Equals(userId) && (activeOnly == false || y.Status == TeamMemberStatus.Active)))
-            //    .AsEnumerable();
+            var query = _client.CreateDocumentQuery<TeamStored>(
+                _collection.SelfLink,
+                new SqlQuerySpec()
+                {
+                    QueryText = @"
+                        SELECT VALUE team 
+                        FROM team 
+                        JOIN member in team.Members 
+                        WHERE 
+                          member.UserId = @userId
+                          AND (@activeOnly = false OR member.Status IN (0,1))",
+                    Parameters = new SqlParameterCollection()
+                    {
+                        new SqlParameter("@userId", userId),
+                        new SqlParameter("@activeOnly", activeOnly),
+                    }
+                }).AsEnumerable();
 
-            var query = _client.CreateDocumentQuery<TeamStored>(_collection.SelfLink)
-                .AsEnumerable()
-                .Where(x => 
-                    (x.AdminId != null && x.AdminId.Equals(userId)) || 
-                    (x.Members != null && x.Members.Any(y => y.UserId != null && y.UserId.Equals(userId) && (activeOnly == false || y.Status == TeamMemberStatus.Active))));
-
-            return Task.FromResult((IEnumerable<Team>)query);
+            return query;
         }
 
+
+        //Needs to be re-written.
         public async Task<IEnumerable<Member>> GetMemebersByTeam(string teamId)
         {
             var team = _client.CreateDocumentQuery<TeamStored>(_collection.SelfLink)
@@ -91,6 +100,7 @@ namespace DataDocumentDB.Repositories
                 .FirstOrDefault();
 
             var users = await _userRepository.GetByIds(team.Members.Select(x => x.UserId));
+            var count = users.Count();
             return users.Select(x =>
             {
                 var member = new Member()
@@ -122,7 +132,7 @@ namespace DataDocumentDB.Repositories
                 .FirstOrDefault();
             team.Members.First(x => x.UserId == userId).Status = TeamMemberStatus.Paused;
 
-            return Task.FromResult(0);
+            return UpdateAsync(team);
         }
 
         public Task RemoveMember(string teamId, string userId)

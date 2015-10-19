@@ -16,7 +16,7 @@ msgstr ""
 msgid "4 tips for you"
 msgstr "4 tips til deg"
 
-#: src\html\team.tpl.html:19
+#: src\html\team.tpl.html:22
 msgid "Accept"
 msgstr "Aksepter"
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "admin"
 msgstr "admin"
 
-#: index.html:1 src\index.html:80
+#: index.html:1 src\index.html:81
 msgid "All"
 msgstr "Alle"
 
@@ -81,19 +81,27 @@ msgstr "bil"
 msgid "Close"
 msgstr "Lukk"
 
-#: src\html\team.tpl.html:64
+#: src\html\team.tpl.html:70
 msgid "Create"
 msgstr "Opprett"
 
-#: src\html\team.tpl.html:59
+#: src\html\team.tpl.html:66
 msgid "Create team:"
 msgstr "Opprett jaktlag:"
+
+#: src\html\team.tpl.html:60
+msgid ""
+"Currently you need to know the hunters email address to be able to invite. "
+"We are working on invitations by name."
+msgstr ""
+"På noværande tidspunkt må du vite e-postadressen til jegeren du vil "
+"invitere. Vi jobber med å kunne invitere på namn."
 
 #: src\i18n\translations.html:28
 msgid "danger"
 msgstr "fare"
 
-#: src\html\team.tpl.html:20
+#: src\html\team.tpl.html:23
 msgid "Decline"
 msgstr "Avslå"
 
@@ -109,11 +117,11 @@ msgstr "Slett"
 msgid "Description:"
 msgstr "Beskriving"
 
-#: src\html\team.tpl.html:70
+#: src\html\team.tpl.html:76
 msgid "Done"
 msgstr "Ferdig"
 
-#: login.html:1 src\html\team.tpl.html:49 src\login.html:116 src\login.html:41
+#: login.html:1 src\html\team.tpl.html:52 src\login.html:116 src\login.html:41
 #: src\login.html:85
 msgid "email"
 msgstr "e-post"
@@ -138,7 +146,7 @@ msgstr "rype"
 msgid "hare"
 msgstr "hare"
 
-#: index.html:1 src\index.html:121
+#: index.html:1 src\index.html:122
 msgid "Help"
 msgstr "Hjelp"
 
@@ -150,7 +158,7 @@ msgstr "hov"
 msgid "house"
 msgstr "hus"
 
-#: src\html\team.tpl.html:2 src\index.html:118
+#: src\html\team.tpl.html:2 src\index.html:119
 msgid "Hunting Team"
 msgstr "Jaktlag"
 
@@ -158,9 +166,13 @@ msgstr "Jaktlag"
 msgid "Invalid username/password."
 msgstr "Feil brukarnamn/password."
 
-#: src\html\team.tpl.html:51
+#: src\html\team.tpl.html:54
 msgid "Invite"
 msgstr "Inviter"
+
+#: src\html\team.tpl.html:50
+msgid "Invite member:"
+msgstr "Inviter medlem:"
 
 #: src\i18n\translations.html:35
 msgid "invited"
@@ -170,11 +182,11 @@ msgstr "invitert"
 msgid "last name"
 msgstr "etternamn"
 
-#: index.html:1 src\index.html:88
+#: index.html:1 src\index.html:89
 msgid "Latest 31 days"
 msgstr "Siste 31 dagar"
 
-#: index.html:1 src\index.html:125
+#: index.html:1 src\index.html:126
 msgid "Log out"
 msgstr "Logg ut"
 
@@ -186,15 +198,15 @@ msgstr "Logg inn"
 msgid "moose"
 msgstr "elg"
 
-#: src\html\team.tpl.html:61
+#: src\html\team.tpl.html:68
 msgid "Name of the new team ..."
 msgstr "Namn på nytt jaktlag ..."
 
-#: index.html:1 src\index.html:84
+#: index.html:1 src\index.html:85
 msgid "None"
 msgstr "Ingen"
 
-#: index.html:1 src\index.html:99
+#: index.html:1 src\index.html:100
 msgid "Norgeskart"
 msgstr ""
 
@@ -202,7 +214,7 @@ msgstr ""
 msgid "Ok"
 msgstr "Ok"
 
-#: index.html:1 src\index.html:107
+#: index.html:1 src\index.html:108
 msgid "Open Street Map"
 msgstr ""
 
@@ -242,7 +254,7 @@ msgstr "reinsdyr"
 msgid "Register"
 msgstr "Registrer"
 
-#: index.html:1 src\index.html:103
+#: index.html:1 src\index.html:104
 msgid "Satellite Imagery"
 msgstr "Satelittbilder"
 
@@ -334,12 +346,12 @@ msgstr ""
 msgid "wolf"
 msgstr "ulv"
 
-#: src\html\team.tpl.html:14
+#: src\html\team.tpl.html:18
 msgid "You are admin for this team and can invite and remove members."
 msgstr ""
 "Du er administrator av dette jaktlaget og kan invitere og slette medlemmar."
 
-#: src\html\team.tpl.html:18
+#: src\html\team.tpl.html:21
 msgid ""
 "You have been invited to this hunting team. Do you accept or decline "
 "membership?"
@@ -347,7 +359,7 @@ msgstr ""
 "Du er invitert til å bli medlem i dette jaktlaget. Godtar eller avslår du "
 "invitasjonen?"
 
-#: src\html\team.tpl.html:22
+#: src\html\team.tpl.html:26
 msgid "Your membership with this team has been paused by the the team admin."
 msgstr ""
 "Ditt medlemsskap i dette jaktlaget er satt på pause av jaktlaget sin "

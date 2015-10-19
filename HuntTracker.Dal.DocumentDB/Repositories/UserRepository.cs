@@ -1,10 +1,8 @@
 ﻿using HuntTracker.Api.Interfaces.DataAccess;
-using System;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents;
 using User = HuntTracker.Api.Interfaces.DataEntities.User;
-using HuntTracker.Api.Interfaces.DataEntities;
 using Microsoft.Azure.Documents.Linq;
 using System.Linq;
 using HuntTracker.Dal.DocumentDB.Crypto;
@@ -41,17 +39,21 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
             return Task.FromResult(user);
         }
 
-        //TODO : Needs to be re-written!
+        //TODO : Needs to be re-written! Could not figure out how to pass a list of strings in sql-parameter
         public Task<IEnumerable<User>> GetByIds(IEnumerable<string> ids)
         {
-            //var user = _client.CreateDocumentQuery<User>(_collection.SelfLink)
-            //    .Where(x => ids.Any(y => x.Id.Equals(y, StringComparison.InvariantCultureIgnoreCase)))
-            //    .AsEnumerable();
+            var where = "(" + string.Join(",", ids.Select(x => "'" + x + "'")) + ")";
+            var users = _client.CreateDocumentQuery<User>(
+                _collection.SelfLink,
+                new SqlQuerySpec()
+                {
+                    QueryText = @"
+                        SELECT VALUE user 
+                        FROM user 
+                        WHERE user.id IN " + where,
+                }).AsEnumerable();
 
-            var user = _client.CreateDocumentQuery<User>(_collection.SelfLink)
-                .AsEnumerable()
-                .Where(x => ids.Any(y => x.Id != null && x.Id.Equals(y, StringComparison.InvariantCultureIgnoreCase)));
-            return Task.FromResult(user);
+            return Task.FromResult(users);
         }
 
         public Task<User> Register(User user, string password)

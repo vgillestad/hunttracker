@@ -27,15 +27,24 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
         public async Task<IEnumerable<Marker>> GetByUser(string userId)
         {
             var teams = await _teamRepository.GetByUserAsync(userId, true);
-            var allMarkers = _client.CreateDocumentQuery<Marker>(_collection.SelfLink)
-                .Where(x => x.Coordinates != null)
-                .AsEnumerable();
+            var teamIds = "(" + string.Join(",", teams.Select(x => "'" + x.Id + "'")) + ")";
 
-            var markers = allMarkers.Where(x =>
-                x.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase)
-                || (!x.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase)
-                    && x.SharedWithTeamIds != null
-                    && x.SharedWithTeamIds.Any(y => teams.Any(k => k.Id == y))));
+            var markers = _client.CreateDocumentQuery<Marker>(
+                _collection.SelfLink,
+                new SqlQuerySpec()
+                {
+                    QueryText = @"
+                        SELECT VALUE marker 
+                        FROM marker 
+                        JOIN teamId IN marker.SharedWithTeamIds
+                        WHERE
+                          marker.UserId = '@userId' OR teamId IN " + teamIds,
+                    Parameters = new SqlParameterCollection()
+                    {
+                        new SqlParameter("@userId", userId),
+                        //new SqlParameter("@teamIds", teamIds),
+                    }
+                }).AsEnumerable();
 
             return markers;
         }

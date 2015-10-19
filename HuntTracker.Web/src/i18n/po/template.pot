@@ -9,7 +9,7 @@ msgstr ""
 msgid "4 tips for you"
 msgstr ""
 
-#: src\html\team.tpl.html:19
+#: src\html\team.tpl.html:22
 msgid "Accept"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgid "admin"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:80
+#: src\index.html:81
 msgid "All"
 msgstr ""
 
@@ -73,19 +73,23 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: src\html\team.tpl.html:64
+#: src\html\team.tpl.html:70
 msgid "Create"
 msgstr ""
 
-#: src\html\team.tpl.html:59
+#: src\html\team.tpl.html:66
 msgid "Create team:"
+msgstr ""
+
+#: src\html\team.tpl.html:60
+msgid "Currently you need to know the hunters email address to be able to invite. We are working on invitations by name."
 msgstr ""
 
 #: src\i18n\translations.html:28
 msgid "danger"
 msgstr ""
 
-#: src\html\team.tpl.html:20
+#: src\html\team.tpl.html:23
 msgid "Decline"
 msgstr ""
 
@@ -102,12 +106,12 @@ msgstr ""
 msgid "Description:"
 msgstr ""
 
-#: src\html\team.tpl.html:70
+#: src\html\team.tpl.html:76
 msgid "Done"
 msgstr ""
 
 #: login.html:1
-#: src\html\team.tpl.html:49
+#: src\html\team.tpl.html:52
 #: src\login.html:116
 #: src\login.html:41
 #: src\login.html:85
@@ -137,7 +141,7 @@ msgid "hare"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:121
+#: src\index.html:122
 msgid "Help"
 msgstr ""
 
@@ -150,7 +154,7 @@ msgid "house"
 msgstr ""
 
 #: src\html\team.tpl.html:2
-#: src\index.html:118
+#: src\index.html:119
 msgid "Hunting Team"
 msgstr ""
 
@@ -158,8 +162,12 @@ msgstr ""
 msgid "Invalid username/password."
 msgstr ""
 
-#: src\html\team.tpl.html:51
+#: src\html\team.tpl.html:54
 msgid "Invite"
+msgstr ""
+
+#: src\html\team.tpl.html:50
+msgid "Invite member:"
 msgstr ""
 
 #: src\i18n\translations.html:35
@@ -172,12 +180,12 @@ msgid "last name"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:88
+#: src\index.html:89
 msgid "Latest 31 days"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:125
+#: src\index.html:126
 msgid "Log out"
 msgstr ""
 
@@ -190,17 +198,17 @@ msgstr ""
 msgid "moose"
 msgstr ""
 
-#: src\html\team.tpl.html:61
+#: src\html\team.tpl.html:68
 msgid "Name of the new team ..."
 msgstr ""
 
 #: index.html:1
-#: src\index.html:84
+#: src\index.html:85
 msgid "None"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:99
+#: src\index.html:100
 msgid "Norgeskart"
 msgstr ""
 
@@ -210,7 +218,7 @@ msgid "Ok"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:107
+#: src\index.html:108
 msgid "Open Street Map"
 msgstr ""
 
@@ -258,7 +266,7 @@ msgid "Register"
 msgstr ""
 
 #: index.html:1
-#: src\index.html:103
+#: src\index.html:104
 msgid "Satellite Imagery"
 msgstr ""
 
@@ -348,14 +356,14 @@ msgstr ""
 msgid "wolf"
 msgstr ""
 
-#: src\html\team.tpl.html:14
+#: src\html\team.tpl.html:18
 msgid "You are admin for this team and can invite and remove members."
 msgstr ""
 
-#: src\html\team.tpl.html:18
+#: src\html\team.tpl.html:21
 msgid "You have been invited to this hunting team. Do you accept or decline membership?"
 msgstr ""
 
-#: src\html\team.tpl.html:22
+#: src\html\team.tpl.html:26
 msgid "Your membership with this team has been paused by the the team admin."
 msgstr ""
