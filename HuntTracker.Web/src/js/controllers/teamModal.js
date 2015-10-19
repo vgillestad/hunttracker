@@ -21,6 +21,9 @@ angular.module("HTControllers")
             $scope.user = user;
             TeamSource.getMyTeams(function (teams) {
                 $scope.teams = teams;
+                if($scope.teams && $scope.teams.length > 0) {
+                    $scope.teams[0].isOpen = true;
+                }
                 $scope.teams.forEach(function (team) {
                     team.userIsTeamAdmin = team.adminId === $scope.user.id;
                     team.members = MemberSource.getByTeamId({ teamId: team.id }, function (members) {
@@ -28,11 +31,11 @@ angular.module("HTControllers")
                             return member.userId === $scope.user.id;
                         })[0];
                         team.userMemberStatus = meAsMember.status;
+                        if(team.userMemberStatus === 'invited') {
+                            team.isOpen = true;
+                        }
                     });
                 });
-                if($scope.teams && $scope.teams.length > 0) {
-                    $scope.teams[0].isOpen = true;
-                }
                 $scope.loading = false;
             });
         });

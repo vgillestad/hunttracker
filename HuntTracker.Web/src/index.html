@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html manifest="appcache.mf">
 
 <head>
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
     <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
     />
-    <link type="text/css" rel="stylesheet" href="../node_modules/openlayers/dist/ol-debug.css" />
+    <link type="text/css" rel="stylesheet" href="../node_modules/openlayers/dist/ol.css" />
     <link type="text/css" rel="stylesheet" href="css/icomoon.css" />
     <link type="text/css" rel="stylesheet" href="css/index.css" />
     <!-- endbuild -->
@@ -21,7 +21,7 @@
     <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="../bower_components/moment/locale/nb.js"></script>
     <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript" src="../node_modules/openlayers/dist/ol-debug.js"></script>
+    <script type="text/javascript" src="../node_modules/openlayers/dist/ol.js"></script>
     <script type="text/javascript" src="../bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="../bower_components/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="../bower_components/angular-gettext/dist/angular-gettext.js"></script>
@@ -58,6 +58,21 @@
     <script type="text/javascript" src="js/main.js"></script>
     <!-- endbuild -->
 </head>
+<script type="text/javascript">
+// Check if a new cache is available on page load.
+window.addEventListener('load', function(e) {
+  window.applicationCache.addEventListener('updateready', function(e) {
+    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+      // Browser downloaded a new app cache.
+      if (confirm('A new version of this site is available. Load it?')) {
+        window.location.reload();
+      }
+    } else {
+      // Manifest didn't changed. Nothing new to server.
+    }
+  }, false);
+}, false);
+</script>
 
 <body ng-app="HuntTracker" ng-controller="MapCtrl">
     <!--MENU-->
@@ -130,17 +145,11 @@
             </ul>
         </nav>
     </div>
-    
+
     <!--MAP-->
     <div class="map-fullscreen">
-        <ol-map class="map-fullscreen" 
-        ol-markers="markers" 
-        ol-layer="settings.layer" 
-        ol-track-position="tracking" 
-        ol-on-position-changed="positionChanged(coordinates, accuracy)"
-        ol-on-marker-selected="showMarkerDetails(marker)" 
-        ol-on-show-context-menu="addMarker(coordinates)"
-        ol-fit-view-to-markers-trigger="fitMapToMarkersTrigger">
+        <ol-map class="map-fullscreen" ol-markers="markers" ol-layer="settings.layer" ol-track-position="tracking" ol-on-position-changed="positionChanged(coordinates, accuracy)"
+        ol-on-marker-selected="showMarkerDetails(marker)" ol-on-show-context-menu="addMarker(coordinates)" ol-fit-view-to-markers-trigger="fitMapToMarkersTrigger">
         </ol-map>
     </div>
 </body>
