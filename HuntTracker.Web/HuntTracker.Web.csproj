@@ -103,7 +103,7 @@
     <Content Include="index.css" />
     <Content Include="index.html" />
     <Content Include="index.js" />
-    <None Include="appcache.mf" />
+    <Content Include="appcache.mf" />
     <Content Include="login.css" />
     <Content Include="login.html" />
     <Content Include="login.js" />
