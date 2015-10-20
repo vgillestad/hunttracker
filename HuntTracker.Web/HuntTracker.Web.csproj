@@ -141,9 +141,12 @@
     <Content Include="src\images\you.png" />
     <Content Include="src\index.html" />
     <Content Include="src\js\controllers\controllers.js" />
+    <Content Include="src\js\controllers\helpModal.js" />
     <Content Include="src\js\controllers\login.js" />
-    <Content Include="src\js\controllers\mapModal.js" />
+    <Content Include="src\js\controllers\markerMineModal.js" />
+    <Content Include="src\js\controllers\markerOtherModal.js" />
     <Content Include="src\js\controllers\menu.js" />
+    <Content Include="src\js\controllers\teamModal.js" />
     <Content Include="src\js\directives\datetime-picker.js" />
     <Content Include="src\js\directives\popover.js" />
     <Content Include="src\js\directives\directives.js" />
@@ -154,10 +157,13 @@
     <Content Include="src\js\lib\modernizr-custom.js" />
     <Content Include="src\js\main.js" />
     <Content Include="src\js\services\auth.js" />
+    <Content Include="src\js\services\filters.js" />
     <Content Include="src\js\services\helpers.js" />
     <Content Include="src\js\services\icons.js" />
     <Content Include="src\js\services\markers.js" />
+    <Content Include="src\js\services\members.js" />
     <Content Include="src\js\services\services.js" />
+    <Content Include="src\js\services\teams.js" />
     <Content Include="src\js\services\users.js" />
     <Content Include="src\login.html" />
     <Content Include="Web.config">
