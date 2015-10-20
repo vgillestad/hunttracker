@@ -27,26 +27,40 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
         public async Task<IEnumerable<Marker>> GetByUser(string userId)
         {
             var teams = await _teamRepository.GetByUserAsync(userId, true);
-            var teamIds = "(" + string.Join(",", teams.Select(x => "'" + x.Id + "'")) + ")";
+            var teamIds = string.Join(",", teams.Select(x => "'" + x.Id + "'"));
 
-            var markers = _client.CreateDocumentQuery<Marker>(
+            var myQuery = string.Format("SELECT VALUE marker FROM marker WHERE marker.UserId = '{0}'", userId);
+            var otherQuery = string.Format("SELECT VALUE marker FROM marker JOIN teamId IN marker.SharedWithTeamIds WHERE teamId IN ({0})", teamIds);
+
+            var myMarkers = _client.CreateDocumentQuery<Marker>(
                 _collection.SelfLink,
                 new SqlQuerySpec()
                 {
-                    QueryText = @"
-                        SELECT VALUE marker 
-                        FROM marker 
-                        JOIN teamId IN marker.SharedWithTeamIds
-                        WHERE
-                          marker.UserId = '@userId' OR teamId IN " + teamIds,
-                    Parameters = new SqlParameterCollection()
-                    {
-                        new SqlParameter("@userId", userId),
-                        //new SqlParameter("@teamIds", teamIds),
-                    }
+                    QueryText = myQuery,
                 }).AsEnumerable();
 
-            return markers;
+            if (teams.Any())
+            {
+                var otherMarkers = _client.CreateDocumentQuery<Marker>(
+                _collection.SelfLink,
+                new SqlQuerySpec()
+                {
+                    QueryText = otherQuery,
+                }).AsEnumerable();
+
+                var allMarkers = myMarkers.ToList();
+                foreach(var marker in otherMarkers.ToList())
+                {
+                    if(!myMarkers.Any(x => x.Id.Equals(marker.Id, StringComparison.InvariantCultureIgnoreCase)))
+                    {
+                        allMarkers.Add(marker);
+                    }
+                }
+
+                myMarkers = allMarkers;
+            }
+
+            return myMarkers;
         }
 
         public async Task InsertAsync(Marker marker)
