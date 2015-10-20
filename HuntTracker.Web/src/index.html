@@ -64,9 +64,7 @@ window.addEventListener('load', function(e) {
   window.applicationCache.addEventListener('updateready', function(e) {
     if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
       // Browser downloaded a new app cache.
-      if (confirm('A new version of this site is available. Load it?')) {
-        window.location.reload();
-      }
+      window.location.reload();
     } else {
       // Manifest didn't changed. Nothing new to server.
     }
@@ -77,7 +75,7 @@ window.addEventListener('load', function(e) {
 <body ng-app="HuntTracker" ng-controller="MapCtrl">
     <!--MENU-->
     <div class="main-menu">
-        <i ng-if="loading" class="icon-spinner3 spinner icon-saving"></i>
+        <i ng-if="loading" class="icon-spinner3 spinner spinner--steps2 icon-saving"></i>
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav navbar-right">
                 <!--Tracking-->

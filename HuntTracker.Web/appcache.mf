@@ -1,5 +1,5 @@
 ﻿CACHE MANIFEST
-# 2015-10-19:v3
+# 2015-10-20:v2
 
 # Explicitly cached entries
 index.js

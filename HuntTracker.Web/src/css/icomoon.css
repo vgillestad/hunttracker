@@ -6463,3 +6463,7 @@
 .spinner {
 	animation: anim-rotate 2s infinite linear;
 }
+
+.spinner--steps2 {
+	animation: anim-rotate 1s infinite steps(12);
+}
