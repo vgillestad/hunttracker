@@ -2,6 +2,7 @@
 body {
     height: 100%;
     margin: 0;
+    touch-action: manipulation;		/* IE11+ */
 }
 
 .map-fullscreen {
