@@ -13,13 +13,15 @@
     "tests"
   ],
   "dependencies": {
-    "angular-sanitize": "~1.3.8",
-    "angular-gettext": "~1.1.4",
-    "angular": "~1.3.8",
-    "bootstrap": "~3.3.1",
-    "hammerjs": "~2.0.0",
-    "angular-resource": "~1.3.11",
+    "angular-gettext": "~2.1.0",
+    "angular": "~1.4.7",
+    "bootstrap": "~3.3.5",
+    "hammerjs": "~2.0.4",
+    "angular-resource": "~1.4.7",
     "eonasdan-bootstrap-datetimepicker": "~4.0.0",
-    "angular-bootstrap": "~0.13.0"
+    "angular-bootstrap": "~0.14.3"
+  },
+  "resolutions": {
+    "angular": "~1.4.7"
   }
 }

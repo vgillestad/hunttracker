@@ -1,7 +1,7 @@
 ﻿/* global angular, Modernizr */
 angular.module("HTControllers")
 
-    .controller("MapCtrl", ["$scope", "$modal", "$timeout", "UserSource", "AuthSource", "MarkerSource", "IconSource", "FilterSource", "TeamSource", "Helpers", function ($scope, $modal, $timeout, UserSource, AuthSource, MarkerSource, IconSource, FilterSource, TeamSource, Helpers) {
+    .controller("MapCtrl", ["$scope", "$uibModal", "$timeout", "UserSource", "AuthSource", "MarkerSource", "IconSource", "FilterSource", "TeamSource", "Helpers", function ($scope, $modal, $timeout, UserSource, AuthSource, MarkerSource, IconSource, FilterSource, TeamSource, Helpers) {
         $scope.loading = true;
         $scope.tracking = false;
         $scope.markers = [];

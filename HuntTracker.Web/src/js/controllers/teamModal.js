@@ -1,7 +1,7 @@
 /* global angular, Modernizr */
 angular.module("HTControllers")
 
-    .controller("TeamModalCtrl", ["$scope", "$modalInstance", "TeamSource", "UserSource", "MemberSource", function ($scope, $modalInstance, TeamSource, UserSource, MemberSource) {
+    .controller("TeamModalCtrl", ["$scope", "$uibModalInstance", "TeamSource", "UserSource", "MemberSource", function ($scope, $modalInstance, TeamSource, UserSource, MemberSource) {
         $scope.loading = true;
         $scope.newTeam = {};
 

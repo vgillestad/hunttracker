@@ -1,7 +1,7 @@
 /* global angular, Modernizr */
 angular.module("HTControllers")
 
-    .controller("MarkerOtherModalCtrl", ["$scope", "$modalInstance", "marker", "icons", "teams", "UserSource", "Helpers", "UserSource", function ($scope, $modalInstance, marker, icons, teams, UserSource, helpers, UserSource) {
+    .controller("MarkerOtherModalCtrl", ["$scope", "$uibModalInstance", "marker", "icons", "teams", "UserSource", "Helpers", "UserSource", function ($scope, $modalInstance, marker, icons, teams, UserSource, helpers, UserSource) {
         $scope.marker = marker;
         $scope.marker.sharedWithTeamIds = $scope.marker.sharedWithTeamIds || [];
 
