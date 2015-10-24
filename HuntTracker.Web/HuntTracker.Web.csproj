@@ -185,6 +185,7 @@
     <Content Include="src\i18n\po\nb_NO.po" />
     <Content Include="src\i18n\po\nn_NO.mo" />
     <Content Include="src\i18n\po\nn_NO.po" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\hunttracker.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
