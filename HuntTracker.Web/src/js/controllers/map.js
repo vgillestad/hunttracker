@@ -46,6 +46,10 @@ angular.module("HTControllers")
             $scope.tracking = !$scope.tracking;
             if (!$scope.tracking) {
                 $scope.you.hidden = true;
+                $scope.trackingLoading = false;
+            }
+            else {
+                $scope.trackingLoading = true;
             }
         }
 
@@ -145,6 +149,7 @@ angular.module("HTControllers")
         }
 
         $scope.positionChanged = function (coordinates, accuracy) {
+            $scope.trackingLoading = false;
             if ($scope.you) {
                 $scope.you.coordinates = coordinates;
                 $scope.you.hidden = false;
@@ -152,10 +157,9 @@ angular.module("HTControllers")
             } else {
                 $scope.you = {
                     id: "you",
-                    icon: "default",
                     coordinates: coordinates,
                     accuracy: accuracy,
-                    iconSrc: angular.copy($scope.icons["default"], {})
+                    iconSrc: angular.copy($scope.icons["you"], {})
                 };
                 $scope.you.iconSrc.color = "rgb(51, 122, 183)";
                 $scope.markers.push($scope.you);

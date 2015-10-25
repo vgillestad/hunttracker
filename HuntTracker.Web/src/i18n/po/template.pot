@@ -5,6 +5,9 @@ msgstr ""
 "Project-Id-Version: \n"
 
 #: src\html\help.tpl.html:2
+msgid "2 tips for you"
+msgstr ""
+
 #: templates\help.tpl.html:2
 msgid "4 tips for you"
 msgstr ""
@@ -36,7 +39,7 @@ msgid "admin"
 msgstr ""
 
 #: index.html:13
-#: src\index.html:94
+#: src\index.html:96
 msgid "All"
 msgstr ""
 
@@ -155,7 +158,7 @@ msgid "hare"
 msgstr ""
 
 #: index.html:13
-#: src\index.html:135
+#: src\index.html:137
 msgid "Help"
 msgstr ""
 
@@ -169,7 +172,7 @@ msgstr ""
 
 #: index.html:13
 #: src\html\team.tpl.html:2
-#: src\index.html:132
+#: src\index.html:134
 #: templates\team.tpl.html:2
 msgid "Hunting Team"
 msgstr ""
@@ -198,12 +201,12 @@ msgid "last name"
 msgstr ""
 
 #: index.html:13
-#: src\index.html:102
+#: src\index.html:104
 msgid "Latest 31 days"
 msgstr ""
 
 #: index.html:13
-#: src\index.html:139
+#: src\index.html:141
 msgid "Log out"
 msgstr ""
 
@@ -222,22 +225,22 @@ msgid "Name of the new team ..."
 msgstr ""
 
 #: index.html:13
-#: src\index.html:98
+#: src\index.html:100
 msgid "None"
 msgstr ""
 
 #: index.html:13
-#: src\index.html:113
+#: src\index.html:115
 msgid "Norgeskart"
 msgstr ""
 
-#: src\html\help.tpl.html:13
+#: src\html\help.tpl.html:11
 #: templates\help.tpl.html:13
 msgid "Ok"
 msgstr ""
 
 #: index.html:13
-#: src\index.html:121
+#: src\index.html:123
 msgid "Open Street Map"
 msgstr ""
 
@@ -269,9 +272,12 @@ msgstr ""
 msgid "paw"
 msgstr ""
 
-#: src\html\help.tpl.html:6
 #: templates\help.tpl.html:6
 msgid "Press <i class=\"icon-circles\"></i> to find your location."
+msgstr ""
+
+#: src\html\help.tpl.html:6
+msgid "Press <i class=\"icon-you\"></i> to find your location."
 msgstr ""
 
 #: src\i18n\translations.html:16
@@ -285,7 +291,7 @@ msgid "Register"
 msgstr ""
 
 #: index.html:13
-#: src\index.html:117
+#: src\index.html:119
 msgid "Satellite Imagery"
 msgstr ""
 
@@ -334,6 +340,9 @@ msgid "Tags are categories that can be used when searching an filtering points. 
 msgstr ""
 
 #: src\html\help.tpl.html:7
+msgid "Tap-and-hold to add a point in the map (or right-click if you are using a PC)."
+msgstr ""
+
 #: templates\help.tpl.html:7
 msgid "Tap-and-hold to add point in the map"
 msgstr ""
@@ -351,12 +360,10 @@ msgstr ""
 msgid "tracks"
 msgstr ""
 
-#: src\html\help.tpl.html:8
 #: templates\help.tpl.html:8
 msgid "Use <i class=\"icon-filter\"></i> to filter points."
 msgstr ""
 
-#: src\html\help.tpl.html:9
 #: templates\help.tpl.html:9
 msgid "Use <i class=\"icon-stack2\"></i> to change what map to use."
 msgstr ""

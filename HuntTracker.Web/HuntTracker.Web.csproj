@@ -111,6 +111,7 @@
     <Content Include="src\css\icomoon.css" />
     <Content Include="src\css\index.css" />
     <Content Include="src\css\login.css" />
+    <Content Include="src\favicon.png" />
     <Content Include="src\fonts\icomoon\icomoon.svg" />
     <Content Include="gulpfile.js" />
     <Content Include="src\html\help.tpl.html" />
@@ -188,6 +189,7 @@
     <Content Include="src\i18n\po\nn_NO.po" />
     <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\hunttracker.pubxml" />
+    <Content Include="src\css\icomoon.addons.css" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

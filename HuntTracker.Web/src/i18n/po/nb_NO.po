@@ -12,7 +12,11 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src\html\help.tpl.html:2 templates\help.tpl.html:2
+#: src\html\help.tpl.html:2
+msgid "2 tips for you"
+msgstr "2 tips til deg"
+
+#: templates\help.tpl.html:2
 msgid "4 tips for you"
 msgstr "4 tips til deg"
 
@@ -41,7 +45,7 @@ msgstr ""
 msgid "admin"
 msgstr "admin"
 
-#: index.html:13 src\index.html:94
+#: index.html:13 src\index.html:96
 msgid "All"
 msgstr "Alle"
 
@@ -150,7 +154,7 @@ msgstr "rype"
 msgid "hare"
 msgstr "hare"
 
-#: index.html:13 src\index.html:135
+#: index.html:13 src\index.html:137
 msgid "Help"
 msgstr "Hjelp"
 
@@ -162,7 +166,7 @@ msgstr "hov"
 msgid "house"
 msgstr "hus"
 
-#: index.html:13 src\html\team.tpl.html:2 src\index.html:132
+#: index.html:13 src\html\team.tpl.html:2 src\index.html:134
 #: templates\team.tpl.html:2
 msgid "Hunting Team"
 msgstr "Jaktlag"
@@ -187,11 +191,11 @@ msgstr "invitert"
 msgid "last name"
 msgstr "etternavn"
 
-#: index.html:13 src\index.html:102
+#: index.html:13 src\index.html:104
 msgid "Latest 31 days"
 msgstr "Siste 31 dagar"
 
-#: index.html:13 src\index.html:139
+#: index.html:13 src\index.html:141
 msgid "Log out"
 msgstr "Logg ut"
 
@@ -207,19 +211,19 @@ msgstr "elg"
 msgid "Name of the new team ..."
 msgstr "Navn på nytt jaktlag ..."
 
-#: index.html:13 src\index.html:98
+#: index.html:13 src\index.html:100
 msgid "None"
 msgstr "Ingen"
 
-#: index.html:13 src\index.html:113
+#: index.html:13 src\index.html:115
 msgid "Norgeskart"
 msgstr ""
 
-#: src\html\help.tpl.html:13 templates\help.tpl.html:13
+#: src\html\help.tpl.html:11 templates\help.tpl.html:13
 msgid "Ok"
 msgstr "Ok"
 
-#: index.html:13 src\index.html:121
+#: index.html:13 src\index.html:123
 msgid "Open Street Map"
 msgstr ""
 
@@ -247,9 +251,13 @@ msgstr "pause"
 msgid "paw"
 msgstr "pote"
 
-#: src\html\help.tpl.html:6 templates\help.tpl.html:6
+#: templates\help.tpl.html:6
 msgid "Press <i class=\"icon-circles\"></i> to find your location."
 msgstr "Trykk <i class=\"icon-circles\"></i> for å finne din posisjon."
+
+#: src\html\help.tpl.html:6
+msgid "Press <i class=\"icon-you\"></i> to find your location."
+msgstr "Trykk <i class=\"icon-you\"></i> for å finne din posisjon."
 
 #: src\i18n\translations.html:16
 msgid "raindeer"
@@ -259,7 +267,7 @@ msgstr "reinsdyr"
 msgid "Register"
 msgstr "Registrer"
 
-#: index.html:13 src\index.html:117
+#: index.html:13 src\index.html:119
 msgid "Satellite Imagery"
 msgstr "Satelittbilder"
 
@@ -307,9 +315,17 @@ msgstr ""
 "tags på et punkt ved å bruke hashtags i beskrivelsetekstboksen, f.eks. "
 "#jaktlag1 var med, vil legge på en jaktlag1 tag."
 
-#: src\html\help.tpl.html:7 templates\help.tpl.html:7
+#: src\html\help.tpl.html:7
+msgid ""
+"Tap-and-hold to add a point in the map (or right-click if you are using a "
+"PC)."
+msgstr ""
+"Trykk-og-hold for å legge til et punkt i kartet (eller høgre-klikk viss du "
+"bruker en PC). "
+
+#: templates\help.tpl.html:7
 msgid "Tap-and-hold to add point in the map"
-msgstr "Trykk-og-hold for å legge til eit punkt i kartet."
+msgstr "Trykk-og-hold for å legge til et punkt i kartet."
 
 #: src\i18n\translations.html:38
 msgid "This hunter is already a member in this team."
@@ -323,11 +339,11 @@ msgstr "Dette er der <strong>du</strong> er no."
 msgid "tracks"
 msgstr "spor"
 
-#: src\html\help.tpl.html:8 templates\help.tpl.html:8
+#: templates\help.tpl.html:8
 msgid "Use <i class=\"icon-filter\"></i> to filter points."
 msgstr "Bruk <i class=\"icon-filter\"></i> for å filtrere punkt."
 
-#: src\html\help.tpl.html:9 templates\help.tpl.html:9
+#: templates\help.tpl.html:9
 msgid "Use <i class=\"icon-stack2\"></i> to change what map to use."
 msgstr "Bruk <i class=\"icon-stack2\"></i> for å velge kart."
 

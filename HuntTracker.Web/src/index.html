@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta name="msapplication-tap-highlight" content="no" />
     <title>HuntTracker</title>
-    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
     <!-- build:css index.css -->
     <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
     />
     <link type="text/css" rel="stylesheet" href="../node_modules/openlayers/dist/ol.css" />
     <link type="text/css" rel="stylesheet" href="css/icomoon.css" />
+    <link type="text/css" rel="stylesheet" href="css/icomoon.addons.css" />
     <link type="text/css" rel="stylesheet" href="css/index.css" />
     <!-- endbuild -->
     <!-- build:js index.js -->
@@ -81,8 +82,8 @@ window.addEventListener('load', function(e) {
             <ul class="nav navbar-nav navbar-right">
                 <!--Tracking-->
                 <li>
-                    <a href="#" ng-click="setTracking()" style="border-right: 1px solid #e7e7e7">
-                        <i class="icon-circles" ng-class="{'text-primary': tracking  === true}"></i>
+                    <a href="javascript:void(0)" ng-click="setTracking()" style="border-right: 1px solid #e7e7e7">
+                        <i class="icon-you" ng-class="{'text-primary': tracking  === true, 'spinner': trackingLoading === true}"></i>
                     </a>
                 </li>
                 <!--Filters-->
@@ -92,15 +93,15 @@ window.addEventListener('load', function(e) {
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#" ng-click="applyFilter('all')"><i ng-class="settings.filter === 'all' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>All</span></a>
+                            <a href="javascript:void(0)" ng-click="applyFilter('all')"><i ng-class="settings.filter === 'all' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>All</span></a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#" ng-click="applyFilter('none')"><i ng-class="settings.filter === 'none' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>None</span></a>
+                            <a href="javascript:void(0)" ng-click="applyFilter('none')"><i ng-class="settings.filter === 'none' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>None</span></a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#" ng-click="applyFilter('date', 31)"><i ng-class="settings.filter === 'date' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Latest 31 days</span></a>
+                            <a href="javascript:void(0)" ng-click="applyFilter('date', 31)"><i ng-class="settings.filter === 'date' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Latest 31 days</span></a>
                         </li>
                     </ul>
                 </li>
@@ -111,15 +112,15 @@ window.addEventListener('load', function(e) {
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#" ng-click="settings.layer = 'norgeskart'"><i ng-class="settings.layer === 'norgeskart' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Norgeskart</span></a>
+                            <a href="javascript:void(0)" ng-click="settings.layer = 'norgeskart'"><i ng-class="settings.layer === 'norgeskart' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Norgeskart</span></a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#" ng-click="settings.layer = 'satellite'"><i ng-class="settings.layer === 'satellite' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Satellite Imagery</span></a>
+                            <a href="javascript:void(0)" ng-click="settings.layer = 'satellite'"><i ng-class="settings.layer === 'satellite' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Satellite Imagery</span></a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#" ng-click="settings.layer = 'osm'"><i ng-class="settings.layer === 'osm' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Open Street Map</span></a>
+                            <a href="javascript:void(0)" ng-click="settings.layer = 'osm'"><i ng-class="settings.layer === 'osm' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Open Street Map</span></a>
                         </li>
                     </ul>
                 </li>
@@ -130,14 +131,14 @@ window.addEventListener('load', function(e) {
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#" ng-click="showTeam()" translate>Hunting Team</a>
+                            <a href="javascript:void(0)" ng-click="showTeam()" translate>Hunting Team</a>
                         </li>
                         <li>
-                            <a href="#" ng-click="showHelp()" translate>Help</a>
+                            <a href="javascript:void(0)" ng-click="showHelp()" translate>Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#" ng-click="logout()"><i class="icon-user-minus"></i> {{'Log out' | translate}}</a>
+                            <a href="javascript:void(0)" ng-click="logout()"><i class="icon-user-minus"></i> {{'Log out' | translate}}</a>
                         </li>
                     </ul>
                 </li>
