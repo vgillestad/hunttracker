@@ -24,7 +24,7 @@
 
         helpers.extractTags = function (text) {
             if (text) {
-                var hashTags = text.match(/\B#\w*[a-zA-Z]+\w*/g);
+                var hashTags = text.match(/\B#\w*[a-zæøåA-ZÆØÅ]+\w*/g);
                 if (hashTags) {
                     return hashTags.map(function (hashTag) {
                         return hashTag.replace("#", "");

@@ -8,9 +8,8 @@
 			</small>
 			<hr />
 		</div>
-		<small ng-if="!marker.id" class="text-justify" translate>Add a pin. Enter a description and tag (#) the pin:</small>
 		<div class="form-group">
-			<textarea class="form-control" ng-model="marker.description" ng-change="extractDescriptionTags()"></textarea>
+			<textarea class="form-control" ng-model="marker.description" ng-change="extractDescriptionTags()" placeholder="{{'Description' | translate}}"></textarea>
 		</div>
 		<div class="form-group">
 			<ul class="nav nav-tabs" role="tablist">

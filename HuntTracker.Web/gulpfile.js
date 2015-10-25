@@ -27,9 +27,9 @@ gulp.task('translations', function () {
 });
 
 gulp.task('watch', function () {
-    return gulp.src('./src/html/*.tpl.html')
-        .pipe(watch('./src/html/*.tpl.html'))
-        .pipe(gulp.dest('templates'));
+    watch('./src/html/*.tpl.html', function () {
+        gulp.start('templates');
+    });
 });
 
 var useMin = function (src) {
