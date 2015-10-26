@@ -1,12 +1,12 @@
 ﻿CACHE MANIFEST
-# 2015-10-25:v1
+# 2015-10-26:v1
 
 # Explicitly cached entries
 index.js
 index.css
 login.js
 login.css
-/src/fonts/icomoon/icomoon.woff?k1oc9z
+/src/fonts/icomoon/icomoon.woff?xljosp
 /src/images/animals8.png
 
 # offline.html will be displayed if the user is offline

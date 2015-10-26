@@ -15,13 +15,15 @@ angular.module("HTControllers")
         
         var getTeamAndMarkers = function () {
             var currentMarkerCount = $scope.markers ? $scope.markers.length : null;
-            
             MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
+                $scope.loading = false;
                 $scope.markers = Helpers.mapIcons(markers, $scope.icons);
                 if ($scope.markers.length < 1) {
                     $scope.showHelp();
                 }
-                $scope.loading = false;
+                if ($scope.you) {
+                    $scope.markers.push($scope.you);
+                }
                 if(currentMarkerCount && currentMarkerCount !== $scope.markers.length) {
                     $scope.fitMapToMarkersTrigger = Math.random();
                 }

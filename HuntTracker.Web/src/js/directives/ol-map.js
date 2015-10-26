@@ -208,7 +208,6 @@ angular.module("HTDirectives")
                 scope.$watch("fitViewToMarkersTrigger", function () {
                     if(scope.markers && scope.markers.length > 0) {
                         view.fit(markerSource.getExtent(), map.getSize(), { maxZoom: 15 });
-                        console.log("triggered");   
                     }
                 });
 
