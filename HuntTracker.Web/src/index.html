@@ -152,6 +152,9 @@ window.addEventListener('load', function(e) {
         ol-on-marker-selected="showMarkerDetails(marker)" ol-on-show-context-menu="addMarker(coordinates)" ol-fit-view-to-markers-trigger="fitMapToMarkersTrigger">
         </ol-map>
     </div>
+    <div ng-if="!you.hidden && you.accuracy > 100" class="gps-error-message">
+        <span translate>Your GPS is struggeling. Accuarcy is</span> {{you.accuracy}}m
+    </div>
 </body>
 
 </html>

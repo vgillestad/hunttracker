@@ -128,20 +128,20 @@ msgstr ""
 
 #: login.html:1
 #: src\html\team.tpl.html:53
-#: src\login.html:115
-#: src\login.html:40
-#: src\login.html:84
+#: src\login.html:116
+#: src\login.html:41
+#: src\login.html:85
 #: templates\team.tpl.html:53
 msgid "email"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:70
+#: src\login.html:71
 msgid "first name"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:57
+#: src\login.html:58
 msgid "Forgot password?"
 msgstr ""
 
@@ -196,7 +196,7 @@ msgid "invited"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:77
+#: src\login.html:78
 msgid "last name"
 msgstr ""
 
@@ -211,7 +211,7 @@ msgid "Log out"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:53
+#: src\login.html:54
 msgid "Login"
 msgstr ""
 
@@ -254,13 +254,13 @@ msgid "Other"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:47
-#: src\login.html:91
+#: src\login.html:48
+#: src\login.html:92
 msgid "password"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:88
+#: src\login.html:89
 msgid "Password"
 msgstr ""
 
@@ -285,8 +285,8 @@ msgid "raindeer"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:101
-#: src\login.html:56
+#: src\login.html:102
+#: src\login.html:57
 msgid "Register"
 msgstr ""
 
@@ -309,7 +309,7 @@ msgid "Seen"
 msgstr ""
 
 #: login.html:1
-#: src\login.html:122
+#: src\login.html:123
 msgid "Send"
 msgstr ""
 
@@ -394,6 +394,10 @@ msgstr ""
 #: src\html\team.tpl.html:21
 #: templates\team.tpl.html:21
 msgid "You have been invited to this hunting team. Do you accept or decline membership?"
+msgstr ""
+
+#: src\index.html:156
+msgid "Your GPS is struggeling. Accuarcy is"
 msgstr ""
 
 #: src\html\team.tpl.html:27

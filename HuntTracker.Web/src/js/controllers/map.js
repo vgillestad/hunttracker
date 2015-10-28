@@ -160,7 +160,7 @@ angular.module("HTControllers")
                 $scope.you = {
                     id: "you",
                     coordinates: coordinates,
-                    accuracy: accuracy,
+                    accuracy: Math.round(accuracy),
                     iconSrc: angular.copy($scope.icons["you"], {})
                 };
                 $scope.you.iconSrc.color = "rgb(51, 122, 183)";

@@ -2,7 +2,7 @@
 body {
     height: 100%;
     margin: 0;
-    touch-action: manipulation;		/* IE11+ */
+    touch-action: manipulation; /* IE11+ */
 }
 
 .map-fullscreen {
@@ -26,82 +26,86 @@ body {
 }
 
 .animal-btn {
-    height:63px;
+    height: 63px;
     width: 63px;
 }
-.animal-btn div {
-    background-repeat: no-repeat;
-    -moz-transform-origin: 0 0;
-    margin: auto;
-}
+
+    .animal-btn div {
+        background-repeat: no-repeat;
+        -moz-transform-origin: 0 0;
+        margin: auto;
+    }
 
 .btn-selected {
     background-color: #D7D7D7;
-    border:2px solid;
+    border: 2px solid;
 }
 
 
 /*http://bootsnipp.com/snippets/featured/circle-button*/
 .btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
-.btn-circle-sm {
-  width: 20px;
-  height: 20px;
-  text-align: center;
-  padding: 2.4px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 10px;
-}
-.btn-circle.btn-lg {
-  width: 50px;
-  height: 50px;
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 25px;
-}
-.btn-circle.btn-xl {
-  width: 70px;
-  height: 70px;
-  padding: 10px 16px;
-  font-size: 24px;
-  line-height: 1.33;
-  border-radius: 35px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
 }
 
-.btn-group>.btn-group>.btn {
+.btn-circle-sm {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    padding: 2.4px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 10px;
+}
+
+.btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 35px;
+}
+
+.btn-group > .btn-group > .btn {
     border-radius: 0;
 }
 
 /*Main menu*/
 .navbar-nav.navbar-right:last-child {
-  margin-right: 0 !important;
+    margin-right: 0 !important;
 }
- 
+
 .navbar-nav.navbar-right {
-  margin-right: 0;
-  float: right!important;
+    margin-right: 0;
+    float: right !important;
 }
 
 .navbar-nav {
-    float: right!important;
+    float: right !important;
     margin: 0;
 }
 
-.navbar-nav>li, .navbar-nav {
-    float: left !important;
-}
+    .navbar-nav > li, .navbar-nav {
+        float: left !important;
+    }
 
 /*Tabs in the marker modal*/
-.nav-tabs>li>a {
+.nav-tabs > li > a {
     padding: 10px 4px;
 }
 
@@ -114,16 +118,17 @@ body {
 
 /*Tooltip input modal*/
 .tooltip > p {
-   text-align:left;
- }
+    text-align: left;
+}
 
 .tooltip-inner {
-    text-align:justify;
+    text-align: justify;
 }
 
 /*Tags in modal*/
 .badge-lighter {
-    background-color: #989898;;
+    background-color: #989898;
+    ;
 }
 
 .icon-red {
@@ -133,12 +138,29 @@ body {
 /*Loading and Success icon*/
 .icon-saving {
     position: absolute;
-    top:5px;
-    left:-20px;
-    font-size:20px;
+    top: 5px;
+    left: -20px;
+    font-size: 20px;
 }
 
 /**/
 .member-actions span {
-  margin-left:1px
+    margin-left: 1px;
+}
+
+.gps-error-message {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: red;
+    color: white;
+    padding-right: 2px;
+    padding-left: 2px;
+    font-size: 12px;
+}
+
+@media screen and (max-width: 330px) {
+    .gps-error-message {
+        font-size: 11px;
+    }
 }

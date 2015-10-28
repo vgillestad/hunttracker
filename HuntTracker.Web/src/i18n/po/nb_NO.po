@@ -129,16 +129,16 @@ msgstr "Beskrivelse:"
 msgid "Done"
 msgstr "Ferdig"
 
-#: login.html:1 src\html\team.tpl.html:53 src\login.html:115 src\login.html:40
-#: src\login.html:84 templates\team.tpl.html:53
+#: login.html:1 src\html\team.tpl.html:53 src\login.html:116 src\login.html:41
+#: src\login.html:85 templates\team.tpl.html:53
 msgid "email"
 msgstr "e-post"
 
-#: login.html:1 src\login.html:70
+#: login.html:1 src\login.html:71
 msgid "first name"
 msgstr "fornavn"
 
-#: login.html:1 src\login.html:57
+#: login.html:1 src\login.html:58
 msgid "Forgot password?"
 msgstr "Glemt password?"
 
@@ -187,7 +187,7 @@ msgstr "Inviter medlem:"
 msgid "invited"
 msgstr "invitert"
 
-#: login.html:1 src\login.html:77
+#: login.html:1 src\login.html:78
 msgid "last name"
 msgstr "etternavn"
 
@@ -199,7 +199,7 @@ msgstr "Siste 31 dagar"
 msgid "Log out"
 msgstr "Logg ut"
 
-#: login.html:1 src\login.html:53
+#: login.html:1 src\login.html:54
 msgid "Login"
 msgstr "Logg inn"
 
@@ -235,11 +235,11 @@ msgstr "anna"
 msgid "Other"
 msgstr "Anna"
 
-#: login.html:1 src\login.html:47 src\login.html:91
+#: login.html:1 src\login.html:48 src\login.html:92
 msgid "password"
 msgstr "passord"
 
-#: login.html:1 src\login.html:88
+#: login.html:1 src\login.html:89
 msgid "Password"
 msgstr "Passord"
 
@@ -263,7 +263,7 @@ msgstr "Trykk <i class=\"icon-you\"></i> for å finne din posisjon."
 msgid "raindeer"
 msgstr "reinsdyr"
 
-#: login.html:1 src\login.html:101 src\login.html:56
+#: login.html:1 src\login.html:102 src\login.html:57
 msgid "Register"
 msgstr "Registrer"
 
@@ -283,7 +283,7 @@ msgstr "sett"
 msgid "Seen"
 msgstr "Sett"
 
-#: login.html:1 src\login.html:122
+#: login.html:1 src\login.html:123
 msgid "Send"
 msgstr "Send"
 
@@ -380,6 +380,10 @@ msgid ""
 msgstr ""
 "Du er invitert til å bli medlem i dette jaktlaget. Godtar eller avslår du "
 "invitasjonen?"
+
+#: src\index.html:156
+msgid "Your GPS is struggeling. Accuarcy is"
+msgstr "Din GPS sliter med å finne din posisjon. Nøyaktighet er"
 
 #: src\html\team.tpl.html:27 templates\team.tpl.html:27
 msgid "Your membership with this team has been paused by the the team admin."
