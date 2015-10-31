@@ -18,6 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/index.css" />
     <!-- endbuild -->
     <!-- build:js index.js -->
+    <script type="text/javascript" src="js/lib/appcache.js"></script>
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
@@ -50,6 +51,7 @@
     <script type="text/javascript" src="js/directives/popover.js"></script>
     <script type="text/javascript" src="js/directives/ol-map.js"></script>
     <script type="text/javascript" src="js/directives/datetime-picker.js"></script>
+    <script type="text/javascript" src="js/directives/marker-icon.js"></script>
     <script type="text/javascript" src="js/controllers/controllers.js"></script>
     <script type="text/javascript" src="js/controllers/menu.js"></script>
     <script type="text/javascript" src="js/controllers/map.js"></script>
@@ -60,20 +62,6 @@
     <script type="text/javascript" src="js/main.js"></script>
     <!-- endbuild -->
 </head>
-<script type="text/javascript">
-// Check if a new cache is available on page load.
-window.addEventListener('load', function(e) {
-  window.applicationCache.addEventListener('updateready', function(e) {
-    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
-      // Browser downloaded a new app cache.
-      window.location.reload();
-    } else {
-      // Manifest didn't changed. Nothing new to server.
-    }
-  }, false);
-}, false);
-</script>
-
 <body ng-app="HuntTracker" ng-controller="MapCtrl">
     <!--MENU-->
     <div class="main-menu">
@@ -152,6 +140,7 @@ window.addEventListener('load', function(e) {
         ol-on-marker-selected="showMarkerDetails(marker)" ol-on-show-context-menu="addMarker(coordinates)" ol-fit-view-to-markers-trigger="fitMapToMarkersTrigger">
         </ol-map>
     </div>
+
     <div ng-if="!you.hidden && you.accuracy > 100" class="gps-error-message">
         <span translate>Your GPS is struggeling. Accuarcy is</span> {{you.accuracy}}m
     </div>

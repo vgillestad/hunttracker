@@ -11,6 +11,7 @@
 		<div class="form-group">
 			<textarea class="form-control" ng-model="marker.description" ng-change="extractDescriptionTags()" placeholder="{{'Description' | translate}}"></textarea>
 		</div>
+        
 		<div class="form-group">
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" ng-class="{active: shotIcons[marker.icon] != null }">
@@ -26,26 +27,19 @@
 
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane" ng-class="{active: shotIcons[marker.icon] != null }" id="shot">
-					<button ng-repeat="(key, value) in shotIcons" class="btn btn-default animal-btn" ng-class="key === marker.icon ? 'btn-selected' : ''"
-					ng-click="setIcon(key)">
-						<div ng-show="value.type === 'image'" ng-style="{'background-image': 'url(' + value.src + ')', 'height': value.size[1] + 'px', 'width': value.size[0] + 'px', 'background-position': '-' + value.offset[0] + 'px -' + value.offset[1] + 'px', 'zoom': value.scale, '-moz-transform': 'scale(' + value.scale + ')'}"></div>
-						<i ng-show="value.type === 'font'" ng-class="value.class" style="font-size:25px"></i>
-					</button>
+                    <button ng-repeat="(key, value) in shotIcons" class="btn btn-default animal-btn" ng-class="key === marker.icon ? 'btn-selected' : ''" ng-click="setIcon(key)">
+                        <marker-icon icon="value"></marker-icon>
+                    </button>
 				</div>
 				<div role="tabpanel" class="tab-pane" ng-class="{active: seenIcons[marker.icon] != null }" id="seen">
-					<button ng-repeat="(key, value) in seenIcons" class="btn btn-default animal-btn" ng-class="key === marker.icon ? 'btn-selected' : ''"
-					ng-click="setIcon(key)">
-						<div ng-show="value.type === 'image'" ng-style="{'background-image': 'url(' + value.src + ')', 'height': value.size[1] + 'px', 'width': value.size[0] + 'px', 'background-position': '-' + value.offset[0] + 'px -' + value.offset[1] + 'px', 'zoom': value.scale, '-moz-transform': 'scale(' + value.scale + ')'}"></div>
-						<i ng-show="value.type === 'font'" ng-class="value.class" style="font-size:25px"></i>
-					</button>
+                    <button ng-repeat="(key, value) in seenIcons" class="btn btn-default animal-btn" ng-class="key === marker.icon ? 'btn-selected' : ''" ng-click="setIcon(key)">
+                        <marker-icon icon="value"></marker-icon>
+                    </button>
 				</div>
-
 				<div role="tabpanel" class="tab-pane" ng-class="{active: otherIcons[marker.icon] != null }" id="other">
-					<button ng-repeat="(key, value) in otherIcons" class="btn btn-default animal-btn" ng-class="key === marker.icon ? 'btn-selected' : ''"
-					ng-click="setIcon(key)">
-						<div ng-show="value.type === 'image'" ng-style="{'background-image': 'url(' + value.src + ')', 'height': value.size[1] + 'px', 'width': value.size[0] + 'px', 'background-position': '-' + value.offset[0] + 'px -' + value.offset[1] + 'px', 'zoom': value.scale, '-moz-transform': 'scale(' + value.scale + ')'}"></div>
-						<i ng-show="value.type === 'font'" ng-class="value.class" style="font-size:25px"></i>
-					</button>
+                    <button ng-repeat="(key, value) in otherIcons" class="btn btn-default animal-btn" ng-class="key === marker.icon ? 'btn-selected' : ''" ng-click="setIcon(key)">
+                        <marker-icon icon="value"></marker-icon>
+                    </button>
 				</div>
 			</div>
 		</div>

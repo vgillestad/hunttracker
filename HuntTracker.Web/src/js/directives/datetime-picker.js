@@ -1,7 +1,7 @@
 ﻿/* global Modernizr, moment */
 angular.module("HTDirectives")
 
-    .directive("datetimePicker", ["$compile", "$window", function ($compile, $window) {
+    .directive("datetimePicker", ["$window", function ($window) {
         return {
             restrict: 'E',
             template:

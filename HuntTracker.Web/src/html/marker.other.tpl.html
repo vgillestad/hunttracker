@@ -1,9 +1,5 @@
 <div class="modal-body">
-	<div 
-	  ng-if="icon.type === 'image'" 
-	  ng-style="{'background-image': 'url(' + icon.src + ')', 'height': icon.size[1] + 'px', 'width': icon.size[0] + 'px', 'background-position': '-' + icon.offset[0] + 'px -' + icon.offset[1] + 'px', 'zoom': icon.scale, '-moz-transform': 'scale(' + icon.scale + ')'}">
-	</div>
-	<i ng-if="icon.type === 'font'" ng-class="icon.class" style="font-size:25px"></i>
+    <marker-icon icon="icon" style="display:block; height:50px"></marker-icon>
 	<p><i class="icon-user"> </i><strong>{{addedBy.firstName}} {{addedBy.lastName}}</strong></p>
 	<p><i class="icon-calendar"> </i> {{formattedDateTime}}</p>
 	<p ng-if="marker.description">

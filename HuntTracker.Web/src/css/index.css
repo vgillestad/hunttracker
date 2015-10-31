@@ -29,12 +29,9 @@ body {
     height: 63px;
     width: 63px;
 }
-
-    .animal-btn div {
-        background-repeat: no-repeat;
-        -moz-transform-origin: 0 0;
-        margin: auto;
-    }
+.animal-btn:focus {
+    outline:none !important;
+}
 
 .btn-selected {
     background-color: #D7D7D7;
