@@ -1,19 +1,32 @@
 ﻿@keyframes anim-rotate {
-	0% {
-		transform: rotate(0);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes anim-rotate { /*iOS*/
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 .spinner {
-	display: inline-block;
-	line-height: 1;
-	animation: anim-rotate 2s infinite linear;
-	text-shadow: 0 0 .25em rgba(255,255,255, .3);
+    display: inline-block;
+    line-height: 1;
+    text-shadow: 0 0 .25em rgba(255,255,255, .3);
+    animation: anim-rotate 2s infinite linear;
+    -webkit-animation: anim-rotate 2s infinite linear; /*iOS*/
 }
 
 .spinner--steps2 {
-	animation: anim-rotate 1s infinite steps(12);
+    animation: anim-rotate 1s infinite steps(12);
+    -webkit-animation: anim-rotate 1s infinite steps(12); /*iOS*/
 }

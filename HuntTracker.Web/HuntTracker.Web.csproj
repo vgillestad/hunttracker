@@ -149,6 +149,8 @@
     <Content Include="src\js\controllers\markerOtherModal.js" />
     <Content Include="src\js\controllers\menu.js" />
     <Content Include="src\js\controllers\teamModal.js" />
+    <Content Include="src\js\directives\marker-icon.js" />
+    <Content Include="src\js\directives\marker-icon-buttons.js" />
     <Content Include="src\js\directives\datetime-picker.js" />
     <Content Include="src\js\directives\popover.js" />
     <Content Include="src\js\directives\directives.js" />
