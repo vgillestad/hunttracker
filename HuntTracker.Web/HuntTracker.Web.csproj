@@ -171,7 +171,6 @@
     <Content Include="src\js\services\teams.js" />
     <Content Include="src\js\services\users.js" />
     <Content Include="src\login.html" />
-    <Content Include="src\t.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
