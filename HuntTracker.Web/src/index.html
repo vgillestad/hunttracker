@@ -59,6 +59,7 @@
     <script type="text/javascript" src="js/controllers/markerOtherModal.js"></script>
     <script type="text/javascript" src="js/controllers/helpModal.js"></script>
     <script type="text/javascript" src="js/controllers/teamModal.js"></script>
+    <script type="text/javascript" src="js/controllers/filterModal.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <!-- endbuild -->
 </head>
@@ -77,19 +78,22 @@
                 <!--Filters-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="border-right: 1px solid #e7e7e7">
-                        <i class="icon-filter" ng-class="{'text-danger': settings.filter  !== 'all'}"></i>
+                        <i class="icon-filter" ng-class="{'text-danger': user.settings.filter  !== 'all'}"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a href="javascript:void(0)" ng-click="applyFilter('all')"><i ng-class="settings.filter === 'all' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>All</span></a>
+                        <li ng-repeat="(key, value) in standardFilters">
+                            <a href="javascript:void(0)" ng-click="setFilter(key)"><i ng-class="user.settings.filter === key ? 'icon-radio-checked' : 'icon-radio-unchecked'"></i><span>{{value.name | translate}}</span></a>
                         </li>
+                        
+                        <li class="divider" ng-if="user.filters"></li>
+                        <li ng-repeat="(key, value) in user.filters" class="hz">
+                            <a href="javascript:void(0)" ng-click="setFilter(key)"><i ng-class="user.settings.filter === key ? 'icon-radio-checked' : 'icon-radio-unchecked'"></i><span>{{value.name}}</span></a>
+                            <a href="javascript:void(0)" ng-click="showFilterModal(key)" class="btn btn-default btn-xs"><i class="icon-pencil"></i></a>
+                        </li>
+                        
                         <li class="divider"></li>
                         <li>
-                            <a href="javascript:void(0)" ng-click="applyFilter('none')"><i ng-class="settings.filter === 'none' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>None</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0)" ng-click="applyFilter('date', 31)"><i ng-class="settings.filter === 'date' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Latest 31 days</span></a>
+                            <a href="javascript:void(0)" ng-click="showFilterModal()"><i class="icon-pencil"></i><span translate>Custom Filter</span></a>
                         </li>
                     </ul>
                 </li>
@@ -99,16 +103,8 @@
                         <i class="icon-stack2"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a href="javascript:void(0)" ng-click="settings.layer = 'norgeskart'"><i ng-class="settings.layer === 'norgeskart' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Norgeskart</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0)" ng-click="settings.layer = 'satellite'"><i ng-class="settings.layer === 'satellite' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Satellite Imagery</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0)" ng-click="settings.layer = 'osm'"><i ng-class="settings.layer === 'osm' ? 'icon-checkbox-checked' : 'icon-checkbox-unchecked'"> </i><span translate>Open Street Map</span></a>
+                        <li ng-repeat="(key,value) in layers">
+                            <a href="javascript:void(0)" ng-click="setLayer(key)"><i ng-class="user.settings.layer === key ? 'icon-radio-checked' : 'icon-radio-unchecked'"></i><span>{{value | translate}}</span></a>
                         </li>
                     </ul>
                 </li>
@@ -119,10 +115,10 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="javascript:void(0)" ng-click="showTeam()" translate>Hunting Team</a>
+                            <a href="javascript:void(0)" ng-click="showTeamModal()" translate>Hunting Team</a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" ng-click="showHelp()" translate>Help</a>
+                            <a href="javascript:void(0)" ng-click="showHelpModal()" translate>Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -136,7 +132,7 @@
 
     <!--MAP-->
     <div class="map-fullscreen">
-        <ol-map class="map-fullscreen" ol-markers="markers" ol-layer="settings.layer" ol-track-position="tracking" ol-on-position-changed="positionChanged(coordinates, accuracy)"
+        <ol-map class="map-fullscreen" ol-markers="markers" ol-layer="user.settings.layer" ol-track-position="tracking" ol-on-position-changed="positionChanged(coordinates, accuracy)"
         ol-on-marker-selected="showMarkerDetails(marker)" ol-on-show-context-menu="addMarker(coordinates)" ol-fit-view-to-markers-trigger="fitMapToMarkersTrigger">
         </ol-map>
     </div>

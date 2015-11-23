@@ -7,6 +7,9 @@ using Microsoft.Azure.Documents.Linq;
 using System.Linq;
 using HuntTracker.Dal.DocumentDB.Crypto;
 using System.Collections.Generic;
+using HuntTracker.Api.Interfaces.DataEntities;
+using System;
+using AutoMapper;
 
 namespace HuntTracker.Dal.DataDocumentDB.Repositories
 {
@@ -94,6 +97,17 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
 
             user = null;
             return Task.FromResult(false);
+        }
+
+        public async Task Update(User user)
+        {
+            var currentDocument = _client.CreateDocumentQuery(_collection.SelfLink)
+                .Where(x => x.Id == user.Id)
+                .AsEnumerable()
+                .FirstOrDefault();
+
+            Mapper.DynamicMap(user, currentDocument);
+            await _client.ReplaceDocumentAsync(currentDocument.SelfLink, currentDocument);
         }
     }
 

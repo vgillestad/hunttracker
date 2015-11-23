@@ -29,9 +29,9 @@ namespace HuntTracker.Web
 
             var collectionName = "HuntTrackerCollection";
 #if DEBUG
-            var storage = Storage.File;
-            //var storage = Storage.DocumentDB;
-            //collectionName = "HuntTrackerTestCollection";
+            //var storage = Storage.File;
+            var storage = Storage.DocumentDB;
+            collectionName = "HuntTrackerTestCollection";
 #else
             var storage = Storage.DocumentDB;
 #endif

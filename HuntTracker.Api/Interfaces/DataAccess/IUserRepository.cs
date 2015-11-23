@@ -11,5 +11,6 @@ namespace HuntTracker.Api.Interfaces.DataAccess
         Task<User> GetByEmail(string email);
         Task<bool> TryGetByCredentials(string email, string password, out User user);
         Task<User> Register(User user, string password);
+        Task Update(User user);
     }
 }

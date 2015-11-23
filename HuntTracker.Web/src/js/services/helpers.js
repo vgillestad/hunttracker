@@ -33,11 +33,47 @@
             }
             return [];
         }
-        
+
         helpers.mapIcons = function (markers, icons) {
             if (!markers || markers.length < 1) return markers;
             return markers.map(function (marker) {
                 marker.iconSrc = icons[marker.icon] || icons["default"];
+                return marker;
+            });
+        }
+
+        helpers.applyFilter = function (filter, markers, user, icons) {
+            var hidden, markerDate;
+            return markers.map(function (marker) {
+                hidden = false;
+                if (filter.mineOnly.enabled && user.id !== marker.userId) {
+                    hidden = true;
+                }
+                if (!hidden && filter.team.enabled && filter.team.teams) {
+                    filter.team.teams.forEach(function (team) {
+                        if (!marker.sharedWithTeamIds || !(marker.sharedWithTeamIds.indexOf(team) > -1)) {
+                            hidden = true;
+                        }
+                    });
+                }
+                if (!hidden && filter.tag.enabled && filter.tag.tags) {
+                    filter.tag.tags.forEach(function (tag) {
+                        var iconTags = icons[marker.icon].tags || [];
+                        var customTags = helpers.extractTags(marker.description);
+                        if (iconTags.indexOf(tag) < 0 && customTags.indexOf(tag) < 0) {
+                            hidden = true;
+                        }
+                    });
+                }
+                markerDate = new Date(marker.dateTime);
+                if (!hidden && filter.fromDate.enabled && new Date(filter.fromDate.date) > markerDate) {
+                    hidden = true;
+                }
+                if (!hidden && filter.toDate.enabled && new Date(filter.toDate.date) < markerDate) {
+                    hidden = true;
+                }
+
+                marker.hidden = hidden;
                 return marker;
             });
         }

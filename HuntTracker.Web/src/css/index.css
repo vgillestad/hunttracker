@@ -161,3 +161,21 @@ body {
         font-size: 11px;
     }
 }
+
+/*Enabled two links in same li in dropdown*/
+ul>li.hz{
+    display: flex !important;
+}
+.dropdown-menu>li>a:nth-child(2) {
+    padding: 5px 15px 5px 15px;
+}
+/*Spacing between i and a in dropdown*/
+.dropdown-menu>li>a:first-child>i {
+    padding-right:3px
+}
+
+.dropdown-menu>li {
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+

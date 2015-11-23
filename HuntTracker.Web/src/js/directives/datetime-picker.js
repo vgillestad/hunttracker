@@ -5,25 +5,26 @@ angular.module("HTDirectives")
         return {
             restrict: 'E',
             template:
-                '<div class="form-group">' +
-                    '<div class="input-group" style="max-width:170px;float:left;padding-right:5px">' +
-                        '<input type="date" class="form-control" style="-webkit-appearance: none;" />' +
-                        '<span class="input-group-addon">' +
-                            '<i class="icon-calendar"></i>' +
-                        '</span>' +
-                    '</div>' +
+            '<div class="form-group">' +
+            '<div class="input-group" style="max-width:170px;float:left;padding-right:5px">' +
+            '<input type="date" class="form-control" style="-webkit-appearance: none;" />' +
+            '<span class="input-group-addon">' +
+            '<i class="icon-calendar"></i>' +
+            '</span>' +
+            '</div>' +
 
-                    '<div class="input-group">' +
-                        '<input type="time" class="form-control" style="-webkit-appearance: none;" />' +
-                        '<span class="input-group-addon">' +
-                            '<i class="icon-clock"></i>' +
-                        '</span>' +
-                    '</div>' +
-                    
-                '</div>',
+            '<div class="input-group">' +
+            '<input type="time" class="form-control" style="-webkit-appearance: none;" />' +
+            '<span class="input-group-addon">' +
+            '<i class="icon-clock"></i>' +
+            '</span>' +
+            '</div>' +
+
+            '</div>',
             replace: true,
             scope: {
-                model: "=model"
+                model: "=model",
+                dateOnly: "=?dateOnly"
             },
             link: function (scope, element, attrs) {
                 var icons = {
@@ -37,43 +38,69 @@ angular.module("HTDirectives")
                     clear: 'icon-bin',
                 };
 
+                if (scope.dateOnly) {
+                    element.find(".input-group").last().remove();
+                }
+
                 var $date = element.find('input[type="date"]');
                 var $time = element.find('input[type="time"]');
 
-                var updateModel = function () {
+                var updateModelFromPicker = function () {
                     var date = $date.data("DateTimePicker").date();
-                    var time = $time.data("DateTimePicker").date();
+
                     var update = new Date();
                     update.setDate(date.date());
                     update.setMonth(date.month());
                     update.setFullYear(date.year());
-                    update.setHours(time.hour());
-                    update.setMinutes(time.minutes());
+                    if (!scope.dateOnly) {
+                        var time = $time.data("DateTimePicker").date();
+                        update.setHours(time.hour());
+                        update.setMinutes(time.minutes());
+                    }
+                    else {
+                        update.setHours(0);
+                        update.setMinutes(0);
+                    }
 
                     scope.model = update.toISOString();
                     scope.$apply();
                 };
 
-                var updateModel2 = function () {
+                var updateModelFromNative = function () {
                     var update = moment($date.val());
-                    var time = $time.val();
-                    update.hour(time.substr(0,2));
-                    update.minutes(time.substr(3,4));
+                    if(!scope.dateOnly) {
+                        var time = $time.val();
+                        update.hour(time.substr(0, 2));
+                        update.minutes(time.substr(3, 4));    
+                    }
+                    else {
+                        update.hours(0);
+                        update.minutes(0);
+                    }
 
                     scope.model = update.toISOString();
                     scope.$apply();
                 };
 
-                var useDateInput = Modernizr.inputtypes.date && $window.isMobileOrTablet;
-                var useTimeInput = Modernizr.inputtypes.time && $window.isMobileOrTablet;
+                var useNative = Modernizr.inputtypes.date && Modernizr.inputtypes.time && $window.isMobileOrTablet;
 
-                if (useDateInput) {
+                if (useNative) {
+                    //Date
                     $date.val(moment(scope.model).format('YYYY-MM-DD'));
                     $date.on("change", function (e) {
-                        updateModel2();
+                        updateModelFromNative();
                     });
+                    
+                    //Time
+                    if (!scope.dateOnly) {
+                        $time.val(moment(scope.model).format('HH:mm'));
+                        $time.on("change", function () {
+                            updateModelFromNative();
+                        });
+                    }
                 }
                 else {
+                    //Date 
                     $date.attr('type', 'text');
                     $date.datetimepicker({
                         defaultDate: scope.model,
@@ -84,29 +111,24 @@ angular.module("HTDirectives")
                         $date.data("DateTimePicker").toggle();
                     });
                     $date.on("dp.change", function (e) {
-                        updateModel();
+                        updateModelFromPicker();
                     });
-                }
-
-                if (useTimeInput) {
-                    $time.val(moment(scope.model).format('HH:mm'));
-                    $time.on("change", function () {
-                        updateModel2();
-                    });
-                }
-                else {
-                    $time.attr('type', 'text');
-                    $time.datetimepicker({
-                        defaultDate: scope.model,
-                        format: 'LT',
-                        icons: icons,
-                    });
-                    $time.siblings().last().on('click', function () {
-                        $time.data("DateTimePicker").toggle();
-                    });
-                    $time.on("dp.change", function (e) {
-                        updateModel();
-                    });
+                    
+                    //Time
+                    if (!scope.dateOnly) {
+                        $time.attr('type', 'text');
+                        $time.datetimepicker({
+                            defaultDate: scope.model,
+                            format: 'LT',
+                            icons: icons,
+                        });
+                        $time.siblings().last().on('click', function () {
+                            $time.data("DateTimePicker").toggle();
+                        });
+                        $time.on("dp.change", function (e) {
+                            updateModelFromPicker();
+                        });
+                    }
                 }
             }
         };

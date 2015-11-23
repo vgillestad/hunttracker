@@ -72,6 +72,14 @@ namespace HuntTracker.Dal.File.Repositories
                 .Select(x => (User)x);
             return Task.FromResult(users);
         }
+
+        public Task Update(User user)
+        {
+            var userWithCredentials = _users.FirstOrDefault(x => x.Id.Equals(user.Id, StringComparison.InvariantCultureIgnoreCase));
+            Mapper.DynamicMap(user, userWithCredentials);
+
+            return Task.FromResult(0);
+        }
     }
 
     public class UserWithCredentials : User

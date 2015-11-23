@@ -16,15 +16,11 @@ msgstr ""
 msgid "2 tips for you"
 msgstr "2 tips til deg"
 
-#: templates\help.tpl.html:2
-msgid "4 tips for you"
-msgstr "4 tips til deg"
-
-#: src\html\team.tpl.html:22 templates\team.tpl.html:22
+#: src\html\team.tpl.html:22
 msgid "Accept"
 msgstr "Aksepter"
 
-#: src\html\marker.mine.tpl.html:7 templates\marker.mine.tpl.html:7
+#: src\html\marker.mine.tpl.html:7
 msgid "Accuracy:"
 msgstr "Nøyaktigheit"
 
@@ -36,16 +32,11 @@ msgstr "medlem"
 msgid "Add"
 msgstr "Legg til"
 
-#: templates\marker.mine.tpl.html:11
-msgid "Add a pin. Enter a description and tag (#) the pin:"
-msgstr ""
-"Legg til punkt i kartet. Skriv inn beskrivelse og merk punktet med tags (#)"
-
 #: src\i18n\translations.html:32
 msgid "admin"
 msgstr "admin"
 
-#: index.html:13 src\index.html:96
+#: index.html:1
 msgid "All"
 msgstr "Alle"
 
@@ -53,7 +44,7 @@ msgstr "Alle"
 msgid "Already an existing user with that email address."
 msgstr "Det finns allereie ein brukar med denne epostadressa."
 
-#: src\html\marker.mine.tpl.html:83 templates\marker.mine.tpl.html:84
+#: src\html\marker.mine.tpl.html:77
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
@@ -61,7 +52,7 @@ msgstr "Er du sikker?"
 msgid "bird"
 msgstr "fugl"
 
-#: src\html\team.tpl.html:5 templates\team.tpl.html:5
+#: src\html\team.tpl.html:5
 msgid ""
 "By creating a hunting team, you will be able to share points you add in the "
 "map with the other team members."
@@ -73,7 +64,7 @@ msgstr ""
 msgid "camera"
 msgstr "kamera"
 
-#: src\html\marker.mine.tpl.html:86 templates\marker.mine.tpl.html:87
+#: src\html\filter.tpl.html:67 src\html\marker.mine.tpl.html:80
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -81,19 +72,19 @@ msgstr "Avbryt"
 msgid "car"
 msgstr "bil"
 
-#: src\html\marker.other.tpl.html:33 templates\marker.other.tpl.html:33
+#: src\html\marker.other.tpl.html:29
 msgid "Close"
 msgstr "Lukk"
 
-#: src\html\team.tpl.html:71 templates\team.tpl.html:71
+#: src\html\team.tpl.html:71
 msgid "Create"
 msgstr "Opprett"
 
-#: src\html\team.tpl.html:67 templates\team.tpl.html:67
+#: src\html\team.tpl.html:67
 msgid "Create team:"
 msgstr "Opprett jaktlag:"
 
-#: src\html\team.tpl.html:61 templates\team.tpl.html:61
+#: src\html\team.tpl.html:61
 msgid ""
 "Currently you need to know the hunters email address to be able to invite. "
 "We are working on invitations by name."
@@ -101,11 +92,15 @@ msgstr ""
 "På noværande tidspunkt må du vite e-postadressen til jegeren du vil "
 "invitere. Vi jobber med å kunne invitere på namn."
 
+#: src\html\filter.tpl.html:2 src\index.html:96
+msgid "Custom Filter"
+msgstr "Egendefinert filter"
+
 #: src\i18n\translations.html:28
 msgid "danger"
 msgstr "fare"
 
-#: src\html\team.tpl.html:23 templates\team.tpl.html:23
+#: src\html\team.tpl.html:23
 msgid "Decline"
 msgstr "Avslå"
 
@@ -113,7 +108,7 @@ msgstr "Avslå"
 msgid "deer"
 msgstr "hjort"
 
-#: src\html\marker.mine.tpl.html:82 templates\marker.mine.tpl.html:83
+#: src\html\marker.mine.tpl.html:76
 msgid "Delete"
 msgstr "Slett"
 
@@ -121,18 +116,34 @@ msgstr "Slett"
 msgid "Description"
 msgstr "Beskriving"
 
-#: src\html\marker.other.tpl.html:11 templates\marker.other.tpl.html:11
+#: src\html\marker.other.tpl.html:7
 msgid "Description:"
 msgstr "Beskriving"
 
-#: src\html\team.tpl.html:77 templates\team.tpl.html:77
+#: src\html\team.tpl.html:77
 msgid "Done"
 msgstr "Ferdig"
 
 #: login.html:1 src\html\team.tpl.html:53 src\login.html:116 src\login.html:41
-#: src\login.html:85 templates\team.tpl.html:53
+#: src\login.html:85
 msgid "email"
 msgstr "e-post"
+
+#: src\html\filter.tpl.html:43
+msgid "Filter on from date"
+msgstr "Filtrer på frådato"
+
+#: src\html\filter.tpl.html:17
+msgid "Filter on hunting team"
+msgstr "Filtrer på jaktlag"
+
+#: src\html\filter.tpl.html:28
+msgid "Filter on tags"
+msgstr "Filtrer på tags"
+
+#: src\html\filter.tpl.html:55
+msgid "Filter on to date"
+msgstr "Filtrer på tildato"
 
 #: login.html:1 src\login.html:71
 msgid "first name"
@@ -154,7 +165,7 @@ msgstr "rype"
 msgid "hare"
 msgstr "hare"
 
-#: index.html:13 src\index.html:137
+#: index.html:1 src\index.html:121
 msgid "Help"
 msgstr "Hjelp"
 
@@ -166,8 +177,7 @@ msgstr "hov"
 msgid "house"
 msgstr "hus"
 
-#: index.html:13 src\html\team.tpl.html:2 src\index.html:134
-#: templates\team.tpl.html:2
+#: index.html:1 src\html\team.tpl.html:2 src\index.html:118
 msgid "Hunting Team"
 msgstr "Jaktlag"
 
@@ -175,11 +185,11 @@ msgstr "Jaktlag"
 msgid "Invalid username/password."
 msgstr "Feil brukarnamn/password."
 
-#: src\html\team.tpl.html:55 templates\team.tpl.html:55
+#: src\html\team.tpl.html:55
 msgid "Invite"
 msgstr "Inviter"
 
-#: src\html\team.tpl.html:51 templates\team.tpl.html:51
+#: src\html\team.tpl.html:51
 msgid "Invite member:"
 msgstr "Inviter medlem:"
 
@@ -191,11 +201,11 @@ msgstr "invitert"
 msgid "last name"
 msgstr "etternamn"
 
-#: index.html:13 src\index.html:104
+#: index.html:1
 msgid "Latest 31 days"
 msgstr "Siste 31 dagar"
 
-#: index.html:13 src\index.html:141
+#: index.html:1 src\index.html:125
 msgid "Log out"
 msgstr "Logg ut"
 
@@ -207,23 +217,27 @@ msgstr "Logg inn"
 msgid "moose"
 msgstr "elg"
 
-#: src\html\team.tpl.html:69 templates\team.tpl.html:69
+#: src\html\filter.tpl.html:66
+msgid "Name of the filter"
+msgstr "Namn på filteret"
+
+#: src\html\team.tpl.html:69
 msgid "Name of the new team ..."
 msgstr "Namn på nytt jaktlag ..."
 
-#: index.html:13 src\index.html:100
+#: index.html:1
 msgid "None"
 msgstr "Ingen"
 
-#: index.html:13 src\index.html:115
+#: index.html:1
 msgid "Norgeskart"
 msgstr ""
 
-#: src\html\help.tpl.html:11 templates\help.tpl.html:13
+#: src\html\help.tpl.html:11
 msgid "Ok"
 msgstr "Ok"
 
-#: index.html:13 src\index.html:123
+#: index.html:1
 msgid "Open Street Map"
 msgstr ""
 
@@ -231,7 +245,7 @@ msgstr ""
 msgid "other"
 msgstr "anna"
 
-#: src\html\marker.mine.tpl.html:23 templates\marker.mine.tpl.html:24
+#: src\html\marker.mine.tpl.html:24
 msgid "Other"
 msgstr "Anna"
 
@@ -251,10 +265,6 @@ msgstr "pause"
 msgid "paw"
 msgstr "pote"
 
-#: templates\help.tpl.html:6
-msgid "Press <i class=\"icon-circles\"></i> to find your location."
-msgstr "Trykk <i class=\"icon-circles\"></i> for å finne din posisjon."
-
 #: src\html\help.tpl.html:6
 msgid "Press <i class=\"icon-you\"></i> to find your location."
 msgstr "Trykk <i class=\"icon-you\"></i> for å finne din posisjon."
@@ -267,7 +277,7 @@ msgstr "reinsdyr"
 msgid "Register"
 msgstr "Registrer"
 
-#: index.html:13 src\index.html:119
+#: index.html:1
 msgid "Satellite Imagery"
 msgstr "Satelittbilder"
 
@@ -275,23 +285,35 @@ msgstr "Satelittbilder"
 msgid "Save"
 msgstr "Lagre"
 
+#: src\html\filter.tpl.html:68
+msgid "Save and use"
+msgstr "Lagre og bruk"
+
 #: src\i18n\translations.html:9
 msgid "seen"
 msgstr "sett"
 
-#: src\html\marker.mine.tpl.html:20 templates\marker.mine.tpl.html:21
+#: src\html\marker.mine.tpl.html:21
 msgid "Seen"
 msgstr "Sett"
+
+#: src\html\filter.tpl.html:20
+msgid "Select the hunting teams a point must be shared with to show in the map"
+msgstr "Vel jaktlag eit punkt må være delt med for å vise i kartet"
+
+#: src\html\filter.tpl.html:31
+msgid "Select the tags a point must have to show in the map"
+msgstr "Vel tags eit punkt må ha for å vise i kartet"
 
 #: login.html:1 src\login.html:123
 msgid "Send"
 msgstr "Send"
 
-#: src\html\marker.mine.tpl.html:69 templates\marker.mine.tpl.html:70
+#: src\html\marker.mine.tpl.html:63
 msgid "Share with:"
 msgstr "Del med:"
 
-#: src\html\marker.other.tpl.html:28 templates\marker.other.tpl.html:28
+#: src\html\marker.other.tpl.html:24
 msgid "Shared with:"
 msgstr "Delt med:"
 
@@ -299,12 +321,15 @@ msgstr "Delt med:"
 msgid "shot"
 msgstr "skutt"
 
-#: src\html\marker.mine.tpl.html:17 templates\marker.mine.tpl.html:18
+#: src\html\marker.mine.tpl.html:18
 msgid "Shot"
 msgstr "Skutt"
 
-#: src\html\marker.mine.tpl.html:54 src\html\marker.other.tpl.html:16
-#: templates\marker.mine.tpl.html:55 templates\marker.other.tpl.html:16
+#: src\html\filter.tpl.html:10
+msgid "Show my points only"
+msgstr "Vis kun mine punkt"
+
+#: src\html\marker.mine.tpl.html:48 src\html\marker.other.tpl.html:12
 msgid ""
 "Tags are categories that can be used when searching an filtering points. "
 "Most icons have assosiated tags. You can add your own tags by using hashtag "
@@ -323,29 +348,37 @@ msgstr ""
 "Trykk-og-hold for å legge til punkt i kartet (eller høgre-klikk viss du "
 "brukar ein PC). "
 
-#: templates\help.tpl.html:7
-msgid "Tap-and-hold to add point in the map"
-msgstr "Trykk-og-hold for å legge til punkt i kartet."
+#: src\html\filter.tpl.html:65
+msgid "The filter will be stored and will be available in the filter menu"
+msgstr "Filteret vil bli lagra og vil være tilgjengeleg i filtermenyen"
+
+#: src\html\filter.tpl.html:46
+msgid ""
+"The points date must be <span style=\"text-decoration:underline\">larger or "
+"equal</span> to the given date to show in the map"
+msgstr ""
+"Punktet sin dato må være <span style=\"text-decoration:underline\">større "
+"eller lik</span> dato du angir for å vise i kartet"
+
+#: src\html\filter.tpl.html:58
+msgid ""
+"The points date must be <span style=\"text-decoration:underline\">smaller or "
+"equal</span> to the given date to show in the map"
+msgstr ""
+"Punktet sin dato må være <span style=\"text-decoration:underline\">mindre "
+"eller lik</span> datoen du angir for å vise i kartet"
 
 #: src\i18n\translations.html:38
 msgid "This hunter is already a member in this team."
 msgstr "Denne jegeren er allerede medlem i dette jaktlaget."
 
-#: src\html\marker.mine.tpl.html:5 templates\marker.mine.tpl.html:5
+#: src\html\marker.mine.tpl.html:5
 msgid "This is where <strong>you</strong> are now."
 msgstr "Dette er der <strong>du</strong> er no."
 
 #: src\i18n\translations.html:11
 msgid "tracks"
 msgstr "spor"
-
-#: templates\help.tpl.html:8
-msgid "Use <i class=\"icon-filter\"></i> to filter points."
-msgstr "Bruk <i class=\"icon-filter\"></i> for å filtrere punkt."
-
-#: templates\help.tpl.html:9
-msgid "Use <i class=\"icon-stack2\"></i> to change what map to use."
-msgstr "Bruk <i class=\"icon-stack2\"></i> for å velge kart."
 
 #: src\i18n\translations.html:39 src\i18n\translations.html:5
 msgid "We are sorry, but an unexpected error occured."
@@ -355,7 +388,7 @@ msgstr "Vi beklagar, men ein uventa feil oppstod."
 msgid "We did not find any hunters with that email address."
 msgstr "Vi fann ingen jegarar med denne e-postadressa."
 
-#: src\html\team.tpl.html:6 templates\team.tpl.html:6
+#: src\html\team.tpl.html:6
 msgid ""
 "When you create a hunting team you can invite others to join. The invites "
 "have to be accepted before they become active memebers of the hunting team."
@@ -363,16 +396,20 @@ msgstr ""
 "Når du opprettar eit jaktlag kan du invitere andre til å være medlemmar. Dei "
 "som blir invitert må akseptere invitasjonen før dei blir aktive medlemmar."
 
+#: src\html\filter.tpl.html:3
+msgid "With a filter you decide what points should show in the map."
+msgstr "Med eit filter kan du definere kva punkt som skal vise i kartet."
+
 #: src\i18n\translations.html:18
 msgid "wolf"
 msgstr "ulv"
 
-#: src\html\team.tpl.html:18 templates\team.tpl.html:18
+#: src\html\team.tpl.html:18
 msgid "You are admin for this team and can invite and remove members."
 msgstr ""
 "Du er administrator av dette jaktlaget og kan invitere og slette medlemmar."
 
-#: src\html\team.tpl.html:21 templates\team.tpl.html:21
+#: src\html\team.tpl.html:21
 msgid ""
 "You have been invited to this hunting team. Do you accept or decline "
 "membership?"
@@ -380,15 +417,35 @@ msgstr ""
 "Du er invitert til å bli medlem i dette jaktlaget. Godtar eller avslår du "
 "invitasjonen?"
 
-#: src\index.html:156
+#: index.html:1 src\index.html:141
 msgid "Your GPS is struggeling. Accuarcy is"
 msgstr "Din GPS slit med å finne din posisjon. Nøyaktigheit er"
 
-#: src\html\team.tpl.html:27 templates\team.tpl.html:27
+#: src\html\team.tpl.html:27
 msgid "Your membership with this team has been paused by the the team admin."
 msgstr ""
 "Ditt medlemsskap i dette jaktlaget er satt på pause av jaktlaget sin "
 "administrator."
+
+#~ msgid "4 tips for you"
+#~ msgstr "4 tips til deg"
+
+#~ msgid "Add a pin. Enter a description and tag (#) the pin:"
+#~ msgstr ""
+#~ "Legg til punkt i kartet. Skriv inn beskrivelse og merk punktet med tags "
+#~ "(#)"
+
+#~ msgid "Press <i class=\"icon-circles\"></i> to find your location."
+#~ msgstr "Trykk <i class=\"icon-circles\"></i> for å finne din posisjon."
+
+#~ msgid "Tap-and-hold to add point in the map"
+#~ msgstr "Trykk-og-hold for å legge til punkt i kartet."
+
+#~ msgid "Use <i class=\"icon-filter\"></i> to filter points."
+#~ msgstr "Bruk <i class=\"icon-filter\"></i> for å filtrere punkt."
+
+#~ msgid "Use <i class=\"icon-stack2\"></i> to change what map to use."
+#~ msgstr "Bruk <i class=\"icon-stack2\"></i> for å velge kart."
 
 #~ msgid ""
 #~ "Tap-and-hold to add a point in the map (or right-click if you are using a "

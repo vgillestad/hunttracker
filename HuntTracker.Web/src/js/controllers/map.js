@@ -6,25 +6,25 @@ angular.module("HTControllers")
         $scope.tracking = false;
         $scope.markers = [];
         $scope.you = null;
+        $scope.layers = { "norgeskart": "Norgeskart", "satellite": "Satellite Imagery" };
         $scope.icons = IconSource.getAll();
+        $scope.standardFilters = FilterSource.getAll();
         $scope.youIcon = "default";
-        $scope.settings = {
-            layer: 'norgeskart',
-            filter: 'all',
-        }
-        
+
         var getTeamAndMarkers = function () {
             var currentMarkerCount = $scope.markers ? $scope.markers.length : null;
             MarkerSource.getByUserId({ userId: $scope.user.id }, function (markers) {
                 $scope.loading = false;
-                $scope.markers = Helpers.mapIcons(markers, $scope.icons);
+                markers = Helpers.mapIcons(markers, $scope.icons);
+                markers = Helpers.applyFilter($scope.standardFilters[$scope.user.settings.filter] || $scope.user.filters[$scope.user.settings.filter], markers, $scope.user, $scope.icons);
+                $scope.markers = markers;
                 if ($scope.markers.length < 1) {
-                    $scope.showHelp();
+                    $scope.showHelpModal();
                 }
                 if ($scope.you) {
                     $scope.markers.push($scope.you);
                 }
-                if(currentMarkerCount && currentMarkerCount !== $scope.markers.length) {
+                if (currentMarkerCount && currentMarkerCount !== $scope.markers.length) {
                     $scope.fitMapToMarkersTrigger = Math.random();
                 }
             });
@@ -33,6 +33,10 @@ angular.module("HTControllers")
 
         UserSource.me(function (user) {
             $scope.user = user;
+            $scope.user.settings = $scope.user.settings || {
+                filter: "all",
+                layer: "norgeskart"
+            }
             getTeamAndMarkers();
         });
 
@@ -168,13 +172,19 @@ angular.module("HTControllers")
             }
         }
 
-        var filters = FilterSource.getAll();
-        $scope.applyFilter = function (filter, options) {
-            $scope.settings.filter = filter;
-            $scope.markers = filters[filter]($scope.markers, options);
+        $scope.setLayer = function(layer) {
+            $scope.user.settings.layer = layer;
+            UserSource.updateMe($scope.user);
         }
 
-        $scope.showHelp = function () {
+        $scope.setFilter = function (filter, options) {
+            $scope.user.settings.filter = filter;
+            $scope.markers = Helpers.applyFilter($scope.standardFilters[filter] || $scope.user.filters[filter], $scope.markers, $scope.user, $scope.icons);
+            $scope.fitMapToMarkersTrigger = Math.random();
+            UserSource.updateMe($scope.user);
+        }
+
+        $scope.showHelpModal = function () {
             $modal.open({
                 templateUrl: "help.tpl.html",
                 controller: "HelpModalCtrl",
@@ -182,7 +192,7 @@ angular.module("HTControllers")
             });
         }
 
-        $scope.showTeam = function () {
+        $scope.showTeamModal = function () {
             var teamModal = $modal.open({
                 templateUrl: "team.tpl.html",
                 controller: "TeamModalCtrl",
@@ -192,6 +202,29 @@ angular.module("HTControllers")
                 $scope.loading = true;
                 getTeamAndMarkers();
             });
+        }
+
+        $scope.showFilterModal = function (filterId) {
+            $scope.user.filters = $scope.user.filters || {};
+            var filter = filterId !== null ? $scope.user.filters[filterId] : null;
+            var teamModal = $modal.open({
+                templateUrl: "filter.tpl.html",
+                controller: "FilterModalCtrl",
+                size: "md",
+                resolve: {
+                    user: function () { return $scope.user; },
+                    teams: function () { return $scope.teams; },
+                    markers: function () { return $scope.markers; },
+                    filter: function () { return filter; }
+                }
+            });
+            teamModal.result.then(function (result) {
+                if (!filterId) { //New filter
+                    filterId = Math.uuid();
+                }
+                $scope.user.filters[filterId] = result.filter;
+                $scope.setFilter(filterId);
+            }, function () { });
         }
 
         $scope.logout = function () {

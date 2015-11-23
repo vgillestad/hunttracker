@@ -30,6 +30,14 @@ namespace HuntTracker.Api.Controllers
         }
 
         [Authorize]
+        [HttpPut]
+        [Route("me")]
+        public async Task Update([FromBody] User user)
+        {
+            await _userRepository.Update(user);
+        }
+
+        [Authorize]
         [HttpGet]
         [Route("users/{id}")]
         public async Task<User> Get([FromUri] string id)

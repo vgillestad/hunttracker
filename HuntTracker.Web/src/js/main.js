@@ -10,6 +10,7 @@
             "marker.other.tpl.html",
             "help.tpl.html",
             "team.tpl.html",
+            "filter.tpl.html",
             "template/modal/backdrop.html",
             "template/modal/window.html",
             "template/tooltip/tooltip-popup.html",

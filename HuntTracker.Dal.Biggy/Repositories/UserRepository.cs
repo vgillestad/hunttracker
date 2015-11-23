@@ -72,6 +72,11 @@ namespace HuntTracker.Dal.Biggy.Repositories
                 .Select(x =>(User) x);
             return Task.FromResult(users);
         }
+
+        public Task Update(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class UserWithCredentials : User

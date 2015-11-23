@@ -117,6 +117,7 @@
     <Content Include="src\html\help.tpl.html" />
     <Content Include="src\html\marker.mine.tpl.html" />
     <Content Include="src\html\marker.other.tpl.html" />
+    <Content Include="src\html\filter.tpl.html" />
     <Content Include="src\html\team.tpl.html" />
     <Content Include="src\html\templates.js" />
     <Content Include="src\i18n\nb_NO.js" />
@@ -148,6 +149,7 @@
     <Content Include="src\js\controllers\markerMineModal.js" />
     <Content Include="src\js\controllers\markerOtherModal.js" />
     <Content Include="src\js\controllers\menu.js" />
+    <Content Include="src\js\controllers\filterModal.js" />
     <Content Include="src\js\controllers\teamModal.js" />
     <Content Include="src\js\directives\marker-icon.js" />
     <Content Include="src\js\directives\marker-icon-buttons.js" />

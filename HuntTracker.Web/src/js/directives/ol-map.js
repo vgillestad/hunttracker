@@ -200,13 +200,15 @@ angular.module("HTDirectives")
                         if (fitViewToMarkers && newMarkers.length > 0) { //Happens first time
                             fitViewToMarkers = false;
                             map.updateSize();
-                            view.fit(markerSource.getExtent(), map.getSize(), { maxZoom: 15 });
+                            if (markerSource.getFeatures().length > 0) {
+                                view.fit(markerSource.getExtent(), map.getSize(), { maxZoom: 15 });
+                            }
                         }
                     }
                 }, true);
-                
+
                 scope.$watch("fitViewToMarkersTrigger", function () {
-                    if(scope.markers && scope.markers.length > 0) {
+                    if (markerSource.getFeatures().length > 0) {
                         view.fit(markerSource.getExtent(), map.getSize(), { maxZoom: 15 });
                     }
                 });
