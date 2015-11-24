@@ -45,6 +45,8 @@
         helpers.applyFilter = function (filter, markers, user, icons) {
             var hidden, markerDate;
             return markers.map(function (marker) {
+                if(marker.id === "you") { return marker;} //Not filter not applied on you marker
+                
                 hidden = false;
                 if (filter.mineOnly.enabled && user.id !== marker.userId) {
                     hidden = true;

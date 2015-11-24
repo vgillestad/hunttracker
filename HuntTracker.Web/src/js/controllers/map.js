@@ -141,15 +141,12 @@ angular.module("HTControllers")
         $scope.showMarkerDetails = function (marker) {
             $scope.marker = marker;
             if ($scope.marker.id === "you") {
-                $scope.youAreHere = true;
                 $scope.addMarker($scope.marker.coordinates);
             }
             else if ($scope.marker.userId === $scope.user.id) {
-                $scope.youAreHere = false;
                 showMarkerModal();
             }
             else {
-                $scope.youAreHere = false;
                 showMarkerOtherModal();
             }
         }

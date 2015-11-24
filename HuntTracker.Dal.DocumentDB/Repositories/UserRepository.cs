@@ -106,8 +106,10 @@ namespace HuntTracker.Dal.DataDocumentDB.Repositories
                 .AsEnumerable()
                 .FirstOrDefault();
 
-            Mapper.DynamicMap(user, currentDocument);
-            await _client.ReplaceDocumentAsync(currentDocument.SelfLink, currentDocument);
+            var userWithCredentials = (UserWithCredentials)(dynamic)currentDocument;
+            Mapper.DynamicMap(user, userWithCredentials);
+
+            await _client.ReplaceDocumentAsync(currentDocument.SelfLink, userWithCredentials);
         }
     }
 
