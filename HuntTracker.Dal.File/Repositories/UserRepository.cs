@@ -77,6 +77,7 @@ namespace HuntTracker.Dal.File.Repositories
         {
             var userWithCredentials = _users.FirstOrDefault(x => x.Id.Equals(user.Id, StringComparison.InvariantCultureIgnoreCase));
             Mapper.DynamicMap(user, userWithCredentials);
+            _users.Update(userWithCredentials);
 
             return Task.FromResult(0);
         }
