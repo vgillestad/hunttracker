@@ -1,6 +1,4 @@
-﻿angular.module("HuntTracker", ["gettext","templates", "ui.bootstrap", "HTControllers", "HTDirectives", "HTServices"])
-
-    .constant(Modernizr,'')
+﻿angular.module("HuntTracker", ["gettext", "templates", "ui.bootstrap", "HTControllers", "HTDirectives", "HTServices"])
 
 .config(["$httpProvider", function ($httpProvider) {
     //interceptor that adds random argument to GET-requests to prevent caching in IE.
@@ -18,9 +16,18 @@
             "template/accordion/accordion.html",
             "template/accordion/accordion-group.html"
         ];
+        var apiUrl = window.selfHostedApi ? "" : "http://192.168.1.177:8081/api";
 
         return {
             'request': function (config) {
+
+                if (!ht.env.selfHostedApi && config.url.indexOf("/api") > -1) {
+                    config.url = config.url.replace("/api", apiUrl);
+                    var token = localStorage.token; 
+                    if(token) {
+                        config.headers.Authorization = 'Bearer ' + token;
+                    }
+                }
 
                 if (config.method === "GET" && whitelist.indexOf(config.url) < 0) {
                     var rand = new Date().getTime();
@@ -38,7 +45,7 @@
             },
             'responseError': function (rejection) {
                 if (rejection && rejection.status === 401) {
-                    document.location.href = "/login.html";
+                    document.location.href = "login.html";
                 }
 
                 return $q.reject(rejection);

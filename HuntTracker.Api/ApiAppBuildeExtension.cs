@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using System.Web.Http.Cors;
+using HuntTracker.Api.Authorization;
 
 namespace HuntTracker.Api
 {
@@ -16,6 +18,8 @@ namespace HuntTracker.Api
     {
         public static IAppBuilder UseHuntTrackerApi(this IAppBuilder appBuilder)
         {
+            appBuilder.Use(typeof(JwtAuthMiddleware), new TokenHandler());
+
             var webApiConfig = new HttpConfiguration();
             webApiConfig.MapHttpAttributeRoutes();
             webApiConfig.Formatters.Clear();
@@ -31,6 +35,9 @@ namespace HuntTracker.Api
             };
             jsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
             webApiConfig.Formatters.Add(jsonFormatter);
+
+            webApiConfig.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+            webApiConfig.EnsureInitialized();
 
             appBuilder.UseAutofacWebApi(webApiConfig);
             appBuilder.UseWebApi(webApiConfig);

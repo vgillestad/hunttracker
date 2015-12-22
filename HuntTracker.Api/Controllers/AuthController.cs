@@ -7,6 +7,8 @@ using System.Web.Http;
 using HuntTracker.Api.Interfaces.DataAccess;
 using HuntTracker.Api.Interfaces.DataEntities;
 using Microsoft.Owin.Security;
+using System.Linq;
+using HuntTracker.Api.Authorization;
 
 namespace HuntTracker.Api.Controllers
 {
@@ -14,15 +16,17 @@ namespace HuntTracker.Api.Controllers
     public class AuthController : ApiController
     {
         private readonly IUserRepository _usersRepository;
+        private readonly ITokenHandler _tokenHandler;
 
-        public AuthController(IUserRepository usersRepository)
+        public AuthController(IUserRepository usersRepository, ITokenHandler tokenHandler)
         {
+            _tokenHandler = tokenHandler;
             _usersRepository = usersRepository;
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<HttpResponseMessage> LogIn([FromBody] Login login)
+        public async Task<object> LogIn([FromBody] Login login)
         {
             User user;
             if (login == null || !await _usersRepository.TryGetByCredentials(login.Email, login.Password, out user))
@@ -39,7 +43,9 @@ namespace HuntTracker.Api.Controllers
             var identity = new ClaimsIdentity(claims, "HT");
 
             Request.GetOwinContext().Authentication.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+
+            var token = _tokenHandler.CreateToken(claims);
+            return new { token };
         }
 
         [HttpDelete]

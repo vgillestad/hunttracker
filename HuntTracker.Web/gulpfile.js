@@ -32,26 +32,33 @@ gulp.task('watch', function () {
     });
 });
 
+gulp.task('copyToApp', function () {
+    gulp.src("./index.*").pipe(gulp.dest("../HuntTracker.App/www"));
+    gulp.src("./login.*").pipe(gulp.dest("../HuntTracker.App/www"));
+    gulp.src("./src/fonts/icomoon/*").pipe(gulp.dest("../HuntTracker.App/www/src/fonts/icomoon"));
+    gulp.src("./src/images/animals8.png").pipe(gulp.dest("../HuntTracker.App/www/src/images"));
+    gulp.src("./src/images/deer_hunting.jpg").pipe(gulp.dest("../HuntTracker.App/www/src/images"));
+});
+
 var useMin = function (src) {
     return gulp.src(src)
         .pipe(usemin({
             css: [minifyCss(), 'concat'],
             html: [minifyHtml({ empty: true })],
+            vendorjs: [uglify()],
             js: [uglify()],
         }))
         .pipe(gulp.dest('./'));
 }
-
 gulp.task('useMinIndex', function () {
     return useMin("./src/index.html");
 });
-
 gulp.task('useMinLogin', function () {
     return useMin("./src/login.html");
 });
-
 gulp.task('build', function (cb) {
     runSequence(
         ['useMinIndex', 'useMinLogin'],
+        'copyToApp',
         cb);
 });

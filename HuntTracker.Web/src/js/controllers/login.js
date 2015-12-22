@@ -15,8 +15,9 @@ angular.module("HTLogin", ["gettext", "HTServices"])
             $scope.errorMessage = "";
             $scope.loading = true;
             AuthSource.login({ email: $scope.email, password: $scope.password }).$promise
-                .then(function () {
-                    document.location.href = "/";
+                .then(function (auth) {
+                    localStorage.token = auth.token;
+                    ht.env.hostedInCordova ? document.location.href = "index.html" : document.location.href = "";
                 }, function (reason) {
                     $scope.password = "";
                     $scope.loading = false;
@@ -64,3 +65,21 @@ angular.module("HTLogin", ["gettext", "HTServices"])
             $scope.view = "forgot";
         }
     }])
+
+.config(["$httpProvider", function ($httpProvider) {
+    //interceptor that adds random argument to GET-requests to prevent caching in IE.
+    $httpProvider.interceptors.push(["$q", function ($q) {
+
+        var apiUrl = window.selfHostedApi ? "" : "http://192.168.1.177:8081/api";
+
+        return {
+            'request': function (config) {
+
+                if (!window.selfHostedApi && config.url.indexOf("/api") > -1) {
+                    config.url = config.url.replace("/api", apiUrl);
+                }
+                return config || $q.when(config);
+            }
+        };
+    }]);
+}])

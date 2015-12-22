@@ -15,6 +15,9 @@ using System.Linq;
 using HuntTracker.Dal.DataDocumentDB.Repositories;
 using HuntTracker.Api.Interfaces.DataAccess;
 using DataDocumentDB.Repositories;
+using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Security.Jwt;
+using HuntTracker.Api.Authorization;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace HuntTracker.Web
@@ -62,18 +65,19 @@ namespace HuntTracker.Web
                 throw new ArgumentException("No storage provided");
             }
 
+            builder.Register(x => new TokenHandler()).AsImplementedInterfaces();
+
             builder.RegisterApiControllers(typeof(MarkerController).Assembly);
             var container = builder.Build();
 
             app.UseAutofacMiddleware(container);
-
-            app.UseCookieAuthentication(new CookieAuthenticationOptions()
-            {
-                AuthenticationType = "HT",
-                CookieSecure = CookieSecureOption.SameAsRequest,
-                ExpireTimeSpan = TimeSpan.FromDays(7),
-                SlidingExpiration = true,
-            });
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            //{
+            //    AuthenticationType = "HT",
+            //    CookieSecure = CookieSecureOption.SameAsRequest,
+            //    ExpireTimeSpan = TimeSpan.FromDays(7),
+            //    SlidingExpiration = true
+            //});
 
             app.UseHuntTrackerApi();
         }

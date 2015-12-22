@@ -225,8 +225,9 @@ angular.module("HTControllers")
         }
 
         $scope.logout = function () {
+            localStorage.token = "";
             AuthSource.logout(function () {
-                location.href = "/login.html";
+                document.location.href = "login.html";
             });
         }
     }]);

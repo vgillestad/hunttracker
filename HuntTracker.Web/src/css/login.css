@@ -1,5 +1,5 @@
 ﻿body {
-    background: url('/src/images/deer_hunting.jpg')
+    background: url('src/images/deer_hunting.jpg')
 }
 .panel {
     border: 1px solid lightgray;
