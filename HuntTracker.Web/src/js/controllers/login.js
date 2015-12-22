@@ -17,7 +17,7 @@ angular.module("HTLogin", ["gettext", "HTServices"])
             AuthSource.login({ email: $scope.email, password: $scope.password }).$promise
                 .then(function (auth) {
                     localStorage.token = auth.token;
-                    ht.env.hostedInCordova ? document.location.href = "index.html" : document.location.href = "";
+                    ht.env.hostedInCordova ? document.location.href = "index.html" : document.location.href = "/";
                 }, function (reason) {
                     $scope.password = "";
                     $scope.loading = false;
@@ -75,7 +75,7 @@ angular.module("HTLogin", ["gettext", "HTServices"])
         return {
             'request': function (config) {
 
-                if (!window.selfHostedApi && config.url.indexOf("/api") > -1) {
+                if (!ht.env.selfHostedApi && config.url.indexOf("/api") > -1) {
                     config.url = config.url.replace("/api", apiUrl);
                 }
                 return config || $q.when(config);

@@ -6,7 +6,6 @@ index.js
 index.vendor.js
 index.css
 login.js
-login.vendor.js
 login.css
 /src/fonts/icomoon/icomoon.woff?xljosp
 /src/images/animals8.png

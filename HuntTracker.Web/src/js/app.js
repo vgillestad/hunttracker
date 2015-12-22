@@ -16,7 +16,6 @@
             "template/accordion/accordion.html",
             "template/accordion/accordion-group.html"
         ];
-        var apiUrl = window.selfHostedApi ? "" : "http://192.168.1.177:8081/api";
 
         return {
             'request': function (config) {

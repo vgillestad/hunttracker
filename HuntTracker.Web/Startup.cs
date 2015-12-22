@@ -71,13 +71,13 @@ namespace HuntTracker.Web
             var container = builder.Build();
 
             app.UseAutofacMiddleware(container);
-            //app.UseCookieAuthentication(new CookieAuthenticationOptions()
-            //{
-            //    AuthenticationType = "HT",
-            //    CookieSecure = CookieSecureOption.SameAsRequest,
-            //    ExpireTimeSpan = TimeSpan.FromDays(7),
-            //    SlidingExpiration = true
-            //});
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationType = "HT",
+                CookieSecure = CookieSecureOption.SameAsRequest,
+                ExpireTimeSpan = TimeSpan.FromDays(7),
+                SlidingExpiration = true
+            });
 
             app.UseHuntTrackerApi();
         }
