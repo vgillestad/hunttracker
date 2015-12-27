@@ -119,6 +119,7 @@
     <Content Include="index.html" />
     <Content Include="index.js" />
     <Content Include="appcache.mf" />
+    <Content Include="index.vendor.js" />
     <Content Include="login.css" />
     <Content Include="login.html" />
     <Content Include="login.js" />
