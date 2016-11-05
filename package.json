@@ -1,0 +1,45 @@
+{
+  "name": "hunttracker",
+  "version": "1.0.0",
+  "description": "track you hunting experience",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js",
+    "test": "echo \"Error: no test specified\"",
+    "prod": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vgillestad/HuntTracker.git"
+  },
+  "author": "Vegard Gillestad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vgillestad/HuntTracker/issues"
+  },
+  "homepage": "https://github.com/vgillestad/HuntTracker#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^5.7.0",
+    "morgan": "^1.7.0",
+    "node-pbkdf2": "^0.1.1",
+    "password-hash": "^1.2.2",
+    "pg": "^6.0.3",
+    "pg-promise": "^5.2.7",
+    "validator": "^5.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-angular-gettext": "^2.1.0",
+    "gulp-angular-templatecache": "^1.8.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-minify-html": "^1.0.4",
+    "gulp-uglify": "^1.4.2",
+    "gulp-usemin": "^0.3.14",
+    "gulp-watch": "^4.3.5",
+    "openlayers": "^3.10.1",
+    "run-sequence": "^1.1.4"
+  }
+}
