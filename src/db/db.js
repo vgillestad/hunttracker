@@ -1,6 +1,7 @@
+var config = require('../config');
+
 var pgp = require('pg-promise')();
-//var db = pgp('postgres://vegard@localhost/postgres');
-var db = pgp('postgres://vegard:Langbein83@hunttrackerdb.cleejiangjli.eu-west-1.rds.amazonaws.com:5432/postgres');
+var db = pgp(config.postgresConnection);
 var queries = require('./queries');
 
 // USER
