@@ -8,6 +8,8 @@ var runSequence = require('run-sequence');
 var templateCache = require('gulp-angular-templatecache');
 var watch = require('gulp-watch');
 
+//node --stack-size=32000 ./node_modules/gulp/bin/gulp.js build
+
 gulp.task('templates', function () {
     return gulp.src('./src/html/*.tpl.html')
       .pipe(templateCache({ standalone: true }))
@@ -39,15 +41,15 @@ var useMin = function (src) {
             html: [minifyHtml({ empty: true })],
             js: [uglify()],
         }))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./src/public/dist'));
 }
 
 gulp.task('useMinIndex', function () {
-    return useMin("./src/index.html");
+    return useMin("./src/public/index.html");
 });
 
 gulp.task('useMinLogin', function () {
-    return useMin("./src/login.html");
+    return useMin("./src/public/login.html");
 });
 
 gulp.task('build', function (cb) {

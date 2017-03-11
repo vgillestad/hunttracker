@@ -1,3 +1,4 @@
 {
-    "jwtSecret":"worlddominationnext" 
+    "jwtSecret":"worlddominationnext",
+    "env":"production"
 }

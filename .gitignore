@@ -120,3 +120,11 @@ node_modules
 
 #Json file
 Data
+
+*data.sql
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+config.json

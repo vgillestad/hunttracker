@@ -1,3 +1,4 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 DROP SCHEMA IF EXISTS hunttracker CASCADE;
 CREATE SCHEMA hunttracker;
 

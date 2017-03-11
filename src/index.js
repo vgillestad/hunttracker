@@ -192,8 +192,10 @@ app.delete('/api/teams/:teamId/members/:userId', function (req, res) {
 
 
 
-
-// app.use(express.static(path.join(__dirname, './public/dist')));
+if (config.env === 'production') {
+    app.use(express.static(path.join(__dirname, './public/dist')));
+}
 app.use(express.static(path.join(__dirname, './public')));
+
 app.listen(config.port);
 console.log('Running at http://localhost:' + config.port); 
