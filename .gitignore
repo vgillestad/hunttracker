@@ -127,4 +127,5 @@ Data
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
+dist
 config.json
