@@ -192,6 +192,11 @@ app.delete('/api/teams/:teamId/members/:userId', function (req, res) {
 
 
 
+if (config.env !== 'production') {
+    app.get('/appcache.mf', function (req, res) {
+        return res.status(404).send()
+    });
+}
 if (config.env === 'production') {
     app.use(express.static(path.join(__dirname, './public/dist')));
 }
