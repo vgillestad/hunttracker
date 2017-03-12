@@ -45,15 +45,15 @@ module.exports.getMarkersByUser = function (userId) {
 
 module.exports.insertMarker = function (marker) {
     return db.tx(t => {
-        var queries = [
+        var q = [
             t.none(queries.INSERT_MARKER, [marker.id, marker.userId, marker.description, marker.dateTime, marker.icon, marker.coordinates[0], marker.coordinates[1]])
         ];
        if (marker.sharedWithTeamIds && marker.sharedWithTeamIds.length > 0) {
             marker.sharedWithTeamIds.forEach(teamId => {
-                queries.push(t.none(queries.INSERT_MARKER_TEAM, [marker.id, teamId]))
+                q.push(t.none(queries.INSERT_MARKER_TEAM, [marker.id, teamId]))
             });
        }
-        return t.batch(queries);
+        return t.batch(q);
     })  
 }
 
