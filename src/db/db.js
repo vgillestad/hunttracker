@@ -48,46 +48,51 @@ module.exports.insertMarker = function (marker) {
         var q = [
             t.none(queries.INSERT_MARKER, [marker.id, marker.userId, marker.description, marker.dateTime, marker.icon, marker.coordinates[0], marker.coordinates[1]])
         ];
-       if (marker.sharedWithTeamIds && marker.sharedWithTeamIds.length > 0) {
+        if (marker.sharedWithTeamIds && marker.sharedWithTeamIds.length > 0) {
             marker.sharedWithTeamIds.forEach(teamId => {
                 q.push(t.none(queries.INSERT_MARKER_TEAM, [marker.id, teamId]))
             });
-       }
+        }
         return t.batch(q);
-    })  
+    })
 }
 
 module.exports.updateMarker = function (marker) {
     return db.one(queries.GET_MARKER_BY_ID, [marker.id])
         .then((currentMarker) => {
-            var batch = [
-                //Update marker
-                db.none(queries.UPDATE_MARKER, [marker.id, marker.userId, marker.description, marker.dateTime, marker.icon, marker.coordinates[0], marker.coordinates[1]])
-            ]
-            marker.sharedWithTeamIds = marker.sharedWithTeamIds || []
-            currentMarker.sharedWithTeamIds = currentMarker.sharedWithTeamIds || []
-
-            marker.sharedWithTeamIds.forEach(teamId => {
-                if (currentMarker.sharedWithTeamIds.indexOf(teamId) < 0) {
-                    //Insert marker_team
-                    batch.push(db.none(queries.INSERT_MARKER_TEAM, [marker.id, teamId]));
-                }
-            });
-            currentMarker.sharedWithTeamIds.forEach(teamId => {
-                if (marker.sharedWithTeamIds.indexOf(teamId) < 0) {
-                    //Delete marker_team
-                    batch.push(db.none(queries.DELETE_MARKER_TEAM, [marker.id, teamId]));
-                }
-            });
             return db.tx(function (t) {
-                return t.batch(batch);
+                var q = [
+                    //Update marker
+                    t.none(queries.UPDATE_MARKER, [marker.id, marker.userId, marker.description, marker.dateTime, marker.icon, marker.coordinates[0], marker.coordinates[1]])
+                ]
+                marker.sharedWithTeamIds = marker.sharedWithTeamIds || []
+                currentMarker.sharedWithTeamIds = currentMarker.sharedWithTeamIds || []
+
+                marker.sharedWithTeamIds.forEach(teamId => {
+                    if (currentMarker.sharedWithTeamIds.indexOf(teamId) < 0) {
+                        //Insert marker_team
+                        q.push(t.none(queries.INSERT_MARKER_TEAM, [marker.id, teamId]));
+                    }
+                });
+                currentMarker.sharedWithTeamIds.forEach(teamId => {
+                    if (marker.sharedWithTeamIds.indexOf(teamId) < 0) {
+                        //Delete marker_team
+                        q.push(t.none(queries.DELETE_MARKER_TEAM, [marker.id, teamId]));
+                    }
+                });
+                return t.batch(q);
             });
         });
 }
 
 module.exports.deleteMarker = function (markerId) {
-    return db.none(queries.DELETE_MARKER_TEAM_BY_MARKER, [markerId])
-        .then(() => db.none(queries.DELETE_MARKER, [markerId]))
+    return db.tx(function (t) {
+        var q = [
+            t.none(queries.DELETE_MARKER_TEAM_BY_MARKER, [markerId]),
+            t.none(queries.DELETE_MARKER, [markerId])
+        ]
+        return t.batch(q);
+    });
 }
 
 // TEAM
@@ -97,14 +102,24 @@ module.exports.getTeamsByUser = function (userId, activeOnly) {
 }
 
 module.exports.insertTeam = function (team) {
-    return db.none(queries.INSERT_TEAM, [team.id, team.adminId, team.name, team.description])
-        .then(() => db.none(queries.INSERT_TEAM_USER, [team.id, team.adminId, 'admin']))
+    return db.tx(function (t) {
+        var q = [
+           t.none(queries.INSERT_TEAM, [team.id, team.adminId, team.name, team.description]),
+           t.none(queries.INSERT_TEAM_USER, [team.id, team.adminId, 'admin'])
+        ]
+        return t.batch(q);
+    });
 }
 
 module.exports.deleteTeam = function (teamId) {
-    return db.none(queries.DELETE_MARKER_TEAM_BY_TEAM, [teamId])
-        .then(() => db.none(queries.DELETE_TEAM_USER_BY_TEAM, [teamId]))
-        .then(() => db.none(queries.DELETE_TEAM, [teamId]))
+    return db.tx(function (t) {
+        var q = [
+            db.none(queries.DELETE_MARKER_TEAM_BY_TEAM, [teamId]),
+            db.none(queries.DELETE_TEAM_USER_BY_TEAM, [teamId]),
+            db.none(queries.DELETE_TEAM, [teamId])
+        ]
+        return t.batch(q)
+    });
 }
 
 // TEAM USER
