@@ -44,19 +44,17 @@ module.exports.getMarkersByUser = function (userId) {
 }
 
 module.exports.insertMarker = function (marker) {
-    return db.none(queries.INSERT_MARKER, [marker.id, marker.userId, marker.description, marker.dateTime, marker.icon, marker.coordinates[0], marker.coordinates[1]])
-        .then(() => {
-            if (marker.sharedWithTeamIds && marker.sharedWithTeamIds.length > 0) {
-                var batch = []
-                marker.sharedWithTeamIds.forEach(teamId => {
-                    batch.push(db.none(queries.INSERT_MARKER_TEAM, [marker.id, teamId]))
-                });
-                return db.tx(function (t) {
-                    return t.batch(batch);
-                })
-            }
-            return;
-        })
+    return db.tx(t => {
+        var q = [
+            t.none(queries.INSERT_MARKER, [marker.id, marker.userId, marker.description, marker.dateTime, marker.icon, marker.coordinates[0], marker.coordinates[1]])
+        ];
+       if (marker.sharedWithTeamIds && marker.sharedWithTeamIds.length > 0) {
+            marker.sharedWithTeamIds.forEach(teamId => {
+                q.push(t.none(queries.INSERT_MARKER_TEAM, [marker.id, teamId]))
+            });
+       }
+        return t.batch(q);
+    })  
 }
 
 module.exports.updateMarker = function (marker) {
