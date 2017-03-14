@@ -6,7 +6,7 @@ angular.module("HTDirectives")
             restrict: 'E',
             template:
             '<div class="form-group">' +
-            '<div class="input-group" style="max-width:170px;float:left;padding-right:5px">' +
+            '<div class="input-group" style="max-width:168px;float:left;padding-right:5px">' +
             '<input type="date" class="form-control" style="-webkit-appearance: none;" />' +
             '<span class="input-group-addon">' +
             '<i class="icon-calendar"></i>' +
