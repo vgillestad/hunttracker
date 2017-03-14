@@ -19,7 +19,7 @@ app.use(morgan('dev'));
 
 var createUserToken = function (user) {
     var token = jwt.sign({ id: user.id, email: user.email }, config.jwtSecret, {
-        expiresInMinutes: 1440 // expires in 24 hours
+        expiresIn: '90 days'
     });
     return token;
 }
