@@ -3,10 +3,10 @@ var gettext = require('gulp-angular-gettext');
 var usemin = require('gulp-usemin');
 var uglify = require('gulp-uglify');
 var minifyHtml = require('gulp-minify-html');
-var minifyCss = require('gulp-minify-css');
 var runSequence = require('run-sequence');
 var templateCache = require('gulp-angular-templatecache');
 var watch = require('gulp-watch');
+var cleanCSS = require('gulp-clean-css');
 
 //node --stack-size=32000 ./node_modules/gulp/bin/gulp.js build
 
@@ -37,7 +37,7 @@ gulp.task('watch', function () {
 var useMin = function (src) {
     return gulp.src(src)
         .pipe(usemin({
-            css: [minifyCss(), 'concat'],
+            css: [cleanCSS()],
             html: [minifyHtml({ empty: true })],
             js: [uglify()],
         }))
