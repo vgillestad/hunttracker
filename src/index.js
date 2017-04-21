@@ -17,8 +17,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
 
-app.get('/.well-known/acme-challenge/GkSC0rnTG4RcrSfpF3IlV1RRkRSiUl-68-61_GT73ho', function (req, res) {
-    return res.send('GkSC0rnTG4RcrSfpF3IlV1RRkRSiUl-68-61_GT73ho.SSFaCeAeenDRdpSmeYjvtuwjs7cHzzjfIg_976OYKAo');
+app.get('/.well-known/acme-challenge/:content', function (req, res) {
+    return res.send(req.param('content'));
 });
 
 var createUserToken = function (user) {
