@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.get('/.well-known/acme-challenge/:content', function (req, res) {
-    return res.send(req.param('content'));
+    return res.send(req.param('content') + ".SSFaCeAeenDRdpSmeYjvtuwjs7cHzzjfIg_976OYKAo");
 });
 
 var createUserToken = function (user) {
