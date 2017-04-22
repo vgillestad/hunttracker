@@ -67,19 +67,21 @@ angular.module("HTDirectives")
 
                 //Touch devices like iPad - using element[0] instead of map.getViewport() to make it work on Windows Phone
                 var elm = window.isWindowsPhone ? element[0] : map.getViewport();
-                new Hammer.Manager(elm, {
-                    recognizers: [
-                        [Hammer.Press]
-                    ]
-                }).on('press', function (e) {
-                    e.preventDefault();
-                    var eventPosition = [e.center.x, e.center.y];
-                    var coordinates = map.getCoordinateFromPixel(eventPosition);
-                    scope.$apply(function () {
-                        scope.onShowContextMenu({ coordinates: coordinates });
+                if (window.isMobileOrTablet) {
+                    new Hammer.Manager(elm, {
+                        recognizers: [
+                            [Hammer.Press]
+                        ]
+                    }).on('press', function (e) {
+                        e.preventDefault();
+                        var eventPosition = [e.center.x, e.center.y];
+                        var coordinates = map.getCoordinateFromPixel(eventPosition);
+                        scope.$apply(function () {
+                            scope.onShowContextMenu({ coordinates: coordinates });
+                        });
+                        return false;
                     });
-                    return false;
-                });
+                }
 
                 var adjacentPixels = function (pixel, r) {
                     var x = pixel[0], y = pixel[1], pixels = [];
@@ -97,7 +99,7 @@ angular.module("HTDirectives")
                         function (feature, layer) {
                             return feature;
                         });
-                    
+
                     //If touch and no feature found at pixel, expand pixels to check.
                     //This extra checking can potensially take extra time.
                     if (!feature && Modernizr.touch) {
