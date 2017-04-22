@@ -33,14 +33,10 @@ module.exports.insertUser = function (user) {
 
 // MARKER
 module.exports.getMarkersByUser = function (userId) {
-    return db.manyOrNone(queries.GET_MARKERS, [userId])
-        .then(markers => {
-            return markers.map(x => {
-                x.coordinates = [x.lat, x.lon];
-                x.sharedWithTeamIds = x.sharedWithTeamIds || []
-                return x;
-            });
-        })
+    return db.each(queries.GET_MARKERS, [userId], x => {
+        x.coordinates = [x.lat, x.lon];
+        x.sharedWithTeamIds = x.sharedWithTeamIds || []
+    });
 }
 
 module.exports.insertMarker = function (marker) {
