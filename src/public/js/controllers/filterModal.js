@@ -7,33 +7,36 @@ angular.module("HTControllers")
         $scope.icons = IconSource.getAll();
         $scope.filter = filter || {
             mineOnly: { enabled: false },
-            team: { enabled: false,  teams: [] },
+            team: { enabled: false, teams: [] },
             tag: { enabled: false, tags: [] },
             fromDate: { enabled: false, date: new Date() },
-            toDate: { enabled: false,  date: new Date() } ,
+            toDate: { enabled: false, date: new Date() },
         };
-        
+
         $scope.actionTags = []; $scope.animalTags = []; $scope.otherTags = []; $scope.customTags = [];
         markers.forEach(function (marker) {
             //IconTags
-            var iconTags = $scope.icons[marker.icon].tags;
-            if (iconTags) {
-                var firstTag = iconTags[0];
-                if (firstTag === "shot" || firstTag === "seen") {
-                    if ($scope.actionTags.indexOf(firstTag) < 0) {
-                        $scope.actionTags.push(firstTag);
-                    }
-                    var animalTag = iconTags[1];
-                    if ($scope.animalTags.indexOf(animalTag) < 0) {
-                        $scope.animalTags.push(animalTag);
-                    }
-                }
-                else {
-                    iconTags.forEach(function (tag) {
-                        if ($scope.otherTags.indexOf(tag) < 0) {
-                            $scope.otherTags.push(tag);
+            var icon = $scope.icons[marker.icon];
+            if (icon) {
+                var iconTags = icon.tags;
+                if (iconTags) {
+                    var firstTag = iconTags[0];
+                    if (firstTag === "shot" || firstTag === "seen") {
+                        if ($scope.actionTags.indexOf(firstTag) < 0) {
+                            $scope.actionTags.push(firstTag);
                         }
-                    })
+                        var animalTag = iconTags[1];
+                        if ($scope.animalTags.indexOf(animalTag) < 0) {
+                            $scope.animalTags.push(animalTag);
+                        }
+                    }
+                    else {
+                        iconTags.forEach(function (tag) {
+                            if ($scope.otherTags.indexOf(tag) < 0) {
+                                $scope.otherTags.push(tag);
+                            }
+                        })
+                    }
                 }
             }
             //CustomTags
@@ -51,7 +54,7 @@ angular.module("HTControllers")
             var index = $scope.filter.team.teams.indexOf(team);
             index < 0 ? $scope.filter.team.teams.push(team) : $scope.filter.team.teams.splice(index, 1);
         }
-        
+
         $scope.toggleTag = function (tag) {
             var index = $scope.filter.tag.tags.indexOf(tag);
             index < 0 ? $scope.filter.tag.tags.push(tag) : $scope.filter.tag.tags.splice(index, 1);
