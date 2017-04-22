@@ -33,10 +33,10 @@ angular.module("HTDirectives")
                         source: new ol.source.XYZ({
                             attributions: [
                                 new ol.Attribution({
-                                    html: "&copy; <a href='http://statkart.no'>Kartverket</a>"
+                                    html: "&copy; <a href='https://statkart.no'>Kartverket</a>"
                                 })
                             ],
-                            url: "http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={z}&x={x}&y={y}"
+                            url: "https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={z}&x={x}&y={y}"
                         })
                     })
                 ];

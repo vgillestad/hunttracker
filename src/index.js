@@ -17,8 +17,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
 
-app.get('/.well-known/acme-challenge/:content', function (req, res) {
-    return res.send(req.param('content') + ".SSFaCeAeenDRdpSmeYjvtuwjs7cHzzjfIg_976OYKAo");
+app.use(function (req, res, next) {
+    console.log(`req.url:${req.url}`);
+    console.log(`req.host:${req.host}`);
+    console.log(`req.path:${req.path}`);
+    console.log(`req.protocol:${req.protocol}`);
 });
 
 var createUserToken = function (user) {
