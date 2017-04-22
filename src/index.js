@@ -18,12 +18,12 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use(function (req, res, next) {
-    console.log(`req.url:${req.url}`);
-    console.log(`req.hostname:${req.host}`);
-    console.log(`req.path:${req.path}`);
-    console.log(`req.protocol:${req.protocol}`);
-    console.log(`req.fwd:${req.headers["x-forwarded-proto"]}`);
-
+    if (req.hostname && req.hostname.indexOf('hunttracker.no') > -1) {
+        return res.redirect(301, 'https://hunttracker.herokuapp.com/');
+    }
+    else if (req.headers["x-forwarded-proto"] === 'http') {
+        return res.redirect(301, 'https://hunttracker.herokuapp.com/');
+    }
     next();
 });
 
