@@ -19,9 +19,12 @@ app.use(morgan('dev'));
 
 app.use(function (req, res, next) {
     console.log(`req.url:${req.url}`);
-    console.log(`req.host:${req.host}`);
+    console.log(`req.hostname:${req.host}`);
     console.log(`req.path:${req.path}`);
     console.log(`req.protocol:${req.protocol}`);
+    console.log(`req.fwd:${req.headers["x-forwarded-proto"]}`);
+
+    next();
 });
 
 var createUserToken = function (user) {
