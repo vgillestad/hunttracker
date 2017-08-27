@@ -46,7 +46,7 @@ app.post("/api/auth", function (req, res) {
             return pwd.verify(user.passwordHash, req.body.password)
                 .then(isValid => {
                     if (isValid) {
-                        return res.cookie('token', createUserToken(user)).send()
+                        return res.cookie('token', createUserToken(user), { maxAge: 86400000 * 90, httpOnly: false } ).send()
                     }
                     return res.status(401).send()
                 })
