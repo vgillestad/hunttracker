@@ -36,7 +36,7 @@ angular.module("HTDirectives")
                                     html: "&copy; <a href='https://statkart.no'>Kartverket</a>"
                                 })
                             ],
-                            url: "https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={z}&x={x}&y={y}"
+                            url: "https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}"
                         })
                     })
                 ];
