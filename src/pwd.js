@@ -11,7 +11,7 @@ module.exports.verify = function (combined, password) {
             var hash = Buffer.from(ph[2], 'base64');
 
             // verify the salt and hash against the password
-            crypto.pbkdf2(password, salt, iterations, hash.length, function (err, verify) {
+            crypto.pbkdf2(password, salt, iterations, hash.length, 'SHA1', function (err, verify) {
                 if (err) reject(err);
                 else {
                     var isValid = verify.toString('binary') === hash.toString('binary')
