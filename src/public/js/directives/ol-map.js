@@ -247,8 +247,8 @@ angular.module("HTDirectives")
                     map.removeLayer(markerLayer);
                     map.removeLayer(propertyLayer);
 
-                    map.addLayer(markerLayer);
                     map.addLayer(propertyLayer);
+                    map.addLayer(markerLayer);
                 });
             }
         };
