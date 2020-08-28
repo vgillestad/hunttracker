@@ -18,7 +18,7 @@ angular.module("HTDirectives")
             },
             link: function (scope, element, attrs) {
 
-                var layers = [
+                var backgroundLayers = [
                     new ol.layer.Tile({
                         source: new ol.source.OSM()
                     }),
@@ -174,6 +174,18 @@ angular.module("HTDirectives")
                     });
                 };
 
+                var propertyLayer = new ol.layer.Tile({
+                    source: new ol.source.TileWMS({
+                        url: 'https://openwms.statkart.no/skwms1/wms.matrikkel?',
+                        params: {
+                            'LAYERS': 'eiendomskart',
+                            'FORMAT': 'image/png',
+                            'TRANSPARENT': 'true',
+                        }
+                    })
+                })
+                map.addLayer(propertyLayer);
+
                 var markerSource = new ol.source.Vector();
                 var markerLayer = new ol.layer.Vector({ source: markerSource });
                 map.addLayer(markerLayer);
@@ -215,23 +227,28 @@ angular.module("HTDirectives")
                     }
                 });
 
+
+
                 scope.$watch("layer", function () {
-                    for (var index = 0; index < layers.length; index++) {
-                        map.removeLayer(layers[index]);
+                    for (var index = 0; index < backgroundLayers.length; index++) {
+                        map.removeLayer(backgroundLayers[index]);
                     }
 
                     if (scope.layer === "osm") {
-                        map.addLayer(layers[0]);
+                        map.addLayer(backgroundLayers[0]);
                     }
                     else if (scope.layer === "satellite") {
-                        map.addLayer(layers[1]);
+                        map.addLayer(backgroundLayers[1]);
                     }
                     else {
-                        map.addLayer(layers[2]);
+                        map.addLayer(backgroundLayers[2]);
                     }
                     //Re-add to ensure on top
                     map.removeLayer(markerLayer);
+                    map.removeLayer(propertyLayer);
+
                     map.addLayer(markerLayer);
+                    map.addLayer(propertyLayer);
                 });
             }
         };
