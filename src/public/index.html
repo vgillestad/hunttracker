@@ -4,13 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="viewport"
+        content="viewport-fit=cover, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta name="msapplication-tap-highlight" content="no" />
     <title>HuntTracker</title>
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
     <!-- build:css index.css -->
     <link type="text/css" rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>
+    <link type="text/css" rel="stylesheet"
+        href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <link type="text/css" rel="stylesheet" href="/js/lib/openlayers/ol.css" />
     <link type="text/css" rel="stylesheet" href="/css/icomoon.css" />
     <link type="text/css" rel="stylesheet" href="/css/icomoon.addons.css" />
@@ -22,7 +24,8 @@
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="/bower_components/moment/locale/nb.js"></script>
-    <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript"
+        src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="/js/lib/openlayers/ol.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.js"></script>
@@ -62,7 +65,9 @@
     <script type="text/javascript" src="/js/main.js"></script>
     <!-- endbuild -->
 </head>
+
 <body ng-app="HuntTracker" ng-controller="MapCtrl">
+
     <!--MENU-->
     <div class="main-menu">
         <i ng-if="loading" class="icon-spinner3 spinner spinner--steps2 icon-saving"></i>
@@ -71,45 +76,54 @@
                 <!--Tracking-->
                 <li>
                     <a href="javascript:void(0)" ng-click="setTracking()" style="border-right: 1px solid #e7e7e7">
-                        <i class="icon-you" ng-class="{'text-primary': tracking  === true, 'spinner': trackingLoading === true}"></i>
+                        <i class="icon-you"
+                            ng-class="{'text-primary': tracking  === true, 'spinner': trackingLoading === true}"></i>
                     </a>
                 </li>
                 <!--Filters-->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="border-right: 1px solid #e7e7e7">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false" style="border-right: 1px solid #e7e7e7">
                         <i class="icon-filter" ng-class="{'text-danger': user.settings.filter  !== 'all'}"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li ng-repeat="(key, value) in standardFilters">
-                            <a href="javascript:void(0)" ng-click="setFilter(key)"><i ng-class="user.settings.filter === key ? 'icon-radio-checked' : 'icon-radio-unchecked'"></i><span>{{value.name | translate}}</span></a>
+                            <a href="javascript:void(0)" ng-click="setFilter(key)"><i
+                                    ng-class="user.settings.filter === key ? 'icon-radio-checked' : 'icon-radio-unchecked'"></i><span>{{value.name | translate}}</span></a>
                         </li>
-                        
+
                         <li class="divider" ng-if="user.filters"></li>
                         <li ng-repeat="(key, value) in user.filters" class="hz">
-                            <a href="javascript:void(0)" ng-click="setFilter(key)"><i ng-class="user.settings.filter === key ? 'icon-radio-checked' : 'icon-radio-unchecked'"></i><span>{{value.name}}</span></a>
-                            <a href="javascript:void(0)" ng-click="showFilterModal(key)" class="btn btn-default btn-xs"><i class="icon-pencil"></i></a>
+                            <a href="javascript:void(0)" ng-click="setFilter(key)"><i
+                                    ng-class="user.settings.filter === key ? 'icon-radio-checked' : 'icon-radio-unchecked'"></i><span>{{value.name}}</span></a>
+                            <a href="javascript:void(0)" ng-click="showFilterModal(key)"
+                                class="btn btn-default btn-xs"><i class="icon-pencil"></i></a>
                         </li>
-                        
+
                         <li class="divider"></li>
                         <li>
-                            <a href="javascript:void(0)" ng-click="showFilterModal()"><i class="icon-pencil"></i><span translate>Custom Filter</span></a>
+                            <a href="javascript:void(0)" ng-click="showFilterModal()"><i class="icon-pencil"></i><span
+                                    translate>Custom Filter</span></a>
                         </li>
                     </ul>
                 </li>
                 <!--Layers-->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="border-right: 1px solid #e7e7e7">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false" style="border-right: 1px solid #e7e7e7">
                         <i class="icon-stack2"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li ng-repeat="(key,value) in layers">
-                            <a href="javascript:void(0)" ng-click="setLayer(key)"><i ng-class="user.settings.layer === key ? 'icon-radio-checked' : 'icon-radio-unchecked'"></i><span>{{value | translate}}</span></a>
+                            <a href="javascript:void(0)" ng-click="setLayer(key)"><i
+                                    ng-class="user.settings.layer === key ? 'icon-radio-checked' : 'icon-radio-unchecked'"></i><span>{{value | translate}}</span></a>
                         </li>
                     </ul>
                 </li>
                 <!--General Menu-->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">
                         <i class="icon-menu"></i>
                     </a>
                     <ul class="dropdown-menu">
@@ -121,7 +135,8 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="javascript:void(0)" ng-click="logout()"><i class="icon-user-minus"></i> {{'Log out' | translate}}</a>
+                            <a href="javascript:void(0)" ng-click="logout()"><i class="icon-user-minus"></i>
+                                {{'Log out' | translate}}</a>
                         </li>
                     </ul>
                 </li>
@@ -130,15 +145,16 @@
     </div>
 
     <!--MAP-->
-    <div class="map-fullscreen">
-        <ol-map class="map-fullscreen" ol-markers="markers" ol-layer="user.settings.layer" ol-track-position="tracking" ol-on-position-changed="positionChanged(coordinates, accuracy)"
-        ol-on-marker-selected="showMarkerDetails(marker)" ol-on-show-context-menu="addMarker(coordinates)" ol-fit-view-to-markers-trigger="fitMapToMarkersTrigger">
-        </ol-map>
-    </div>
+    <ol-map class="map-fullscreen" ol-markers="markers" ol-layer="user.settings.layer" ol-track-position="tracking"
+        ol-on-position-changed="positionChanged(coordinates, accuracy)"
+        ol-on-marker-selected="showMarkerDetails(marker)" ol-on-show-context-menu="addMarker(coordinates)"
+        ol-fit-view-to-markers-trigger="fitMapToMarkersTrigger">
+    </ol-map>
 
     <div ng-if="!you.hidden && you.accuracy > 100" class="gps-error-message">
         <span translate>Your GPS is struggeling. Accuarcy is</span> {{you.accuracy}}m
     </div>
+
 </body>
 
 </html>

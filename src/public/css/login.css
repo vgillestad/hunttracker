@@ -1,5 +1,10 @@
 ﻿body {
-    background: url('/images/deer_hunting.jpg')
+    background: url('/images/deer_hunting.jpg');
+    height:100vh;
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-right: env(safe-area-inset-right);
 }
 .panel {
     border: 1px solid lightgray;

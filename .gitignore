@@ -128,3 +128,4 @@ Data
 !.elasticbeanstalk/*.global.yml
 
 config.json
+.DS_Store
