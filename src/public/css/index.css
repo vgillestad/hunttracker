@@ -189,3 +189,7 @@ ul>li.hz {
 .ol-zoom {
     top: calc(0.5em + env(safe-area-inset-top));
 }
+
+.modal-dialog {
+    margin-top: calc(10px + env(safe-area-inset-top));
+}
