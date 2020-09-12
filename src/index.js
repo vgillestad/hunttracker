@@ -1,17 +1,18 @@
 /* global process */
-var express = require('express');
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser')
-var morgan = require('morgan');
-var jwt = require('jsonwebtoken');
-var validator = require('validator');
-var path = require('path');
-var passwordHash = require('password-hash')
-var config = require('./config');
-var pwd = require('./pwd')
-var db = require('./db/db')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
+const morgan = require('morgan');
+const jwt = require('jsonwebtoken');
+const validator = require('validator');
+const path = require('path');
+const passwordHash = require('password-hash')
+const nodemailer = require('nodemailer');
+const config = require('./config');
+const pwd = require('./pwd')
+const db = require('./db/db')
 
-var app = express();
+const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -27,11 +28,12 @@ app.use(function (req, res, next) {
     next();
 });
 
-var createUserToken = function (user) {
-    var token = jwt.sign({ id: user.id, email: user.email }, config.jwtSecret, {
-        expiresIn: '90 days'
-    });
-    return token;
+const createUserToken = ({ userId }) => {
+    return jwt.sign({ id: userId }, config.jwtSecret, { expiresIn: '90 days' });
+}
+
+const createPasswordResetToken = ({ userId }) => {
+    return jwt.sign({ id: userId, scope: 'password-reset' }, config.jwtSecret, { expiresIn: '1 hours' });
 }
 
 app.post("/api/auth", function (req, res) {
@@ -46,7 +48,7 @@ app.post("/api/auth", function (req, res) {
             return pwd.verify(user.passwordHash, req.body.password)
                 .then(isValid => {
                     if (isValid) {
-                        return res.cookie('token', createUserToken(user), { maxAge: 86400000 * 90, httpOnly: false } ).send()
+                        return res.cookie('token', createUserToken({ userId: user.id }), { maxAge: 86400000 * 90, httpOnly: false }).send()
                     }
                     return res.status(401).send()
                 })
@@ -71,6 +73,39 @@ app.post('/api/users/', function (req, res) {
                 .catch(err => res.status(500).json({ err: err && err.toString ? err.toString() : err }));
         })
 });
+
+app.post('/api/password-reset', async (req, res) => {
+    try {
+        const user = await db.getUserByEmail(req.body.email);
+        if (user) {
+            const token = createPasswordResetToken({ userId: user.id });
+            const resetPasswordUrl = `${config.publicBaseUrl}/reset-password?token=${token}`
+            await nodemailer.createTransport({
+                host: "mail.fastname.no",
+                port: 465,
+                secure: true,
+                auth: {
+                    user: 'support@hunttracker.no',
+                    pass: 'Langbein83',
+                },
+            }).sendMail({
+                from: '"HuntTracker Support" <support@hunttracker.no>',
+                to: user.email,
+                subject: "Reset Password",
+                html: `
+                    <h3>Hi ${user.firstName}</h3>
+                    <p>You just sent us a request to reset your password. Click this <a href="${resetPasswordUrl}">link</a> and you will be able to choose your new password.</p>
+                    <p><small>If the above link does not work, you can copy the below link into any browser:<br/>${resetPasswordUrl}</small></p>
+                    `,
+            });
+            return res.send()
+        }
+        return res.status(404).send();
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send();
+    }
+})
 
 app.use("/api/*", function (req, res, next) {
     var token = req.cookies.token || req.query.token || req.headers['authorization'] || '';
