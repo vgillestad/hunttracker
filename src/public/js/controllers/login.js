@@ -60,7 +60,19 @@ angular.module("HTLogin", ["gettext", "HTServices"])
         }
 
         $scope.forgot = function () {
-            $scope.errorMessage = "Sorry, but this functionality is not ready yet.";
             $scope.view = "forgot";
+        }
+        $scope.forgotSubmit = function () {
+            $scope.errorMessage = null;
+            $scope.loading = true;
+            UserSource.sendResetPasswordEmail({ email: $scope.email }).$promise
+                .then(function () {
+                    $scope.errorMessage = 'We have sent you an email with instructions how to reset password';
+                    $scope.loading = false;
+                    $scope.view = 'login';
+                }, function () {
+                    $scope.loading = false;
+                    $scope.errorMessage = "We are sorry, but an unexpected error occured.";
+                });
         }
     }])

@@ -22,6 +22,12 @@ module.exports.INSERT_USER = `
 INSERT INTO hunttracker."user" ("firstName", "lastName", email, "passwordHash") 
 VALUES ($1,$2,$3,$4)`
 
+module.exports.UPDATE_USER_PASSWORD = `
+UPDATE hunttracker."user"
+SET 
+  "passwordHash" = $1
+WHERE id = $2`;
+
 module.exports.GET_MARKER_BY_ID = `
 SELECT 
   marker.*,

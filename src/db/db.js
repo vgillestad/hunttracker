@@ -31,6 +31,10 @@ module.exports.insertUser = function (user) {
     return db.none(queries.INSERT_USER, [user.firstName, user.lastName, user.email, user.passwordHash])
 }
 
+module.exports.updateUserPassword = function (userId, passwordHash) {
+    return db.none(queries.UPDATE_USER_PASSWORD, [passwordHash, userId])
+}
+
 // MARKER
 module.exports.getMarkersByUser = function (userId) {
     return db.each(queries.GET_MARKERS, [userId], x => {
@@ -100,8 +104,8 @@ module.exports.getTeamsByUser = function (userId, activeOnly) {
 module.exports.insertTeam = function (team) {
     return db.tx(function (t) {
         var q = [
-           t.none(queries.INSERT_TEAM, [team.id, team.adminId, team.name, team.description]),
-           t.none(queries.INSERT_TEAM_USER, [team.id, team.adminId, 'admin'])
+            t.none(queries.INSERT_TEAM, [team.id, team.adminId, team.name, team.description]),
+            t.none(queries.INSERT_TEAM_USER, [team.id, team.adminId, 'admin'])
         ]
         return t.batch(q);
     });

@@ -33,7 +33,7 @@ const createUserToken = ({ userId }) => {
 }
 
 const createPasswordResetToken = ({ userId }) => {
-    return jwt.sign({ id: userId, scope: 'password-reset' }, config.jwtSecret, { expiresIn: '1 hours' });
+    return jwt.sign({ id: userId, scope: 'reset-password' }, config.jwtSecret, { expiresIn: '1 hours' });
 }
 
 app.post("/api/auth", function (req, res) {
@@ -60,26 +60,12 @@ app.delete('/api/auth', function (req, res) {
     return res.cookie('token', '').status(200).send()
 })
 
-app.post('/api/users/', function (req, res) {
-    db.getUserByEmail(req.body.email)
-        .then(user => {
-            if (user) {
-                return res.status(409).send()
-            }
-            user = req.body;
-            user.passwordHash = passwordHash.generate(req.body.password)
-            db.insertUser(user)
-                .then(res.send())
-                .catch(err => res.status(500).json({ err: err && err.toString ? err.toString() : err }));
-        })
-});
-
-app.post('/api/password-reset', async (req, res) => {
+app.post('/api/users/send-reset-password-email', async (req, res) => {
     try {
         const user = await db.getUserByEmail(req.body.email);
         if (user) {
             const token = createPasswordResetToken({ userId: user.id });
-            const resetPasswordUrl = `${config.publicBaseUrl}/reset-password?token=${token}`
+            const resetPasswordUrl = `${config.publicBaseUrl}/reset-password.html#/?token=${token}`
             await nodemailer.createTransport({
                 host: "mail.fastname.no",
                 port: 465,
@@ -94,8 +80,8 @@ app.post('/api/password-reset', async (req, res) => {
                 subject: "Reset Password",
                 html: `
                     <h3>Hi ${user.firstName}</h3>
-                    <p>You just sent us a request to reset your password. Click this <a href="${resetPasswordUrl}">link</a> and you will be able to choose your new password.</p>
-                    <p><small>If the above link does not work, you can copy the below link into any browser:<br/>${resetPasswordUrl}</small></p>
+                    <p>You just sent us a request to reset your password. Follow the link below and you will be able to reset your new password.</p>
+                    <p><small>${resetPasswordUrl}</p>
                     `,
             });
             return res.send()
@@ -106,6 +92,43 @@ app.post('/api/password-reset', async (req, res) => {
         return res.status(500).send();
     }
 })
+
+app.post('/api/users/reset-password', async (req, res) => {
+    try {
+        const { token, password, confirmPassword } = req.body;
+        if (password !== confirmPassword) {
+            return res.status(400).send('password and confirmPassword does not match');
+        }
+        jwt.verify(token, config.jwtSecret, async function (err, decoded) {
+            if (err) {
+                return res.status(401).json({ message: 'invalid token' });
+            } else {
+                if (decoded.scope === 'reset-password') {
+                    await db.updateUserPassword(decoded.id, passwordHash.generate(password))
+                    return res.send();
+                }
+                return res.status(403).json({ message: 'provided token not allowed for password reset' });
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send();
+    }
+})
+
+app.post('/api/users/', function (req, res) {
+    db.getUserByEmail(req.body.email)
+        .then(user => {
+            if (user) {
+                return res.status(409).send()
+            }
+            user = req.body;
+            user.passwordHash = passwordHash.generate(req.body.password)
+            db.insertUser(user)
+                .then(res.send())
+                .catch(err => res.status(500).json({ err: err && err.toString ? err.toString() : err }));
+        })
+});
 
 app.use("/api/*", function (req, res, next) {
     var token = req.cookies.token || req.query.token || req.headers['authorization'] || '';

@@ -52,8 +52,12 @@ gulp.task('useMinLogin', function () {
     return useMin("./src/public/login.html");
 });
 
+gulp.task('useMinResetPassword', function () {
+    return useMin("./src/public/reset-password.html");
+});
+
 gulp.task('build', function (cb) {
     runSequence(
-        ['useMinIndex', 'useMinLogin'],
+        ['useMinIndex', 'useMinLogin', 'useMinResetPassword'],
         cb);
 });
