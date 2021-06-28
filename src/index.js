@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan');
 const jwt = require('jsonwebtoken');
-const validator = require('validator');
 const path = require('path');
 const passwordHash = require('password-hash')
 const nodemailer = require('nodemailer');
@@ -48,7 +47,8 @@ app.post("/api/auth", function (req, res) {
             return pwd.verify(user.passwordHash, req.body.password)
                 .then(isValid => {
                     if (isValid) {
-                        return res.cookie('token', createUserToken({ userId: user.id }), { maxAge: 86400000 * 90, httpOnly: false }).send()
+                        res.cookie()
+                        return res.cookie('token', createUserToken({ userId: user.id }), { maxAge: 86400000 * 90, httpOnly: false, sameSite: 'strict' }).send()
                     }
                     return res.status(401).send()
                 })
@@ -258,13 +258,6 @@ app.delete('/api/teams/:teamId/members/:userId', function (req, res) {
         .catch(err => res.status(500).json({ err: err && err.toString ? err.toString() : err }));
 });
 
-
-
-if (config.env !== 'production') {
-    app.get('/appcache.mf', function (req, res) {
-        return res.status(404).send()
-    });
-}
 if (config.env === 'production') {
     app.use(express.static(path.join(__dirname, './public/dist')));
 }

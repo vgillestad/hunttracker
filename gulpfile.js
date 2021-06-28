@@ -3,7 +3,6 @@ var gettext = require('gulp-angular-gettext');
 var usemin = require('gulp-usemin');
 var uglify = require('gulp-uglify');
 var minifyHtml = require('gulp-minify-html');
-var runSequence = require('run-sequence');
 var templateCache = require('gulp-angular-templatecache');
 var watch = require('gulp-watch');
 var cleanCSS = require('gulp-clean-css');
@@ -12,8 +11,8 @@ var cleanCSS = require('gulp-clean-css');
 
 gulp.task('templates', function () {
     return gulp.src('./src/html/*.tpl.html')
-      .pipe(templateCache({ standalone: true }))
-      .pipe(gulp.dest('./src/html'));
+        .pipe(templateCache({ standalone: true }))
+        .pipe(gulp.dest('./src/html'));
 });
 
 gulp.task('pot', function () {
@@ -56,8 +55,4 @@ gulp.task('useMinResetPassword', function () {
     return useMin("./src/public/reset-password.html");
 });
 
-gulp.task('build', function (cb) {
-    runSequence(
-        ['useMinIndex', 'useMinLogin', 'useMinResetPassword'],
-        cb);
-});
+gulp.task('build', gulp.series('useMinIndex', 'useMinLogin', 'useMinResetPassword'));

@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon ./src/index.js",
     "test": "echo \"Error: no test specified\"",
-    "prod": "node ./src/index.js"
+    "prod": "node ./src/index.js",
+    "install-dependencies": "npm install && ./node_modules/bower/bin/bower install",
+    "build-client": "node --stack-size=32000 ./node_modules/gulp/bin/gulp.js build"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,7 @@
     "jsonwebtoken": "^5.7.0",
     "morgan": "^1.7.0",
     "node-pbkdf2": "^0.1.1",
-    "nodemailer": "^6.4.11",
+    "nodemailer": "^6.6.2",
     "password-hash": "^1.2.2",
     "pg": "^6.0.3",
     "pg-promise": "^5.2.7",
@@ -33,16 +35,14 @@
   },
   "devDependencies": {
     "bower": "^1.8.8",
-    "gulp": "^3.9.0",
-    "gulp-angular-gettext": "^2.1.0",
-    "gulp-angular-templatecache": "^1.8.0",
+    "gulp": "^4.0.0",
+    "gulp-angular-gettext": "^2.3.0",
+    "gulp-angular-templatecache": "^3.0.0",
     "gulp-clean-css": "^3.0.3",
     "gulp-minify-css": "^1.2.1",
     "gulp-minify-html": "^1.0.4",
     "gulp-uglify": "^1.4.2",
     "gulp-usemin": "^0.3.14",
-    "gulp-watch": "^4.3.5",
-    "openlayers": "^3.10.1",
-    "run-sequence": "^1.1.4"
+    "gulp-watch": "^5.0.1"
   }
 }
