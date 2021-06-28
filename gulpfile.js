@@ -1,6 +1,7 @@
 ﻿var gulp = require('gulp');
 var gettext = require('gulp-angular-gettext');
 var usemin = require('gulp-usemin');
+var replace = require('gulp-replace');
 var uglify = require('gulp-uglify');
 var minifyHtml = require('gulp-minify-html');
 var templateCache = require('gulp-angular-templatecache');
@@ -10,9 +11,10 @@ var cleanCSS = require('gulp-clean-css');
 //node --stack-size=32000 ./node_modules/gulp/bin/gulp.js build
 
 gulp.task('templates', function () {
-    return gulp.src('./src/html/*.tpl.html')
+    return gulp.src('./src/public/html/**/*.tpl.html')
         .pipe(templateCache({ standalone: true }))
-        .pipe(gulp.dest('./src/html'));
+        .pipe(replace('put(\'/', 'put(\''))
+        .pipe(gulp.dest('./src/public/html'));
 });
 
 gulp.task('pot', function () {
