@@ -19,10 +19,10 @@ app.use(morgan('dev'));
 
 app.use(function (req, res, next) {
     if (req.hostname && req.hostname.indexOf('hunttracker.no') > -1) {
-        return res.redirect(301, 'https://hunttracker.herokuapp.com/');
+        return res.redirect(301, config.publicBaseUrl);
     }
     else if (req.headers["x-forwarded-proto"] === 'http') {
-        return res.redirect(301, 'https://hunttracker.herokuapp.com/');
+        return res.redirect(301, config.publicBaseUrl);
     }
     next();
 });
@@ -264,4 +264,4 @@ if (config.env === 'production') {
 app.use(express.static(path.join(__dirname, './public')));
 
 app.listen(config.port);
-console.log('Running at http://localhost:' + config.port); 
+console.log('Running at http://localhost:' + config.port);
