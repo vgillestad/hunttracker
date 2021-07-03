@@ -1,7 +1,12 @@
 var config = require('../config');
 
 var pgp = require('pg-promise')();
-var db = pgp(config.postgresConnection);
+var db = pgp({
+    connectionString: config.postgresConnection,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
 var queries = require('./queries');
 
 // USER

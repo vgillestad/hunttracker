@@ -1,6 +1,5 @@
 /* global process */
 const express = require('express');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan');
 const jwt = require('jsonwebtoken');
@@ -12,8 +11,8 @@ const pwd = require('./pwd')
 const db = require('./db/db')
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
 
