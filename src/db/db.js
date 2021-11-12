@@ -3,9 +3,11 @@ var config = require('../config');
 var pgp = require('pg-promise')();
 var db = pgp({
     connectionString: config.postgresConnection,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    ssl: config.env === 'production'
+        ? {
+            rejectUnauthorized: false
+        }
+        : null
 });
 var queries = require('./queries');
 

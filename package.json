@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\"",
     "prod": "node ./src/index.js",
     "install-dependencies": "npm install && ./node_modules/bower/bin/bower install",
-    "build-client": "node --stack-size=32000 ./node_modules/gulp/bin/gulp.js build"
+    "build-client": "node --stack-size=32000 ./node_modules/gulp/bin/gulp.js build",
+    "docker-build": "docker build . -t vgillestad/hunttracker"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/vgillestad/HuntTracker#readme",
   "dependencies": {
     "cookie-parser": "^1.4.3",
+    "email-validator": "^2.0.4",
     "express": "^4.13.4",
     "jsonwebtoken": "^5.7.0",
     "morgan": "^1.7.0",

@@ -2,6 +2,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan');
+const validator = require("email-validator");
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const passwordHash = require('password-hash')
@@ -116,6 +117,10 @@ app.post('/api/users/reset-password', async (req, res) => {
 })
 
 app.post('/api/users/', function (req, res) {
+    const { email, password } = req.body;
+    if (!validator.validate(email) || !password) {
+        return res.status(400).json({ message: 'you need to provide an valid email and a password.' })
+    }
     db.getUserByEmail(req.body.email)
         .then(user => {
             if (user) {
@@ -132,6 +137,7 @@ app.post('/api/users/', function (req, res) {
 app.use("/api/*", function (req, res, next) {
     var token = req.cookies.token || req.query.token || req.headers['authorization'] || '';
     token = token.replace('Bearer', '').trim();
+    console.log(token);
     if (token) {
         jwt.verify(token, config.jwtSecret, function (err, decoded) {
             if (err) {
