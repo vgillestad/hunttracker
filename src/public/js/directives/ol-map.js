@@ -176,7 +176,7 @@ angular.module("HTDirectives")
 
                 var propertyLayer = new ol.layer.Tile({
                     source: new ol.source.TileWMS({
-                        url: 'https://openwms.statkart.no/skwms1/wms.matrikkel?',
+                        url: 'https://wms.geonorge.no/skwms1/wms.matrikkel',
                         params: {
                             'LAYERS': 'eiendomskart',
                             'FORMAT': 'image/png',
